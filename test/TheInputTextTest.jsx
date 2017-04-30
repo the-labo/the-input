@@ -17,8 +17,11 @@ describe('the-input-text', () => {
   })
 
   it('Render a component', () => {
+    let state = {}
     let element = render(
-       <TheInputText />
+      <TheInputText name='foo'
+                    onUpdate={(values) => { state.values = values }}
+      />
     )
     ok(element)
   })

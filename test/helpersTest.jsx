@@ -4,9 +4,9 @@
  */
 'use strict'
 
-import helpers from '../lib/helpers'
+import { normalizeOptions } from '../lib/helpers'
 import React from 'react'
-import { ok, equal } from 'assert'
+import { ok, deepEqual } from 'assert'
 
 describe('helpers', () => {
   before(() => {
@@ -15,8 +15,10 @@ describe('helpers', () => {
   after(() => {
   })
 
-  it('Handle helpers', () => {
-    ok(helpers)
+  it('normalizeOptions', () => {
+    ok(normalizeOptions)
+    deepEqual(normalizeOptions([ 'foo' ]), { 'foo': 'foo' })
+    deepEqual(normalizeOptions({ 'foo': 'bar' }), { 'foo': 'bar' })
   })
 })
 
