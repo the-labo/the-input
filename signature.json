@@ -114,14 +114,24 @@
         "name": "enterCandidate",
         "docblock": null,
         "modifiers": [],
-        "params": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
         "returns": null
       },
       {
         "name": "offSuggestion",
         "docblock": null,
         "modifiers": [],
-        "params": [],
+        "params": [
+          {
+            "name": "delay",
+            "type": null
+          }
+        ],
         "returns": null
       },
       {
@@ -132,7 +142,7 @@
         ],
         "params": [
           {
-            "name": "{ parser, candidates, selectedCandidate }",
+            "name": "{ parser, candidates, selectedCandidate, onSelect }",
             "type": null
           }
         ],
