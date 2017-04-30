@@ -1,0 +1,25 @@
+{
+  "TheInput": {
+    "description": "Input of the-components",
+    "displayName": "TheInput",
+    "methods": []
+  },
+  "TheInputStyle": {
+    "description": "Style for TheInput",
+    "displayName": "TheInputStyle",
+    "methods": [],
+    "props": {
+      "options": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Style options",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
+  }
+}
