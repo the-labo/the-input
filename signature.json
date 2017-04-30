@@ -4,6 +4,70 @@
     "displayName": "TheInput",
     "methods": []
   },
+  "TheInputRadio": {
+    "description": "Radio input of the-components",
+    "displayName": "TheInputRadio",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "idFor",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "optionValue",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Option",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ name, value, id, checked, onChange, label }",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "value": {
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "parser": {
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      },
+      "options": {
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
+  },
   "TheInputStyle": {
     "description": "Style for TheInput",
     "displayName": "TheInputStyle",
