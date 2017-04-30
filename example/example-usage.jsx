@@ -15,7 +15,10 @@ class ExampleComponent extends React.PureComponent {
   render () {
     const s = this
     let { values } = s.state
-    const onUpdate = (values) => s.setState({ values })
+    const onUpdate = (values) => {
+      console.log('values:', values)
+      s.setState({ values })
+    }
 
     const { Text } = TheInput
     return (
@@ -24,6 +27,8 @@ class ExampleComponent extends React.PureComponent {
         <Text name='value01'
               value={values[ 'value01' ]}
               onUpdate={ onUpdate }
+              placeholder='value01'
+              options={[ 'Banana', 'Orange', 'Apple' ]}
         />
       </div>
 

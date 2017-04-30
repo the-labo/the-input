@@ -31,7 +31,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.5.8",
-    "the-component-util": "^1.3.0",
+    "the-component-util": "^1.3.4",
     "the-style": "^1.2.2"
   },
   "devDependencies": {

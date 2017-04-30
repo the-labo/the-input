@@ -21,5 +21,216 @@
         }
       }
     }
+  },
+  "TheInputText": {
+    "description": "Input of the-components",
+    "displayName": "TheInputText",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyUp",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyDown",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "updateCandidates",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "index",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "moveCandidateIndex",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "amount",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "enterCandidate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "offSuggestion",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "Options",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ parser, candidates, selectedCandidate }",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "type": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Text type",
+        "defaultValue": {
+          "value": "'text'",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "onEnter": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for enter",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      },
+      "matcher": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Options parser",
+        "defaultValue": {
+          "value": "(candidate, value) => {\n  return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())\n}",
+          "computed": false
+        }
+      },
+      "options": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "Options",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
   }
 }
