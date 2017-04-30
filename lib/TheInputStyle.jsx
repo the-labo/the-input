@@ -90,6 +90,49 @@ TheInputStyle.data = (options) => {
           backgroundColor: dominantColor
         }
       }
+    }),
+    asStyleData('.the-input-radio', {
+      '&': {
+        display: 'inline-block',
+        maxWidth: contentWidth,
+        verticalAlign: 'middle',
+        width: '100%',
+        boxSizing: 'border-box',
+        position: 'relative'
+      },
+      '.the-input-radio-item': {
+        display: 'inline-flex',
+        justifyContent: 'flex-center',
+        overflow: 'hidden',
+        textOverflow: 'ellipses',
+        boxSizing: 'border-box',
+        alignItems: 'center',
+        margin: '0 2px'
+      },
+      '.the-input-radio-label': {
+        display: 'inline-block',
+        padding: '2px 4px',
+        cursor: 'pointer',
+        '&:hover': {},
+        '&:active': {}
+      },
+      '.the-input-radio-radio': {
+        opacity: 0,
+        overflow: 'hidden',
+        width: 1,
+        height: 1,
+        marginRight: -1,
+        marginBottom: -1,
+        visibility: 'hidden',
+        zIndex: -1,
+        position: 'absolute',
+        left: 0,
+        top: 0
+
+      },
+      '.the-input-radio-icon': {
+        color: dominantColor
+      }
     })
   )
 }
