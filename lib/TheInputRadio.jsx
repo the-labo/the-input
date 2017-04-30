@@ -3,8 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
-import uuid from 'uuid'
+import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { normalizeOptions } from './helpers'
 
@@ -15,14 +14,14 @@ class TheInputRadio extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
-    s.uuid = uuid.v4()
+    s.id = newId()
   }
 
   render () {
     const s = this
     const { props } = s
     let {
-      id = s.uuid,
+      id = s.id,
       className,
       name,
       options,
@@ -64,7 +63,7 @@ class TheInputRadio extends React.PureComponent {
 
   idFor (optionValue) {
     const s = this
-    let { id = s.uuid } = s.props
+    let { id = s.id } = s.props
     return [ id, optionValue ].join('-')
   }
 

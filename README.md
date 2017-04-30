@@ -146,6 +146,18 @@ Components
 Input of the-components
 
 
+### TheInputRadio
+
+Radio input of the-components
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `value` |   |  | `''` |
+| `parser` |   |  | `String` |
+| `options` |   |  | `{}` |
+
 ### TheInputStyle
 
 Style for TheInput

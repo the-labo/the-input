@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import TheStyle from 'the-style'
-import { asStyleData } from 'the-component-util'
+import { colorAlpha, asStyleData } from 'the-component-util'
 
 /** Style for TheInput */
 const TheInputStyle = ({ id, className, options }) => (
@@ -66,10 +66,12 @@ TheInputStyle.data = (options) => {
         left: 0,
         right: 0,
         listStyle: 'none',
+        zIndex: 8,
         border: `1px solid ${lightBorderColor}`,
         boxShadow: '2px 2px 4px rgba(0,0,0,0.33)',
         boxSizing: 'border-box',
-        borderRadius: '0 0 2px 2px'
+        borderRadius: '0 0 2px 2px',
+        backgroundColor
       },
       '.the-input-text-option': {
         display: 'flex',
@@ -87,7 +89,7 @@ TheInputStyle.data = (options) => {
           borderBottom: 'none'
         },
         '&.the-input-text-option-selected': {
-          backgroundColor: dominantColor
+          backgroundColor: colorAlpha(dominantColor, 0.2)
         }
       }
     }),
