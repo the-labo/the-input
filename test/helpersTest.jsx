@@ -4,10 +4,9 @@
  */
 'use strict'
 
-import Helpers from '../lib/helpers'
+import helpers from '../lib/helpers'
 import React from 'react'
 import { ok, equal } from 'assert'
-import { render } from 'the-script-test'
 
 describe('helpers', () => {
   before(() => {
@@ -16,11 +15,8 @@ describe('helpers', () => {
   after(() => {
   })
 
-  it('Render a component', () => {
-    let element = render(
-       <Helpers />
-    )
-    ok(element)
+  it('Handle helpers', () => {
+    ok(helpers)
   })
 })
 
