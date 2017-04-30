@@ -20,7 +20,7 @@ class ExampleComponent extends React.PureComponent {
       s.setState({ values })
     }
 
-    const { Text, Radio } = TheInput
+    const { Text, Radio, Checkbox } = TheInput
     return (
       <div>
         <TheInputStyle/>
@@ -47,6 +47,16 @@ class ExampleComponent extends React.PureComponent {
         </div>
 
         <hr/>
+
+        <h3>Checkbox</h3>
+
+        <div>
+          <Checkbox name='value03'
+                    value={values[ 'value03' ]}
+                    onUpdate={ onUpdate }
+                    options={[ 'Green', 'Pink', 'Brown' ]}
+          />
+        </div>
       </div>
 
     )

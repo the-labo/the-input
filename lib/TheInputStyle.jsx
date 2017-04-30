@@ -35,6 +35,8 @@ TheInputStyle.data = (options) => {
     lightBorderColor = ThemeValues.lightBorderColor,
     backgroundColor = ThemeValues.backgroundColor,
     contentPadding = ThemeValues.contentPadding,
+    hoverOpacity = ThemeValues.hoverOpacity,
+    activeOpacity = ThemeValues.activeOpacity,
   } = options
   return Object.assign({},
     asStyleData('.the-input', {
@@ -115,8 +117,8 @@ TheInputStyle.data = (options) => {
         display: 'inline-block',
         padding: '2px 4px',
         cursor: 'pointer',
-        '&:hover': {},
-        '&:active': {}
+        '&:hover': { opacity: hoverOpacity },
+        '&:active': { opacity: activeOpacity }
       },
       '.the-input-radio-radio': {
         opacity: 0,
@@ -134,6 +136,50 @@ TheInputStyle.data = (options) => {
       },
       '.the-input-radio-icon': {
         color: dominantColor
+      }
+    }),
+    asStyleData('.the-input-checkbox', {
+      '&': {
+        display: 'inline-block',
+        maxWidth: contentWidth,
+        verticalAlign: 'middle',
+        width: '100%',
+        boxSizing: 'border-box',
+        position: 'relative'
+      },
+      '.the-input-checkbox-item': {
+        display: 'inline-flex',
+        justifyContent: 'flex-center',
+        overflow: 'hidden',
+        textOverflow: 'ellipses',
+        boxSizing: 'border-box',
+        alignItems: 'center',
+        margin: '0 2px'
+      },
+      '.the-input-checkbox-label': {
+        display: 'inline-block',
+        padding: '2px 4px',
+        cursor: 'pointer',
+        '&:hover': { opacity: hoverOpacity },
+        '&:active': { opacity: activeOpacity }
+      },
+      '.the-input-checkbox-checkbox': {
+        opacity: 0,
+        overflow: 'hidden',
+        width: 1,
+        height: 1,
+        marginRight: -1,
+        marginBottom: -1,
+        visibility: 'hidden',
+        zIndex: -1,
+        position: 'absolute',
+        left: 0,
+        top: 0
+
+      },
+      '.the-input-checkbox-icon': {
+        color: dominantColor,
+        minWidth: '1em'
       }
     })
   )

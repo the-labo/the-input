@@ -94,7 +94,7 @@ class ExampleComponent extends React.PureComponent {
       s.setState({ values })
     }
 
-    const { Text, Radio } = TheInput
+    const { Text, Radio, Checkbox } = TheInput
     return (
       <div>
         <TheInputStyle/>
@@ -121,6 +121,16 @@ class ExampleComponent extends React.PureComponent {
         </div>
 
         <hr/>
+
+        <h3>Checkbox</h3>
+
+        <div>
+          <Checkbox name='value03'
+                    value={values[ 'value03' ]}
+                    onUpdate={ onUpdate }
+                    options={[ 'Green', 'Pink', 'Brown' ]}
+          />
+        </div>
       </div>
 
     )
@@ -146,6 +156,19 @@ Components
 Input of the-components
 
 
+### TheInputCheckbox
+
+Checkbox input of the-components
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `value` |   |  | `''` |
+| `parser` |   |  | `String` |
+| `options` |   |  | `{}` |
+| `splitter` |   |  | `','` |
+
 ### TheInputRadio
 
 Radio input of the-components
@@ -170,7 +193,7 @@ Style for TheInput
 
 ### TheInputText
 
-Input of the-components
+Text Input
 
 **Props**
 

@@ -4,6 +4,76 @@
     "displayName": "TheInput",
     "methods": []
   },
+  "TheInputCheckbox": {
+    "description": "Checkbox input of the-components",
+    "displayName": "TheInputCheckbox",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "idFor",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "optionValue",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Option",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ name, value, id, checked, onChange, label }",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "value": {
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "parser": {
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      },
+      "options": {
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "splitter": {
+        "defaultValue": {
+          "value": "','",
+          "computed": false
+        }
+      }
+    }
+  },
   "TheInputRadio": {
     "description": "Radio input of the-components",
     "displayName": "TheInputRadio",
@@ -87,7 +157,7 @@
     }
   },
   "TheInputText": {
-    "description": "Input of the-components",
+    "description": "Text Input",
     "displayName": "TheInputText",
     "methods": [
       {

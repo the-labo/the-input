@@ -7,7 +7,7 @@ import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { normalizeOptions } from './helpers'
 
 /**
- * Input of the-components
+ * Text Input
  */
 class TheInputText extends React.PureComponent {
   constructor (props) {
