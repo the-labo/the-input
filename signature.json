@@ -376,5 +376,72 @@
         }
       }
     }
+  },
+  "TheInputTextArea": {
+    "description": "TextArea Input",
+    "displayName": "TheInputTextArea",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "rows": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "TextArea rows",
+        "defaultValue": {
+          "value": "5",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      }
+    }
   }
 }
