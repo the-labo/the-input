@@ -95,6 +95,27 @@ TheInputStyle.data = (options) => {
         }
       }
     }),
+    asStyleData('.the-input-textarea', {
+      '&': {
+        display: 'inline-block',
+        maxWidth: contentWidth,
+        verticalAlign: 'middle',
+        width: '100%',
+        boxSizing: 'border-box',
+        position: 'relative'
+      },
+      '.the-input-textarea-input': {
+        display: 'block',
+        outlineColor: dominantColor,
+        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
+        boxSizing: 'border-box',
+        padding: '4px 8px',
+        borderRadius: '2px',
+        width: '100%',
+        border: `1px solid ${inputBorderColor}`,
+        resize: 'none'
+      }
+    }),
     asStyleData('.the-input-radio', {
       '&': {
         display: 'inline-block',

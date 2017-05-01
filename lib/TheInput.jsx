@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import TheInputStyle from './TheInputStyle'
 import TheInputText from './TheInputText'
+import TheInputTextArea from './TheInputTextArea'
 import TheInputRadio from './TheInputRadio'
 import TheInputCheckbox from './TheInputCheckbox'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
@@ -33,6 +34,7 @@ class TheInput extends React.PureComponent {
 
 TheInput.Style = TheInputStyle
 TheInput.Text = TheInputText
+TheInput.TextArea = TheInputTextArea
 TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
 
