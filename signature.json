@@ -138,6 +138,224 @@
       }
     }
   },
+  "TheInputSelect": {
+    "description": "Text Input",
+    "displayName": "TheInputSelect",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleDisplayClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyUp",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyDown",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "moveCandidateIndex",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "amount",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "enterSuggested",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "offFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "delay",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "getOptionValues",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "getIndexForValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Options",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ parser, options, suggestingIndex, onSelect }",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "onEnter": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for enter",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      },
+      "options": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "Options",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
+  },
   "TheInputStyle": {
     "description": "Style for TheInput",
     "displayName": "TheInputStyle",
