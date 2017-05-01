@@ -45,7 +45,6 @@ class TheInputText extends React.PureComponent {
         <input className='the-input-text-input'
                {...{ id, type, name, value, placeholder }}
                onFocus={ (e) => s.handleFocus(e) }
-               onChange={ (e) => s.handleChange(e) }
                onBlur={ (e) => s.handleBlur(e) }
                onKeyUp={ (e) => s.handleKeyUp(e) }
                onKeyDown={ (e) => s.handleKeyDown(e) }

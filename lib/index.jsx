@@ -10,6 +10,7 @@ import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
 import TheInputRadio from './TheInputRadio'
 import TheInputCheckbox from './TheInputCheckbox'
+import TheInputSelect from './TheInputSelect'
 
 export default TheInput
 
@@ -19,5 +20,6 @@ export {
   TheInputText,
   TheInputTextArea,
   TheInputRadio,
-  TheInputCheckbox
+  TheInputCheckbox,
+  TheInputSelect
 }

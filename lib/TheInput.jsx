@@ -8,6 +8,7 @@ import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
 import TheInputRadio from './TheInputRadio'
 import TheInputCheckbox from './TheInputCheckbox'
+import TheInputSelect from './TheInputSelect'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
 /**
@@ -37,6 +38,7 @@ TheInput.Text = TheInputText
 TheInput.TextArea = TheInputTextArea
 TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
+TheInput.Select = TheInputSelect
 
 TheInput.propTypes = {}
 
