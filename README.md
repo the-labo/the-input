@@ -205,6 +205,21 @@ Radio input of the-components
 | `parser` |   |  | `String` |
 | `options` |   |  | `{}` |
 
+### TheInputSelect
+
+Text Input
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `name` | string  | Name of input | `` |
+| `value` | string  | Value of input | `''` |
+| `onUpdate` | func  | Handle for update | `` |
+| `onEnter` | func  | Handle for enter | `null` |
+| `parser` | func  | Value parser | `String` |
+| `options` | union  | Options | `{}` |
+
 ### TheInputStyle
 
 Style for TheInput
