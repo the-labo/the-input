@@ -1,6 +1,6 @@
 {
   "name": "the-input",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "Input of the-components",
   "main": "shim",
   "scripts": {
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/the-labo/the-input#readme",
   "dependencies": {
+    "asobj": "^1.5.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.8",
     "the-component-util": "^1.4.1",

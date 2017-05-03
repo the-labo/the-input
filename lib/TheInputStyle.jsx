@@ -54,6 +54,7 @@ TheInputStyle.data = (options) => {
       '.the-input-text-input': {
         display: 'block',
         outlineColor: dominantColor,
+        minHeight: '24px',
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         boxSizing: 'border-box',
         padding: '4px 8px',
@@ -93,6 +94,25 @@ TheInputStyle.data = (options) => {
         '&.the-input-text-option-selected': {
           backgroundColor: colorAlpha(dominantColor, 0.2)
         }
+      }
+    }),
+    asStyleData('.the-input-password', {
+      position: 'relative',
+      '.the-input-password-toggle': {
+        position: 'absolute',
+        right: 0,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 0,
+        bottom: 0,
+        zIndex: 4,
+        padding: '0 4px',
+        minWidth: '1em',
+        outlineColor: colorAlpha(dominantColor, 0.2),
+        cursor: 'pointer',
+        '&:hover': { opacity: hoverOpacity },
+        '&:active': { opacity: activeOpacity },
       }
     }),
     asStyleData('.the-input-textarea', {

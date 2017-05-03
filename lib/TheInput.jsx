@@ -9,6 +9,7 @@ import TheInputTextArea from './TheInputTextArea'
 import TheInputRadio from './TheInputRadio'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputSelect from './TheInputSelect'
+import TheInputPassword from './TheInputPassword'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
 /**
@@ -35,6 +36,7 @@ class TheInput extends React.PureComponent {
 
 TheInput.Style = TheInputStyle
 TheInput.Text = TheInputText
+TheInput.Password = TheInputPassword
 TheInput.TextArea = TheInputTextArea
 TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
