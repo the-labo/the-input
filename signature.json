@@ -74,6 +74,27 @@
       }
     }
   },
+  "TheInputPassword": {
+    "description": "",
+    "displayName": "TheInputPassword",
+    "methods": [
+      {
+        "name": "toggleShowing",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "showing",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "composes": [
+      "asobj"
+    ]
+  },
   "TheInputRadio": {
     "description": "Radio input of the-components",
     "displayName": "TheInputRadio",
