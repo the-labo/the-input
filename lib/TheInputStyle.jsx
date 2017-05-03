@@ -37,6 +37,7 @@ TheInputStyle.data = (options) => {
     contentPadding = ThemeValues.contentPadding,
     hoverOpacity = ThemeValues.hoverOpacity,
     activeOpacity = ThemeValues.activeOpacity,
+    errorColor = ThemeValues.errorColor
   } = options
   return Object.assign({},
     asStyleData('.the-input', {
@@ -46,6 +47,7 @@ TheInputStyle.data = (options) => {
       '&': {
         display: 'inline-block',
         maxWidth: contentWidth,
+        margin: '0 4px',
         verticalAlign: 'middle',
         width: '100%',
         boxSizing: 'border-box',
@@ -54,7 +56,7 @@ TheInputStyle.data = (options) => {
       '.the-input-text-input': {
         display: 'block',
         outlineColor: dominantColor,
-        minHeight: '24px',
+        minHeight: '28px',
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         boxSizing: 'border-box',
         padding: '4px 8px',
@@ -121,6 +123,7 @@ TheInputStyle.data = (options) => {
         maxWidth: contentWidth,
         verticalAlign: 'middle',
         width: '100%',
+        margin: '0 4px',
         boxSizing: 'border-box',
         position: 'relative'
       },
@@ -142,6 +145,8 @@ TheInputStyle.data = (options) => {
         maxWidth: contentWidth,
         verticalAlign: 'middle',
         width: '100%',
+        margin: '4px 0',
+        borderRadius: '2px',
         boxSizing: 'border-box',
         position: 'relative'
       },
@@ -185,6 +190,8 @@ TheInputStyle.data = (options) => {
         maxWidth: contentWidth,
         verticalAlign: 'middle',
         width: '100%',
+        margin: '4px 0',
+        borderRadius: '2px',
         boxSizing: 'border-box',
         position: 'relative'
       },
@@ -296,6 +303,25 @@ TheInputStyle.data = (options) => {
         width: '1px',
         height: '1px',
         overflow: 'hidden'
+      }
+    }),
+    asStyleData('.the-input-error', {
+      '.the-input-text-input,.the-input-textarea-input': {
+        borderColor: errorColor
+      },
+      '.the-input-select-display': {
+        borderColor: errorColor
+      },
+      '&.the-input-radio,&.the-input-checkbox': {
+        border: `1px solid ${errorColor}`
+      },
+      '.the-input-error-message': {
+        color: errorColor,
+        display: 'block',
+        fontSize: 'small',
+        padding: '4px 4px 0',
+        margin: '0 0 -2px',
+        fontStyle: 'italic'
       }
     })
   )

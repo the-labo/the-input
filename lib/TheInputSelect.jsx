@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { normalizeOptions } from './helpers'
+import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
  * Text Input
@@ -33,6 +33,7 @@ class TheInputSelect extends React.PureComponent {
       type,
       name,
       value,
+      error,
       options,
       placeholder
     } = props
@@ -40,9 +41,13 @@ class TheInputSelect extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'type', 'value', 'name', 'placeholder' ] })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-select', className)}
+           className={classnames('the-input-select', className, {
+             'the-input-error': !!error
+           })}
            data-value={value}
       >
+        { renderErrorMessage(error) }
+
         <a className='the-input-select-display'
            onClick={(e) => s.handleDisplayClick(e)}
         >
@@ -251,6 +256,11 @@ TheInputSelect.propTypes = {
   onEnter: PropTypes.func,
   /** Value parser */
   parser: PropTypes.func,
+  /** Input error */
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
@@ -261,6 +271,7 @@ TheInputSelect.propTypes = {
 TheInputSelect.defaultProps = {
   value: '',
   parser: String,
+  error: null,
   options: {},
   onEnter: null
 }

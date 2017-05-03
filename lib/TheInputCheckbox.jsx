@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { normalizeOptions, normalizeArrayValue } from './helpers'
+import { normalizeOptions, normalizeArrayValue, renderErrorMessage } from './helpers'
 
 /**
  * Checkbox input of the-components
@@ -26,6 +26,7 @@ class TheInputCheckbox extends React.PureComponent {
       name,
       options,
       value,
+      error,
       splitter
     } = props
 
@@ -35,10 +36,14 @@ class TheInputCheckbox extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className' ] })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-checkbox', className)}
+           className={classnames('the-input-checkbox', className, {
+             'the-input-error': !!error
+           })}
            data-value={value}
            id={id}
       >
+        { renderErrorMessage(error) }
+
         {
           Object.keys(options).map((optionValue) => (
             <TheInputCheckbox.Option name={name}
@@ -132,6 +137,7 @@ TheInputCheckbox.PropTypes = {
 TheInputCheckbox.defaultProps = {
   value: '',
   parser: String,
+  error:null,
   options: {},
   splitter: ','
 }

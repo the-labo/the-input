@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { normalizeOptions } from './helpers'
+import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
  * Radio input of the-components
@@ -25,7 +25,8 @@ class TheInputRadio extends React.PureComponent {
       className,
       name,
       options,
-      value
+      value,
+      error
     } = props
 
     options = normalizeOptions(options)
@@ -33,10 +34,14 @@ class TheInputRadio extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className' ] })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-radio', className)}
+           className={classnames('the-input-radio', className, {
+             'the-input-error': !!error
+           })}
            data-value={value}
            id={id}
       >
+        { renderErrorMessage(error) }
+
         {
           Object.keys(options).map((optionValue) => (
             <TheInputRadio.Option name={name}
@@ -100,6 +105,11 @@ TheInputRadio.PropTypes = {
   onUpdate: PropTypes.func.isRequired,
   /** Value parser */
   parser: PropTypes.func,
+  /** Input error */
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
@@ -110,6 +120,7 @@ TheInputRadio.PropTypes = {
 TheInputRadio.defaultProps = {
   value: '',
   parser: String,
+  error: null,
   options: {}
 }
 

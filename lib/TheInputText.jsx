@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
-import { normalizeOptions } from './helpers'
+import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
  * Text Input
@@ -32,15 +32,19 @@ class TheInputText extends React.PureComponent {
       type,
       name,
       value,
+      error,
       placeholder
     } = props
     let { suggesting, candidates, selectedCandidate } = s.state
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'type', 'value', 'name', 'placeholder' ] })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-text', className)}
+           className={classnames('the-input-text', className, {
+             'the-input-error': !!error
+           })}
            data-value={value}
       >
+        { renderErrorMessage(error) }
 
         <input className='the-input-text-input'
                {...{ id, type, name, value, placeholder }}
@@ -218,6 +222,11 @@ TheInputText.propTypes = {
   parser: PropTypes.func,
   /** Options parser */
   matcher: PropTypes.func,
+  /** Input error */
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
@@ -232,6 +241,7 @@ TheInputText.defaultProps = {
   matcher: (candidate, value) => {
     return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
   },
+  error: null,
   options: {},
   onEnter: null
 }

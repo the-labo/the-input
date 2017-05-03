@@ -3,6 +3,8 @@
  */
 'use strict'
 
+import React from 'react'
+
 export const normalizeOptions = (options) => [].concat(options)
   .filter(Boolean)
   .reduce((normalized, value) => {
@@ -20,3 +22,15 @@ export const normalizeArrayValue = (values, splitter = ',') => [].concat(values)
     }
     return normzlied.concat(value)
   }, [])
+
+export const renderErrorMessage = (error) => {
+  if (!error) {
+    return null
+  }
+  if (typeof error === 'string') {
+    error = { message: error }
+  }
+  return (
+    <span className='the-input-error-message'>{error.message}</span>
+  )
+}

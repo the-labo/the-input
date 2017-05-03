@@ -88,6 +88,44 @@ class ExampleComponent extends React.PureComponent {
         <br/>
         <br/>
         <br/>
+
+        <h3>Error</h3>
+
+        <Text name='value01'
+              value={values[ 'value01' ]}
+              onUpdate={ onUpdate }
+              placeholder='value01'
+              options={[ 'Banana', 'Orange', 'Apple' ]}
+              error='Something Wrong with This!'
+        />
+
+        <TextArea name='value01'
+                  value={values[ 'value01' ]}
+                  onUpdate={ onUpdate }
+                  placeholder='value01'
+                  error='Something Wrong with This!'
+        />
+
+        <Select name='value04'
+                value={values[ 'value04' ]}
+                onUpdate={ onUpdate }
+                options={[ 'Tea', 'Coffee', 'Water' ]}
+                error='Something Wrong with This!'
+        />
+
+        <Radio name='value02'
+               value={values[ 'value02' ]}
+               onUpdate={ onUpdate }
+               options={[ 'Car', 'Ship', 'Plane' ]}
+               error='Something Wrong with This!'
+        />
+
+        <Checkbox name='value03'
+                  value={values[ 'value03' ]}
+                  onUpdate={ onUpdate }
+                  options={[ 'Green', 'Pink', 'Brown' ]}
+                  error='Something Wrong with This!'
+        />
       </div>
 
     )

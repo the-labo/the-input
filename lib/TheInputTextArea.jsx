@@ -4,6 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import { renderErrorMessage } from './helpers'
 
 /**
  * TextArea Input
@@ -25,14 +26,18 @@ class TheInputTextArea extends React.PureComponent {
       rows,
       name,
       value,
+      error,
       placeholder
     } = props
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'rows', 'value', 'name', 'placeholder' ] })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-textarea', className)}
+           className={classnames('the-input-textarea', className, {
+             'the-input-error': !!error
+           })}
            data-value={value}
       >
+        { renderErrorMessage(error) }
 
         <textarea className='the-input-textarea-input'
                   {...{ id, rows, name, value, placeholder }}
@@ -54,7 +59,6 @@ class TheInputTextArea extends React.PureComponent {
     onChange && onChange(e)
     onUpdate && onUpdate({ [name]: parser(value) })
   }
-
 }
 
 TheInputTextArea.propTypes = {
@@ -73,6 +77,7 @@ TheInputTextArea.propTypes = {
 TheInputTextArea.defaultProps = {
   rows: 5,
   value: '',
+  error: null,
   parser: String
 }
 
