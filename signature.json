@@ -175,6 +175,39 @@
       }
     }
   },
+  "TheInputSearch": {
+    "description": "",
+    "displayName": "TheInputSearch",
+    "methods": [
+      {
+        "name": "toggleOpen",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "open",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "composes": [
+      "asobj"
+    ]
+  },
   "TheInputSelect": {
     "description": "Text Input",
     "displayName": "TheInputSelect",
