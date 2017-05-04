@@ -18,6 +18,7 @@ class TheInputPassword extends React.PureComponent {
   render () {
     const s = this
     const { props, state } = s
+    let { value } = props
     let { showing } = state
     let icon = showing ? TheInputPassword.HIDE_ICON : TheInputPassword.SHOW_ICON
     return (
@@ -26,14 +27,18 @@ class TheInputPassword extends React.PureComponent {
                     type={showing ? 'text' : 'password'}
                     options={[]}
       >
-        <a className={classnames('the-input-password-toggle')}
-           tabIndex={-1}
-           onMouseDown={() => s.toggleShowing(true)}
-           onMouseUp={() => s.toggleShowing(false)}
-           onMouseOut={() => s.toggleShowing(false)}
-        >
-          <TheIcon className={icon}/>
-        </a>
+        {
+          value && (
+            <a className={classnames('the-input-password-toggle')}
+               tabIndex={-1}
+               onMouseDown={() => s.toggleShowing(true)}
+               onMouseUp={() => s.toggleShowing(false)}
+               onMouseOut={() => s.toggleShowing(false)}
+            >
+              <TheIcon className={icon}/>
+            </a>
+          )
+        }
       </TheInputText>
     )
   }

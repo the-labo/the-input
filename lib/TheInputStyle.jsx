@@ -39,6 +39,26 @@ TheInputStyle.data = (options) => {
     activeOpacity = ThemeValues.activeOpacity,
     errorColor = ThemeValues.errorColor
   } = options
+
+  const ToggleIconStyle = (values) => Object.assign({
+    position: 'absolute',
+    right: 0,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 0,
+    bottom: 0,
+    zIndex: 4,
+    padding: '0 4px',
+    minWidth: '1em',
+    outlineColor: colorAlpha(dominantColor, 0.2),
+    cursor: 'pointer',
+    '&:hover': { opacity: hoverOpacity },
+    '&:active': { opacity: activeOpacity }
+  }, values)
+
+  let animationDuration = 300
+
   return Object.assign({},
     asStyleData('.the-input', {
       '&': {}
@@ -100,21 +120,32 @@ TheInputStyle.data = (options) => {
     }),
     asStyleData('.the-input-password', {
       position: 'relative',
-      '.the-input-password-toggle': {
-        position: 'absolute',
-        right: 0,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        top: 0,
-        bottom: 0,
-        zIndex: 4,
-        padding: '0 4px',
-        minWidth: '1em',
-        outlineColor: colorAlpha(dominantColor, 0.2),
-        cursor: 'pointer',
-        '&:hover': { opacity: hoverOpacity },
-        '&:active': { opacity: activeOpacity },
+      '.the-input-password-toggle': ToggleIconStyle()
+    }),
+    asStyleData('.the-input-search', {
+      position: 'relative',
+      '&': {
+        transition: `max-width ${animationDuration}ms`,
+        maxWidth: '2em'
+      },
+      '&.the-input-search-open': {
+        maxWidth: contentWidth,
+        '.the-input-text-input': {
+          opacity: 1
+        },
+        '.the-input-search-toggle': {
+          padding: '0 4px'
+        }
+      },
+      '.the-input-search-toggle': ToggleIconStyle({
+        color: dominantColor,
+        outline: 'none',
+        padding: '0 8px',
+        transition: `opacity ${animationDuration}ms`
+      }),
+      '.the-input-text-input': {
+        opacity: 0,
+        transition: `opacity ${animationDuration}ms`
       }
     }),
     asStyleData('.the-input-textarea', {

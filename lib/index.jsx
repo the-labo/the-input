@@ -1,7 +1,7 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 1.1.1
+ * @version 1.1.2
  */
 'use strict'
 
@@ -10,6 +10,7 @@ import TheInput from './TheInput'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputPassword from './TheInputPassword'
 import TheInputRadio from './TheInputRadio'
+import TheInputSearch from './TheInputSearch'
 import TheInputSelect from './TheInputSelect'
 import TheInputStyle from './TheInputStyle'
 import TheInputText from './TheInputText'
@@ -23,6 +24,7 @@ export {
   TheInputCheckbox,
   TheInputPassword,
   TheInputRadio,
+  TheInputSearch,
   TheInputSelect,
   TheInputStyle,
   TheInputText,

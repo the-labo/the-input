@@ -94,7 +94,15 @@ class ExampleComponent extends React.PureComponent {
       s.setState({ values })
     }
 
-    const { Text, Password, TextArea, Radio, Checkbox, Select } = TheInput
+    const {
+      Text,
+      Password,
+      Search,
+      TextArea,
+      Radio,
+      Checkbox,
+      Select
+    } = TheInput
     return (
       <div>
         <TheInputStyle/>
@@ -107,6 +115,15 @@ class ExampleComponent extends React.PureComponent {
               placeholder='value01'
               options={[ 'Banana', 'Orange', 'Apple' ]}
         />
+
+        <br/>
+
+        <Search name='value01'
+                value={values[ 'value01' ]}
+                onUpdate={ onUpdate }
+                placeholder='value01'
+        />
+
 
         <br/>
 
@@ -220,6 +237,11 @@ export default ExampleComponent
 Components
 -----------
 
+### 
+
+
+
+
 ### TheInput
 
 Input of the-components
@@ -235,6 +257,7 @@ Checkbox input of the-components
 | --- | --- | ---- | ---- |
 | `value` |   |  | `''` |
 | `parser` |   |  | `String` |
+| `error` |   |  | `null` |
 | `options` |   |  | `{}` |
 | `splitter` |   |  | `','` |
 
@@ -253,6 +276,7 @@ Radio input of the-components
 | --- | --- | ---- | ---- |
 | `value` |   |  | `''` |
 | `parser` |   |  | `String` |
+| `error` |   |  | `null` |
 | `options` |   |  | `{}` |
 
 ### TheInputSelect
@@ -268,6 +292,7 @@ Text Input
 | `onUpdate` | func  | Handle for update | `` |
 | `onEnter` | func  | Handle for enter | `null` |
 | `parser` | func  | Value parser | `String` |
+| `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 
 ### TheInputStyle
@@ -297,6 +322,7 @@ Text Input
 | `matcher` | func  | Options parser | `(candidate, value) => {
   return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
 }` |
+| `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 
 ### TheInputTextArea
@@ -312,6 +338,7 @@ TextArea Input
 | `value` | string  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
+| `error` |   |  | `null` |
 
 
 

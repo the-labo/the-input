@@ -20,7 +20,15 @@ class ExampleComponent extends React.PureComponent {
       s.setState({ values })
     }
 
-    const { Text, Password, TextArea, Radio, Checkbox, Select } = TheInput
+    const {
+      Text,
+      Password,
+      Search,
+      TextArea,
+      Radio,
+      Checkbox,
+      Select
+    } = TheInput
     return (
       <div>
         <TheInputStyle/>
@@ -33,6 +41,15 @@ class ExampleComponent extends React.PureComponent {
               placeholder='value01'
               options={[ 'Banana', 'Orange', 'Apple' ]}
         />
+
+        <br/>
+
+        <Search name='value01'
+                value={values[ 'value01' ]}
+                onUpdate={ onUpdate }
+                placeholder='value01'
+        />
+
 
         <br/>
 

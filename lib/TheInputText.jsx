@@ -33,11 +33,21 @@ class TheInputText extends React.PureComponent {
       name,
       value,
       error,
-      placeholder
+      placeholder,
+      autoFocus,
+      autoComplete,
+      inputRef
     } = props
     let { suggesting, candidates, selectedCandidate } = s.state
+    if (!autoComplete && candidates.length >= 0) {
+      autoComplete = 'off'
+    }
     return (
-      <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'type', 'value', 'name', 'placeholder' ] })}
+      <div {...htmlAttributesFor(props, {
+        except: [
+          'id', 'className', 'type', 'value', 'name', 'placeholder', 'autoFocus', 'autoComplete'
+        ]
+      })}
            {...eventHandlersFor(props, { except: [] })}
            className={classnames('the-input-text', className, {
              'the-input-error': !!error
@@ -47,12 +57,13 @@ class TheInputText extends React.PureComponent {
         { renderErrorMessage(error) }
 
         <input className='the-input-text-input'
-               {...{ id, type, name, value, placeholder }}
+               {...{ id, type, name, value, placeholder, autoFocus, autoComplete }}
                onChange={ (e) => s.handleChange(e) }
                onFocus={ (e) => s.handleFocus(e) }
                onBlur={ (e) => s.handleBlur(e) }
                onKeyUp={ (e) => s.handleKeyUp(e) }
                onKeyDown={ (e) => s.handleKeyDown(e) }
+               ref={inputRef}
 
         />
         {children}

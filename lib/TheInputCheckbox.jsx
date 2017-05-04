@@ -137,7 +137,7 @@ TheInputCheckbox.PropTypes = {
 TheInputCheckbox.defaultProps = {
   value: '',
   parser: String,
-  error:null,
+  error: null,
   options: {},
   splitter: ','
 }
