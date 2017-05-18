@@ -6,7 +6,87 @@
   "TheInput": {
     "description": "Input of the-components",
     "displayName": "TheInput",
-    "methods": []
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "type": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Input type",
+        "defaultValue": {
+          "value": "'text'",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Name of input",
+        "defaultValue": {
+          "value": "'_the'",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "options": {
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
   },
   "TheInputCheckbox": {
     "description": "Checkbox input of the-components",
