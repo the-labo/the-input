@@ -250,6 +250,16 @@ Components
 
 Input of the-components
 
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `type` | string  | Input type | `'text'` |
+| `name` | string  | Name of input | `'_the'` |
+| `value` | string  | Value of input | `''` |
+| `onUpdate` | func  | Handle for update | `` |
+| `error` | union  |  | `null` |
+| `options` |   |  | `{}` |
 
 ### TheInputCheckbox
 

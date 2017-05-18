@@ -58,7 +58,7 @@
         "type": {
           "name": "func"
         },
-        "required": true,
+        "required": false,
         "description": "Handle for update"
       },
       "error": {
