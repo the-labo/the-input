@@ -31,6 +31,7 @@ class TheInputText extends React.PureComponent {
       parser,
       type,
       name,
+      required,
       value,
       error,
       placeholder,
@@ -45,7 +46,7 @@ class TheInputText extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'type', 'value', 'name', 'placeholder', 'autoFocus', 'autoComplete'
+          'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
         ]
       })}
            {...eventHandlersFor(props, { except: [] })}
@@ -57,7 +58,7 @@ class TheInputText extends React.PureComponent {
         { renderErrorMessage(error) }
 
         <input className='the-input-text-input'
-               {...{ id, type, name, value, placeholder, autoFocus, autoComplete }}
+               {...{ id, type, name, required, value, placeholder, autoFocus, autoComplete }}
                onChange={ (e) => s.handleChange(e) }
                onFocus={ (e) => s.handleFocus(e) }
                onBlur={ (e) => s.handleBlur(e) }

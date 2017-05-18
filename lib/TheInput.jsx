@@ -27,6 +27,7 @@ class TheInput extends React.PureComponent {
       children,
       type,
       name,
+      required,
       value,
       error,
       placeholder,
@@ -37,7 +38,7 @@ class TheInput extends React.PureComponent {
     return (
       <div { ...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'type', 'value', 'name', 'placeholder', 'autoFocus', 'autoComplete'
+          'id', 'className', 'type', 'value', 'required', 'name', 'placeholder', 'autoFocus', 'autoComplete'
         ]
       }) }
            { ...eventHandlersFor(props, { except: [] })}
@@ -48,7 +49,7 @@ class TheInput extends React.PureComponent {
         { renderErrorMessage(error) }
 
         <input type='the-input-input'
-               {...{ id, type, name, value, placeholder, autoFocus, autoComplete }}
+               {...{ id, type, name, required, value, placeholder, autoFocus, autoComplete }}
                onChange={ (e) => s.handleChange(e) }
                ref={inputRef}
         />

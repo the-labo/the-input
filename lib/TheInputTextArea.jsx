@@ -25,12 +25,17 @@ class TheInputTextArea extends React.PureComponent {
       children,
       rows,
       name,
+      required,
       value,
       error,
       placeholder
     } = props
     return (
-      <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'rows', 'value', 'name', 'placeholder' ] })}
+      <div {...htmlAttributesFor(props, {
+        except: [
+          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder'
+        ]
+      })}
            {...eventHandlersFor(props, { except: [] })}
            className={classnames('the-input-textarea', className, {
              'the-input-error': !!error
@@ -40,7 +45,7 @@ class TheInputTextArea extends React.PureComponent {
         { renderErrorMessage(error) }
 
         <textarea className='the-input-textarea-input'
-                  {...{ id, rows, name, value, placeholder }}
+                  {...{ id, rows, name, required, value, placeholder }}
                   onChange={(e) => s.handleChange(e)}
 
         />
