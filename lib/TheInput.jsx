@@ -11,6 +11,7 @@ import TheInputCheckbox from './TheInputCheckbox'
 import TheInputSelect from './TheInputSelect'
 import TheInputPassword from './TheInputPassword'
 import TheInputSearch from './TheInputSearch'
+import { renderErrorMessage } from './helpers'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
 /**
@@ -21,17 +22,47 @@ class TheInput extends React.PureComponent {
     const s = this
     const { props } = s
     let {
+      id,
       className,
-      children
+      children,
+      type,
+      name,
+      value,
+      error,
+      placeholder,
+      autoFocus,
+      autoComplete,
+      inputRef
     } = props
     return (
-      <div { ...htmlAttributesFor(props, { except: [ 'className' ] }) }
+      <div { ...htmlAttributesFor(props, {
+        except: [
+          'id', 'className', 'type', 'value', 'name', 'placeholder', 'autoFocus', 'autoComplete'
+        ]
+      }) }
            { ...eventHandlersFor(props, { except: [] })}
-           className={ classnames('the-input', className) }
+           className={ classnames('the-input', className, {
+             'the-input-error': !!error
+           }) }
       >
+        { renderErrorMessage(error) }
+
+        <input type='the-input-input'
+               {...{ id, type, name, value, placeholder, autoFocus, autoComplete }}
+               onChange={ (e) => s.handleChange(e) }
+               ref={inputRef}
+        />
         { children }
       </div>
     )
+  }
+
+  handleChange (e) {
+    const s = this
+    let { parser, onChange, onUpdate } = s.props
+    let { name, value } = e.target
+    onChange && onChange(e)
+    onUpdate && onUpdate({ [name]: parser(value) })
   }
 }
 
@@ -44,9 +75,28 @@ TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
 TheInput.Select = TheInputSelect
 
-TheInput.propTypes = {}
+TheInput.propTypes = {
+  /** Input type */
+  type: PropTypes.string,
+  /** Name of input */
+  name: PropTypes.string,
+  /** Value of input */
+  value: PropTypes.string,
+  /** Handle for update */
+  onUpdate: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
+}
 
-TheInput.defaultProps = {}
+TheInput.defaultProps = {
+  type: 'text',
+  value: '',
+  name: '_the',
+  error: null,
+  options: {}
+}
 
 TheInput.displayName = 'TheInput'
 

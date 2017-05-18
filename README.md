@@ -182,6 +182,10 @@ class ExampleComponent extends React.PureComponent {
 
         <h3>Error</h3>
 
+        <TheInput name='@'
+                  type='hidden'
+                  error='This is global error'/>
+
         <Text name='value01'
               value={values[ 'value01' ]}
               onUpdate={ onUpdate }
@@ -278,6 +282,11 @@ Radio input of the-components
 | `parser` |   |  | `String` |
 | `error` |   |  | `null` |
 | `options` |   |  | `{}` |
+
+### TheInputSearch
+
+
+
 
 ### TheInputSelect
 
