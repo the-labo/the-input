@@ -83,7 +83,7 @@ TheInput.propTypes = {
   /** Value of input */
   value: PropTypes.string,
   /** Handle for update */
-  onUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func,
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
