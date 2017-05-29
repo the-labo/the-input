@@ -124,12 +124,16 @@ class TheInputText extends React.PureComponent {
       case 40: // DOWN
         s.moveCandidateIndex(+1)
         break
-      case 13: // Enter
-        s.enterCandidate(s.state.selectedCandidate)
+      case 13: { // Enter
+        let { selectedCandidate } = s.state
+        if (selectedCandidate) {
+          s.enterCandidate(selectedCandidate)
+        }
         if (onEnter) {
           onEnter()
         }
         break
+      }
       case 9: // Tab
         s.offSuggestion()
         break
