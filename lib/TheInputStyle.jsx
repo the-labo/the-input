@@ -37,7 +37,9 @@ TheInputStyle.data = (options) => {
     contentPadding = ThemeValues.contentPadding,
     hoverOpacity = ThemeValues.hoverOpacity,
     activeOpacity = ThemeValues.activeOpacity,
-    errorColor = ThemeValues.errorColor
+    errorColor = ThemeValues.errorColor,
+    toggleHandleSize = 24,
+    animationDuration = 400
   } = options
 
   const ToggleIconStyle = (values) => Object.assign({
@@ -56,8 +58,6 @@ TheInputStyle.data = (options) => {
     '&:hover': { opacity: hoverOpacity },
     '&:active': { opacity: activeOpacity }
   }, values)
-
-  let animationDuration = 300
 
   return Object.assign({},
     asStyleData('.the-input', {
@@ -260,6 +260,86 @@ TheInputStyle.data = (options) => {
         color: dominantColor,
         minWidth: '1em'
       }
+    }),
+    asStyleData('.the-input-toggle', {
+      '&': {
+        display: 'inline-flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer'
+      },
+      '.the-input-toggle-radio': {
+        display: 'none'
+      },
+      '.the-input-toggle-label': {
+        width: '100%',
+        height: '100%',
+        boxSizing: 'border-box',
+        textAlign: 'center',
+        fontSize: '14px',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        padding: 0,
+        flexGrow: 1,
+        flexShrink: 1,
+        cursor: 'pointer',
+        transition: `width ${animationDuration}ms`,
+        lineHeight: `${toggleHandleSize}px`
+      },
+      '.the-input-toggle-label-text': {
+        display: 'inline-block',
+        width: '100%',
+        padding: '0 8px',
+        boxSizing: 'border-box',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        minWidth: toggleHandleSize * 1.5
+      },
+      '.the-input-toggle-on-label': {
+        background: dominantColor,
+        color: 'white',
+        borderRadius: `${toggleHandleSize / 2}px 0 0 ${toggleHandleSize / 2}px`,
+        marginRight: -1 * toggleHandleSize / 2
+      },
+      '.the-input-toggle-off-label': {
+        background: '#FAFAFA',
+        color: '#AAA',
+        borderRadius: `0 ${toggleHandleSize / 2}px ${toggleHandleSize / 2}px 0`,
+        marginLeft: -1 * toggleHandleSize / 2
+      },
+      '&.the-input-toggle-on .the-input-toggle-off-label': {
+        width: `${toggleHandleSize / 2 + 2}px !important`
+      },
+      '&.the-input-toggle-off .the-input-toggle-on-label': {
+        width: `${toggleHandleSize / 2 + 2}px !important`
+      },
+      '.the-input-toggle-inner': {
+        display: 'inline-flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: backgroundColor,
+        height: toggleHandleSize,
+        borderRadius: (toggleHandleSize / 2 + 1),
+        minWidth: toggleHandleSize * 3 + 2,
+        border: `1px solid ${inputBorderColor}`,
+        overflow: 'hidden',
+        width: '100%'
+      },
+      '.the-input-toggle-handle': {
+        display: 'inline-block',
+        borderRadius: '50%',
+        width: toggleHandleSize,
+        height: toggleHandleSize,
+        backgroundColor: 'white',
+        border: `1px solid ${inputBorderColor}`,
+        flexGrow: 0,
+        flexShrink: 0,
+        position: 'relative',
+        zIndex: 4
+      }
+
     }),
     asStyleData('.the-input-select', {
       '&': {

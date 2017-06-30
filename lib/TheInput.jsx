@@ -11,6 +11,7 @@ import TheInputCheckbox from './TheInputCheckbox'
 import TheInputSelect from './TheInputSelect'
 import TheInputPassword from './TheInputPassword'
 import TheInputSearch from './TheInputSearch'
+import TheInputToggle from './TheInputToggle'
 import { renderErrorMessage } from './helpers'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
@@ -75,6 +76,7 @@ TheInput.TextArea = TheInputTextArea
 TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
 TheInput.Select = TheInputSelect
+TheInput.Toggle = TheInputToggle
 
 TheInput.propTypes = {
   /** Input type */

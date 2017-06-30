@@ -16,7 +16,6 @@ class ExampleComponent extends React.PureComponent {
     const s = this
     let { values } = s.state
     const onUpdate = (values) => {
-      console.log('values:', values)
       s.setState({ values })
     }
 
@@ -27,7 +26,8 @@ class ExampleComponent extends React.PureComponent {
       TextArea,
       Radio,
       Checkbox,
-      Select
+      Select,
+      Toggle
     } = TheInput
     return (
       <div>
@@ -99,6 +99,15 @@ class ExampleComponent extends React.PureComponent {
                   value={values[ 'value04' ]}
                   onUpdate={ onUpdate }
                   options={[ 'Tea', 'Coffee', 'Water' ]}
+          />
+        </div>
+
+        <h3>Toggle</h3>
+
+        <div>
+          <Toggle name='value05'
+                  on={Boolean(values[ 'value05' ])}
+                  onUpdate={ onUpdate }
           />
         </div>
 
