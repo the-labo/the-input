@@ -855,5 +855,89 @@
         }
       }
     }
+  },
+  "TheInputToggle": {
+    "description": "Toggle input of the-components",
+    "displayName": "TheInputToggle",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Label",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ htmlFor, className, title }",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Radio",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{ id, name, value, checked, onClick, onChange }",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "on": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "onTitle": {
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "offTitle": {
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "error": {
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      }
+    }
   }
 }

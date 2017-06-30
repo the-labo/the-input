@@ -90,7 +90,6 @@ class ExampleComponent extends React.PureComponent {
     const s = this
     let { values } = s.state
     const onUpdate = (values) => {
-      console.log('values:', values)
       s.setState({ values })
     }
 
