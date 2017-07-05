@@ -368,6 +368,19 @@ TextArea Input
 | `parser` | func  | Value parser | `String` |
 | `error` |   |  | `null` |
 
+### TheInputToggle
+
+Toggle input of the-components
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `on` |   |  | `false` |
+| `onTitle` |   |  | `''` |
+| `offTitle` |   |  | `''` |
+| `error` |   |  | `null` |
+
 
 
 <!-- Section from "doc/guides/03.Components.md.hbs" End -->
