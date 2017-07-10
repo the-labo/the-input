@@ -1,6 +1,6 @@
 {
   "name": "the-input",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Input of the-components",
   "main": "shim",
   "scripts": {
