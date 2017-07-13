@@ -940,7 +940,7 @@
       },
       "width": {
         "defaultValue": {
-          "value": "120",
+          "value": "64",
           "computed": false
         }
       }
