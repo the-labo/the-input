@@ -391,7 +391,7 @@ Toggle input of the-components
 | `onTitle` |   |  | `''` |
 | `offTitle` |   |  | `''` |
 | `error` |   |  | `null` |
-| `width` |   |  | `120` |
+| `width` |   |  | `64` |
 
 
 
