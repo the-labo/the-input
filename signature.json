@@ -937,6 +937,12 @@
           "value": "null",
           "computed": false
         }
+      },
+      "width": {
+        "defaultValue": {
+          "value": "120",
+          "computed": false
+        }
       }
     }
   }

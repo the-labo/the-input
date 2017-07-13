@@ -24,7 +24,9 @@ class TheInputToggle extends React.PureComponent {
       name,
       on,
       className,
+      width,
       error,
+      style,
       onTitle,
       offTitle
     } = props
@@ -33,6 +35,7 @@ class TheInputToggle extends React.PureComponent {
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className' ] })}
            {...eventHandlersFor(props, { except: [] })}
            {...{ id }}
+           style={Object.assign({}, style, { width })}
            className={classnames('the-input-toggle', className, {
              'the-input-toggle-on': on,
              'the-input-toggle-off': !on,
@@ -119,7 +122,8 @@ TheInputToggle.defaultProps = {
   on: false,
   onTitle: '',
   offTitle: '',
-  error: null
+  error: null,
+  width: 64
 }
 
 TheInputToggle.displayName = 'TheInputToggle'

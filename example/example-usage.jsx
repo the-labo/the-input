@@ -111,6 +111,15 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <div>
+          <Toggle name='value05'
+                  on={Boolean(values[ 'value05' ])}
+                  onTitle='This is on'
+                  offTitle='This is off'
+                  onUpdate={ onUpdate }
+          />
+        </div>
+
         <br/>
         <br/>
         <br/>
