@@ -183,7 +183,7 @@ TheInputStyle.data = (options) => {
       },
       '.the-input-radio-item': {
         display: 'inline-flex',
-        justifyContent: 'flex-center',
+        justifyContent: 'center',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         boxSizing: 'border-box',
