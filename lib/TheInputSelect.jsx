@@ -37,6 +37,7 @@ class TheInputSelect extends React.PureComponent {
       options,
       placeholder
     } = props
+    options = normalizeOptions(options)
     let { suggesting, suggestingIndex } = s.state
     return (
       <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'type', 'value', 'name', 'placeholder' ] })}
@@ -210,7 +211,8 @@ class TheInputSelect extends React.PureComponent {
   getOptionValues () {
     const s = this
     let { props } = s
-    return Object.keys(props.options || {})
+    let options = normalizeOptions(props.options)
+    return Object.keys(options || {})
   }
 
   getIndexForValue (value) {
