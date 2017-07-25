@@ -7,10 +7,10 @@ import TheStyle from 'the-style'
 import { colorAlpha, asStyleData } from 'the-component-util'
 
 /** Style for TheInput */
-const TheInputStyle = ({ id, className, options }) => (
-  <TheStyle { ...{ id } }
-            className={ classnames('the-input-style', className) }
-            styles={ TheInputStyle.data(options) }
+const TheInputStyle = ({id, className, options}) => (
+  <TheStyle {...{id}}
+            className={classnames('the-input-style', className)}
+            styles={TheInputStyle.data(options)}
   />
 )
 
@@ -25,7 +25,7 @@ TheInputStyle.defaultProps = {
 }
 
 TheInputStyle.data = (options) => {
-  const { ThemeValues } = TheStyle
+  const {ThemeValues} = TheStyle
   let {
     dominantColor = ThemeValues.dominantColor,
     contentWidth = ThemeValues.contentWidth,
@@ -49,14 +49,14 @@ TheInputStyle.data = (options) => {
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 0,
-    height:'30px',
+    height: '30px',
     zIndex: 4,
     padding: '0 4px',
     minWidth: '1em',
     outlineColor: colorAlpha(dominantColor, 0.2),
     cursor: 'pointer',
-    '&:hover': { opacity: hoverOpacity },
-    '&:active': { opacity: activeOpacity }
+    '&:hover': {opacity: hoverOpacity},
+    '&:active': {opacity: activeOpacity}
   }, values)
 
   return Object.assign({},
@@ -194,8 +194,8 @@ TheInputStyle.data = (options) => {
         display: 'inline-block',
         padding: '2px 4px',
         cursor: 'pointer',
-        '&:hover': { opacity: hoverOpacity },
-        '&:active': { opacity: activeOpacity }
+        '&:hover': {opacity: hoverOpacity},
+        '&:active': {opacity: activeOpacity}
       },
       '.the-input-radio-radio': {
         opacity: 0,
@@ -239,8 +239,8 @@ TheInputStyle.data = (options) => {
         display: 'inline-block',
         padding: '2px 4px',
         cursor: 'pointer',
-        '&:hover': { opacity: hoverOpacity },
-        '&:active': { opacity: activeOpacity }
+        '&:hover': {opacity: hoverOpacity},
+        '&:active': {opacity: activeOpacity}
       },
       '.the-input-checkbox-checkbox': {
         opacity: 0,
