@@ -675,7 +675,7 @@
         ],
         "params": [
           {
-            "name": "{ parser, candidates, selectedCandidate, onSelect }",
+            "name": "{parser, candidates, selectedCandidate, onSelect}",
             "type": null
           }
         ],
