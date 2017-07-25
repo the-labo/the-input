@@ -548,6 +548,18 @@
     "displayName": "TheInputText",
     "methods": [
       {
+        "name": "handleDocumentClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleChange",
         "docblock": null,
         "modifiers": [],

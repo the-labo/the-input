@@ -14,9 +14,9 @@ class ExampleComponent extends React.PureComponent {
 
   render () {
     const s = this
-    let { values } = s.state
+    let {values} = s.state
     const onUpdate = (values) => {
-      s.setState({ values })
+      s.setState({values})
     }
 
     const {
@@ -36,17 +36,17 @@ class ExampleComponent extends React.PureComponent {
         <h3>Text</h3>
 
         <Text name='value01'
-              value={values[ 'value01' ]}
-              onUpdate={ onUpdate }
+              value={values['value01']}
+              onUpdate={onUpdate}
               placeholder='value01'
-              options={[ 'Banana', 'Orange', 'Apple' ]}
+              options={['Banana', 'Orange', 'Apple']}
         />
 
         <br/>
 
         <Search name='value01'
-                value={values[ 'value01' ]}
-                onUpdate={ onUpdate }
+                value={values['value01']}
+                onUpdate={onUpdate}
                 placeholder='value01'
         />
 
@@ -54,16 +54,16 @@ class ExampleComponent extends React.PureComponent {
         <br/>
 
         <Password name='value01'
-                  value={values[ 'value01' ]}
-                  onUpdate={ onUpdate }
+                  value={values['value01']}
+                  onUpdate={onUpdate}
                   placeholder='value01'
         />
 
         <br/>
 
         <TextArea name='value01'
-                  value={values[ 'value01' ]}
-                  onUpdate={ onUpdate }
+                  value={values['value01']}
+                  onUpdate={onUpdate}
                   placeholder='value01'
         />
 
@@ -73,9 +73,9 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Radio name='value02'
-                 value={values[ 'value02' ]}
-                 onUpdate={ onUpdate }
-                 options={[ 'Car', 'Ship', 'Plane' ]}
+                 value={values['value02']}
+                 onUpdate={onUpdate}
+                 options={['Car', 'Ship', 'Plane']}
           />
         </div>
 
@@ -85,9 +85,9 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Checkbox name='value03'
-                    value={values[ 'value03' ]}
-                    onUpdate={ onUpdate }
-                    options={[ 'Green', 'Pink', 'Brown' ]}
+                    value={values['value03']}
+                    onUpdate={onUpdate}
+                    options={['Green', 'Pink', 'Brown']}
           />
         </div>
 
@@ -96,9 +96,9 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Select name='value04'
-                  value={values[ 'value04' ]}
-                  onUpdate={ onUpdate }
-                  options={[ 'Tea', 'Coffee', 'Water' ]}
+                  value={values['value04']}
+                  onUpdate={onUpdate}
+                  options={['Tea', 'Coffee', 'Water']}
           />
         </div>
 
@@ -106,17 +106,17 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Toggle name='value05'
-                  on={Boolean(values[ 'value05' ])}
-                  onUpdate={ onUpdate }
+                  on={Boolean(values['value05'])}
+                  onUpdate={onUpdate}
           />
         </div>
 
         <div>
           <Toggle name='value05'
-                  on={Boolean(values[ 'value05' ])}
+                  on={Boolean(values['value05'])}
                   onTitle='This is on'
                   offTitle='This is off'
-                  onUpdate={ onUpdate }
+                  onUpdate={onUpdate}
           />
         </div>
 
@@ -131,38 +131,45 @@ class ExampleComponent extends React.PureComponent {
                   error='This is global error'/>
 
         <Text name='value01'
-              value={values[ 'value01' ]}
-              onUpdate={ onUpdate }
+              value={values['value01']}
+              onUpdate={onUpdate}
               placeholder='value01'
-              options={[ 'Banana', 'Orange', 'Apple' ]}
+              options={['Banana', 'Orange', 'Apple']}
               error='Something Wrong with This!'
         />
 
+        <Password name='value01'
+                  value={values['value01']}
+                  onUpdate={onUpdate}
+                  placeholder='value01'
+                  error='Something Wrong with This!'
+        />
+
         <TextArea name='value01'
-                  value={values[ 'value01' ]}
-                  onUpdate={ onUpdate }
+                  value={values['value01']}
+                  onUpdate={onUpdate}
                   placeholder='value01'
                   error='Something Wrong with This!'
         />
 
         <Select name='value04'
-                value={values[ 'value04' ]}
-                onUpdate={ onUpdate }
-                options={[ 'Tea', 'Coffee', 'Water' ]}
+                value={values['value04']}
+                onUpdate={onUpdate}
+                options={['Tea', 'Coffee', 'Water']}
                 error='Something Wrong with This!'
         />
 
         <Radio name='value02'
-               value={values[ 'value02' ]}
-               onUpdate={ onUpdate }
-               options={[ 'Car', 'Ship', 'Plane' ]}
+               value={values['value02']}
+               onUpdate={onUpdate}
+               options={['Car', 'Ship', 'Plane']}
                error='Something Wrong with This!'
         />
 
         <Checkbox name='value03'
-                  value={values[ 'value03' ]}
-                  onUpdate={ onUpdate }
-                  options={[ 'Green', 'Pink', 'Brown' ]}
+                  value={values['value03']}
+                  onUpdate={onUpdate}
+                  options={['Green', 'Pink', 'Brown']}
                   error='Something Wrong with This!'
         />
       </div>

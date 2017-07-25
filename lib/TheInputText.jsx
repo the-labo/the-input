@@ -4,6 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
@@ -13,17 +14,19 @@ class TheInputText extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
+    s.elm = null
     s.state = {
       suggesting: false,
       selectedCandidate: null,
       candidates: []
     }
+    s.handleDocumentClick = s.handleDocumentClick.bind(s)
     s._offSuggestionOffTimer = -1
   }
 
   render () {
     const s = this
-    const { props } = s
+    const {props} = s
     let {
       id,
       className,
@@ -39,7 +42,7 @@ class TheInputText extends React.PureComponent {
       autoComplete,
       inputRef
     } = props
-    let { suggesting, candidates, selectedCandidate } = s.state
+    let {suggesting, candidates, selectedCandidate} = s.state
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
@@ -49,29 +52,30 @@ class TheInputText extends React.PureComponent {
           'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
         ]
       })}
-           {...eventHandlersFor(props, { except: [] })}
+           {...eventHandlersFor(props, {except: []})}
            className={classnames('the-input-text', className, {
              'the-input-error': !!error
            })}
            data-value={value}
+           ref={(elm) => { s.elm = elm }}
       >
-        { renderErrorMessage(error) }
+        {renderErrorMessage(error)}
 
         <input className='the-input-text-input'
-               {...{ id, type, name, required, value, placeholder, autoFocus, autoComplete }}
-               onChange={ (e) => s.handleChange(e) }
-               onFocus={ (e) => s.handleFocus(e) }
-               onBlur={ (e) => s.handleBlur(e) }
-               onKeyUp={ (e) => s.handleKeyUp(e) }
-               onKeyDown={ (e) => s.handleKeyDown(e) }
+               {...{id, type, name, required, value, placeholder, autoFocus, autoComplete}}
+               onChange={(e) => s.handleChange(e)}
+               onFocus={(e) => s.handleFocus(e)}
+               onBlur={(e) => s.handleBlur(e)}
+               onKeyUp={(e) => s.handleKeyUp(e)}
+               onKeyDown={(e) => s.handleKeyDown(e)}
                ref={inputRef}
 
         />
         {children}
         {
           suggesting && (
-            <TheInputText.Options {...{ parser, candidates, selectedCandidate }}
-                                  onSelect={({ value }) => s.enterCandidate(value)}
+            <TheInputText.Options {...{parser, candidates, selectedCandidate}}
+                                  onSelect={({value}) => s.enterCandidate(value)}
             />
           )
         }
@@ -79,44 +83,65 @@ class TheInputText extends React.PureComponent {
     )
   }
 
+  componentDidMount () {
+    const s = this
+    const window = get('window')
+    window.addEventListener('click', s.handleDocumentClick)
+  }
+
   componentWillUnmount () {
     const s = this
+    const window = get('window')
+    window.removeEventListener('click', s.handleDocumentClick)
     clearTimeout(s._offSuggestionOffTimer)
+  }
+
+  handleDocumentClick (e) {
+    const s = this
+    const {elm} = s
+
+    if (!elm) {
+      return
+    }
+    const inside = elm.contains(e.target)
+    if (!inside) {
+      s.offSuggestion()
+    }
   }
 
   handleChange (e) {
     const s = this
-    let { parser, onChange, onUpdate } = s.props
-    let { name, value } = e.target
+    let {parser, onChange, onUpdate} = s.props
+    let {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({ [name]: parser(value) })
+    onUpdate && onUpdate({[name]: parser(value)})
   }
 
   handleFocus (e) {
     const s = this
     clearTimeout(s._offSuggestionOffTimer)
-    s.setState({ suggesting: true })
+    s.setState({suggesting: true})
     s.updateCandidates(-1)
-    let { onFocus } = s.props
+    let {onFocus} = s.props
     onFocus && onFocus(e)
   }
 
   handleBlur (e) {
     const s = this
-    let { onBlur } = s.props
+    let {onBlur} = s.props
     onBlur && onBlur(e)
   }
 
   handleKeyUp (e) {
     const s = this
     s.updateCandidates()
-    let { onKeyUp } = s.props
+    let {onKeyUp} = s.props
     onKeyUp && onKeyUp(e)
   }
 
   handleKeyDown (e) {
     const s = this
-    let { onKeyDown, onEnter } = s.props
+    let {onKeyDown, onEnter} = s.props
     switch (e.keyCode) {
       case 38: // UP
         s.moveCandidateIndex(-1)
@@ -125,7 +150,7 @@ class TheInputText extends React.PureComponent {
         s.moveCandidateIndex(+1)
         break
       case 13: { // Enter
-        let { selectedCandidate } = s.state
+        let {selectedCandidate} = s.state
         if (selectedCandidate) {
           s.enterCandidate(selectedCandidate)
         }
@@ -138,7 +163,7 @@ class TheInputText extends React.PureComponent {
         s.offSuggestion()
         break
       default:
-        s.setState({ suggesting: true })
+        s.setState({suggesting: true})
         break
     }
     onKeyDown && onKeyDown(e)
@@ -146,12 +171,12 @@ class TheInputText extends React.PureComponent {
 
   updateCandidates (index) {
     const s = this
-    let { options, value, matcher } = s.props
+    let {options, value, matcher} = s.props
     options = normalizeOptions(options)
     value = value && String(value).trim()
-    let { selectedCandidate } = s.state
+    let {selectedCandidate} = s.state
     let candidates = Object.keys(options)
-      .map((name) => options[ name ])
+      .map((name) => options[name])
       .map((candidate) => String(candidate).trim())
       .filter((candidate) => !!candidate)
       .filter((candidate) => candidate !== value)
@@ -161,13 +186,13 @@ class TheInputText extends React.PureComponent {
     }
     s.setState({
       candidates,
-      selectedCandidate: candidates[ index ] || null
+      selectedCandidate: candidates[index] || null
     })
   }
 
   moveCandidateIndex (amount) {
     const s = this
-    let { candidates, selectedCandidate } = s.state
+    let {candidates, selectedCandidate} = s.state
     if (!candidates) {
       return
     }
@@ -181,7 +206,7 @@ class TheInputText extends React.PureComponent {
 
   enterCandidate (value) {
     const s = this
-    let { name } = s.props
+    let {name} = s.props
     s.handleChange({
       target: {
         name,
@@ -195,11 +220,11 @@ class TheInputText extends React.PureComponent {
     const s = this
     clearTimeout(s._offSuggestionOffTimer)
     s._offSuggestionOffTimer = setTimeout(() => {
-      s.setState({ suggesting: false })
+      s.setState({suggesting: false})
     }, delay)
   }
 
-  static Options ({ parser, candidates, selectedCandidate, onSelect }) {
+  static Options ({parser, candidates, selectedCandidate, onSelect}) {
     if (candidates.length === 0) {
       return null
     }
@@ -212,7 +237,7 @@ class TheInputText extends React.PureComponent {
             })}
                 key={candidate}
                 data-value={parser(candidate)}
-                onClick={() => onSelect({ value: candidate })}
+                onClick={() => onSelect({value: candidate})}
             >
               {candidate}
             </li>
