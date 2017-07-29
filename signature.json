@@ -305,6 +305,18 @@
         "returns": null
       },
       {
+        "name": "handleDocumentClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleDisplayClick",
         "docblock": null,
         "modifiers": [],
@@ -427,7 +439,7 @@
         ],
         "params": [
           {
-            "name": "{ parser, options, suggestingIndex, onSelect }",
+            "name": "{parser, options, suggestingIndex, onSelect}",
             "type": null
           }
         ],

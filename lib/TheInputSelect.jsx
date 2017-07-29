@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
+import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
@@ -14,22 +15,25 @@ class TheInputSelect extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
+    s.elm = null
     s.state = {
       suggesting: false,
       suggestingIndex: s.getIndexForValue(s.props.value)
     }
+    s.handleDocumentClick = s.handleDocumentClick.bind(s)
     s._suggestOffTimer = -1
     s.input = null
   }
 
   render () {
     const s = this
-    const { props } = s
+    const {props} = s
     let {
       id,
       className,
       children,
       parser,
+      sorter,
       type,
       name,
       value,
@@ -38,35 +42,36 @@ class TheInputSelect extends React.PureComponent {
       placeholder
     } = props
     options = normalizeOptions(options)
-    let { suggesting, suggestingIndex } = s.state
+    let {suggesting, suggestingIndex} = s.state
     return (
-      <div {...htmlAttributesFor(props, { except: [ 'id', 'className', 'type', 'value', 'name', 'placeholder' ] })}
-           {...eventHandlersFor(props, { except: [] })}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
+           {...eventHandlersFor(props, {except: []})}
            className={classnames('the-input-select', className, {
              'the-input-error': !!error
            })}
            data-value={value}
+           ref={(elm) => { s.elm = elm }}
       >
-        { renderErrorMessage(error) }
+        {renderErrorMessage(error)}
 
         <a className='the-input-select-display'
            onClick={(e) => s.handleDisplayClick(e)}
         >
           <span className='the-input-select-display-value'>
-            {options[ value ]}
+            {options[value]}
           </span>
           <TheIcon className={TheInputSelect.OPEN_ICON}/>
         </a>
         <input className='the-input-select-input'
-               {...{ id, type, name, value, placeholder }}
-               onFocus={ (e) => s.handleFocus(e) }
-               onBlur={ (e) => s.handleBlur(e) }
-               onKeyUp={ (e) => s.handleKeyUp(e) }
-               onKeyDown={ (e) => s.handleKeyDown(e) }
+               {...{id, type, name, value, placeholder}}
+               onFocus={(e) => s.handleFocus(e)}
+               onBlur={(e) => s.handleBlur(e)}
+               onKeyUp={(e) => s.handleKeyUp(e)}
+               onKeyDown={(e) => s.handleKeyDown(e)}
                ref={(input) => { s.input = input }}
 
         />
-        <select onChange={ (e) => s.handleChange(e) }
+        <select onChange={(e) => s.handleChange(e)}
                 value={value}
                 tabIndex={-1}
                 className='the-input-select-select'
@@ -83,8 +88,8 @@ class TheInputSelect extends React.PureComponent {
         {children}
         {
           suggesting && (
-            <TheInputSelect.Options {...{ parser, options, suggestingIndex }}
-                                    onSelect={({ value }) => s.enterSuggested(value)}
+            <TheInputSelect.Options {...{parser, sorter, options, suggestingIndex}}
+                                    onSelect={({value}) => s.enterSuggested(value)}
             />
           )
         }
@@ -92,23 +97,52 @@ class TheInputSelect extends React.PureComponent {
     )
   }
 
+  componentDidMount () {
+    const s = this
+    const window = get('window')
+    window.addEventListener('click', s.handleDocumentClick)
+  }
+
   componentWillUnmount () {
     const s = this
+    const window = get('window')
+    window.removeEventListener('click', s.handleDocumentClick)
     clearTimeout(s._suggestOffTimer)
   }
 
   handleChange (e) {
     const s = this
-    let { parser, onChange, onUpdate } = s.props
-    let { name, value } = e.target
+    let {parser, onChange, onUpdate} = s.props
+    let {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({ [name]: parser(value) })
+    onUpdate && onUpdate({[name]: parser(value)})
+  }
+
+  handleDocumentClick (e) {
+    const s = this
+    const {elm} = s
+
+    if (!elm) {
+      return
+    }
+    const inside = elm.contains(e.target)
+    if (!inside) {
+      s.offSuggestion()
+    }
+  }
+
+  offSuggestion (delay = 10) {
+    const s = this
+    clearTimeout(s._suggestOffTimer)
+    s._suggestOffTimer = setTimeout(() => {
+      s.setState({suggesting: false})
+    }, delay)
   }
 
   handleDisplayClick (e) {
     const s = this
     clearTimeout(s._suggestOffTimer)
-    let { input, state } = s
+    let {input, state} = s
     let suggesting = !state.suggesting
     if (suggesting) {
       input.focus()
@@ -124,26 +158,26 @@ class TheInputSelect extends React.PureComponent {
   handleFocus (e) {
     const s = this
     clearTimeout(s._suggestOffTimer)
-    s.setState({ suggesting: true })
-    let { onFocus } = s.props
+    s.setState({suggesting: true})
+    let {onFocus} = s.props
     onFocus && onFocus(e)
   }
 
   handleBlur (e) {
     const s = this
-    let { onBlur } = s.props
+    let {onBlur} = s.props
     onBlur && onBlur(e)
   }
 
   handleKeyUp (e) {
     const s = this
-    let { onKeyUp } = s.props
+    let {onKeyUp} = s.props
     onKeyUp && onKeyUp(e)
   }
 
   handleKeyDown (e) {
     const s = this
-    let { onKeyDown, onEnter } = s.props
+    let {onKeyDown, onEnter} = s.props
     switch (e.keyCode) {
       case 38: // UP
         s.moveCandidateIndex(-1)
@@ -153,18 +187,18 @@ class TheInputSelect extends React.PureComponent {
         break
       case 13: { // Enter
         let values = s.getOptionValues()
-        let { suggestingIndex } = s.state
-        s.enterSuggested(values[ suggestingIndex ])
+        let {suggestingIndex} = s.state
+        s.enterSuggested(values[suggestingIndex])
         if (onEnter) {
           onEnter()
         }
         break
       }
       case 9: // Tab
-        s.offFocus()
+        s.offSuggestion()
         break
       default:
-        s.setState({ suggesting: true })
+        s.setState({suggesting: true})
         break
     }
     onKeyDown && onKeyDown(e)
@@ -172,7 +206,7 @@ class TheInputSelect extends React.PureComponent {
 
   moveCandidateIndex (amount) {
     const s = this
-    let { state } = s
+    let {state} = s
     let values = s.getOptionValues()
     let index = state.suggestingIndex + amount
     let over = (index === -1) || (index === values.length)
@@ -186,7 +220,7 @@ class TheInputSelect extends React.PureComponent {
 
   enterSuggested (value) {
     const s = this
-    let { state, props } = s
+    let {state, props} = s
     if (!state.suggesting) {
       return
     }
@@ -194,23 +228,15 @@ class TheInputSelect extends React.PureComponent {
       suggesting: false,
       suggestingIndex: s.getIndexForValue(value)
     })
-    let { name } = s.props
+    let {name} = s.props
     s.handleChange({
-      target: { name, value }
+      target: {name, value}
     })
-  }
-
-  offFocus (delay = 10) {
-    const s = this
-    clearTimeout(s._suggestOffTimer)
-    s._suggestOffTimer = setTimeout(() => {
-      s.setState({ suggesting: false })
-    }, delay)
   }
 
   getOptionValues () {
     const s = this
-    let { props } = s
+    let {props} = s
     let options = normalizeOptions(props.options)
     return Object.keys(options || {})
   }
@@ -220,23 +246,23 @@ class TheInputSelect extends React.PureComponent {
     return s.getOptionValues().indexOf(value)
   }
 
-  static Options ({ parser, options, suggestingIndex, onSelect }) {
-    let optionValues = Object.keys(options)
+  static Options ({parser, sorter, options, suggestingIndex, onSelect}) {
+    const optionValues = Object.keys(options)
     if (optionValues.length === 0) {
       return null
     }
     return (
       <ul className='the-input-select-options'>
         {
-          optionValues.map((optionValue, i) => (
+          optionValues.sort(sorter).map((optionValue, i) => (
             <li className={classnames('the-input-select-option', {
               'the-input-select-option-selected': i === suggestingIndex
             })}
                 key={optionValue}
                 data-value={parser(optionValue)}
-                onClick={() => onSelect({ value: optionValue })}
+                onClick={() => onSelect({value: optionValue})}
             >
-              {options[ optionValue ]}
+              {options[optionValue]}
             </li>
           ))
         }
@@ -258,6 +284,8 @@ TheInputSelect.propTypes = {
   onEnter: PropTypes.func,
   /** Value parser */
   parser: PropTypes.func,
+  /** Options sorter */
+  sorter: PropTypes.func,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -273,6 +301,7 @@ TheInputSelect.propTypes = {
 TheInputSelect.defaultProps = {
   value: '',
   parser: String,
+  sorter: () => 1,
   error: null,
   options: {},
   onEnter: null
