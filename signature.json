@@ -317,6 +317,18 @@
         "returns": null
       },
       {
+        "name": "offSuggestion",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "delay",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleDisplayClick",
         "docblock": null,
         "modifiers": [],
@@ -401,18 +413,6 @@
         "returns": null
       },
       {
-        "name": "offFocus",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "delay",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "getOptionValues",
         "docblock": null,
         "modifiers": [],
@@ -439,7 +439,7 @@
         ],
         "params": [
           {
-            "name": "{parser, options, suggestingIndex, onSelect}",
+            "name": "{parser, sorter, options, suggestingIndex, onSelect}",
             "type": null
           }
         ],
@@ -492,6 +492,17 @@
         "defaultValue": {
           "value": "String",
           "computed": true
+        }
+      },
+      "sorter": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Options sorter",
+        "defaultValue": {
+          "value": "() => 1",
+          "computed": false
         }
       },
       "error": {
