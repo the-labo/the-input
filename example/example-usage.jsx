@@ -98,6 +98,7 @@ class ExampleComponent extends React.PureComponent {
           <Select name='value04'
                   value={values['value04']}
                   onUpdate={onUpdate}
+                  sorter={(a, b) => a.localeCompare(b)}
                   options={['Tea', 'Coffee', 'Water']}
           />
         </div>

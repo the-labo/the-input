@@ -174,6 +174,7 @@ class ExampleComponent extends React.PureComponent {
           <Select name='value04'
                   value={values['value04']}
                   onUpdate={onUpdate}
+                  sorter={(a, b) => a.localeCompare(b)}
                   options={['Tea', 'Coffee', 'Water']}
           />
         </div>
@@ -338,6 +339,7 @@ Text Input
 | `onUpdate` | func  | Handle for update | `` |
 | `onEnter` | func  | Handle for enter | `null` |
 | `parser` | func  | Value parser | `String` |
+| `sorter` | func  | Options sorter | `() => 1` |
 | `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 

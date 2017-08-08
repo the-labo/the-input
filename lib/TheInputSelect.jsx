@@ -236,9 +236,9 @@ class TheInputSelect extends React.PureComponent {
 
   getOptionValues () {
     const s = this
-    let {props} = s
-    let options = normalizeOptions(props.options)
-    return Object.keys(options || {})
+    const {props} = s
+    const options = normalizeOptions(props.options)
+    return Object.keys(options || {}).sort(props.sorter)
   }
 
   getIndexForValue (value) {
