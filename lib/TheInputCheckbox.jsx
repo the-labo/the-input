@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { normalizeOptions, normalizeArrayValue, renderErrorMessage } from './helpers'
@@ -19,7 +19,7 @@ class TheInputCheckbox extends React.PureComponent {
 
   render () {
     const s = this
-    const { props } = s
+    const {props} = s
     let {
       id = s.id,
       className,
@@ -34,15 +34,15 @@ class TheInputCheckbox extends React.PureComponent {
     value = normalizeArrayValue(value, splitter).map((value) => String(value).trim())
 
     return (
-      <div {...htmlAttributesFor(props, { except: [ 'id', 'className' ] })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-checkbox', className, {
+      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
+           {...eventHandlersFor(props, {except: []})}
+           className={c('the-input-checkbox', className, {
              'the-input-error': !!error
            })}
            data-value={value}
            id={id}
       >
-        { renderErrorMessage(error) }
+        {renderErrorMessage(error)}
 
         {
           Object.keys(options).map((optionValue) => (
@@ -52,7 +52,7 @@ class TheInputCheckbox extends React.PureComponent {
                                      key={optionValue}
                                      value={optionValue}
                                      onChange={(e) => s.handleChange(e)}
-                                     label={options[ optionValue ]}
+                                     label={options[optionValue]}
             />
           ))
         }
@@ -69,7 +69,7 @@ class TheInputCheckbox extends React.PureComponent {
       value,
       splitter
     } = s.props
-    let { name, value: changedValue, checked } = e.target
+    let {name, value: changedValue, checked} = e.target
     changedValue = String(changedValue).trim()
     value = normalizeArrayValue(value, splitter)
       .map((value) => String(value).trim())
@@ -88,24 +88,27 @@ class TheInputCheckbox extends React.PureComponent {
 
   idFor (optionValue) {
     const s = this
-    let { id = s.id } = s.props
-    return [ id, ...[].concat(optionValue) ].join('-')
+    let {id = s.id} = s.props
+    return [id, ...[].concat(optionValue)].join('-')
   }
 
-  static Option ({ name, value, id, checked, onChange, label }) {
+  static Option ({name, value, id, checked, onChange, label}) {
     const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
     return (
-      <div className='the-input-checkbox-item'
+      <div className={c('the-input-checkbox-item', {
+        'the-input-checkbox-item-checked': checked
+      })}
+           data-value={value}
            key={value}
       >
         <input type='checkbox'
                className='the-input-checkbox-checkbox'
-               {...{ name, checked, id, value, onChange }}
+               {...{name, checked, id, value, onChange}}
         />
         <label htmlFor={id}
                className='the-input-checkbox-label'
         >
-          <TheIcon className={classnames('the-input-checkbox-icon', icon)}/>
+          <TheIcon className={c('the-input-checkbox-icon', icon)}/>
           {label}
         </label>
       </div>
