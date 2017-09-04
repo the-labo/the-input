@@ -26,7 +26,7 @@ TheInputStyle.defaultProps = {
 
 TheInputStyle.data = (options) => {
   const {ThemeValues} = TheStyle
-  let {
+  const {
     dominantColor = ThemeValues.dominantColor,
     contentWidth = ThemeValues.contentWidth,
     inputBorderColor = ThemeValues.inputBorderColor,
@@ -119,12 +119,14 @@ TheInputStyle.data = (options) => {
       }
     }),
     asStyleData('.the-input-password', {
-      position: 'relative',
+      '&': {
+        position: 'relative',
+      },
       '.the-input-password-toggle': ToggleIconStyle()
     }),
     asStyleData('.the-input-search', {
-      position: 'relative',
       '&': {
+        position: 'relative',
         transition: `max-width ${animationDuration}ms`,
         maxWidth: '2em'
       },
