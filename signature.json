@@ -1,8 +1,4 @@
 {
-  "undefined": {
-    "description": "",
-    "methods": []
-  },
   "TheInput": {
     "description": "Input of the-components",
     "displayName": "TheInput",
@@ -691,6 +687,20 @@
         "returns": null
       },
       {
+        "name": "commitValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "getPatternWarning",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "Options",
         "docblock": null,
         "modifiers": [
@@ -772,6 +782,29 @@
         "description": "Options parser",
         "defaultValue": {
           "value": "(candidate, value) => {\n  return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())\n}",
+          "computed": false
+        }
+      },
+      "pattern": {
+        "type": {
+          "name": "instanceOf",
+          "value": "RegExp"
+        },
+        "required": false,
+        "description": "Regexp for input",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "patternHint": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Hint text for pattern",
+        "defaultValue": {
+          "value": "null",
           "computed": false
         }
       },
