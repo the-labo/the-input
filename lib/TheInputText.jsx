@@ -2,10 +2,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { get } from 'the-window'
-import { normalizeOptions, renderErrorMessage } from './helpers'
+import { normalizeOptions, renderErrorMessage, renderWarningMessage } from './helpers'
+import * as patterns from './patterns'
 
 /**
  * Text Input
@@ -18,7 +19,8 @@ class TheInputText extends React.PureComponent {
     s.state = {
       suggesting: false,
       selectedCandidate: null,
-      candidates: []
+      candidates: [],
+      committedValue: null
     }
     s.handleDocumentClick = s.handleDocumentClick.bind(s)
     s._offSuggestionOffTimer = -1
@@ -26,8 +28,8 @@ class TheInputText extends React.PureComponent {
 
   render () {
     const s = this
-    const {props} = s
-    let {
+    const {props, state} = s
+    const {
       id,
       className,
       children,
@@ -37,15 +39,18 @@ class TheInputText extends React.PureComponent {
       required,
       value,
       error,
+      pattern,
+      patternHint,
       placeholder,
       autoFocus,
-      autoComplete,
       inputRef
     } = props
-    let {suggesting, candidates, selectedCandidate} = s.state
+    let {autoComplete} = props
+    const {suggesting, candidates, selectedCandidate, committedValue} = state
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
+    const warning = s.getPatternWarning()
     return (
       <div {...htmlAttributesFor(props, {
         except: [
@@ -53,12 +58,14 @@ class TheInputText extends React.PureComponent {
         ]
       })}
            {...eventHandlersFor(props, {except: []})}
-           className={classnames('the-input-text', className, {
-             'the-input-error': !!error
+           className={c('the-input-text', className, {
+             'the-input-warn': !!warning,
+             'the-input-error': !!error,
            })}
            data-value={value}
            ref={(elm) => { s.elm = elm }}
       >
+        {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
 
         <input className='the-input-text-input'
@@ -111,8 +118,8 @@ class TheInputText extends React.PureComponent {
 
   handleChange (e) {
     const s = this
-    let {parser, onChange, onUpdate} = s.props
-    let {name, value} = e.target
+    const {parser, onChange, onUpdate} = s.props
+    const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
   }
@@ -128,8 +135,9 @@ class TheInputText extends React.PureComponent {
 
   handleBlur (e) {
     const s = this
-    let {onBlur} = s.props
+    const {onBlur} = s.props
     onBlur && onBlur(e)
+    s.commitValue()
   }
 
   handleKeyUp (e) {
@@ -157,6 +165,7 @@ class TheInputText extends React.PureComponent {
         if (onEnter) {
           onEnter()
         }
+        s.commitValue()
         break
       }
       case 9: // Tab
@@ -192,12 +201,12 @@ class TheInputText extends React.PureComponent {
 
   moveCandidateIndex (amount) {
     const s = this
-    let {candidates, selectedCandidate} = s.state
+    const {candidates, selectedCandidate} = s.state
     if (!candidates) {
       return
     }
-    let index = candidates.indexOf(selectedCandidate) + amount
-    let over = (index <= -1) || (index >= candidates.length)
+    const index = candidates.indexOf(selectedCandidate) + amount
+    const over = (index <= -1) || (index >= candidates.length)
     if (over) {
       return
     }
@@ -224,6 +233,39 @@ class TheInputText extends React.PureComponent {
     }, delay)
   }
 
+  commitValue () {
+    const s = this
+    const {state, props} = s
+    const {value} = props
+
+    if (state.committedValue === value) {
+      return
+    }
+    s.setState({committedValue: value})
+  }
+
+  getPatternWarning () {
+    const s = this
+    const {state, props} = s
+    const {value, pattern, patternHint} = props
+    const {committedValue} = state
+    if (!committedValue) {
+      return null
+    }
+    if (!pattern) {
+      return null
+    }
+    const ok = pattern.test(committedValue)
+    if (ok) {
+      return null
+    }
+    const willBeOK = value && pattern.test(value)
+    if (willBeOK) {
+      return null
+    }
+    return patternHint
+  }
+
   static Options ({parser, candidates, selectedCandidate, onSelect}) {
     if (candidates.length === 0) {
       return null
@@ -232,7 +274,7 @@ class TheInputText extends React.PureComponent {
       <ul className='the-input-text-options'>
         {
           candidates.map((candidate) => (
-            <li className={classnames('the-input-text-option', {
+            <li className={c('the-input-text-option', {
               'the-input-text-option-selected': selectedCandidate === candidate
             })}
                 key={candidate}
@@ -263,6 +305,10 @@ TheInputText.propTypes = {
   parser: PropTypes.func,
   /** Options parser */
   matcher: PropTypes.func,
+  /** Regexp for input */
+  pattern: PropTypes.instanceOf(RegExp),
+  /** Hint text for pattern */
+  patternHint: PropTypes.string,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -282,11 +328,15 @@ TheInputText.defaultProps = {
   matcher: (candidate, value) => {
     return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
   },
+  pattern: null,
+  patternHint: null,
   error: null,
   options: {},
   onEnter: null
 }
 
 TheInputText.displayName = 'TheInputText'
+
+Object.assign(TheInputText, patterns)
 
 export default TheInputText

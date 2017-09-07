@@ -37,6 +37,7 @@ TheInputStyle.data = (options) => {
     contentPadding = ThemeValues.contentPadding,
     hoverOpacity = ThemeValues.hoverOpacity,
     activeOpacity = ThemeValues.activeOpacity,
+    warnColor = ThemeValues.warnColor,
     errorColor = ThemeValues.errorColor,
     toggleHandleSize = 24,
     animationDuration = 400
@@ -62,6 +63,21 @@ TheInputStyle.data = (options) => {
   return Object.assign({},
     asStyleData('.the-input', {
       '&': {}
+    }),
+    asStyleData('.the-input-message', {
+      '&': {
+        transition: 'max-height 300ms',
+        display: 'block',
+        fontSize: 'small',
+        padding: '4px 4px 0',
+        margin: '0 0 -2px',
+        fontStyle: 'italic',
+        overflow: 'hidden',
+        maxHeight: '2em'
+      },
+      '&.the-input-message-empty': {
+        maxHeight: '0em'
+      }
     }),
     asStyleData('.the-input-text', {
       '&': {
@@ -418,6 +434,20 @@ TheInputStyle.data = (options) => {
         overflow: 'hidden'
       }
     }),
+    asStyleData('.the-input-warn', {
+      '.the-input-text-input,.the-input-textarea-input': {
+        borderColor: warnColor
+      },
+      '.the-input-select-display': {
+        borderColor: warnColor
+      },
+      '&.the-input-radio,&.the-input-checkbox': {
+        border: `1px solid ${warnColor}`
+      },
+      '.the-input-warn-message': {
+        color: warnColor
+      }
+    }),
     asStyleData('.the-input-error', {
       '.the-input-text-input,.the-input-textarea-input': {
         borderColor: errorColor
@@ -429,12 +459,7 @@ TheInputStyle.data = (options) => {
         border: `1px solid ${errorColor}`
       },
       '.the-input-error-message': {
-        color: errorColor,
-        display: 'block',
-        fontSize: 'small',
-        padding: '4px 4px 0',
-        margin: '0 0 -2px',
-        fontStyle: 'italic'
+        color: errorColor
       }
     })
   )

@@ -42,6 +42,16 @@ class ExampleComponent extends React.PureComponent {
               options={['Banana', 'Orange', 'Apple']}
         />
 
+        <h3>Text with hint</h3>
+
+        <Text name='value01'
+              value={values['value01']}
+              onUpdate={onUpdate}
+              placeholder='eg: hoge@example.com'
+              pattern={Text.EMAIL_PATTERN}
+              patternHint='Needs to be email'
+        />
+
         <br/>
 
         <Search name='value01'

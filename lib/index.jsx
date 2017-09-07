@@ -1,11 +1,12 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 1.4.14
+ * @version 1.5.0
  */
 'use strict'
 
 import helpers from './helpers'
+import patterns from './patterns'
 import TheInput from './TheInput'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputPassword from './TheInputPassword'
@@ -21,6 +22,7 @@ export default TheInput
 
 export {
   helpers,
+  patterns,
   TheInput,
   TheInputCheckbox,
   TheInputPassword,
