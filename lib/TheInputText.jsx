@@ -40,7 +40,7 @@ class TheInputText extends React.PureComponent {
       value,
       error,
       pattern,
-      patternHint,
+      patternWarning,
       placeholder,
       autoFocus,
       inputRef
@@ -247,7 +247,7 @@ class TheInputText extends React.PureComponent {
   getPatternWarning () {
     const s = this
     const {state, props} = s
-    const {value, pattern, patternHint} = props
+    const {value, pattern, patternWarning} = props
     const {committedValue} = state
     if (!committedValue) {
       return null
@@ -263,7 +263,7 @@ class TheInputText extends React.PureComponent {
     if (willBeOK) {
       return null
     }
-    return patternHint
+    return patternWarning
   }
 
   static Options ({parser, candidates, selectedCandidate, onSelect}) {
@@ -307,8 +307,8 @@ TheInputText.propTypes = {
   matcher: PropTypes.func,
   /** Regexp for input */
   pattern: PropTypes.instanceOf(RegExp),
-  /** Hint text for pattern */
-  patternHint: PropTypes.string,
+  /** Warning text when pattern failed */
+  patternWarning: PropTypes.string,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -329,7 +329,7 @@ TheInputText.defaultProps = {
     return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
   },
   pattern: null,
-  patternHint: null,
+  patternWarning: null,
   error: null,
   options: {},
   onEnter: null
