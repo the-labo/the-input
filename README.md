@@ -279,11 +279,6 @@ export default ExampleComponent
 Components
 -----------
 
-### 
-
-
-
-
 ### TheInput
 
 Input of the-components
@@ -380,6 +375,8 @@ Text Input
 | `matcher` | func  | Options parser | `(candidate, value) => {
   return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
 }` |
+| `pattern` | instanceOf  | Regexp for input | `null` |
+| `patternHint` | string  | Hint text for pattern | `null` |
 | `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 

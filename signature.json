@@ -797,12 +797,12 @@
           "computed": false
         }
       },
-      "patternHint": {
+      "patternWarning": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "Hint text for pattern",
+        "description": "Warning text when pattern failed",
         "defaultValue": {
           "value": "null",
           "computed": false
