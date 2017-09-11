@@ -376,7 +376,7 @@ Text Input
   return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
 }` |
 | `pattern` | instanceOf  | Regexp for input | `null` |
-| `patternHint` | string  | Hint text for pattern | `null` |
+| `patternWarning` | string  | Warning text when pattern failed | `null` |
 | `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 

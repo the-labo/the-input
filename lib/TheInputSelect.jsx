@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { get } from 'the-window'
@@ -42,11 +42,11 @@ class TheInputSelect extends React.PureComponent {
       placeholder
     } = props
     options = normalizeOptions(options)
-    let {suggesting, suggestingIndex} = s.state
+    const {suggesting, suggestingIndex} = s.state
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
            {...eventHandlersFor(props, {except: []})}
-           className={classnames('the-input-select', className, {
+           className={c('the-input-select', className, {
              'the-input-error': !!error
            })}
            data-value={value}
@@ -69,8 +69,9 @@ class TheInputSelect extends React.PureComponent {
                onKeyUp={(e) => s.handleKeyUp(e)}
                onKeyDown={(e) => s.handleKeyDown(e)}
                ref={(input) => { s.input = input }}
-
+               onChange={(value) => {}}
         />
+
         <select onChange={(e) => s.handleChange(e)}
                 value={value}
                 tabIndex={-1}
@@ -142,7 +143,7 @@ class TheInputSelect extends React.PureComponent {
   handleDisplayClick (e) {
     const s = this
     clearTimeout(s._suggestOffTimer)
-    let {input, state} = s
+    const {input, state} = s
     let suggesting = !state.suggesting
     if (suggesting) {
       input.focus()
@@ -228,7 +229,7 @@ class TheInputSelect extends React.PureComponent {
       suggesting: false,
       suggestingIndex: s.getIndexForValue(value)
     })
-    let {name} = s.props
+    const {name} = s.props
     s.handleChange({
       target: {name, value}
     })
@@ -255,7 +256,7 @@ class TheInputSelect extends React.PureComponent {
       <ul className='the-input-select-options'>
         {
           optionValues.sort(sorter).map((optionValue, i) => (
-            <li className={classnames('the-input-select-option', {
+            <li className={c('the-input-select-option', {
               'the-input-select-option-selected': i === suggestingIndex
             })}
                 key={optionValue}
