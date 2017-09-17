@@ -359,6 +359,23 @@ Select Input
 | `error` | union  | Input error | `null` |
 | `options` | union  | Options | `{}` |
 
+### TheInputSlider
+
+Slider Input
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `name` | string  | Name of input | `` |
+| `value` | number  | Value of input | `0` |
+| `onUpdate` | func  | Handle for update | `` |
+| `error` | union  | Input error | `null` |
+| `min` | number  | Min value | `0` |
+| `max` | number  | Max value | `100` |
+| `step` | number  | Value step | `0.1` |
+| `barOnly` | bool  | Hides min/max value text | `false` |
+
 ### TheInputStyle
 
 Style for TheInput
