@@ -251,6 +251,235 @@
       }
     }
   },
+  "TheInputRange": {
+    "description": "Range Input",
+    "displayName": "TheInputRange",
+    "methods": [
+      {
+        "name": "handleResize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "getHandleRadius",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleBarClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFromHandleMove",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "{x}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleToHandleMove",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "{x}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "setRangeValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "from",
+            "type": null
+          },
+          {
+            "name": "to",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "_rateWithX",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "x",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "_rateWithValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "_valueWithRate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "rate",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Label",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{className, children, ref}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Handle",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
+      "value": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "[0, 100]",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Input error",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "min": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Min value",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Max value",
+        "defaultValue": {
+          "value": "100",
+          "computed": false
+        }
+      },
+      "step": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Value step",
+        "defaultValue": {
+          "value": "0.1",
+          "computed": false
+        }
+      },
+      "barOnly": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Hides min/max value text",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      }
+    }
+  },
   "TheInputSearch": {
     "description": "",
     "displayName": "TheInputSearch",
