@@ -165,7 +165,7 @@ class TheInputSlider extends React.PureComponent {
   setSliderValue (value) {
     const s = this
     const {state, props} = s
-    const {step, name} = props
+    const {step, name, onUpdate} = props
     const duplicate = props.value === value
     if (duplicate) {
       return
@@ -184,8 +184,8 @@ class TheInputSlider extends React.PureComponent {
 
     s._value = value
 
-    if (props.onUpdate) {
-      props.onUpdate({[name]: value})
+    if (onUpdate) {
+      onUpdate({[name]: value})
     }
   }
 

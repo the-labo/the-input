@@ -216,11 +216,13 @@ class TheInputRange extends React.PureComponent {
     const [currentFrom, currentTo] = props.value
     if (to < from) {
       if (from === currentFrom) {
-        from = to
+        from = to - step
       } else if (to === currentFrom.to) {
-        to = from
+        to = from + step
       } else {
         to = from = (to + from) / 2
+        to += step
+        from -= step
       }
     }
     const duplicate = (currentFrom === from) && (currentTo === to)

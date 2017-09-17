@@ -92,7 +92,9 @@ class ExampleComponent extends React.PureComponent {
     const s = this
     const {values} = s.state
     const onUpdate = (values) => {
-      s.setState({values})
+      s.setState({
+        values: Object.assign({}, s.state.values, values)
+      })
     }
 
     const {
@@ -211,9 +213,9 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Slider name='value06'
-                  value={values['value06'] || 0}
-                  min={-10}
-                  max={210}
+                  value={values['value06'] || 10}
+                  min={0}
+                  max={100}
                   step={1}
                   onUpdate={onUpdate}
           />
@@ -221,9 +223,9 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Range name='value07'
-                 value={values['value07'] || [0, 100]}
-                 min={-10}
-                 max={210}
+                 value={values['value07'] || [10, 80]}
+                 min={0}
+                 max={100}
                  step={1}
                  onUpdate={onUpdate}
           />
