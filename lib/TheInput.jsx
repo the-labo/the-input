@@ -13,6 +13,7 @@ import TheInputPassword from './TheInputPassword'
 import TheInputSearch from './TheInputSearch'
 import TheInputToggle from './TheInputToggle'
 import TheInputSlider from './TheInputSlider'
+import TheInputRange from './TheInputRange'
 import { renderErrorMessage } from './helpers'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
@@ -79,6 +80,7 @@ TheInput.Checkbox = TheInputCheckbox
 TheInput.Select = TheInputSelect
 TheInput.Toggle = TheInputToggle
 TheInput.Slider = TheInputSlider
+TheInput.Range = TheInputRange
 
 TheInput.propTypes = {
   /** Input type */

@@ -28,7 +28,8 @@ class ExampleComponent extends React.PureComponent {
       Checkbox,
       Select,
       Toggle,
-      Slider
+      Slider,
+      Range
     } = TheInput
     return (
       <div>
@@ -139,6 +140,16 @@ class ExampleComponent extends React.PureComponent {
                   max={210}
                   step={1}
                   onUpdate={onUpdate}
+          />
+        </div>
+
+        <div>
+          <Range name='value07'
+                 value={values['value07'] || [0, 100]}
+                 min={-10}
+                 max={210}
+                 step={1}
+                 onUpdate={onUpdate}
           />
         </div>
 

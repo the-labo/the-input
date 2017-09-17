@@ -521,6 +521,7 @@ TheInputStyle.data = (options) => {
         position: 'relative',
         display: 'inline-block',
         cursor: '-webkit-grab',
+        borderRadius: '50%',
         zIndex: 4,
         '&:active': {
           cursor: '-webkit-grabbing',
@@ -550,6 +551,103 @@ TheInputStyle.data = (options) => {
             boxShadow: '1px 1px 3px rgba(0,0,0,0.5)'
           },
           '.the-input-slider-label': {
+            display: 'inline-block',
+            padding: '2px 4px',
+            textAlign: 'right',
+            minWidth: '24px',
+            fontSize: '14px',
+            lineHeight: `${sliderHandleSize}px`,
+            boxSizing: 'border-box'
+          }
+        },
+      }
+    }),
+    asStyleData('.the-input-range', {
+      '&': {
+        position: 'relative',
+        height: `${sliderHandleSize + 2}px`,
+      },
+      '.the-input-range-inner': {
+        display: 'flex',
+        margin: '2px 0'
+      },
+      '.the-input-range-bar-wrap': {
+        display: 'block',
+        position: 'relative',
+        width: '100%',
+        boxSizing: 'border-box'
+      },
+      '.the-input-range-bar': {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        height: `${sliderBarHeight + sliderPadding}px`,
+        top: `${sliderHandleSize / 2 - sliderPadding}px`,
+      },
+      '.the-input-range-bar-tap': {
+        display: 'block',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: -8,
+        bottom: -8,
+        zIndex: 1
+      },
+      '.the-input-range-bar-bg': {
+        position: 'absolute',
+        left: 0,
+        top: `${sliderPadding}px`,
+        right: 0,
+        height: `${sliderBarHeight}px`,
+        borderRadius: sliderBarHeight / 2,
+        border: '1px solid #BBB',
+        backgroundColor: '#CCC'
+      },
+      '.the-input-range-bar-highlight': {
+        backgroundColor: dominantColor,
+        top: sliderPadding,
+        position: 'absolute',
+        height: sliderBarHeight,
+        borderRadius: sliderBarHeight / 2,
+        border: '1px solid rgba(0,0,0,0.1)',
+        maxWidth: '100%'
+      },
+      '.the-input-range-handle': {
+        position: 'absolute',
+        display: 'inline-block',
+        left: 0,
+        cursor: '-webkit-grab',
+        borderRadius: '50%',
+        zIndex: 4,
+        '&:active': {
+          cursor: '-webkit-grabbing',
+          backgroundColor: '#FCFCFC',
+          zIndex: 5
+        },
+        '.the-input-range-handle-area': {
+          position: 'absolute',
+          display: 'inline-block',
+          color: 'transparent',
+          opacity: 0,
+          left: `${handlePaddingRate}%`,
+          top: `${handlePaddingRate}%`,
+          right: `${handlePaddingRate}%`,
+          bottom: `${handlePaddingRate}%`
+        },
+        '.the-input-range-handle-icon': {
+          width: `${sliderHandleSize}px`,
+          height: `${sliderHandleSize}px`,
+          borderRadius: '50%',
+          display: 'inline-block',
+          backgroundColor: 'white',
+          border: '1px solid #DDD',
+          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+          position: 'relative',
+          zIndex: 3,
+          '&:hover': {
+            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)'
+          },
+          '.the-input-range-label': {
             display: 'inline-block',
             padding: '2px 4px',
             textAlign: 'right',
