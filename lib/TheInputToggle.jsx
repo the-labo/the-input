@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
 import TheInputRadio from './TheInputRadio'
 
@@ -36,7 +36,7 @@ class TheInputToggle extends React.PureComponent {
            {...eventHandlersFor(props, { except: [] })}
            {...{ id }}
            style={Object.assign({}, style, { width })}
-           className={classnames('the-input-toggle', className, {
+           className={c('the-input-toggle', className, {
              'the-input-toggle-on': on,
              'the-input-toggle-off': !on,
              'the-input-error': !!error
@@ -92,7 +92,7 @@ class TheInputToggle extends React.PureComponent {
   static Label ({ htmlFor, className, title }) {
     return (
       <label htmlFor={ htmlFor }
-             className={ classnames('the-input-toggle-label', className) }>
+             className={ c('the-input-toggle-label', className) }>
         <span className='the-input-toggle-label-text'>{ title }</span>
       </label>
     )

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import TheInputStyle from './TheInputStyle'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
@@ -12,6 +12,7 @@ import TheInputSelect from './TheInputSelect'
 import TheInputPassword from './TheInputPassword'
 import TheInputSearch from './TheInputSearch'
 import TheInputToggle from './TheInputToggle'
+import TheInputSlider from './TheInputSlider'
 import { renderErrorMessage } from './helpers'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
@@ -21,7 +22,7 @@ import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 class TheInput extends React.PureComponent {
   render () {
     const s = this
-    const { props } = s
+    const {props} = s
     let {
       id,
       className,
@@ -37,34 +38,34 @@ class TheInput extends React.PureComponent {
       inputRef
     } = props
     return (
-      <div { ...htmlAttributesFor(props, {
+      <div {...htmlAttributesFor(props, {
         except: [
           'id', 'className', 'type', 'value', 'required', 'name', 'placeholder', 'autoFocus', 'autoComplete'
         ]
-      }) }
-           { ...eventHandlersFor(props, { except: [] })}
-           className={ classnames('the-input', className, {
+      })}
+           {...eventHandlersFor(props, {except: []})}
+           className={c('the-input', className, {
              'the-input-error': !!error
-           }) }
+           })}
       >
-        { renderErrorMessage(error) }
+        {renderErrorMessage(error)}
 
         <input type='the-input-input'
-               {...{ id, type, name, required, value, placeholder, autoFocus, autoComplete }}
-               onChange={ (e) => s.handleChange(e) }
+               {...{id, type, name, required, value, placeholder, autoFocus, autoComplete}}
+               onChange={(e) => s.handleChange(e)}
                ref={inputRef}
         />
-        { children }
+        {children}
       </div>
     )
   }
 
   handleChange (e) {
     const s = this
-    let { parser, onChange, onUpdate } = s.props
-    let { name, value } = e.target
+    let {parser, onChange, onUpdate} = s.props
+    let {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({ [name]: parser(value) })
+    onUpdate && onUpdate({[name]: parser(value)})
   }
 }
 
@@ -77,6 +78,7 @@ TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
 TheInput.Select = TheInputSelect
 TheInput.Toggle = TheInputToggle
+TheInput.Slider = TheInputSlider
 
 TheInput.propTypes = {
   /** Input type */

@@ -2,14 +2,14 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import TheStyle from 'the-style'
 import { colorAlpha, asStyleData } from 'the-component-util'
 
 /** Style for TheInput */
 const TheInputStyle = ({id, className, options}) => (
   <TheStyle {...{id}}
-            className={classnames('the-input-style', className)}
+            className={c('the-input-style', className)}
             styles={TheInputStyle.data(options)}
   />
 )
@@ -40,7 +40,12 @@ TheInputStyle.data = (options) => {
     warnColor = ThemeValues.warnColor,
     errorColor = ThemeValues.errorColor,
     toggleHandleSize = 24,
-    animationDuration = 400
+    animationDuration = 400,
+
+    sliderPadding = 6,
+    handlePaddingRate = -20,
+    sliderHandleSize = 24,
+    sliderBarHeight = 4
   } = options
 
   const ToggleIconStyle = (values) => Object.assign({
@@ -460,6 +465,100 @@ TheInputStyle.data = (options) => {
       },
       '.the-input-error-message': {
         color: errorColor
+      }
+    }),
+    asStyleData('.the-input-slider', {
+      '&': {
+        position: 'relative',
+        height: `${sliderHandleSize + 2}px`,
+      },
+      '.the-input-slider-inner': {
+        display: 'flex',
+        margin: '2px 0'
+      },
+      '.the-input-slider-bar-wrap': {
+        display: 'block',
+        position: 'relative',
+        width: '100%',
+        boxSizing: 'border-box'
+      },
+      '.the-input-slider-bar': {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        height: `${sliderBarHeight + sliderPadding}px`,
+        top: `${sliderHandleSize / 2 - sliderPadding}px`,
+      },
+      '.the-input-slider-bar-tap': {
+        display: 'block',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: -8,
+        bottom: -8,
+        zIndex: 1
+      },
+      '.the-input-slider-bar-bg': {
+        position: 'absolute',
+        left: 0,
+        top: `${sliderPadding}px`,
+        right: 0,
+        height: `${sliderBarHeight}px`,
+        borderRadius: sliderBarHeight / 2,
+        border: '1px solid #BBB',
+        backgroundColor: '#CCC'
+      },
+      '.the-input-slider-bar-highlight': {
+        backgroundColor: dominantColor,
+        top: sliderPadding,
+        position: 'absolute',
+        height: sliderBarHeight,
+        borderRadius: sliderBarHeight / 2,
+        border: '1px solid rgba(0,0,0,0.1)',
+        maxWidth: '100%'
+      },
+      '.the-input-slider-handle': {
+        position: 'relative',
+        display: 'inline-block',
+        cursor: '-webkit-grab',
+        zIndex: 4,
+        '&:active': {
+          cursor: '-webkit-grabbing',
+          backgroundColor: '#FCFCFC'
+        },
+        '.the-input-slider-handle-area': {
+          position: 'absolute',
+          display: 'inline-block',
+          color: 'transparent',
+          opacity: 0,
+          left: `${handlePaddingRate}%`,
+          top: `${handlePaddingRate}%`,
+          right: `${handlePaddingRate}%`,
+          bottom: `${handlePaddingRate}%`
+        },
+        '.the-input-slider-handle-icon': {
+          width: `${sliderHandleSize}px`,
+          height: `${sliderHandleSize}px`,
+          borderRadius: '50%',
+          display: 'inline-block',
+          backgroundColor: 'white',
+          border: '1px solid #DDD',
+          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+          position: 'relative',
+          zIndex: 3,
+          '&:hover': {
+            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)'
+          },
+          '.the-input-slider-label': {
+            display: 'inline-block',
+            padding: '2px 4px',
+            textAlign: 'right',
+            minWidth: '24px',
+            fontSize: '14px',
+            lineHeight: `${sliderHandleSize}px`,
+            boxSizing: 'border-box'
+          }
+        },
       }
     })
   )

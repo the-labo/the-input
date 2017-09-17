@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import classnames from 'classnames'
+import c from 'classnames'
 import TheInputText from './TheInputText'
 import TheIcon from 'the-icon'
 import { clone } from 'asobj'
@@ -23,13 +23,13 @@ class TheInputPassword extends React.PureComponent {
     let icon = showing ? TheInputPassword.HIDE_ICON : TheInputPassword.SHOW_ICON
     return (
       <TheInputText {...props}
-                    className={classnames('the-input-password')}
+                    className={c('the-input-password')}
                     type={showing ? 'text' : 'password'}
                     options={[]}
       >
         {
           value && (
-            <a className={classnames('the-input-password-toggle')}
+            <a className={c('the-input-password-toggle')}
                tabIndex={-1}
                onMouseDown={() => s.toggleShowing(true)}
                onMouseUp={() => s.toggleShowing(false)}

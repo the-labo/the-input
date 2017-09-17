@@ -9,7 +9,7 @@ import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
- * Text Input
+ * Select Input
  */
 class TheInputSelect extends React.PureComponent {
   constructor (props) {
@@ -28,7 +28,7 @@ class TheInputSelect extends React.PureComponent {
   render () {
     const s = this
     const {props} = s
-    let {
+    const {
       id,
       className,
       children,
@@ -38,10 +38,9 @@ class TheInputSelect extends React.PureComponent {
       name,
       value,
       error,
-      options,
       placeholder
     } = props
-    options = normalizeOptions(options)
+    const options = normalizeOptions(props.options)
     const {suggesting, suggestingIndex} = s.state
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}

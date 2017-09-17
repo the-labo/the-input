@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { renderErrorMessage } from './helpers'
 
@@ -37,7 +37,7 @@ class TheInputTextArea extends React.PureComponent {
         ]
       })}
            {...eventHandlersFor(props, { except: [] })}
-           className={classnames('the-input-textarea', className, {
+           className={c('the-input-textarea', className, {
              'the-input-error': !!error
            })}
            data-value={value}

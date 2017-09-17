@@ -285,7 +285,7 @@
     ]
   },
   "TheInputSelect": {
-    "description": "Text Input",
+    "description": "Select Input",
     "displayName": "TheInputSelect",
     "methods": [
       {

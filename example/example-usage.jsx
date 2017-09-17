@@ -27,7 +27,8 @@ class ExampleComponent extends React.PureComponent {
       Radio,
       Checkbox,
       Select,
-      Toggle
+      Toggle,
+      Slider
     } = TheInput
     return (
       <div>
@@ -127,6 +128,16 @@ class ExampleComponent extends React.PureComponent {
                   on={Boolean(values['value05'])}
                   onTitle='This is on'
                   offTitle='This is off'
+                  onUpdate={onUpdate}
+          />
+        </div>
+
+        <div>
+          <Slider name='value06'
+                  value={values['value06'] || 0}
+                  min={-10}
+                  max={210}
+                  step={1}
                   onUpdate={onUpdate}
           />
         </div>

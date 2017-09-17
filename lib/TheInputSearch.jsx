@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import classnames from 'classnames'
+import c from 'classnames'
 import TheInputText from './TheInputText'
 import TheIcon from 'the-icon'
 import { clone } from 'asobj'
@@ -24,7 +24,7 @@ class TheInputSearch extends React.PureComponent {
     let { open } = state
     return (
       <TheInputText {...props}
-                    className={classnames('the-input-search', {
+                    className={c('the-input-search', {
                       'the-input-search-open': open || !!value
                     })}
                     type={'search'}
@@ -32,7 +32,7 @@ class TheInputSearch extends React.PureComponent {
                     onFocus={(e) => s.handleFocus()}
       >
         {!value && (
-          <a className={classnames('the-input-search-toggle')}
+          <a className={c('the-input-search-toggle')}
              tabIndex={-1}
              onClick={() => s.toggleOpen()}
           >
