@@ -350,6 +350,23 @@ Radio input of the-components
 | `error` |   |  | `null` |
 | `options` |   |  | `{}` |
 
+### TheInputRange
+
+Range Input
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `name` | string  | Name of input | `` |
+| `value` | arrayOf number | Value of input | `[0, 100]` |
+| `onUpdate` | func  | Handle for update | `` |
+| `error` | union  | Input error | `null` |
+| `min` | number  | Min value | `0` |
+| `max` | number  | Max value | `100` |
+| `step` | number  | Value step | `0.1` |
+| `barOnly` | bool  | Hides min/max value text | `false` |
+
 ### TheInputSearch
 
 
