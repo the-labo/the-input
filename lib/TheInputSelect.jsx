@@ -67,6 +67,7 @@ class TheInputSelect extends React.PureComponent {
                onBlur={(e) => s.handleBlur(e)}
                onKeyUp={(e) => s.handleKeyUp(e)}
                onKeyDown={(e) => s.handleKeyDown(e)}
+               readOnly
                ref={(input) => { s.input = input }}
                onChange={(value) => {}}
         />
@@ -181,15 +182,28 @@ class TheInputSelect extends React.PureComponent {
     const s = this
     let {onKeyDown, onEnter} = s.props
     switch (e.keyCode) {
-      case 38: // UP
-        s.moveCandidateIndex(-1)
+      // UP
+      case 38: {
+        const moved = s.moveCandidateIndex(-1)
+        if (moved) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
         break
-      case 40: // DOWN
-        s.moveCandidateIndex(+1)
+      }
+      // DOWN
+      case 40: {
+        const moved = s.moveCandidateIndex(+1)
+        if (moved) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
         break
-      case 13: { // Enter
-        let values = s.getOptionValues()
-        let {suggestingIndex} = s.state
+      }
+      // Enter
+      case 13: {
+        const values = s.getOptionValues()
+        const {suggestingIndex} = s.state
         s.enterSuggested(values[suggestingIndex])
         if (onEnter) {
           onEnter()
@@ -208,16 +222,17 @@ class TheInputSelect extends React.PureComponent {
 
   moveCandidateIndex (amount) {
     const s = this
-    let {state} = s
-    let values = s.getOptionValues()
-    let index = state.suggestingIndex + amount
-    let over = (index === -1) || (index === values.length)
+    const {state} = s
+    const values = s.getOptionValues()
+    const index = state.suggestingIndex + amount
+    const over = (index === -1) || (index === values.length)
     if (over) {
-      return
+      return false
     }
     s.setState({
       suggestingIndex: index
     })
+    return true
   }
 
   enterSuggested (value) {
