@@ -159,7 +159,9 @@ class TheInputSelect extends React.PureComponent {
     const s = this
     clearTimeout(s._suggestOffTimer)
     s.setState({suggesting: true})
-    let {onFocus} = s.props
+    const {onFocus} = s.props
+    e.preventDefault()
+    e.stopPropagation()
     onFocus && onFocus(e)
   }
 
