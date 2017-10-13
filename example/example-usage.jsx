@@ -185,6 +185,7 @@ class ExampleComponent extends React.PureComponent {
                   onUpdate={onUpdate}
                   placeholder='value01'
                   error='Something Wrong with This!'
+                  onKeyDown={(e) => console.log('key down', e.keyCode)}
         />
 
         <Select name='value04'

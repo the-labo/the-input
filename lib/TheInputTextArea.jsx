@@ -18,7 +18,7 @@ class TheInputTextArea extends React.PureComponent {
 
   render () {
     const s = this
-    const { props } = s
+    const {props} = s
     let {
       id,
       className,
@@ -28,7 +28,13 @@ class TheInputTextArea extends React.PureComponent {
       required,
       value,
       error,
-      placeholder
+      placeholder,
+      onChange,
+      onFocus,
+      onBlur,
+      onKeyUp,
+      onKeyDown,
+      onKeyPress
     } = props
     return (
       <div {...htmlAttributesFor(props, {
@@ -36,16 +42,21 @@ class TheInputTextArea extends React.PureComponent {
           'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder'
         ]
       })}
-           {...eventHandlersFor(props, { except: [] })}
+           {...eventHandlersFor(props, {
+             except: [
+               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
+             ]
+           })}
            className={c('the-input-textarea', className, {
              'the-input-error': !!error
            })}
            data-value={value}
       >
-        { renderErrorMessage(error) }
+        {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{ id, rows, name, required, value, placeholder }}
+                  {...{id, rows, name, required, value, placeholder}}
+                  {...{onChange, onFocus, onBlur, onKeyUp, onKeyDown, onKeyPress}}
                   onChange={(e) => s.handleChange(e)}
 
         />
@@ -59,10 +70,10 @@ class TheInputTextArea extends React.PureComponent {
 
   handleChange (e) {
     const s = this
-    let { parser, onChange, onUpdate } = s.props
-    let { name, value } = e.target
+    let {parser, onChange, onUpdate} = s.props
+    let {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({ [name]: parser(value) })
+    onUpdate && onUpdate({[name]: parser(value)})
   }
 }
 

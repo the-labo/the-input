@@ -57,7 +57,11 @@ class TheInputText extends React.PureComponent {
           'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
         ]
       })}
-           {...eventHandlersFor(props, {except: []})}
+           {...eventHandlersFor(props, {
+             except: [
+               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
+             ]
+           })}
            className={c('the-input-text', className, {
              'the-input-warn': !!warning,
              'the-input-error': !!error,
@@ -74,7 +78,9 @@ class TheInputText extends React.PureComponent {
                onFocus={(e) => s.handleFocus(e)}
                onBlur={(e) => s.handleBlur(e)}
                onKeyUp={(e) => s.handleKeyUp(e)}
+               onKeyPress={(e) => s.handleKeyPress(e)}
                onKeyDown={(e) => s.handleKeyDown(e)}
+
                ref={inputRef}
 
         />
@@ -143,13 +149,19 @@ class TheInputText extends React.PureComponent {
   handleKeyUp (e) {
     const s = this
     s.updateCandidates()
-    let {onKeyUp} = s.props
+    const {onKeyUp} = s.props
     onKeyUp && onKeyUp(e)
+  }
+
+  handleKeyPress (e) {
+    const s = this
+    const {onKeyPress} = s.props
+    onKeyPress && onKeyPress(e)
   }
 
   handleKeyDown (e) {
     const s = this
-    let {onKeyDown, onEnter} = s.props
+    const {onKeyDown, onEnter} = s.props
     switch (e.keyCode) {
       case 38: // UP
         s.moveCandidateIndex(-1)
@@ -183,8 +195,8 @@ class TheInputText extends React.PureComponent {
     let {options, value, matcher} = s.props
     options = normalizeOptions(options)
     value = value && String(value).trim()
-    let {selectedCandidate} = s.state
-    let candidates = Object.keys(options)
+    const {selectedCandidate} = s.state
+    const candidates = Object.keys(options)
       .map((name) => options[name])
       .map((candidate) => String(candidate).trim())
       .filter((candidate) => !!candidate)
