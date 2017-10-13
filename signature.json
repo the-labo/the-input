@@ -1066,6 +1066,18 @@
         "returns": null
       },
       {
+        "name": "handleKeyPress",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleKeyDown",
         "docblock": null,
         "modifiers": [],
