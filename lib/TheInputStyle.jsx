@@ -81,7 +81,9 @@ TheInputStyle.data = (options) => {
         maxHeight: '2em'
       },
       '&.the-input-message-empty': {
-        maxHeight: '0em'
+        maxHeight: '0em',
+        padding: 0,
+        margin: 0
       }
     }),
     asStyleData('.the-input-text', {
