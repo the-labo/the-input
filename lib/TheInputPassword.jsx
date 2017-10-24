@@ -17,10 +17,10 @@ class TheInputPassword extends React.PureComponent {
 
   render () {
     const s = this
-    const { props, state } = s
-    let { value } = props
-    let { showing } = state
-    let icon = showing ? TheInputPassword.HIDE_ICON : TheInputPassword.SHOW_ICON
+    const {props, state} = s
+    const {value} = props
+    const {showing} = state
+    const icon = showing ? TheInputPassword.HIDE_ICON : TheInputPassword.SHOW_ICON
     return (
       <TheInputText {...props}
                     className={c('the-input-password')}
@@ -31,9 +31,8 @@ class TheInputPassword extends React.PureComponent {
           value && (
             <a className={c('the-input-password-toggle')}
                tabIndex={-1}
-               onMouseDown={() => s.toggleShowing(true)}
-               onMouseUp={() => s.toggleShowing(false)}
-               onMouseOut={() => s.toggleShowing(false)}
+               href={'javascript:void(0)'}
+               onClick={() => s.toggleShowing(!s.state.showing)}
             >
               <TheIcon className={icon}/>
             </a>
@@ -45,15 +44,15 @@ class TheInputPassword extends React.PureComponent {
 
   toggleShowing (showing) {
     const s = this
-    s.setState({ showing })
+    s.setState({showing})
   }
 }
 
 TheInputPassword.SHOW_ICON = 'fa fa-eye'
 TheInputPassword.HIDE_ICON = 'fa fa-eye-slash'
 
-TheInputPassword.propTypes = clone(TheInputText.propTypes, { without: [ 'type', 'options' ] })
-TheInputPassword.defaultProps = clone(TheInputText.defaultProps, { without: [ 'type', 'options' ] })
+TheInputPassword.propTypes = clone(TheInputText.propTypes, {without: ['type', 'options']})
+TheInputPassword.defaultProps = clone(TheInputText.defaultProps, {without: ['type', 'options']})
 TheInputPassword.displayName = 'TheInputPassword'
 
 export default TheInputPassword

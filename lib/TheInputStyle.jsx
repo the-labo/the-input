@@ -143,7 +143,10 @@ TheInputStyle.data = (options) => {
       '&': {
         position: 'relative',
       },
-      '.the-input-password-toggle': ToggleIconStyle()
+      '.the-input-password-toggle': ToggleIconStyle({
+        textDecoration: 'none',
+        color: 'inherit'
+      })
     }),
     asStyleData('.the-input-search', {
       '&': {

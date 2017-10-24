@@ -40,7 +40,7 @@
     "the-component-util": "^2.1.0",
     "the-condition": "^2.0.0",
     "the-icon": "^2.0.0",
-    "the-style": "^2.0.0",
+    "the-style": "^2.0.1",
     "the-window": "^5.0.0"
   },
   "devDependencies": {
