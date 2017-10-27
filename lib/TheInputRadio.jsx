@@ -26,7 +26,8 @@ class TheInputRadio extends React.PureComponent {
       name,
       options,
       value,
-      error
+      error,
+      asButton
     } = props
 
     options = normalizeOptions(options)
@@ -35,7 +36,8 @@ class TheInputRadio extends React.PureComponent {
       <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-radio', className, {
-             'the-input-error': !!error
+             'the-input-error': !!error,
+             'the-input-asButton': asButton,
            })}
            data-value={value}
            id={id}
@@ -117,14 +119,17 @@ TheInputRadio.PropTypes = {
   options: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.string)
-  ])
+  ]),
+  /** Use button like style */
+  asButton: PropTypes.bool
 }
 
 TheInputRadio.defaultProps = {
   value: '',
   parser: String,
   error: null,
-  options: {}
+  options: {},
+  asButton: false
 }
 
 TheInputRadio.displayName = 'TheInputRadio'

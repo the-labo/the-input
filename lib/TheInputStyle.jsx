@@ -241,6 +241,23 @@ TheInputStyle.data = (options) => {
       },
       '.the-input-radio-icon': {
         color: dominantColor
+      },
+      '&.the-input-asButton': {
+        '.the-input-radio-icon': {
+          display: 'none'
+        },
+        '.the-input-radio-item': {
+          border: `1px solid #CCC`,
+          borderRadius: '4px',
+          padding: '4px 8px',
+          textAlign: 'center',
+          margin: '4px',
+          background: backgroundColor,
+          fontSize: 'smaller'
+        },
+        '.the-input-radio-item-checked': {
+          border: `2px solid ${dominantColor}`
+        }
       }
     }),
     asStyleData('.the-input-checkbox', {
