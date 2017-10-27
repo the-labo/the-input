@@ -248,6 +248,12 @@
           "value": "{}",
           "computed": false
         }
+      },
+      "asButton": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       }
     }
   },
