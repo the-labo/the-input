@@ -2,6 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { TheCondition } from 'the-condition'
 import c from 'classnames'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
@@ -42,6 +43,8 @@ class TheInputSelect extends React.PureComponent {
     } = props
     const options = normalizeOptions(props.options)
     const {suggesting, suggestingIndex} = s.state
+    const selectedValue = options[value]
+    const hasNotSelect = typeof selectedValue === 'undefined'
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
            {...eventHandlersFor(props, {except: []})}
@@ -57,8 +60,13 @@ class TheInputSelect extends React.PureComponent {
            onClick={(e) => s.handleDisplayClick(e)}
         >
           <span className='the-input-select-display-value'>
-            {options[value]}
+            {selectedValue}
           </span>
+          <TheCondition if={hasNotSelect}>
+            <span className='the-input-select-display-alt'>
+              {placeholder}
+            </span>
+          </TheCondition>
           <TheIcon className={TheInputSelect.OPEN_ICON}/>
         </a>
         <input className='the-input-select-input'

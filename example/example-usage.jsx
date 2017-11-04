@@ -121,6 +121,7 @@ class ExampleComponent extends React.PureComponent {
 
         <div>
           <Select name='value04'
+                  placeholder='Any drink?'
                   value={values['value04']}
                   onUpdate={onUpdate}
                   sorter={(a, b) => a.localeCompare(b)}

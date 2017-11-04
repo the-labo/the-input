@@ -33,6 +33,7 @@ TheInputStyle.data = (options) => {
     inputShadowColor = ThemeValues.inputShadowColor,
     tappableHeight = ThemeValues.tappableHeight,
     lightBorderColor = ThemeValues.lightBorderColor,
+    lightTextColor = ThemeValues.lightTextColor,
     backgroundColor = ThemeValues.backgroundColor,
     contentPadding = ThemeValues.contentPadding,
     hoverOpacity = ThemeValues.hoverOpacity,
@@ -413,6 +414,13 @@ TheInputStyle.data = (options) => {
         justifyContent: 'space-between',
         overflow: 'hidden',
         textOverflow: 'ellipsis'
+      },
+      '.the-input-select-display-value': {},
+      '.the-input-select-display-alt': {
+        color: lightTextColor,
+        display: 'block',
+        width: '100%',
+        textAlign: 'left'
       },
       '.the-input-select-options': {
         padding: 0,
