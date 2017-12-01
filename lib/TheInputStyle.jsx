@@ -42,7 +42,7 @@ TheInputStyle.data = (options) => {
     errorColor = ThemeValues.errorColor,
     toggleHandleSize = 24,
     animationDuration = 400,
-
+    offLabelBackgroundColor = '#FAFAFA',
     sliderPadding = 6,
     handlePaddingRate = -20,
     sliderHandleSize = 24,
@@ -347,19 +347,19 @@ TheInputStyle.data = (options) => {
         background: dominantColor,
         color: 'white',
         borderRadius: `${toggleHandleSize / 2}px 0 0 ${toggleHandleSize / 2}px`,
-        marginRight: -1 * toggleHandleSize / 2
+        boxShadow: `2px 0 0 ${toggleHandleSize / 4}px ${dominantColor}`
       },
       '.the-input-toggle-off-label': {
-        background: '#FAFAFA',
+        background: offLabelBackgroundColor,
         color: '#AAA',
         borderRadius: `0 ${toggleHandleSize / 2}px ${toggleHandleSize / 2}px 0`,
-        marginLeft: -1 * toggleHandleSize / 2
+        boxShadow: `-2px 0 0 ${toggleHandleSize / 4}px ${offLabelBackgroundColor}`
       },
       '&.the-input-toggle-on .the-input-toggle-off-label': {
-        width: `${toggleHandleSize / 2 + 2}px !important`
+        width: `0 !important`
       },
       '&.the-input-toggle-off .the-input-toggle-on-label': {
-        width: `${toggleHandleSize / 2 + 2}px !important`
+        width: `0 !important`
       },
       '.the-input-toggle-inner': {
         display: 'inline-flex',
