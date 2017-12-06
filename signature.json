@@ -128,33 +128,78 @@
       }
     ],
     "props": {
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
       "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
         "defaultValue": {
           "value": "''",
           "computed": false
         }
       },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
       "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
         "defaultValue": {
           "value": "String",
           "computed": true
         }
       },
-      "error": {
-        "defaultValue": {
-          "value": "null",
-          "computed": false
-        }
-      },
       "options": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "Options",
         "defaultValue": {
           "value": "{}",
           "computed": false
         }
       },
       "splitter": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value Splitter text",
         "defaultValue": {
           "value": "','",
+          "computed": false
+        }
+      },
+      "error": {
+        "defaultValue": {
+          "value": "null",
           "computed": false
         }
       }
@@ -225,31 +270,89 @@
       }
     ],
     "props": {
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
       "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
         "defaultValue": {
           "value": "''",
           "computed": false
         }
       },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
       "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
         "defaultValue": {
           "value": "String",
           "computed": true
         }
       },
       "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Input error",
         "defaultValue": {
           "value": "null",
           "computed": false
         }
       },
       "options": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "Options",
         "defaultValue": {
           "value": "{}",
           "computed": false
         }
       },
       "asButton": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Use button like style",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -1440,32 +1543,52 @@
     ],
     "props": {
       "on": {
+        "type": {
+          "name": "bool"
+        },
+        "required": true,
+        "description": "Switch on or not",
         "defaultValue": {
           "value": "false",
           "computed": false
         }
       },
       "onTitle": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Title text for on state",
         "defaultValue": {
           "value": "''",
           "computed": false
         }
       },
       "offTitle": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Title text for off state",
         "defaultValue": {
           "value": "''",
+          "computed": false
+        }
+      },
+      "width": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Width of component",
+        "defaultValue": {
+          "value": "64",
           "computed": false
         }
       },
       "error": {
         "defaultValue": {
           "value": "null",
-          "computed": false
-        }
-      },
-      "width": {
-        "defaultValue": {
-          "value": "64",
           "computed": false
         }
       }

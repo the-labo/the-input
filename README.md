@@ -338,11 +338,13 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `value` |   |  | `''` |
-| `parser` |   |  | `String` |
+| `name` | string  | Name of input | `` |
+| `value` | string  | Value of input | `''` |
+| `onUpdate` | func  | Handle for update | `` |
+| `parser` | func  | Value parser | `String` |
+| `options` | union  | Options | `{}` |
+| `splitter` | string  | Value Splitter text | `','` |
 | `error` |   |  | `null` |
-| `options` |   |  | `{}` |
-| `splitter` |   |  | `','` |
 
 ### TheInputPassword
 
@@ -357,11 +359,13 @@ Radio input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `value` |   |  | `''` |
-| `parser` |   |  | `String` |
-| `error` |   |  | `null` |
-| `options` |   |  | `{}` |
-| `asButton` |   |  | `false` |
+| `name` | string  | Name of input | `` |
+| `value` | string  | Value of input | `''` |
+| `onUpdate` | func  | Handle for update | `` |
+| `parser` | func  | Value parser | `String` |
+| `error` | union  | Input error | `null` |
+| `options` | union  | Options | `{}` |
+| `asButton` | bool  | Use button like style | `false` |
 
 ### TheInputRange
 
@@ -474,11 +478,11 @@ Toggle input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `on` |   |  | `false` |
-| `onTitle` |   |  | `''` |
-| `offTitle` |   |  | `''` |
+| `on` | bool  | Switch on or not | `false` |
+| `onTitle` | string  | Title text for on state | `''` |
+| `offTitle` | string  | Title text for off state | `''` |
+| `width` | number  | Width of component | `64` |
 | `error` |   |  | `null` |
-| `width` |   |  | `64` |
 
 
 
