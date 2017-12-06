@@ -107,7 +107,7 @@ class TheInputToggle extends React.PureComponent {
   }
 }
 
-TheInputToggle.PropTypes = {
+TheInputToggle.propTypes = {
   /** Switch on or not */
   on: PropTypes.bool.isRequired,
   /** Title text for on state */
