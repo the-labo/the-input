@@ -156,11 +156,12 @@ class TheInputUpload extends React.PureComponent {
     const s = this
     const {props} = s
     const {onLoad} = props
+    const urls = []
     s.setState({
       error: null,
-      urls: []
+      urls
     })
-    onLoad && onLoad([])
+    onLoad && onLoad(urls)
   }
 }
 
