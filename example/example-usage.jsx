@@ -31,7 +31,8 @@ class ExampleComponent extends React.PureComponent {
       Select,
       Toggle,
       Slider,
-      Range
+      Range,
+      Upload
     } = TheInput
     return (
       <div>
@@ -116,7 +117,7 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
-
+        <hr/>
         <h3>Select</h3>
 
         <div>
@@ -129,6 +130,7 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
         <h3>Toggle</h3>
 
         <div>
@@ -147,6 +149,9 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
+        <h3>Slider</h3>
+
         <div>
           <Slider name='value06'
                   value={values['value06'] || 10}
@@ -157,6 +162,9 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
+        <h3>Range</h3>
+
         <div>
           <Range name='value07'
                  value={values['value07'] || [10, 80]}
@@ -164,6 +172,17 @@ class ExampleComponent extends React.PureComponent {
                  max={100}
                  step={1}
                  onUpdate={onUpdate}
+          />
+        </div>
+
+        <hr/>
+        <h3>Upload</h3>
+
+        <div>
+          <Upload name='value08'
+                  value={values['value08']}
+                  multiple={true}
+                  onUpdate={onUpdate}
           />
         </div>
 

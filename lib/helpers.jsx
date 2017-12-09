@@ -4,6 +4,8 @@
 'use strict'
 
 import React from 'react'
+import path from 'path'
+import { get } from 'the-window'
 
 export const normalizeOptions = (options) => [].concat(options)
   .filter(Boolean)
@@ -14,16 +16,18 @@ export const normalizeOptions = (options) => [].concat(options)
     )
   }, {})
 
-export const normalizeArrayValue = (values, splitter = ',') => [].concat(values)
-  .filter(Boolean)
-  .reduce((normzlied, value) => {
-    if (typeof value === 'string') {
-      return normzlied.concat(value.split(splitter))
-    }
-    return normzlied.concat(value)
-  }, [])
+export function normalizeArrayValue (values, splitter = ',') {
+  return [].concat(values)
+    .filter(Boolean)
+    .reduce((normzlied, value) => {
+      if (typeof value === 'string') {
+        return normzlied.concat(value.split(splitter))
+      }
+      return normzlied.concat(value)
+    }, [])
+}
 
-export const renderErrorMessage = (error) => {
+export function renderErrorMessage (error) {
   if (!error) {
     return <span className='the-input-message the-input-message-empty'/>
   }
@@ -35,7 +39,7 @@ export const renderErrorMessage = (error) => {
   )
 }
 
-export const renderWarningMessage = (warning) => {
+export function renderWarningMessage (warning) {
   if (!warning) {
     return <span className='the-input-message the-input-message-empty'/>
   }
@@ -45,4 +49,25 @@ export const renderWarningMessage = (warning) => {
   return (
     <span className='the-input-message the-input-warn-message'>{warning.message}</span>
   )
+}
+
+export async function readFile (file) {
+  const FileReader = get('FileReader')
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader
+    reader.onerror = (err) => reject(err)
+    reader.onload = (ev) => resolve(ev.target.result)
+    reader.readAsDataURL(file)
+  })
+}
+
+export function isImageUrl (url) {
+  const imageExtensions = [
+    '.jpg',
+    '.jpeg',
+    '.svg',
+    '.gif',
+    '.png'
+  ]
+  return /^data:image/.test(url) || !!~imageExtensions.indexOf(path.extname(url))
 }

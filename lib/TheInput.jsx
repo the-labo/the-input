@@ -6,6 +6,7 @@ import c from 'classnames'
 import TheInputStyle from './TheInputStyle'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
+import TheInputUpload from './TheInputUpload'
 import TheInputRadio from './TheInputRadio'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputSelect from './TheInputSelect'
@@ -81,6 +82,7 @@ TheInput.Select = TheInputSelect
 TheInput.Toggle = TheInputToggle
 TheInput.Slider = TheInputSlider
 TheInput.Range = TheInputRange
+TheInput.Upload = TheInputUpload
 
 TheInput.propTypes = {
   /** Input type */

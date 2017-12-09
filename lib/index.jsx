@@ -1,7 +1,7 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 2.0.9
+ * @version 2.0.10
  */
 'use strict'
 
@@ -19,6 +19,7 @@ import TheInputStyle from './TheInputStyle'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
 import TheInputToggle from './TheInputToggle'
+import TheInputUpload from './TheInputUpload'
 
 export default TheInput
 
@@ -36,5 +37,6 @@ export {
   TheInputStyle,
   TheInputText,
   TheInputTextArea,
-  TheInputToggle
+  TheInputToggle,
+  TheInputUpload
 }

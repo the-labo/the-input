@@ -688,6 +688,99 @@ TheInputStyle.data = (options) => {
           }
         },
       }
+    }),
+    asStyleData('.the-input-upload', {
+      '&': {
+        position: 'relative',
+        display: 'inline-block',
+        color: '#888',
+        overflow: 'hidden',
+        '&:hover': {
+          color: '#555'
+        },
+        '&:active': {
+          textShadow: 'none',
+          opacity: 1,
+          color: '#777'
+        }
+      },
+      '.the-input-upload-input': {
+        opacity: 0,
+        display: 'inline-block',
+        cursor: 'pointer',
+        position: 'relative',
+        zIndex: 2
+      },
+      '.the-input-upload-label': {
+        position: 'absolute',
+        zIndex: 1,
+        textAlign: 'center',
+        boxSizing: 'border-box',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        backgroundColor: `${backgroundColor}`,
+        boxShadow: 'inset 1px 1px 2px rgba(0,0,0,0.33)',
+        border: '1px solid #CCC',
+        borderRadius: '2px'
+      },
+      '.the-input-upload-label-inner': {
+        display: 'inline-block',
+        verticalAlign: 'middle'
+      },
+      '.the-input-upload-icon': {
+        display: 'block',
+        fontSize: '2em'
+      },
+      '.the-input-upload-aligner': {
+        display: 'inline-block',
+        width: '1px',
+        marginRight: '-1px',
+        height: '100%',
+        boxSizing: 'border-box',
+        verticalAlign: 'middle'
+      },
+      '.the-input-upload-text': {},
+      '.the-input-upload-spin': {},
+      '.the-input-upload-close': {
+        display: 'inline-block',
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 5,
+        margin: 0,
+        border: 'none',
+        padding: '8px',
+        fontSize: '24px',
+        color: '#AAA',
+        background: 'rgba(255,255,255,0.2)',
+        borderRadius: 0,
+        '&:hover': {
+          opacity: 1,
+          boxShadow: 'none',
+          color: '#555'
+        },
+        '&:active': {
+          opacity: 1,
+          boxShadow: 'none',
+          color: '#555'
+        }
+      },
+      '.the-input-upload-preview': {
+        display: 'inline-block',
+        boxSizing: 'border-box',
+        zIndex: 4,
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        border: '1px solid #AAA'
+      },
+      '.the-input-upload-preview-img': {},
     })
   )
 }

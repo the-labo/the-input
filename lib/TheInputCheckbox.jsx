@@ -128,6 +128,11 @@ TheInputCheckbox.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   /** Value parser */
   parser: PropTypes.func,
+  /** Error message */
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,

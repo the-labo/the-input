@@ -107,7 +107,8 @@ class ExampleComponent extends React.PureComponent {
       Select,
       Toggle,
       Slider,
-      Range
+      Range,
+      Upload
     } = TheInput
     return (
       <div>
@@ -192,7 +193,7 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
-
+        <hr/>
         <h3>Select</h3>
 
         <div>
@@ -205,6 +206,7 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
         <h3>Toggle</h3>
 
         <div>
@@ -223,6 +225,9 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
+        <h3>Slider</h3>
+
         <div>
           <Slider name='value06'
                   value={values['value06'] || 10}
@@ -233,6 +238,9 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <hr/>
+        <h3>Range</h3>
+
         <div>
           <Range name='value07'
                  value={values['value07'] || [10, 80]}
@@ -240,6 +248,17 @@ class ExampleComponent extends React.PureComponent {
                  max={100}
                  step={1}
                  onUpdate={onUpdate}
+          />
+        </div>
+
+        <hr/>
+        <h3>Upload</h3>
+
+        <div>
+          <Upload name='value08'
+                  value={values['value08']}
+                  multiple={true}
+                  onUpdate={onUpdate}
           />
         </div>
 
@@ -342,9 +361,9 @@ Checkbox input of the-components
 | `value` | string  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
+| `error` | union  | Error message | `null` |
 | `options` | union  | Options | `{}` |
 | `splitter` | string  | Value Splitter text | `','` |
-| `error` |   |  | `null` |
 
 ### TheInputPassword
 
@@ -483,6 +502,27 @@ Toggle input of the-components
 | `offTitle` | string  | Title text for off state | `''` |
 | `width` | number  | Width of component | `64` |
 | `error` |   |  | `null` |
+
+### TheInputUpload
+
+
+
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `name` | string  | Name of input | `` |
+| `multiple` | bool  | Allow multiple upload | `false` |
+| `onUpdate` | func  | Handle for update | `` |
+| `error` | union  | Error message | `null` |
+| `onLoad` | func  | Handler for load event | `` |
+| `onError` | func  | Handler for error event | `` |
+| `width` | number  | Image width | `180` |
+| `height` | number  | Image height | `180` |
+| `text` | string  | Guide text | `'Upload File'` |
+| `accept` | string  | Accept file type | `null` |
+| `spinner` | string  | Spinner theme | `` |
+| `value` | union  | Value of input | `` |
 
 
 

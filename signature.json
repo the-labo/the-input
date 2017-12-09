@@ -164,6 +164,25 @@
           "computed": true
         }
       },
+      "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Error message",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
       "options": {
         "type": {
           "name": "union",
@@ -194,12 +213,6 @@
         "description": "Value Splitter text",
         "defaultValue": {
           "value": "','",
-          "computed": false
-        }
-      },
-      "error": {
-        "defaultValue": {
-          "value": "null",
           "computed": false
         }
       }
@@ -1591,6 +1604,157 @@
           "value": "null",
           "computed": false
         }
+      }
+    }
+  },
+  "TheInputUpload": {
+    "description": "",
+    "displayName": "TheInputUpload",
+    "methods": [
+      {
+        "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleRemove",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      }
+    ],
+    "props": {
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "Name of input"
+      },
+      "multiple": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Allow multiple upload",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Error message",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "onLoad": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for load event"
+      },
+      "onError": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for error event"
+      },
+      "width": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Image width",
+        "defaultValue": {
+          "value": "180",
+          "computed": false
+        }
+      },
+      "height": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Image height",
+        "defaultValue": {
+          "value": "180",
+          "computed": false
+        }
+      },
+      "text": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Guide text",
+        "defaultValue": {
+          "value": "'Upload File'",
+          "computed": false
+        }
+      },
+      "accept": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Accept file type",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "spinner": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Spinner theme"
+      },
+      "value": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "array"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Value of input"
       }
     }
   }
