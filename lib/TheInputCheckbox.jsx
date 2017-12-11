@@ -136,7 +136,8 @@ TheInputCheckbox.propTypes = {
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.bool)
   ]),
   /** Value Splitter text */
   splitter: PropTypes.string

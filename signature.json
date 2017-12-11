@@ -195,6 +195,12 @@
               "value": {
                 "name": "string"
               }
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "bool"
+              }
             }
           ]
         },
