@@ -129,7 +129,7 @@ class TheInputUpload extends React.PureComponent {
     const s = this
     const {props} = s
     const {target} = e
-    const {onChange, onError, onLoad} = props
+    const {onChange, onError, onLoad, onUpdate, name} = props
     if (target.files.length === 0) {
       return
     }
@@ -141,6 +141,7 @@ class TheInputUpload extends React.PureComponent {
           [...target.files].map(readFile)
         )
         onLoad && onLoad({urls, target})
+        onUpdate && onUpdate({[name]: urls})
         s.setState({urls})
       } catch (error) {
         onError && onError(error)
