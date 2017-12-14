@@ -115,6 +115,11 @@ class TheInputUpload extends React.PureComponent {
     )
   }
 
+  componentDidMount () {
+    const s = this
+
+  }
+
   componentWillReceiveProps (nextProps) {
     const s = this
     const {props} = s
@@ -123,6 +128,12 @@ class TheInputUpload extends React.PureComponent {
     if (hasValue && (props.value !== value)) {
       s.setState({urls: [].concat(value)})
     }
+  }
+
+  componentWillUnmount () {
+    const s = this
+    s.gone = true
+
   }
 
   handleChange (e) {
@@ -140,6 +151,9 @@ class TheInputUpload extends React.PureComponent {
         const urls = await Promise.all(
           [...target.files].map(readFile)
         )
+        if (s.gone) {
+          return
+        }
         onLoad && onLoad({urls, target})
         onUpdate && onUpdate({[name]: urls})
         s.setState({urls})
@@ -164,6 +178,7 @@ class TheInputUpload extends React.PureComponent {
     })
     onLoad && onLoad(urls)
   }
+
 }
 
 TheInputUpload.GUIDE_ICON = 'fa fa-cloud-upload'
