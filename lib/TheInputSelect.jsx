@@ -34,6 +34,7 @@ class TheInputSelect extends React.PureComponent {
       className,
       children,
       parser,
+      readOnly,
       sorter,
       type,
       name,
@@ -56,19 +57,24 @@ class TheInputSelect extends React.PureComponent {
       >
         {renderErrorMessage(error)}
 
-        <a className='the-input-select-display'
-           onClick={(e) => s.handleDisplayClick(e)}
-        >
+        {
+          !readOnly && (
+            <a className='the-input-select-display'
+               onClick={(e) => s.handleDisplayClick(e)}
+            >
           <span className='the-input-select-display-value'>
             {selectedValue}
           </span>
-          <TheCondition if={hasNotSelect}>
+              <TheCondition if={hasNotSelect}>
             <span className='the-input-select-display-alt'>
               {placeholder}
             </span>
-          </TheCondition>
-          <TheIcon className={TheInputSelect.OPEN_ICON}/>
-        </a>
+              </TheCondition>
+              <TheIcon className={TheInputSelect.OPEN_ICON}/>
+            </a>
+          )
+        }
+
         <input className='the-input-select-input'
                {...{id, type, name, value, placeholder}}
                onFocus={(e) => s.handleFocus(e)}
@@ -80,23 +86,31 @@ class TheInputSelect extends React.PureComponent {
                onChange={(value) => {}}
         />
 
-        <select onChange={(e) => s.handleChange(e)}
-                value={value}
-                tabIndex={-1}
-                className='the-input-select-select'
-        >
-          {
-            Object.keys(options).map((value) => (
-              <option name={name}
-                      key={value}
-                      value={value}
-              >{value}</option>
-            ))
-          }
-        </select>
+        {
+          readOnly ? (
+            <span className='the-input-select-readonly'>{options[value]}</span>
+          ) : (
+            <select onChange={(e) => s.handleChange(e)}
+                    value={value}
+                    tabIndex={-1}
+                    className='the-input-select-select'
+            >
+              {
+                Object.keys(options).map((value) => (
+                  <option name={name}
+                          key={value}
+                          value={value}
+                  >{value}</option>
+                ))
+              }
+            </select>
+          )
+        }
+
+
         {children}
         {
-          suggesting && (
+          !readOnly && suggesting && (
             <TheInputSelect.Options {...{parser, sorter, options, suggestingIndex}}
                                     onSelect={({value}) => s.enterSuggested(value)}
             />

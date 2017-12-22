@@ -37,10 +37,9 @@ class TheInputText extends React.PureComponent {
       type,
       name,
       required,
+      readOnly,
       value,
       error,
-      pattern,
-      patternWarning,
       placeholder,
       autoFocus,
       inputRef
@@ -72,21 +71,27 @@ class TheInputText extends React.PureComponent {
         {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
 
-        <input className='the-input-text-input'
-               {...{id, type, name, required, value, placeholder, autoFocus, autoComplete}}
-               onChange={(e) => s.handleChange(e)}
-               onFocus={(e) => s.handleFocus(e)}
-               onBlur={(e) => s.handleBlur(e)}
-               onKeyUp={(e) => s.handleKeyUp(e)}
-               onKeyPress={(e) => s.handleKeyPress(e)}
-               onKeyDown={(e) => s.handleKeyDown(e)}
+        {
+          readOnly ? (
+            <span className='the-input-text-readonly'>{value}</span>
+          ) : (
+            <input className='the-input-text-input'
+                   {...{id, readOnly, type, name, required, value, placeholder, autoFocus, autoComplete}}
+                   onChange={(e) => s.handleChange(e)}
+                   onFocus={(e) => s.handleFocus(e)}
+                   onBlur={(e) => s.handleBlur(e)}
+                   onKeyUp={(e) => s.handleKeyUp(e)}
+                   onKeyPress={(e) => s.handleKeyPress(e)}
+                   onKeyDown={(e) => s.handleKeyDown(e)}
+                   ref={inputRef}
 
-               ref={inputRef}
+            />
+          )
+        }
 
-        />
         {children}
         {
-          suggesting && (
+          !readOnly && suggesting && (
             <TheInputText.Options {...{parser, candidates, selectedCandidate}}
                                   onSelect={({value}) => s.enterCandidate(value)}
             />

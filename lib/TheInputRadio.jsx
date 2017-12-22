@@ -27,7 +27,8 @@ class TheInputRadio extends React.PureComponent {
       options,
       value,
       error,
-      asButton
+      asButton,
+      readOnly
     } = props
 
     options = normalizeOptions(options)
@@ -45,16 +46,20 @@ class TheInputRadio extends React.PureComponent {
         {renderErrorMessage(error)}
 
         {
-          Object.keys(options).map((optionValue) => (
-            <TheInputRadio.Option name={name}
-                                  checked={String(optionValue).trim() === String(value).trim()}
-                                  id={s.idFor(optionValue)}
-                                  key={optionValue}
-                                  value={optionValue}
-                                  onChange={(e) => s.handleChange(e)}
-                                  label={options[optionValue]}
-            />
-          ))
+          readOnly ? (
+            <span className='the-input-radio-readonly'>{options[value]}</span>
+          ) : (
+            Object.keys(options).map((optionValue) => (
+              <TheInputRadio.Option name={name}
+                                    checked={String(optionValue).trim() === String(value).trim()}
+                                    id={s.idFor(optionValue)}
+                                    key={optionValue}
+                                    value={optionValue}
+                                    onChange={(e) => s.handleChange(e)}
+                                    label={options[optionValue]}
+              />
+            ))
+          )
         }
       </div>
     )

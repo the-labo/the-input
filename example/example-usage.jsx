@@ -190,7 +190,9 @@ class ExampleComponent extends React.PureComponent {
         <br/>
         <br/>
 
-        <h3>Error</h3>
+        <hr/>
+
+        <h2>Error</h2>
 
         <TheInput name='@'
                   type='hidden'
@@ -238,6 +240,44 @@ class ExampleComponent extends React.PureComponent {
                   options={['Green', 'Pink', 'Brown']}
                   error='Something Wrong with This!'
         />
+
+
+        <br/>
+        <br/>
+        <br/>
+
+        <hr/>
+
+        <h2>Readonly</h2>
+
+        <Text name='value01'
+              value={values['value01']}
+              onUpdate={onUpdate}
+              readOnly
+              placeholder='value01'
+        />
+
+        <Select name='value04'
+                value={values['value04']}
+                onUpdate={onUpdate}
+                options={['Tea', 'Coffee', 'Water']}
+                readOnly
+        />
+
+        <Radio name='value02'
+               value={values['value02']}
+               onUpdate={onUpdate}
+               options={['Car', 'Ship', 'Plane']}
+               readOnly
+        />
+        <Checkbox name='value03'
+                  value={values['value03']}
+                  onUpdate={onUpdate}
+                  options={['Green', 'Pink', 'Brown']}
+                  readOnly
+        />
+
+
       </div>
 
     )

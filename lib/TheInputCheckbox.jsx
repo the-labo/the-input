@@ -24,6 +24,7 @@ class TheInputCheckbox extends React.PureComponent {
       id = s.id,
       className,
       name,
+      readOnly,
       options,
       value,
       error,
@@ -45,16 +46,20 @@ class TheInputCheckbox extends React.PureComponent {
         {renderErrorMessage(error)}
 
         {
-          Object.keys(options).map((optionValue) => (
-            <TheInputCheckbox.Option name={name}
-                                     checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
-                                     id={s.idFor(optionValue)}
-                                     key={optionValue}
-                                     value={optionValue}
-                                     onChange={(e) => s.handleChange(e)}
-                                     label={options[optionValue]}
-            />
-          ))
+          readOnly ? (
+            <span className='the-input-checkbox-readonly'>{options[value]}</span>
+          ) : (
+            Object.keys(options).map((optionValue) => (
+              <TheInputCheckbox.Option name={name}
+                                       checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
+                                       id={s.idFor(optionValue)}
+                                       key={optionValue}
+                                       value={optionValue}
+                                       onChange={(e) => s.handleChange(e)}
+                                       label={options[optionValue]}
+              />
+            ))
+          )
         }
       </div>
     )
