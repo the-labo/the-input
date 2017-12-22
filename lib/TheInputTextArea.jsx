@@ -55,8 +55,9 @@ class TheInputTextArea extends React.PureComponent {
         {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{id, rows, name, required, value, placeholder}}
+                  {...{id, rows, name, required, placeholder}}
                   {...{onChange, onFocus, onBlur, onKeyUp, onKeyDown, onKeyPress}}
+                  value={value || ''}
                   onChange={(e) => s.handleChange(e)}
 
         />
