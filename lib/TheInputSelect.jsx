@@ -76,7 +76,8 @@ class TheInputSelect extends React.PureComponent {
         }
 
         <input className='the-input-select-input'
-               {...{id, type, name, value, placeholder}}
+               {...{id, type, name, placeholder}}
+               value={value || ''}
                onFocus={(e) => s.handleFocus(e)}
                onBlur={(e) => s.handleBlur(e)}
                onKeyUp={(e) => s.handleKeyUp(e)}
@@ -91,7 +92,7 @@ class TheInputSelect extends React.PureComponent {
             <span className='the-input-select-readonly'>{options[value]}</span>
           ) : (
             <select onChange={(e) => s.handleChange(e)}
-                    value={value}
+                    value={value || ''}
                     tabIndex={-1}
                     className='the-input-select-select'
             >

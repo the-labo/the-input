@@ -110,7 +110,10 @@ TheInputRadio.propTypes = {
   /** Name of input */
   name: PropTypes.string.isRequired,
   /** Value of input */
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   /** Handle for update */
   onUpdate: PropTypes.func.isRequired,
   /** Value parser */
