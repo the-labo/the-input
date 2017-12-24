@@ -137,7 +137,15 @@
       },
       "value": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "bool"
+            }
+          ]
         },
         "required": false,
         "description": "Value of input",
@@ -298,7 +306,15 @@
       },
       "value": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "bool"
+            }
+          ]
         },
         "required": false,
         "description": "Value of input",
