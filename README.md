@@ -398,7 +398,7 @@ Checkbox input of the-components
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
 | `name` | string  | Name of input | `` |
-| `value` | string  | Value of input | `''` |
+| `value` | union  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
 | `error` | union  | Error message | `null` |
@@ -419,7 +419,7 @@ Radio input of the-components
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
 | `name` | string  | Name of input | `` |
-| `value` | string  | Value of input | `''` |
+| `value` | union  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
 | `error` | union  | Input error | `null` |
