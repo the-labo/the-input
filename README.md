@@ -108,7 +108,8 @@ class ExampleComponent extends React.PureComponent {
       Toggle,
       Slider,
       Range,
-      Upload
+      Upload,
+      Tag
     } = TheInput
     return (
       <div>
@@ -262,6 +263,16 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+
+        <hr/>
+        <h3>Tag</h3>
+
+        <Tag name='value01'
+             value={values['value01']}
+             onUpdate={onUpdate}
+             placeholder='value01'
+             options={['Banana', 'Orange', 'Apple']}
+        />
         <br/>
         <br/>
         <br/>

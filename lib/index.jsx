@@ -1,7 +1,7 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 2.1.10
+ * @version 2.1.11
  */
 'use strict'
 
@@ -16,6 +16,7 @@ import TheInputSearch from './TheInputSearch'
 import TheInputSelect from './TheInputSelect'
 import TheInputSlider from './TheInputSlider'
 import TheInputStyle from './TheInputStyle'
+import TheInputTag from './TheInputTag'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
 import TheInputToggle from './TheInputToggle'
@@ -35,6 +36,7 @@ export {
   TheInputSelect,
   TheInputSlider,
   TheInputStyle,
+  TheInputTag,
   TheInputText,
   TheInputTextArea,
   TheInputToggle,

@@ -15,6 +15,7 @@ import TheInputSearch from './TheInputSearch'
 import TheInputToggle from './TheInputToggle'
 import TheInputSlider from './TheInputSlider'
 import TheInputRange from './TheInputRange'
+import TheInputTag from './TheInputTag'
 import { renderErrorMessage } from './helpers'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 
@@ -84,6 +85,7 @@ TheInput.Toggle = TheInputToggle
 TheInput.Slider = TheInputSlider
 TheInput.Range = TheInputRange
 TheInput.Upload = TheInputUpload
+TheInput.Tag = TheInputTag
 
 TheInput.propTypes = {
   /** Input type */

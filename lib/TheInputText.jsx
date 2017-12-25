@@ -141,7 +141,7 @@ class TheInputText extends React.PureComponent {
     clearTimeout(s._offSuggestionOffTimer)
     s.setState({suggesting: true})
     s.updateCandidates(-1)
-    let {onFocus} = s.props
+    const {onFocus} = s.props
     onFocus && onFocus(e)
   }
 
