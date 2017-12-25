@@ -40,7 +40,7 @@ class TheInputTag extends React.PureComponent {
                     onFocus={s.handleFocus}
                     onBlur={s.handleBlur}
                     inputRef={s.handleInputRef}
-                    options={(options || []).filter((option) => !tagValues.includes(option))}
+                    options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
       >
         {
           tagValues.filter(Boolean).map((text) => (
