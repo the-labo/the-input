@@ -1145,6 +1145,110 @@
       }
     }
   },
+  "TheInputTag": {
+    "description": "",
+    "displayName": "TheInputTag",
+    "methods": [
+      {
+        "name": "handleUpdate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "values",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "splitValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleKeyDown",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleBack",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleInputRef",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "input",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "removeTag",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "text",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "updateBySplitValues",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "splitValues",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ]
+  },
   "TheInputText": {
     "description": "Text Input",
     "displayName": "TheInputText",
