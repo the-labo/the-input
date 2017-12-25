@@ -792,7 +792,9 @@ TheInputStyle.data = (options) => {
         border: `1px solid ${inputBorderColor}`,
         boxSizing: 'border-box',
         alignItems: 'center',
-        padding: '0 2px'
+        padding: '0 2px',
+        overflow: 'auto',
+        justifyContent: 'flex-end'
       },
       '&.the-input-tag-focused': {
         outline: `5px auto ${dominantColor}`,
@@ -832,7 +834,8 @@ TheInputStyle.data = (options) => {
         backgroundColor: 'transparent',
         outline: 'none',
         border: 'none',
-        boxShadow: 'none'
+        boxShadow: 'none',
+        minWidth: '72px'
       }
     })
   )

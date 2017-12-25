@@ -503,6 +503,11 @@ Style for TheInput
 | --- | --- | ---- | ---- |
 | `options` | object  | Style options | `{}` |
 
+### TheInputTag
+
+
+
+
 ### TheInputText
 
 Text Input
