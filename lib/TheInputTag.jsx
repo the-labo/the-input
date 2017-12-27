@@ -43,10 +43,13 @@ class TheInputTag extends React.PureComponent {
                     options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
       >
         {
-          tagValues.filter(Boolean).reverse().map((text) => (
-            <span key={text}
-                  className={'the-input-tag-tag'}
-            >
+          tagValues.filter(Boolean)
+            .filter(uniqueFilter())
+            .reverse()
+            .map((text) => (
+              <span key={text}
+                    className={'the-input-tag-tag'}
+              >
               <span className='the-input-tag-text'>
                 {text}
               </span>
@@ -55,7 +58,7 @@ class TheInputTag extends React.PureComponent {
               <TheIcon className={TheInputTag.CLOSE_ICON}/>
               </span>
             </span>
-          ))
+            ))
         }
       </TheInputText>
     )
@@ -155,7 +158,7 @@ class TheInputTag extends React.PureComponent {
     const s = this
     const {name, onUpdate} = s.props
     const [edittingValue, ...tagValues] = splitValues
-    const value = [edittingValue, ...tagValues].reverse().join(' ')
+    const value = [edittingValue, ...tagValues.filter(uniqueFilter())].reverse().join(' ')
     onUpdate && onUpdate({[name]: value})
   }
 }

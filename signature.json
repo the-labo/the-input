@@ -1188,6 +1188,13 @@
         "returns": null
       },
       {
+        "name": "handleEnter",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "handleInputRef",
         "docblock": null,
         "modifiers": [],
