@@ -786,15 +786,16 @@ TheInputStyle.data = (options) => {
     asStyleData('.the-input-tag', {
       '&': {
         display: 'inline-flex',
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
         backgroundColor: backgroundColor,
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         border: `1px solid ${inputBorderColor}`,
         boxSizing: 'border-box',
         alignItems: 'center',
-        padding: '0 2px',
+        padding: '4px',
         overflow: 'auto',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-start'
       },
       '&.the-input-tag-focused': {
         outline: `5px auto ${dominantColor}`,
@@ -802,16 +803,17 @@ TheInputStyle.data = (options) => {
       },
       '.the-input-tag-tag': {
         display: 'inline-flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         padding: '0 2px',
-        margin: '0 2px',
+        margin: '2px',
         fontSize: 'small',
         borderRadius: '2px',
         backgroundColor: colorAlpha(dominantColor, 0.2),
         color: dominantColor,
         position: 'relative',
-        zIndex: '1'
+        zIndex: '1',
+        flexGrow: '1',
       },
       '.the-input-tag-text': {
         display: 'inline-block',
@@ -821,7 +823,6 @@ TheInputStyle.data = (options) => {
       '.the-input-tag-remover': {
         display: 'inline-block',
         verticalAlign: 'middle',
-        fontSize: 'x-small',
         padding: '2px',
         '.the-icon': {
           padding: '0'
@@ -835,7 +836,9 @@ TheInputStyle.data = (options) => {
         outline: 'none',
         border: 'none',
         boxShadow: 'none',
-        minWidth: '72px'
+        minWidth: '48px',
+        flexGrow: 1,
+        width: 'auto'
       }
     })
   )

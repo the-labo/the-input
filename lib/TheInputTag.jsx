@@ -43,7 +43,7 @@ class TheInputTag extends React.PureComponent {
                     options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
       >
         {
-          tagValues.filter(Boolean).map((text) => (
+          tagValues.filter(Boolean).reverse().map((text) => (
             <span key={text}
                   className={'the-input-tag-tag'}
             >

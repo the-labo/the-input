@@ -70,7 +70,7 @@ class TheInputText extends React.PureComponent {
       >
         {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
-
+        {children}
         {
           readOnly ? (
             <span className='the-input-text-readonly'>{value}</span>
@@ -90,7 +90,6 @@ class TheInputText extends React.PureComponent {
           )
         }
 
-        {children}
         {
           !readOnly && suggesting && (
             <TheInputText.Options {...{parser, candidates, selectedCandidate}}
