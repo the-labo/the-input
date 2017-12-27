@@ -80,7 +80,7 @@ class TheInputTag extends React.PureComponent {
   splitValue () {
     const s = this
     const {splitter, value} = s.props
-    return String(value || '').split(splitter).reverse().filter(uniqueFilter())
+    return String(value || '').split(splitter).reverse()
   }
 
   handleKeyDown (e) {
@@ -89,6 +89,9 @@ class TheInputTag extends React.PureComponent {
     switch (e.keyCode) {
       case 8:
         s.handleBack()
+        break
+      case 13:
+        s.handleEnter()
         break
       default:
         break
@@ -102,6 +105,16 @@ class TheInputTag extends React.PureComponent {
     if (edittingValue.length === 0) {
       s.updateBySplitValues(
         ['', ...tagValues.slice(1)]
+      )
+    }
+  }
+
+  handleEnter () {
+    const s = this
+    const [edittingValue, ...tagValues] = s.splitValue()
+    if (edittingValue.length > 0) {
+      s.updateBySplitValues(
+        ['', edittingValue, ...tagValues.slice()]
       )
     }
   }
@@ -141,7 +154,8 @@ class TheInputTag extends React.PureComponent {
   updateBySplitValues (splitValues) {
     const s = this
     const {name, onUpdate} = s.props
-    const value = splitValues.reverse().join(' ')
+    const [edittingValue, ...tagValues] = splitValues
+    const value = [edittingValue, ...tagValues].reverse().join(' ')
     onUpdate && onUpdate({[name]: value})
   }
 }
