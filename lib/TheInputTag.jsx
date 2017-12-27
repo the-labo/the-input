@@ -157,7 +157,8 @@ TheInputTag.propTypes = Object.assign(
 TheInputTag.defaultProps = Object.assign(
   clone(TheInputText.defaultProps, {without: []}),
   {
-    splitter: /[\s,]+/
+    splitter: /[\s,]+/,
+    options: []
   }
 )
 TheInputTag.displayName = 'TheInputTag'
