@@ -1469,6 +1469,34 @@
           "computed": false
         }
       },
+      "onUp": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for up"
+      },
+      "onDown": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for down"
+      },
+      "onLeft": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for left"
+      },
+      "onRight": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for right"
+      },
       "parser": {
         "type": {
           "name": "func"
