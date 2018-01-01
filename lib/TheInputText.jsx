@@ -166,12 +166,27 @@ class TheInputText extends React.PureComponent {
 
   handleKeyDown (e) {
     const s = this
-    const {onKeyDown, onEnter} = s.props
+    const {
+      onKeyDown,
+      onEnter,
+      onUp,
+      onDown,
+      onLeft,
+      onRight
+    } = s.props
     switch (e.keyCode) {
+      case 37: // LEFT
+        onLeft && onLeft()
+        break
       case 38: // UP
+        onUp && onUp()
         s.moveCandidateIndex(-1)
         break
+      case 39: // RIGHT
+        onRight && onRight()
+        break
       case 40: // DOWN
+        onDown && onDown()
         s.moveCandidateIndex(+1)
         break
       case 13: { // Enter
@@ -179,9 +194,7 @@ class TheInputText extends React.PureComponent {
         if (selectedCandidate) {
           s.enterCandidate(selectedCandidate)
         }
-        if (onEnter) {
-          onEnter()
-        }
+        onEnter && onEnter()
         s.commitValue()
         break
       }
@@ -318,6 +331,14 @@ TheInputText.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   /** Handle for enter */
   onEnter: PropTypes.func,
+  /** Handle for up */
+  onUp: PropTypes.func,
+  /** Handle for down */
+  onDown: PropTypes.func,
+  /** Handle for left */
+  onLeft: PropTypes.func,
+  /** Handle for right */
+  onRight: PropTypes.func,
   /** Value parser */
   parser: PropTypes.func,
   /** Options parser */
