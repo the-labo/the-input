@@ -521,6 +521,10 @@ Text Input
 | `value` | string  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `onEnter` | func  | Handle for enter | `null` |
+| `onUp` | func  | Handle for up | `` |
+| `onDown` | func  | Handle for down | `` |
+| `onLeft` | func  | Handle for left | `` |
+| `onRight` | func  | Handle for right | `` |
 | `parser` | func  | Value parser | `String` |
 | `matcher` | func  | Options parser | `(candidate, value) => {
   return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
