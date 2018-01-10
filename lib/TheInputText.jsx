@@ -77,7 +77,7 @@ class TheInputText extends React.PureComponent {
         {children}
         {
           readOnly ? (
-            <span className='the-input-text-readonly'>{value}</span>
+            <span className='the-input-text-readonly'>{value || ''}</span>
           ) : (
             <input className='the-input-text-input'
                    {...{id, readOnly, type, name, required, placeholder, autoFocus, autoComplete}}
