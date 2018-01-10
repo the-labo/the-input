@@ -124,6 +124,14 @@ class ExampleComponent extends React.PureComponent {
               options={['Banana', 'Orange', 'Apple']}
         />
 
+        <Text name='value01'
+              value={values['value01']}
+              onUpdate={onUpdate}
+              parser={(v) => String(v).toUpperCase()}
+              placeholder='value01 only with uppercase parser'
+              options={['Banana', 'Orange', 'Apple']}
+        />
+
         <h3>Text with hint</h3>
 
         <Text name='value01'

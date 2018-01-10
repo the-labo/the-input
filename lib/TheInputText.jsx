@@ -14,21 +14,25 @@ import * as patterns from './patterns'
 class TheInputText extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.elm = null
-    s.state = {
+    this.elm = null
+    this.state = {
       suggesting: false,
       selectedCandidate: null,
       candidates: [],
       committedValue: null
     }
-    s.handleDocumentClick = s.handleDocumentClick.bind(s)
-    s._offSuggestionOffTimer = -1
+    this.handleDocumentClick = this.handleDocumentClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this._offSuggestionOffTimer = -1
   }
 
   render () {
-    const s = this
-    const {props, state} = s
+    const {props, state} = this
     const {
       id,
       className,
@@ -49,7 +53,7 @@ class TheInputText extends React.PureComponent {
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
-    const warning = s.getPatternWarning()
+    const warning = this.getPatternWarning()
     return (
       <div {...htmlAttributesFor(props, {
         except: [
@@ -66,7 +70,7 @@ class TheInputText extends React.PureComponent {
              'the-input-error': !!error,
            })}
            data-value={value}
-           ref={(elm) => { s.elm = elm }}
+           ref={(elm) => { this.elm = elm }}
       >
         {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
@@ -78,12 +82,12 @@ class TheInputText extends React.PureComponent {
             <input className='the-input-text-input'
                    {...{id, readOnly, type, name, required, placeholder, autoFocus, autoComplete}}
                    value={value || ''}
-                   onChange={(e) => s.handleChange(e)}
-                   onFocus={(e) => s.handleFocus(e)}
-                   onBlur={(e) => s.handleBlur(e)}
-                   onKeyUp={(e) => s.handleKeyUp(e)}
-                   onKeyPress={(e) => s.handleKeyPress(e)}
-                   onKeyDown={(e) => s.handleKeyDown(e)}
+                   onChange={this.handleChange}
+                   onFocus={this.handleFocus}
+                   onBlur={this.handleBlur}
+                   onKeyUp={this.handleKeyUp}
+                   onKeyPress={this.handleKeyPress}
+                   onKeyDown={this.handleKeyDown}
                    ref={inputRef}
 
             />
@@ -93,7 +97,7 @@ class TheInputText extends React.PureComponent {
         {
           !readOnly && suggesting && (
             <TheInputText.Options {...{parser, candidates, selectedCandidate}}
-                                  onSelect={({value}) => s.enterCandidate(value)}
+                                  onSelect={({value}) => this.enterCandidate(value)}
             />
           )
         }
@@ -115,57 +119,50 @@ class TheInputText extends React.PureComponent {
   }
 
   handleDocumentClick (e) {
-    const s = this
-    const {elm} = s
+    const {elm} = this
 
     if (!elm) {
       return
     }
     const inside = elm.contains(e.target)
     if (!inside) {
-      s.offSuggestion()
+      this.offSuggestion()
     }
   }
 
   handleChange (e) {
-    const s = this
-    const {parser, onChange, onUpdate} = s.props
+    const {onChange, onUpdate} = this.props
     const {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: parser(value)})
+    onUpdate && onUpdate({[name]: value})
   }
 
   handleFocus (e) {
-    const s = this
-    clearTimeout(s._offSuggestionOffTimer)
-    s.setState({suggesting: true})
-    s.updateCandidates(-1)
-    const {onFocus} = s.props
+    clearTimeout(this._offSuggestionOffTimer)
+    this.setState({suggesting: true})
+    this.updateCandidates(-1)
+    const {onFocus} = this.props
     onFocus && onFocus(e)
   }
 
   handleBlur (e) {
-    const s = this
-    const {onBlur} = s.props
+    const {onBlur} = this.props
     onBlur && onBlur(e)
-    s.commitValue()
+    this.commitValue()
   }
 
   handleKeyUp (e) {
-    const s = this
-    s.updateCandidates()
-    const {onKeyUp} = s.props
+    this.updateCandidates()
+    const {onKeyUp} = this.props
     onKeyUp && onKeyUp(e)
   }
 
   handleKeyPress (e) {
-    const s = this
-    const {onKeyPress} = s.props
+    const {onKeyPress} = this.props
     onKeyPress && onKeyPress(e)
   }
 
   handleKeyDown (e) {
-    const s = this
     const {
       onKeyDown,
       onEnter,
@@ -173,47 +170,46 @@ class TheInputText extends React.PureComponent {
       onDown,
       onLeft,
       onRight
-    } = s.props
+    } = this.props
     switch (e.keyCode) {
       case 37: // LEFT
         onLeft && onLeft()
         break
       case 38: // UP
         onUp && onUp()
-        s.moveCandidateIndex(-1)
+        this.moveCandidateIndex(-1)
         break
       case 39: // RIGHT
         onRight && onRight()
         break
       case 40: // DOWN
         onDown && onDown()
-        s.moveCandidateIndex(+1)
+        this.moveCandidateIndex(+1)
         break
       case 13: { // Enter
-        let {selectedCandidate} = s.state
+        let {selectedCandidate} = this.state
         if (selectedCandidate) {
-          s.enterCandidate(selectedCandidate)
+          this.enterCandidate(selectedCandidate)
         }
         onEnter && onEnter()
-        s.commitValue()
+        this.commitValue()
         break
       }
       case 9: // Tab
-        s.offSuggestion()
+        this.offSuggestion()
         break
       default:
-        s.setState({suggesting: true})
+        this.setState({suggesting: true})
         break
     }
     onKeyDown && onKeyDown(e)
   }
 
   updateCandidates (index) {
-    const s = this
-    let {options, value, matcher} = s.props
+    let {options, value, matcher} = this.props
     options = normalizeOptions(options)
     value = value && String(value).trim()
-    const {selectedCandidate} = s.state
+    const {selectedCandidate} = this.state
     const candidates = Object.keys(options)
       .map((name) => options[name])
       .map((candidate) => String(candidate).trim())
@@ -223,15 +219,14 @@ class TheInputText extends React.PureComponent {
     if (typeof index === 'undefined') {
       index = candidates.indexOf(selectedCandidate)
     }
-    s.setState({
+    this.setState({
       candidates,
       selectedCandidate: candidates[index] || null
     })
   }
 
   moveCandidateIndex (amount) {
-    const s = this
-    const {candidates, selectedCandidate} = s.state
+    const {candidates, selectedCandidate} = this.state
     if (!candidates) {
       return
     }
@@ -240,43 +235,40 @@ class TheInputText extends React.PureComponent {
     if (over) {
       return
     }
-    s.updateCandidates(index)
+    this.updateCandidates(index)
   }
 
   enterCandidate (value) {
-    const s = this
-    let {name} = s.props
-    s.handleChange({
+    const {name} = this.props
+    this.handleChange({
       target: {
         name,
         value
       }
     })
-    s.offSuggestion()
+    this.offSuggestion()
   }
 
   offSuggestion (delay = 10) {
-    const s = this
-    clearTimeout(s._offSuggestionOffTimer)
-    s._offSuggestionOffTimer = setTimeout(() => {
-      s.setState({suggesting: false})
+    clearTimeout(this._offSuggestionOffTimer)
+    this._offSuggestionOffTimer = setTimeout(() => {
+      this.setState({suggesting: false})
     }, delay)
   }
 
   commitValue () {
-    const s = this
-    const {state, props} = s
-    const {value} = props
+    const {value, onUpdate, parser, name} = this.props
+    const committedValue = parser(value)
+    onUpdate && onUpdate({[name]: committedValue})
 
-    if (state.committedValue === value) {
+    if (this.state.committedValue === committedValue) {
       return
     }
-    s.setState({committedValue: value})
+    this.setState({committedValue})
   }
 
   getPatternWarning () {
-    const s = this
-    const {state, props} = s
+    const {state, props} = this
     const {value, pattern, patternWarning} = props
     const {committedValue} = state
     if (!committedValue) {
