@@ -103,8 +103,8 @@ class TheInputRadio extends React.PureComponent {
   }
 }
 
-TheInputRadio.NORMAL_ICON = 'fa fa-circle-o'
-TheInputRadio.CHECKED_ICON = 'fa fa-dot-circle-o'
+TheInputRadio.NORMAL_ICON = 'far fa-circle'
+TheInputRadio.CHECKED_ICON = 'far fa-dot-circle'
 
 TheInputRadio.propTypes = {
   /** Name of input */

@@ -121,8 +121,8 @@ class TheInputCheckbox extends React.PureComponent {
   }
 }
 
-TheInputCheckbox.NORMAL_ICON = 'fa fa-square-o'
-TheInputCheckbox.CHECKED_ICON = 'fa fa-check-square-o'
+TheInputCheckbox.NORMAL_ICON = 'far fa-square'
+TheInputCheckbox.CHECKED_ICON = 'fas fa-check-square'
 
 TheInputCheckbox.propTypes = {
   /** Name of input */
