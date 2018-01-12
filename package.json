@@ -43,20 +43,20 @@
     "the-icon": "^4.0.1",
     "the-spin": "^3.0.0",
     "the-style": "^2.1.0",
-    "the-window": "^5.3.1"
+    "the-window": "^5.3.3"
   },
   "devDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "the-component-demo": "^4.0.1",
-    "the-script-build": "^2.0.0",
+    "the-script-build": "^2.0.1",
     "the-script-doc": "^1.0.2",
     "the-script-release": "^1.0.6",
     "the-script-share": "^1.0.5",
     "the-script-test": "^2.0.1",
     "the-script-update": "^1.0.0",
-    "the-templates": "^2.1.7"
+    "the-templates": "^2.1.11"
   },
   "peerDependencies": {
     "react": ">=16",

@@ -1,7 +1,7 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 3.0.3
+ * @version 3.0.4
  */
 'use strict'
 
