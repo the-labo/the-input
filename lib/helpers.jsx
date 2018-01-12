@@ -71,3 +71,12 @@ export function isImageUrl (url) {
   ]
   return /^data:image/.test(url) || !!~imageExtensions.indexOf(path.extname(url))
 }
+
+export default {
+  normalizeOptions,
+  normalizeArrayValue,
+  renderErrorMessage,
+  renderWarningMessage,
+  readFile,
+  isImageUrl
+}

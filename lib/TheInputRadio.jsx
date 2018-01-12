@@ -10,18 +10,17 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
 /**
  * Radio input of the-components
  */
-class TheInputRadio extends React.PureComponent {
+class TheInputRadio extends React.Component {
   constructor (props) {
     super(props)
-    const s = this
-    s.id = newId()
+    this.id = newId()
+    this.handleChange = this.handleChange.bind(this)
   }
 
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {
-      id = s.id,
+      id = this.id,
       className,
       name,
       options,
@@ -52,10 +51,10 @@ class TheInputRadio extends React.PureComponent {
             Object.keys(options).map((optionValue) => (
               <TheInputRadio.Option name={name}
                                     checked={String(optionValue).trim() === String(value).trim()}
-                                    id={s.idFor(optionValue)}
+                                    id={this.idFor(optionValue)}
                                     key={optionValue}
                                     value={optionValue}
-                                    onChange={(e) => s.handleChange(e)}
+                                    onChange={this.handleChange}
                                     label={options[optionValue]}
               />
             ))
@@ -66,16 +65,14 @@ class TheInputRadio extends React.PureComponent {
   }
 
   handleChange (e) {
-    const s = this
-    let {parser, onChange, onUpdate} = s.props
-    let {name, value} = e.target
+    const {parser, onChange, onUpdate} = this.props
+    const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
   }
 
   idFor (optionValue) {
-    const s = this
-    let {id = s.id} = s.props
+    const {id = this.id} = this.props
     return [id, optionValue].join('-')
   }
 
