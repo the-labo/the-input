@@ -13,15 +13,13 @@ import { normalizeOptions, normalizeArrayValue, renderErrorMessage } from './hel
 class TheInputCheckbox extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.id = newId()
+    this.id = newId()
   }
 
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {
-      id = s.id,
+      id = this.id,
       className,
       name,
       readOnly,
@@ -52,10 +50,10 @@ class TheInputCheckbox extends React.PureComponent {
             Object.keys(options).map((optionValue) => (
               <TheInputCheckbox.Option name={name}
                                        checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
-                                       id={s.idFor(optionValue)}
+                                       id={this.idFor(optionValue)}
                                        key={optionValue}
                                        value={optionValue}
-                                       onChange={(e) => s.handleChange(e)}
+                                       onChange={(e) => this.handleChange(e)}
                                        label={options[optionValue]}
               />
             ))
@@ -66,19 +64,18 @@ class TheInputCheckbox extends React.PureComponent {
   }
 
   handleChange (e) {
-    const s = this
     let {
       parser,
       onChange,
       onUpdate,
       value,
       splitter
-    } = s.props
+    } = this.props
     let {name, value: changedValue, checked} = e.target
     changedValue = String(changedValue).trim()
     value = normalizeArrayValue(value, splitter)
       .map((value) => String(value).trim())
-    let has = value.includes(changedValue)
+    const has = value.includes(changedValue)
     if (has && !checked) {
       value = value.filter((value) => value !== changedValue)
     }
@@ -92,8 +89,7 @@ class TheInputCheckbox extends React.PureComponent {
   }
 
   idFor (optionValue) {
-    const s = this
-    let {id = s.id} = s.props
+    const {id = this.id} = this.props
     return [id, ...[].concat(optionValue)].join('-')
   }
 

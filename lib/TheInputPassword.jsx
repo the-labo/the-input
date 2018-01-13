@@ -9,8 +9,7 @@ import { clone } from 'asobj'
 class TheInputPassword extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.state = {
+    this.state = {
       showing: false
     }
   }
@@ -43,8 +42,7 @@ class TheInputPassword extends React.PureComponent {
   }
 
   toggleShowing (showing) {
-    const s = this
-    s.setState({showing})
+    this.setState({showing})
   }
 }
 
