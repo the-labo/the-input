@@ -121,16 +121,14 @@ class TheInputSelect extends React.PureComponent {
   }
 
   componentDidMount () {
-    const s = this
     const window = get('window')
-    window.addEventListener('click', s.handleDocumentClick)
+    window.addEventListener('click', this.handleDocumentClick)
   }
 
   componentWillUnmount () {
-    const s = this
     const window = get('window')
-    window.removeEventListener('click', s.handleDocumentClick)
-    clearTimeout(s._suggestOffTimer)
+    window.removeEventListener('click', this.handleDocumentClick)
+    clearTimeout(this._suggestOffTimer)
   }
 
   handleChange (e) {
@@ -142,47 +140,43 @@ class TheInputSelect extends React.PureComponent {
   }
 
   handleDocumentClick (e) {
-    const s = this
-    const {elm} = s
+    const {elm} = this
 
     if (!elm) {
       return
     }
     const inside = elm.contains(e.target)
     if (!inside) {
-      s.offSuggestion()
+      this.offSuggestion()
     }
   }
 
   offSuggestion (delay = 10) {
-    const s = this
-    clearTimeout(s._suggestOffTimer)
-    s._suggestOffTimer = setTimeout(() => {
-      s.setState({suggesting: false})
+    clearTimeout(this._suggestOffTimer)
+    this._suggestOffTimer = setTimeout(() => {
+      this.setState({suggesting: false})
     }, delay)
   }
 
   handleDisplayClick (e) {
-    const s = this
-    clearTimeout(s._suggestOffTimer)
-    const {input, state} = s
-    let suggesting = !state.suggesting
+    clearTimeout(this._suggestOffTimer)
+    const {input, state} = this
+    const suggesting = !state.suggesting
     if (suggesting) {
       input.focus()
     } else {
       input.blur()
     }
-    s.setState({
+    this.setState({
       suggesting,
-      suggestingIndex: s.getIndexForValue(s.props.value)
+      suggestingIndex: this.getIndexForValue(this.props.value)
     })
   }
 
   handleFocus (e) {
-    const s = this
-    clearTimeout(s._suggestOffTimer)
-    s.setState({suggesting: true})
-    const {onFocus} = s.props
+    clearTimeout(this._suggestOffTimer)
+    this.setState({suggesting: true})
+    const {onFocus} = this.props
     e.preventDefault()
     e.stopPropagation()
     onFocus && onFocus(e)
@@ -190,23 +184,22 @@ class TheInputSelect extends React.PureComponent {
 
   handleBlur (e) {
     const s = this
-    let {onBlur} = s.props
+    const {onBlur} = s.props
     onBlur && onBlur(e)
   }
 
   handleKeyUp (e) {
     const s = this
-    let {onKeyUp} = s.props
+    const {onKeyUp} = s.props
     onKeyUp && onKeyUp(e)
   }
 
   handleKeyDown (e) {
-    const s = this
-    let {onKeyDown, onEnter} = s.props
+    const {onKeyDown, onEnter} = this.props
     switch (e.keyCode) {
       // UP
       case 38: {
-        const moved = s.moveCandidateIndex(-1)
+        const moved = this.moveCandidateIndex(-1)
         if (moved) {
           e.preventDefault()
           e.stopPropagation()
@@ -215,7 +208,7 @@ class TheInputSelect extends React.PureComponent {
       }
       // DOWN
       case 40: {
-        const moved = s.moveCandidateIndex(+1)
+        const moved = this.moveCandidateIndex(+1)
         if (moved) {
           e.preventDefault()
           e.stopPropagation()
@@ -224,65 +217,61 @@ class TheInputSelect extends React.PureComponent {
       }
       // Enter
       case 13: {
-        const values = s.getOptionValues()
-        const {suggestingIndex} = s.state
-        s.enterSuggested(values[suggestingIndex])
+        const values = this.getOptionValues()
+        const {suggestingIndex} = this.state
+        this.enterSuggested(values[suggestingIndex])
         if (onEnter) {
           onEnter()
         }
         break
       }
       case 9: // Tab
-        s.offSuggestion()
+        this.offSuggestion()
         break
       default:
-        s.setState({suggesting: true})
+        this.setState({suggesting: true})
         break
     }
     onKeyDown && onKeyDown(e)
   }
 
   moveCandidateIndex (amount) {
-    const s = this
-    const {state} = s
-    const values = s.getOptionValues()
+    const {state} = this
+    const values = this.getOptionValues()
     const index = state.suggestingIndex + amount
     const over = (index === -1) || (index === values.length)
     if (over) {
       return false
     }
-    s.setState({
+    this.setState({
       suggestingIndex: index
     })
     return true
   }
 
   enterSuggested (value) {
-    const s = this
-    let {state, props} = s
+    let {state, props} = this
     if (!state.suggesting) {
       return
     }
-    s.setState({
+    this.setState({
       suggesting: false,
-      suggestingIndex: s.getIndexForValue(value)
+      suggestingIndex: this.getIndexForValue(value)
     })
-    const {name} = s.props
-    s.handleChange({
+    const {name} = this.props
+    this.handleChange({
       target: {name, value}
     })
   }
 
   getOptionValues () {
-    const s = this
-    const {props} = s
+    const {props} = this
     const options = normalizeOptions(props.options)
     return Object.keys(options || {}).sort(props.sorter)
   }
 
   getIndexForValue (value) {
-    const s = this
-    return s.getOptionValues().indexOf(value)
+    return this.getOptionValues().indexOf(value)
   }
 
   static Options ({parser, sorter, options, suggestingIndex, onSelect}) {
