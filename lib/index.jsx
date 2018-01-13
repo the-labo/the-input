@@ -1,12 +1,9 @@
 /**
  * Input of the-components
  * @module the-input
- * @version 3.0.5
  */
 'use strict'
 
-import helpers from './helpers'
-import patterns from './patterns'
 import TheInput from './TheInput'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputPassword from './TheInputPassword'
@@ -21,12 +18,10 @@ import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
 import TheInputToggle from './TheInputToggle'
 import TheInputUpload from './TheInputUpload'
-
-export default TheInput
+import helpers from './helpers'
+import patterns from './patterns'
 
 export {
-  helpers,
-  patterns,
   TheInput,
   TheInputCheckbox,
   TheInputPassword,
@@ -40,5 +35,8 @@ export {
   TheInputText,
   TheInputTextArea,
   TheInputToggle,
-  TheInputUpload
+  TheInputUpload,
+  helpers,
+  patterns,
 }
+

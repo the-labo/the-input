@@ -15,15 +15,14 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
 class TheInputSelect extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.elm = null
-    s.state = {
+    this.elm = null
+    this.state = {
       suggesting: false,
-      suggestingIndex: s.getIndexForValue(s.props.value)
+      suggestingIndex: this.getIndexForValue(this.props.value)
     }
-    s.handleDocumentClick = s.handleDocumentClick.bind(s)
-    s._suggestOffTimer = -1
-    s.input = null
+    this.handleDocumentClick = this.handleDocumentClick.bind(this)
+    this._suggestOffTimer = -1
+    this.input = null
   }
 
   render () {

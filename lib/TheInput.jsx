@@ -24,8 +24,7 @@ import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
  */
 class TheInput extends React.PureComponent {
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {
       id,
       className,
@@ -56,7 +55,7 @@ class TheInput extends React.PureComponent {
         <input type='the-input-input'
                {...{id, type, name, required, placeholder, autoFocus, autoComplete}}
                value={value || ''}
-               onChange={(e) => s.handleChange(e)}
+               onChange={(e) => this.handleChange(e)}
                ref={inputRef}
         />
       </div>
@@ -65,8 +64,8 @@ class TheInput extends React.PureComponent {
 
   handleChange (e) {
     const s = this
-    let {parser, onChange, onUpdate} = s.props
-    let {name, value} = e.target
+    const {parser, onChange, onUpdate} = s.props
+    const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
   }
