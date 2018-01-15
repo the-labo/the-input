@@ -3,7 +3,7 @@
 import React from 'react'
 import c from 'classnames'
 import TheInputText from './TheInputText'
-import TheIcon from 'the-icon'
+import { TheIcon } from 'the-icon'
 import { clone } from 'asobj'
 
 class TheInputPassword extends React.PureComponent {

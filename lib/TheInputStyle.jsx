@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
-import TheStyle from 'the-style'
+import { TheStyle } from 'the-style'
 import { colorAlpha, asStyleData } from 'the-component-util'
 
 /** Style for TheInput */
