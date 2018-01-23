@@ -12,11 +12,10 @@ import { readFile, isImageUrl, normalizeArrayValue, renderErrorMessage } from '.
 class TheInputUpload extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.id = newId()
-    s.handleChange = s.handleChange.bind(s)
-    s.handleRemove = s.handleRemove.bind(s)
-    s.state = {
+    this.id = newId()
+    this.handleChange = this.handleChange.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.state = {
       spinning: false,
       error: null,
       urls: [].concat(props.value).filter(Boolean)
@@ -24,14 +23,13 @@ class TheInputUpload extends React.PureComponent {
   }
 
   render () {
-    const s = this
-    const {props, state} = s
+    const {props, state} = this
     const {
       className,
       multiple,
       name,
       value,
-      id = s.id,
+      id = this.id,
       error,
       accept,
       text,
@@ -60,7 +58,7 @@ class TheInputUpload extends React.PureComponent {
                name={name}
                id={`${id}-file`}
                accept={accept}
-               onChange={s.handleChange}
+               onChange={this.handleChange}
                style={{width, height}}
         />
         <label className='the-input-upload-label' htmlFor={`${id}-file`}>
@@ -80,7 +78,7 @@ class TheInputUpload extends React.PureComponent {
         </TheCondition>
         <TheCondition if={!!urls && urls.length > 0}>
           <div>
-            <a onClick={s.handleRemove}
+            <a onClick={this.handleRemove}
                className={'the-input-upload-close'}
             >
               <TheIcon className={c(TheInputUpload.CLOSE_ICON)}
@@ -116,63 +114,57 @@ class TheInputUpload extends React.PureComponent {
   }
 
   componentDidMount () {
-    const s = this
-
   }
 
   componentWillReceiveProps (nextProps) {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {value} = nextProps
     const hasValue = value && value.length > 0
     if (hasValue && (props.value !== value)) {
-      s.setState({urls: [].concat(value)})
+      this.setState({urls: [].concat(value)})
     }
   }
 
   componentWillUnmount () {
-    const s = this
-    s.gone = true
+    this.gone = true
 
   }
 
   handleChange (e) {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {target} = e
-    const {onChange, onError, onLoad, onUpdate, name} = props
+    const {onChange, onError, onLoad, onUpdate, name, multiple,} = props
     if (target.files.length === 0) {
       return
     }
-    s.setState({spinning: true})
+    this.setState({spinning: true})
     onChange && onChange(e)
     ;(async () => {
       try {
         const urls = await Promise.all(
           [...target.files].map(readFile)
         )
-        if (s.gone) {
+        if (this.gone) {
           return
         }
         onLoad && onLoad({urls, target})
-        onUpdate && onUpdate({[name]: urls})
-        s.setState({urls})
+        onUpdate && onUpdate({[name]: multiple ? urls : urls[0]})
+        this.setState({urls})
       } catch (error) {
         onError && onError(error)
-        s.setState({spinning: false, error, urls: []})
+        this.setState({spinning: false, error, urls: []})
       } finally {
-        s.setState({spinning: false})
+        this.setState({spinning: false})
       }
 
     })()
   }
 
   handleRemove () {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {onLoad} = props
     const urls = []
-    s.setState({
+    this.setState({
       error: null,
       urls
     })

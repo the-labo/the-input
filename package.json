@@ -1,35 +1,17 @@
 {
   "name": "the-input",
-  "version": "3.0.9",
   "description": "Input of the-components",
-  "main": "shim",
-  "scripts": {
-    "build": "the-script-build",
-    "doc": "the-script-doc",
-    "prepare": "the-script-build && the-script-doc",
-    "release": "the-script-release -y",
-    "share": "the-script-share",
-    "test": "the-script-test",
-    "update": "the-script-update",
-    "watch": "the-script-build -w"
-  },
-  "repository": "the-labo/the-input",
-  "keywords": [
-    "the",
-    "react-component"
-  ],
+  "version": "3.0.9",
   "author": {
     "name": "Taka Okunishi",
     "email": "okunishinishi@gmail.com",
     "url": "http://okunishitaka.com"
   },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/the-labo/the-input/issues"
   },
-  "homepage": "https://github.com/the-labo/the-input#readme",
   "dependencies": {
-    "asobj": "^2.0.2",
+    "asobj": "^2.0.10",
     "chopcal": "^3.0.1",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
@@ -50,20 +32,38 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "the-component-demo": "^4.0.6",
-    "the-script-build": "^2.0.3",
+    "the-script-build": "^2.1.0",
     "the-script-doc": "^1.0.2",
     "the-script-release": "^1.0.6",
     "the-script-share": "^1.0.5",
     "the-script-test": "^2.0.1",
     "the-script-update": "^1.0.0",
-    "the-templates": "^2.2.1"
-  },
-  "peerDependencies": {
-    "react": ">=16",
-    "react-dom": ">=16"
+    "the-templates": "^2.4.3"
   },
   "engines": {
     "node": ">=8",
     "npm": ">=4"
+  },
+  "homepage": "https://github.com/the-labo/the-input#readme",
+  "keywords": [
+    "react-component",
+    "the"
+  ],
+  "license": "MIT",
+  "main": "shim",
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "repository": "the-labo/the-input",
+  "scripts": {
+    "build": "the-script-build",
+    "doc": "the-script-doc",
+    "prepare": "the-script-build && the-script-doc",
+    "release": "the-script-release -y",
+    "share": "the-script-share",
+    "test": "the-script-test",
+    "update": "the-script-update",
+    "watch": "the-script-build -w"
   }
 }
