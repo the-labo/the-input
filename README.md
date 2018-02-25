@@ -401,11 +401,11 @@ Input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `type` | string  | Input type | `'text'` |
+| `error` | union  | Input type | `null` |
 | `name` | string  | Name of input | `'_the'` |
-| `value` | string  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
-| `error` | union  |  | `null` |
+| `type` | string  |  | `'text'` |
+| `value` | string  | Value of input | `''` |
 | `options` |   |  | `{}` |
 
 ### TheInputCheckbox
@@ -416,13 +416,13 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `value` | union  | Value of input | `''` |
-| `onUpdate` | func  | Handle for update | `` |
-| `parser` | func  | Value parser | `String` |
 | `error` | union  | Error message | `null` |
+| `name` | string  |  | `` |
+| `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
+| `parser` | func  | Value parser | `String` |
 | `splitter` | string  | Value Splitter text | `','` |
+| `value` | union  | Value of input | `''` |
 
 ### TheInputPassword
 
@@ -437,13 +437,13 @@ Radio input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `value` | union  | Value of input | `''` |
-| `onUpdate` | func  | Handle for update | `` |
-| `parser` | func  | Value parser | `String` |
-| `error` | union  | Input error | `null` |
-| `options` | union  | Options | `{}` |
 | `asButton` | bool  | Use button like style | `false` |
+| `error` | union  | Input error | `null` |
+| `name` | string  |  | `` |
+| `onUpdate` | func  | Handle for update | `` |
+| `options` | union  | Options | `{}` |
+| `parser` | func  | Value parser | `String` |
+| `value` | union  | Value of input | `''` |
 
 ### TheInputRange
 
@@ -453,14 +453,14 @@ Range Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `value` | arrayOf number | Value of input | `[0, 100]` |
-| `onUpdate` | func  | Handle for update | `` |
-| `error` | union  | Input error | `null` |
-| `min` | number  | Min value | `0` |
-| `max` | number  | Max value | `100` |
-| `step` | number  | Value step | `0.1` |
 | `barOnly` | bool  | Hides min/max value text | `false` |
+| `error` | union  | Input error | `null` |
+| `max` | number  | Max value | `100` |
+| `min` | number  | Min value | `0` |
+| `name` | string  |  | `` |
+| `onUpdate` | func  | Handle for update | `` |
+| `step` | number  | Value step | `0.1` |
+| `value` | arrayOf number | Value of input | `[0, 100]` |
 
 ### TheInputSearch
 
@@ -475,14 +475,14 @@ Select Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `value` | string  | Value of input | `''` |
-| `onUpdate` | func  | Handle for update | `` |
+| `error` | union  | Input error | `null` |
+| `name` | string  |  | `` |
 | `onEnter` | func  | Handle for enter | `null` |
+| `onUpdate` | func  | Handle for update | `` |
+| `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
 | `sorter` | func  | Options sorter | `() => 1` |
-| `error` | union  | Input error | `null` |
-| `options` | union  | Options | `{}` |
+| `value` | string  | Value of input | `''` |
 
 ### TheInputSlider
 
@@ -492,14 +492,14 @@ Slider Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `value` | number  | Value of input | `0` |
-| `onUpdate` | func  | Handle for update | `` |
-| `error` | union  | Input error | `null` |
-| `min` | number  | Min value | `0` |
-| `max` | number  | Max value | `100` |
-| `step` | number  | Value step | `0.1` |
 | `barOnly` | bool  | Hides min/max value text | `false` |
+| `error` | union  | Input error | `null` |
+| `max` | number  | Max value | `100` |
+| `min` | number  | Min value | `0` |
+| `name` | string  |  | `` |
+| `onUpdate` | func  | Handle for update | `` |
+| `step` | number  | Value step | `0.1` |
+| `value` | number  | Value of input | `0` |
 
 ### TheInputStyle
 
@@ -524,23 +524,23 @@ Text Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `type` | string  | Text type | `'text'` |
-| `name` | string  | Name of input | `` |
-| `value` | string  | Value of input | `''` |
-| `onUpdate` | func  | Handle for update | `` |
-| `onEnter` | func  | Handle for enter | `null` |
-| `onUp` | func  | Handle for up | `` |
-| `onDown` | func  | Handle for down | `` |
-| `onLeft` | func  | Handle for left | `` |
-| `onRight` | func  | Handle for right | `` |
-| `parser` | func  | Value parser | `String` |
+| `error` | union  | Input error | `null` |
 | `matcher` | func  | Options parser | `(candidate, value) => {
   return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
 }` |
+| `name` | string  | Name of input | `` |
+| `onDown` | func  | Handle for down | `` |
+| `onEnter` | func  | Handle for enter | `null` |
+| `onLeft` | func  | Handle for left | `` |
+| `onRight` | func  | Handle for right | `` |
+| `onUp` | func  | Handle for up | `` |
+| `onUpdate` | func  | Handle for update | `` |
+| `options` | union  | Options | `{}` |
+| `parser` | func  | Value parser | `String` |
 | `pattern` | instanceOf  | Regexp for input | `null` |
 | `patternWarning` | string  | Warning text when pattern failed | `null` |
-| `error` | union  | Input error | `null` |
-| `options` | union  | Options | `{}` |
+| `type` | string  |  | `'text'` |
+| `value` | string  | Value of input | `''` |
 
 ### TheInputTextArea
 
@@ -550,11 +550,11 @@ TextArea Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `rows` | number  | TextArea rows | `5` |
 | `name` | string  | Name of input | `` |
-| `value` | string  | Value of input | `''` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
+| `rows` | number  |  | `5` |
+| `value` | string  | Value of input | `''` |
 | `error` |   |  | `null` |
 
 ### TheInputToggle
@@ -565,9 +565,9 @@ Toggle input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `on` | bool  | Switch on or not | `false` |
-| `onTitle` | string  | Title text for on state | `''` |
 | `offTitle` | string  | Title text for off state | `''` |
+| `on` | bool  |  | `false` |
+| `onTitle` | string  | Title text for on state | `''` |
 | `width` | number  | Width of component | `64` |
 | `error` |   |  | `null` |
 
@@ -579,18 +579,18 @@ Toggle input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `name` | string  | Name of input | `` |
-| `multiple` | bool  | Allow multiple upload | `false` |
-| `onUpdate` | func  | Handle for update | `` |
-| `error` | union  | Error message | `null` |
-| `onLoad` | func  | Handler for load event | `` |
-| `onError` | func  | Handler for error event | `` |
-| `width` | number  | Image width | `180` |
-| `height` | number  | Image height | `180` |
-| `text` | string  | Guide text | `'Upload File'` |
 | `accept` | string  | Accept file type | `null` |
+| `error` | union  | Error message | `null` |
+| `height` | number  | Image height | `180` |
+| `multiple` | bool  | Allow multiple upload | `false` |
+| `name` | string  |  | `` |
+| `onError` | func  | Handler for error event | `` |
+| `onLoad` | func  | Handler for load event | `` |
+| `onUpdate` | func  | Handle for update | `` |
 | `spinner` | string  | Spinner theme | `` |
+| `text` | string  | Guide text | `'Upload File'` |
 | `value` | union  | Value of input | `` |
+| `width` | number  | Image width | `180` |
 
 
 
