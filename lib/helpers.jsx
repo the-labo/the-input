@@ -3,9 +3,12 @@
  */
 'use strict'
 
-import React from 'react'
 import path from 'path'
+import React from 'react'
 import { get } from 'the-window'
+import url from 'url'
+
+const {parse: parseUrl} = url
 
 export const normalizeOptions = (options) => [].concat(options)
   .filter(Boolean)
@@ -61,7 +64,10 @@ export async function readFile (file) {
   })
 }
 
-export function isImageUrl (url) {
+export function isImageUrl (src) {
+  if (/^data:image/.test(src)) {
+    return true
+  }
   const imageExtensions = [
     '.jpg',
     '.jpeg',
@@ -69,14 +75,18 @@ export function isImageUrl (url) {
     '.gif',
     '.png'
   ]
-  return /^data:image/.test(url) || !!~imageExtensions.indexOf(path.extname(url))
+  const extname = path.extname(parseUrl(src).pathname)
+  if (!extname) {
+    return true
+  }
+  return !!~imageExtensions.indexOf(extname)
 }
 
 export default {
-  normalizeOptions,
+  isImageUrl,
   normalizeArrayValue,
+  normalizeOptions,
+  readFile,
   renderErrorMessage,
   renderWarningMessage,
-  readFile,
-  isImageUrl
 }

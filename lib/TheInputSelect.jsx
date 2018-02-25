@@ -1,10 +1,10 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import { TheCondition } from 'the-condition'
 import c from 'classnames'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
+import { TheCondition } from 'the-condition'
 import { TheIcon } from 'the-icon'
 import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
@@ -13,111 +13,40 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  * Select Input
  */
 class TheInputSelect extends React.PureComponent {
+  static Options ({onSelect, options, parser, sorter, suggestingIndex}) {
+    const optionValues = Object.keys(options)
+    if (optionValues.length === 0) {
+      return null
+    }
+    return (
+      <ul className='the-input-select-options'>
+        {
+          optionValues.sort(sorter).map((optionValue, i) => (
+            <li className={c('the-input-select-option', {
+              'the-input-select-option-selected': i === suggestingIndex,
+            })}
+                data-value={parser(optionValue)}
+                key={optionValue}
+                onClick={() => onSelect({value: optionValue})}
+            >
+              {options[optionValue]}
+            </li>
+          ))
+        }
+      </ul>
+    )
+  }
+
   constructor (props) {
     super(props)
     this.elm = null
     this.state = {
       suggesting: false,
-      suggestingIndex: this.getIndexForValue(this.props.value)
+      suggestingIndex: this.getIndexForValue(this.props.value),
     }
     this.handleDocumentClick = this.handleDocumentClick.bind(this)
     this._suggestOffTimer = -1
     this.input = null
-  }
-
-  render () {
-    const s = this
-    const {props} = s
-    const {
-      id,
-      className,
-      children,
-      parser,
-      readOnly,
-      sorter,
-      type,
-      name,
-      value,
-      error,
-      placeholder
-    } = props
-    const options = normalizeOptions(props.options)
-    const {suggesting, suggestingIndex} = s.state
-    const selectedValue = options[value]
-    const hasNotSelect = typeof selectedValue === 'undefined'
-    return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
-           {...eventHandlersFor(props, {except: []})}
-           className={c('the-input-select', className, {
-             'the-input-error': !!error
-           })}
-           data-value={value}
-           ref={(elm) => { s.elm = elm }}
-      >
-        {renderErrorMessage(error)}
-
-        {
-          !readOnly && (
-            <a className='the-input-select-display'
-               onClick={(e) => s.handleDisplayClick(e)}
-            >
-          <span className='the-input-select-display-value'>
-            {selectedValue}
-          </span>
-              <TheCondition if={hasNotSelect}>
-            <span className='the-input-select-display-alt'>
-              {placeholder}
-            </span>
-              </TheCondition>
-              <TheIcon className={TheInputSelect.OPEN_ICON}/>
-            </a>
-          )
-        }
-
-        <input className='the-input-select-input'
-               {...{id, type, name, placeholder}}
-               value={value || ''}
-               onFocus={(e) => s.handleFocus(e)}
-               onBlur={(e) => s.handleBlur(e)}
-               onKeyUp={(e) => s.handleKeyUp(e)}
-               onKeyDown={(e) => s.handleKeyDown(e)}
-               readOnly
-               ref={(input) => { s.input = input }}
-               onChange={(value) => {}}
-        />
-
-        {
-          readOnly ? (
-            <span className='the-input-select-readonly'>{options[value]}</span>
-          ) : (
-            <select onChange={(e) => s.handleChange(e)}
-                    value={value || ''}
-                    tabIndex={-1}
-                    className='the-input-select-select'
-            >
-              {
-                Object.keys(options).map((value) => (
-                  <option name={name}
-                          key={value}
-                          value={value}
-                  >{value}</option>
-                ))
-              }
-            </select>
-          )
-        }
-
-
-        {children}
-        {
-          !readOnly && suggesting && (
-            <TheInputSelect.Options {...{parser, sorter, options, suggestingIndex}}
-                                    onSelect={({value}) => s.enterSuggested(value)}
-            />
-          )
-        }
-      </div>
-    )
   }
 
   componentDidMount () {
@@ -131,12 +60,58 @@ class TheInputSelect extends React.PureComponent {
     clearTimeout(this._suggestOffTimer)
   }
 
+  enterSuggested (value) {
+    let {props, state} = this
+    if (!state.suggesting) {
+      return
+    }
+    this.setState({
+      suggesting: false,
+      suggestingIndex: this.getIndexForValue(value),
+    })
+    const {name} = this.props
+    this.handleChange({
+      target: {name, value},
+    })
+  }
+
+  getIndexForValue (value) {
+    return this.getOptionValues().indexOf(value)
+  }
+
+  getOptionValues () {
+    const {props} = this
+    const options = normalizeOptions(props.options)
+    return Object.keys(options || {}).sort(props.sorter)
+  }
+
+  handleBlur (e) {
+    const s = this
+    const {onBlur} = s.props
+    onBlur && onBlur(e)
+  }
+
   handleChange (e) {
     const s = this
-    let {parser, onChange, onUpdate} = s.props
+    let {onChange, onUpdate, parser} = s.props
     let {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
+  }
+
+  handleDisplayClick (e) {
+    clearTimeout(this._suggestOffTimer)
+    const {input, state} = this
+    const suggesting = !state.suggesting
+    if (suggesting) {
+      input.focus()
+    } else {
+      input.blur()
+    }
+    this.setState({
+      suggesting,
+      suggestingIndex: this.getIndexForValue(this.props.value),
+    })
   }
 
   handleDocumentClick (e) {
@@ -151,28 +126,6 @@ class TheInputSelect extends React.PureComponent {
     }
   }
 
-  offSuggestion (delay = 10) {
-    clearTimeout(this._suggestOffTimer)
-    this._suggestOffTimer = setTimeout(() => {
-      this.setState({suggesting: false})
-    }, delay)
-  }
-
-  handleDisplayClick (e) {
-    clearTimeout(this._suggestOffTimer)
-    const {input, state} = this
-    const suggesting = !state.suggesting
-    if (suggesting) {
-      input.focus()
-    } else {
-      input.blur()
-    }
-    this.setState({
-      suggesting,
-      suggestingIndex: this.getIndexForValue(this.props.value)
-    })
-  }
-
   handleFocus (e) {
     clearTimeout(this._suggestOffTimer)
     this.setState({suggesting: true})
@@ -182,20 +135,8 @@ class TheInputSelect extends React.PureComponent {
     onFocus && onFocus(e)
   }
 
-  handleBlur (e) {
-    const s = this
-    const {onBlur} = s.props
-    onBlur && onBlur(e)
-  }
-
-  handleKeyUp (e) {
-    const s = this
-    const {onKeyUp} = s.props
-    onKeyUp && onKeyUp(e)
-  }
-
   handleKeyDown (e) {
-    const {onKeyDown, onEnter} = this.props
+    const {onEnter, onKeyDown} = this.props
     switch (e.keyCode) {
       // UP
       case 38: {
@@ -235,6 +176,12 @@ class TheInputSelect extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
+  handleKeyUp (e) {
+    const s = this
+    const {onKeyUp} = s.props
+    onKeyUp && onKeyUp(e)
+  }
+
   moveCandidateIndex (amount) {
     const {state} = this
     const values = this.getOptionValues()
@@ -244,57 +191,110 @@ class TheInputSelect extends React.PureComponent {
       return false
     }
     this.setState({
-      suggestingIndex: index
+      suggestingIndex: index,
     })
     return true
   }
 
-  enterSuggested (value) {
-    let {state, props} = this
-    if (!state.suggesting) {
-      return
-    }
-    this.setState({
-      suggesting: false,
-      suggestingIndex: this.getIndexForValue(value)
-    })
-    const {name} = this.props
-    this.handleChange({
-      target: {name, value}
-    })
+  offSuggestion (delay = 10) {
+    clearTimeout(this._suggestOffTimer)
+    this._suggestOffTimer = setTimeout(() => {
+      this.setState({suggesting: false})
+    }, delay)
   }
 
-  getOptionValues () {
-    const {props} = this
+  render () {
+    const s = this
+    const {props} = s
+    const {
+      children,
+      className,
+      error,
+      id,
+      name,
+      parser,
+      placeholder,
+      readOnly,
+      sorter,
+      type,
+      value,
+    } = props
     const options = normalizeOptions(props.options)
-    return Object.keys(options || {}).sort(props.sorter)
-  }
-
-  getIndexForValue (value) {
-    return this.getOptionValues().indexOf(value)
-  }
-
-  static Options ({parser, sorter, options, suggestingIndex, onSelect}) {
-    const optionValues = Object.keys(options)
-    if (optionValues.length === 0) {
-      return null
-    }
+    const {suggesting, suggestingIndex} = s.state
+    const selectedValue = options[value]
+    const hasNotSelect = typeof selectedValue === 'undefined'
     return (
-      <ul className='the-input-select-options'>
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
+           {...eventHandlersFor(props, {except: []})}
+           className={c('the-input-select', className, {
+             'the-input-error': !!error,
+           })}
+           data-value={value}
+           ref={(elm) => { s.elm = elm }}
+      >
+        {renderErrorMessage(error)}
+
         {
-          optionValues.sort(sorter).map((optionValue, i) => (
-            <li className={c('the-input-select-option', {
-              'the-input-select-option-selected': i === suggestingIndex
-            })}
-                key={optionValue}
-                data-value={parser(optionValue)}
-                onClick={() => onSelect({value: optionValue})}
+          !readOnly && (
+            <a className='the-input-select-display'
+               onClick={(e) => s.handleDisplayClick(e)}
             >
-              {options[optionValue]}
-            </li>
-          ))
+          <span className='the-input-select-display-value'>
+            {selectedValue}
+          </span>
+              <TheCondition if={hasNotSelect}>
+            <span className='the-input-select-display-alt'>
+              {placeholder}
+            </span>
+              </TheCondition>
+              <TheIcon className={TheInputSelect.OPEN_ICON}/>
+            </a>
+          )
         }
-      </ul>
+
+        <input className='the-input-select-input'
+               {...{id, name, placeholder, type}}
+               onBlur={(e) => s.handleBlur(e)}
+               onChange={(value) => {}}
+               onFocus={(e) => s.handleFocus(e)}
+               onKeyDown={(e) => s.handleKeyDown(e)}
+               onKeyUp={(e) => s.handleKeyUp(e)}
+               readOnly
+               ref={(input) => { s.input = input }}
+               value={value || ''}
+        />
+
+        {
+          readOnly ? (
+            <span className='the-input-select-readonly'>{options[value]}</span>
+          ) : (
+            <select className='the-input-select-select'
+                    onChange={(e) => s.handleChange(e)}
+                    tabIndex={-1}
+                    value={value || ''}
+            >
+              {
+                Object.keys(options).map((value) => (
+                  <option key={value}
+                          name={name}
+                          value={value}
+                  >{value}</option>
+                ))
+              }
+            </select>
+          )
+        }
+
+
+        {children}
+        {
+          !readOnly && suggesting && (
+            <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
+                                    onSelect={({value}) => s.enterSuggested(value)}
+            />
+          )
+        }
+      </div>
     )
   }
 }
@@ -303,36 +303,36 @@ TheInputSelect.OPEN_ICON = 'fa fa-caret-down'
 
 TheInputSelect.propTypes = {
   /** Name of input */
-  name: PropTypes.string.isRequired,
-  /** Value of input */
-  value: PropTypes.string,
-  /** Handle for update */
-  onUpdate: PropTypes.func.isRequired,
-  /** Handle for enter */
-  onEnter: PropTypes.func,
-  /** Value parser */
-  parser: PropTypes.func,
-  /** Options sorter */
-  sorter: PropTypes.func,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
+  name: PropTypes.string.isRequired,
+  /** Handle for enter */
+  onEnter: PropTypes.func,
+  /** Handle for update */
+  onUpdate: PropTypes.func.isRequired,
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.string)
-  ])
+  ]),
+  /** Value parser */
+  parser: PropTypes.func,
+  /** Options sorter */
+  sorter: PropTypes.func,
+  /** Value of input */
+  value: PropTypes.string,
 }
 
 TheInputSelect.defaultProps = {
-  value: '',
+  error: null,
+  onEnter: null,
+  options: {},
   parser: String,
   sorter: () => 1,
-  error: null,
-  options: {},
-  onEnter: null
+  value: '',
 }
 
 TheInputSelect.displayName = 'TheInputSelect'

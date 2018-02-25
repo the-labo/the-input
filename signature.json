@@ -17,14 +17,22 @@
       }
     ],
     "props": {
-      "type": {
+      "error": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
         },
         "required": false,
         "description": "Input type",
         "defaultValue": {
-          "value": "'text'",
+          "value": "null",
           "computed": false
         }
       },
@@ -39,6 +47,24 @@
           "computed": false
         }
       },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for update"
+      },
+      "type": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'text'",
+          "computed": false
+        }
+      },
       "value": {
         "type": {
           "name": "string"
@@ -47,32 +73,6 @@
         "description": "Value of input",
         "defaultValue": {
           "value": "''",
-          "computed": false
-        }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handle for update"
-      },
-      "error": {
-        "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "object"
-            }
-          ]
-        },
-        "required": false,
-        "description": "",
-        "defaultValue": {
-          "value": "null",
           "computed": false
         }
       },
@@ -88,6 +88,20 @@
     "description": "Checkbox input of the-components",
     "displayName": "TheInputCheckbox",
     "methods": [
+      {
+        "name": "Option",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{checked, id, label, name, onChange, value}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
       {
         "name": "handleChange",
         "docblock": null,
@@ -111,67 +125,9 @@
           }
         ],
         "returns": null
-      },
-      {
-        "name": "Option",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{name, value, id, checked, onChange, label}",
-            "type": null
-          }
-        ],
-        "returns": null
       }
     ],
     "props": {
-      "name": {
-        "type": {
-          "name": "string"
-        },
-        "required": true,
-        "description": "Name of input"
-      },
-      "value": {
-        "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "bool"
-            }
-          ]
-        },
-        "required": false,
-        "description": "Value of input",
-        "defaultValue": {
-          "value": "''",
-          "computed": false
-        }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": true,
-        "description": "Handle for update"
-      },
-      "parser": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Value parser",
-        "defaultValue": {
-          "value": "String",
-          "computed": true
-        }
-      },
       "error": {
         "type": {
           "name": "union",
@@ -190,6 +146,20 @@
           "value": "null",
           "computed": false
         }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": ""
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
       },
       "options": {
         "type": {
@@ -219,6 +189,17 @@
           "computed": false
         }
       },
+      "parser": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Value parser",
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
+      },
       "splitter": {
         "type": {
           "name": "string"
@@ -227,6 +208,25 @@
         "description": "Value Splitter text",
         "defaultValue": {
           "value": "','",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "bool"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
           "computed": false
         }
       }
@@ -258,6 +258,20 @@
     "displayName": "TheInputRadio",
     "methods": [
       {
+        "name": "Option",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{checked, id, label, name, onChange, value}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleChange",
         "docblock": null,
         "modifiers": [],
@@ -280,65 +294,18 @@
           }
         ],
         "returns": null
-      },
-      {
-        "name": "Option",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{name, value, id, checked, onChange, label}",
-            "type": null
-          }
-        ],
-        "returns": null
       }
     ],
     "props": {
-      "name": {
+      "asButton": {
         "type": {
-          "name": "string"
-        },
-        "required": true,
-        "description": "Name of input"
-      },
-      "value": {
-        "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "bool"
-            }
-          ]
+          "name": "bool"
         },
         "required": false,
-        "description": "Value of input",
+        "description": "Use button like style",
         "defaultValue": {
-          "value": "''",
+          "value": "false",
           "computed": false
-        }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": true,
-        "description": "Handle for update"
-      },
-      "parser": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Value parser",
-        "defaultValue": {
-          "value": "String",
-          "computed": true
         }
       },
       "error": {
@@ -359,6 +326,20 @@
           "value": "null",
           "computed": false
         }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": ""
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
       },
       "options": {
         "type": {
@@ -382,14 +363,33 @@
           "computed": false
         }
       },
-      "asButton": {
+      "parser": {
         "type": {
-          "name": "bool"
+          "name": "func"
         },
         "required": false,
-        "description": "Use button like style",
+        "description": "Value parser",
         "defaultValue": {
-          "value": "false",
+          "value": "String",
+          "computed": true
+        }
+      },
+      "value": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "bool"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
           "computed": false
         }
       }
@@ -400,10 +400,31 @@
     "displayName": "TheInputRange",
     "methods": [
       {
-        "name": "handleResize",
+        "name": "Handle",
         "docblock": null,
-        "modifiers": [],
-        "params": [],
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Label",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{children, className, ref}",
+            "type": null
+          }
+        ],
         "returns": null
       },
       {
@@ -438,6 +459,13 @@
         "returns": null
       },
       {
+        "name": "handleResize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "handleToHandleMove",
         "docblock": null,
         "modifiers": [],
@@ -466,24 +494,24 @@
         "returns": null
       },
       {
-        "name": "_rateWithX",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "x",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "_rateWithValue",
         "docblock": null,
         "modifiers": [],
         "params": [
           {
             "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "_rateWithX",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "x",
             "type": null
           }
         ],
@@ -500,64 +528,19 @@
           }
         ],
         "returns": null
-      },
-      {
-        "name": "Label",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{className, children, ref}",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "Handle",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "props",
-            "type": null
-          }
-        ],
-        "returns": null
       }
     ],
     "props": {
-      "name": {
+      "barOnly": {
         "type": {
-          "name": "string"
-        },
-        "required": true,
-        "description": "Name of input"
-      },
-      "value": {
-        "type": {
-          "name": "arrayOf",
-          "value": {
-            "name": "number"
-          }
+          "name": "bool"
         },
         "required": false,
-        "description": "Value of input",
+        "description": "Hides min/max value text",
         "defaultValue": {
-          "value": "[0, 100]",
+          "value": "false",
           "computed": false
         }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": true,
-        "description": "Handle for update"
       },
       "error": {
         "type": {
@@ -578,6 +561,17 @@
           "computed": false
         }
       },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Max value",
+        "defaultValue": {
+          "value": "100",
+          "computed": false
+        }
+      },
       "min": {
         "type": {
           "name": "number"
@@ -589,16 +583,19 @@
           "computed": false
         }
       },
-      "max": {
+      "name": {
         "type": {
-          "name": "number"
+          "name": "string"
         },
-        "required": false,
-        "description": "Max value",
-        "defaultValue": {
-          "value": "100",
-          "computed": false
-        }
+        "required": true,
+        "description": ""
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
       },
       "step": {
         "type": {
@@ -611,14 +608,17 @@
           "computed": false
         }
       },
-      "barOnly": {
+      "value": {
         "type": {
-          "name": "bool"
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
         },
         "required": false,
-        "description": "Hides min/max value text",
+        "description": "Value of input",
         "defaultValue": {
-          "value": "false",
+          "value": "[0, 100]",
           "computed": false
         }
       }
@@ -629,24 +629,24 @@
     "displayName": "TheInputSearch",
     "methods": [
       {
-        "name": "toggleOpen",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "open",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "handleFocus",
         "docblock": null,
         "modifiers": [],
         "params": [
           {
             "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "toggleOpen",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "open",
             "type": null
           }
         ],
@@ -662,7 +662,76 @@
     "displayName": "TheInputSelect",
     "methods": [
       {
+        "name": "Options",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{onSelect, options, parser, sorter, suggestingIndex}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "enterSuggested",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "getIndexForValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "getOptionValues",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleChange",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleDisplayClick",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -686,55 +755,7 @@
         "returns": null
       },
       {
-        "name": "offSuggestion",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "delay",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleDisplayClick",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "handleFocus",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleBlur",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleKeyUp",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -758,6 +779,18 @@
         "returns": null
       },
       {
+        "name": "handleKeyUp",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "moveCandidateIndex",
         "docblock": null,
         "modifiers": [],
@@ -770,45 +803,12 @@
         "returns": null
       },
       {
-        "name": "enterSuggested",
+        "name": "offSuggestion",
         "docblock": null,
         "modifiers": [],
         "params": [
           {
-            "name": "value",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "getOptionValues",
-        "docblock": null,
-        "modifiers": [],
-        "params": [],
-        "returns": null
-      },
-      {
-        "name": "getIndexForValue",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "value",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "Options",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{parser, sorter, options, suggestingIndex, onSelect}",
+            "name": "delay",
             "type": null
           }
         ],
@@ -816,21 +816,40 @@
       }
     ],
     "props": {
+      "error": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Input error",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
       "name": {
         "type": {
           "name": "string"
         },
         "required": true,
-        "description": "Name of input"
+        "description": ""
       },
-      "value": {
+      "onEnter": {
         "type": {
-          "name": "string"
+          "name": "func"
         },
         "required": false,
-        "description": "Value of input",
+        "description": "Handle for enter",
         "defaultValue": {
-          "value": "''",
+          "value": "null",
           "computed": false
         }
       },
@@ -841,14 +860,25 @@
         "required": true,
         "description": "Handle for update"
       },
-      "onEnter": {
+      "options": {
         "type": {
-          "name": "func"
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
         },
         "required": false,
-        "description": "Handle for enter",
+        "description": "Options",
         "defaultValue": {
-          "value": "null",
+          "value": "{}",
           "computed": false
         }
       },
@@ -874,44 +904,14 @@
           "computed": false
         }
       },
-      "error": {
+      "value": {
         "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "object"
-            }
-          ]
+          "name": "string"
         },
         "required": false,
-        "description": "Input error",
+        "description": "Value of input",
         "defaultValue": {
-          "value": "null",
-          "computed": false
-        }
-      },
-      "options": {
-        "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "object"
-            },
-            {
-              "name": "arrayOf",
-              "value": {
-                "name": "string"
-              }
-            }
-          ]
-        },
-        "required": false,
-        "description": "Options",
-        "defaultValue": {
-          "value": "{}",
+          "value": "''",
           "computed": false
         }
       }
@@ -922,10 +922,31 @@
     "displayName": "TheInputSlider",
     "methods": [
       {
-        "name": "handleResize",
+        "name": "Handle",
         "docblock": null,
-        "modifiers": [],
-        "params": [],
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Label",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{children, className, ref}",
+            "type": null
+          }
+        ],
         "returns": null
       },
       {
@@ -960,7 +981,26 @@
         "returns": null
       },
       {
+        "name": "handleResize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "setSliderValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "_rateWithValue",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -984,18 +1024,6 @@
         "returns": null
       },
       {
-        "name": "_rateWithValue",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "value",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "_valueWithRate",
         "docblock": null,
         "modifiers": [],
@@ -1006,61 +1034,19 @@
           }
         ],
         "returns": null
-      },
-      {
-        "name": "Label",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{className, children, ref}",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "Handle",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "props",
-            "type": null
-          }
-        ],
-        "returns": null
       }
     ],
     "props": {
-      "name": {
+      "barOnly": {
         "type": {
-          "name": "string"
-        },
-        "required": true,
-        "description": "Name of input"
-      },
-      "value": {
-        "type": {
-          "name": "number"
+          "name": "bool"
         },
         "required": false,
-        "description": "Value of input",
+        "description": "Hides min/max value text",
         "defaultValue": {
-          "value": "0",
+          "value": "false",
           "computed": false
         }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": true,
-        "description": "Handle for update"
       },
       "error": {
         "type": {
@@ -1081,6 +1067,17 @@
           "computed": false
         }
       },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Max value",
+        "defaultValue": {
+          "value": "100",
+          "computed": false
+        }
+      },
       "min": {
         "type": {
           "name": "number"
@@ -1092,16 +1089,19 @@
           "computed": false
         }
       },
-      "max": {
+      "name": {
         "type": {
-          "name": "number"
+          "name": "string"
         },
-        "required": false,
-        "description": "Max value",
-        "defaultValue": {
-          "value": "100",
-          "computed": false
-        }
+        "required": true,
+        "description": ""
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
       },
       "step": {
         "type": {
@@ -1114,14 +1114,14 @@
           "computed": false
         }
       },
-      "barOnly": {
+      "value": {
         "type": {
-          "name": "bool"
+          "name": "number"
         },
         "required": false,
-        "description": "Hides min/max value text",
+        "description": "Value of input",
         "defaultValue": {
-          "value": "false",
+          "value": "0",
           "computed": false
         }
       }
@@ -1150,72 +1150,10 @@
     "displayName": "TheInputTag",
     "methods": [
       {
-        "name": "handleUpdate",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "values",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "splitValue",
-        "docblock": null,
-        "modifiers": [],
-        "params": [],
-        "returns": null
-      },
-      {
-        "name": "handleKeyDown",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "handleBack",
         "docblock": null,
         "modifiers": [],
         "params": [],
-        "returns": null
-      },
-      {
-        "name": "handleEnter",
-        "docblock": null,
-        "modifiers": [],
-        "params": [],
-        "returns": null
-      },
-      {
-        "name": "handleInputRef",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "input",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleFocus",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
         "returns": null
       },
       {
@@ -1231,6 +1169,61 @@
         "returns": null
       },
       {
+        "name": "handleEnter",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleInputRef",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "input",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyDown",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleUpdate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "values",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "removeTag",
         "docblock": null,
         "modifiers": [],
@@ -1240,6 +1233,13 @@
             "type": null
           }
         ],
+        "returns": null
+      },
+      {
+        "name": "splitValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
         "returns": null
       },
       {
@@ -1261,7 +1261,47 @@
     "displayName": "TheInputText",
     "methods": [
       {
-        "name": "handleDocumentClick",
+        "name": "Options",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{candidates, onSelect, parser, selectedCandidate}",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "commitValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "enterCandidate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "value",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "getPatternWarning",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -1285,43 +1325,19 @@
         "returns": null
       },
       {
+        "name": "handleDocumentClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleFocus",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleBlur",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleKeyUp",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "e",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "handleKeyPress",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -1345,12 +1361,24 @@
         "returns": null
       },
       {
-        "name": "updateCandidates",
+        "name": "handleKeyPress",
         "docblock": null,
         "modifiers": [],
         "params": [
           {
-            "name": "index",
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyUp",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
             "type": null
           }
         ],
@@ -1369,18 +1397,6 @@
         "returns": null
       },
       {
-        "name": "enterCandidate",
-        "docblock": null,
-        "modifiers": [],
-        "params": [
-          {
-            "name": "value",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "offSuggestion",
         "docblock": null,
         "modifiers": [],
@@ -1393,28 +1409,12 @@
         "returns": null
       },
       {
-        "name": "commitValue",
+        "name": "updateCandidates",
         "docblock": null,
         "modifiers": [],
-        "params": [],
-        "returns": null
-      },
-      {
-        "name": "getPatternWarning",
-        "docblock": null,
-        "modifiers": [],
-        "params": [],
-        "returns": null
-      },
-      {
-        "name": "Options",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
         "params": [
           {
-            "name": "{parser, candidates, selectedCandidate, onSelect}",
+            "name": "index",
             "type": null
           }
         ],
@@ -1422,14 +1422,33 @@
       }
     ],
     "props": {
-      "type": {
+      "error": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
         },
         "required": false,
-        "description": "Text type",
+        "description": "Input error",
         "defaultValue": {
-          "value": "'text'",
+          "value": "null",
+          "computed": false
+        }
+      },
+      "matcher": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Options parser",
+        "defaultValue": {
+          "value": "(candidate, value) => {\n  return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())\n}",
           "computed": false
         }
       },
@@ -1440,23 +1459,12 @@
         "required": true,
         "description": "Name of input"
       },
-      "value": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Value of input",
-        "defaultValue": {
-          "value": "''",
-          "computed": false
-        }
-      },
-      "onUpdate": {
+      "onDown": {
         "type": {
           "name": "func"
         },
-        "required": true,
-        "description": "Handle for update"
+        "required": false,
+        "description": "Handle for down"
       },
       "onEnter": {
         "type": {
@@ -1468,20 +1476,6 @@
           "value": "null",
           "computed": false
         }
-      },
-      "onUp": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handle for up"
-      },
-      "onDown": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handle for down"
       },
       "onLeft": {
         "type": {
@@ -1497,6 +1491,42 @@
         "required": false,
         "description": "Handle for right"
       },
+      "onUp": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handle for up"
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "options": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "Options",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
       "parser": {
         "type": {
           "name": "func"
@@ -1506,17 +1536,6 @@
         "defaultValue": {
           "value": "String",
           "computed": true
-        }
-      },
-      "matcher": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Options parser",
-        "defaultValue": {
-          "value": "(candidate, value) => {\n  return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())\n}",
-          "computed": false
         }
       },
       "pattern": {
@@ -1542,44 +1561,25 @@
           "computed": false
         }
       },
-      "error": {
+      "type": {
         "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "object"
-            }
-          ]
+          "name": "string"
         },
         "required": false,
-        "description": "Input error",
+        "description": "",
         "defaultValue": {
-          "value": "null",
+          "value": "'text'",
           "computed": false
         }
       },
-      "options": {
+      "value": {
         "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "object"
-            },
-            {
-              "name": "arrayOf",
-              "value": {
-                "name": "string"
-              }
-            }
-          ]
+          "name": "string"
         },
         "required": false,
-        "description": "Options",
+        "description": "Value of input",
         "defaultValue": {
-          "value": "{}",
+          "value": "''",
           "computed": false
         }
       }
@@ -1603,34 +1603,12 @@
       }
     ],
     "props": {
-      "rows": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "TextArea rows",
-        "defaultValue": {
-          "value": "5",
-          "computed": false
-        }
-      },
       "name": {
         "type": {
           "name": "string"
         },
         "required": true,
         "description": "Name of input"
-      },
-      "value": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Value of input",
-        "defaultValue": {
-          "value": "''",
-          "computed": false
-        }
       },
       "onUpdate": {
         "type": {
@@ -1650,6 +1628,28 @@
           "computed": true
         }
       },
+      "rows": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "5",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Value of input",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
       "error": {
         "defaultValue": {
           "value": "null",
@@ -1662,6 +1662,34 @@
     "description": "Toggle input of the-components",
     "displayName": "TheInputToggle",
     "methods": [
+      {
+        "name": "Label",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{className, htmlFor, title }",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "Radio",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{checked, id, name, onChange, onClick, value }",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
       {
         "name": "handleChange",
         "docblock": null,
@@ -1685,43 +1713,26 @@
           }
         ],
         "returns": null
-      },
-      {
-        "name": "Label",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{ htmlFor, className, title }",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
-        "name": "Radio",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{ id, name, value, checked, onClick, onChange }",
-            "type": null
-          }
-        ],
-        "returns": null
       }
     ],
     "props": {
+      "offTitle": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Title text for off state",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
       "on": {
         "type": {
           "name": "bool"
         },
         "required": true,
-        "description": "Switch on or not",
+        "description": "",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -1733,17 +1744,6 @@
         },
         "required": false,
         "description": "Title text for on state",
-        "defaultValue": {
-          "value": "''",
-          "computed": false
-        }
-      },
-      "offTitle": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Title text for off state",
         "defaultValue": {
           "value": "''",
           "computed": false
@@ -1793,30 +1793,16 @@
       }
     ],
     "props": {
-      "name": {
+      "accept": {
         "type": {
           "name": "string"
         },
-        "required": true,
-        "description": "Name of input"
-      },
-      "multiple": {
-        "type": {
-          "name": "bool"
-        },
         "required": false,
-        "description": "Allow multiple upload",
+        "description": "Accept file type",
         "defaultValue": {
-          "value": "false",
+          "value": "null",
           "computed": false
         }
-      },
-      "onUpdate": {
-        "type": {
-          "name": "func"
-        },
-        "required": true,
-        "description": "Handle for update"
       },
       "error": {
         "type": {
@@ -1837,31 +1823,6 @@
           "computed": false
         }
       },
-      "onLoad": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handler for load event"
-      },
-      "onError": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handler for error event"
-      },
-      "width": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "Image width",
-        "defaultValue": {
-          "value": "180",
-          "computed": false
-        }
-      },
       "height": {
         "type": {
           "name": "number"
@@ -1873,6 +1834,52 @@
           "computed": false
         }
       },
+      "multiple": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Allow multiple upload",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": ""
+      },
+      "onError": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for error event"
+      },
+      "onLoad": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for load event"
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Handle for update"
+      },
+      "spinner": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Spinner theme"
+      },
       "text": {
         "type": {
           "name": "string"
@@ -1883,24 +1890,6 @@
           "value": "'Upload File'",
           "computed": false
         }
-      },
-      "accept": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Accept file type",
-        "defaultValue": {
-          "value": "null",
-          "computed": false
-        }
-      },
-      "spinner": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Spinner theme"
       },
       "value": {
         "type": {
@@ -1916,6 +1905,17 @@
         },
         "required": false,
         "description": "Value of input"
+      },
+      "width": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Image width",
+        "defaultValue": {
+          "value": "180",
+          "computed": false
+        }
       }
     }
   }

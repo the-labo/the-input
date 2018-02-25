@@ -1,129 +1,129 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
-import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
 import TheInputRadio from './TheInputRadio'
 
 /**
  * Toggle input of the-components
  */
 class TheInputToggle extends React.PureComponent {
+  static Label ({className, htmlFor, title }) {
+    return (
+      <label className={ c('the-input-toggle-label', className) }
+             htmlFor={ htmlFor }>
+        <span className='the-input-toggle-label-text'>{ title }</span>
+      </label>
+    )
+  }
+
+  static Radio ({checked, id, name, onChange, onClick, value }) {
+    return (
+      <input type='radio'
+             {...{checked, id, name, onChange, onClick, value }}
+             className='the-input-toggle-radio'/>
+    )
+  }
+
   constructor (props) {
     super(props)
     const s = this
     s.id = newId()
   }
 
+  handleChange (e) {
+    const s = this
+    let {onChange } = s.props
+    onChange && onChange(e)
+  }
+
+  handleClick (e) {
+    const s = this
+    let {on, onUpdate } = s.props
+    let {name } = s.props
+    onUpdate && onUpdate({[name]: !on })
+  }
+
   render () {
     const s = this
-    const { props } = s
+    const {props } = s
     let {
+      className,
+      error,
       id = s.id,
       name,
+      offTitle,
       on,
-      className,
-      width,
-      error,
-      style,
       onTitle,
-      offTitle
+      style,
+      width,
     } = props
-    const { Label, Radio } = TheInputToggle
+    const {Label, Radio } = TheInputToggle
     return (
-      <div {...htmlAttributesFor(props, { except: [ 'id', 'className' ] })}
-           {...eventHandlersFor(props, { except: [] })}
-           {...{ id }}
-           style={Object.assign({}, style, { width })}
+      <div {...htmlAttributesFor(props, {except: [ 'id', 'className' ] })}
+           {...eventHandlersFor(props, {except: [] })}
+           {...{id }}
            className={c('the-input-toggle', className, {
-             'the-input-toggle-on': on,
+             'the-input-error': !!error,
              'the-input-toggle-off': !on,
-             'the-input-error': !!error
+             'the-input-toggle-on': on,
            })}
+           style={Object.assign({}, style, {width })}
       >
         <div className='the-input-toggle-inner'
         >
-          <Label htmlFor={`${id}-radio-off`}
-                 className='the-input-toggle-on-label'
+          <Label className='the-input-toggle-on-label'
+                 htmlFor={`${id}-radio-off`}
                  title={onTitle}
           />
-          <Radio id={`${id}-radio-off`}
-                 value='off'
+          <Radio checked={!on}
+                 id={`${id}-radio-off`}
                  name={name}
-                 checked={!on}
                  onChange={(e) => s.handleChange(e)}
                  onClick={(e) => s.handleClick(e)}
+                 value='off'
           />
           <div className='the-input-toggle-handle'
                onClick={(e) => s.handleClick(e)}
           >
           </div>
-          <Label htmlFor={`${id}-radio-on`}
-                 className='the-input-toggle-off-label'
+          <Label className='the-input-toggle-off-label'
+                 htmlFor={`${id}-radio-on`}
                  title={offTitle}
           />
-          <Radio id={`${id}-radio-on`}
-                 value='on'
+          <Radio checked={!!on}
+                 id={`${id}-radio-on`}
                  name={name}
-                 checked={!!on}
                  onChange={(e) => s.handleChange(e)}
                  onClick={(e) => s.handleClick(e)}
+                 value='on'
           />
         </div>
         { props.children }
       </div>
     )
   }
-
-  handleChange (e) {
-    const s = this
-    let { onChange } = s.props
-    onChange && onChange(e)
-  }
-
-  handleClick (e) {
-    const s = this
-    let { on, onUpdate } = s.props
-    let { name } = s.props
-    onUpdate && onUpdate({ [name]: !on })
-  }
-
-  static Label ({ htmlFor, className, title }) {
-    return (
-      <label htmlFor={ htmlFor }
-             className={ c('the-input-toggle-label', className) }>
-        <span className='the-input-toggle-label-text'>{ title }</span>
-      </label>
-    )
-  }
-
-  static Radio ({ id, name, value, checked, onClick, onChange }) {
-    return (
-      <input type='radio'
-             {...{ id, name, value, checked, onClick, onChange }}
-             className='the-input-toggle-radio'/>
-    )
-  }
 }
 
 TheInputToggle.propTypes = {
   /** Switch on or not */
+  /** Title text for off state */
+  offTitle: PropTypes.string,
   on: PropTypes.bool.isRequired,
   /** Title text for on state */
   onTitle: PropTypes.string,
-  /** Title text for off state */
-  offTitle: PropTypes.string,
   /** Width of component */
-  width: PropTypes.number
+  width: PropTypes.number,
 }
 
 TheInputToggle.defaultProps = {
+  error: null,
+  offTitle: '',
   on: false,
   onTitle: '',
-  offTitle: '',
-  error: null,
-  width: 64
+  width: 64,
 }
 
 TheInputToggle.displayName = 'TheInputToggle'

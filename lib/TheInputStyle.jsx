@@ -1,13 +1,13 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { asStyleData, colorAlpha } from 'the-component-util'
 import { TheStyle } from 'the-style'
-import { colorAlpha, asStyleData } from 'the-component-util'
 
 /** Style for TheInput */
-const TheInputStyle = ({id, className, options}) => (
+const TheInputStyle = ({className, id, options}) => (
   <TheStyle {...{id}}
             className={c('the-input-style', className)}
             styles={TheInputStyle.data(options)}
@@ -17,829 +17,829 @@ const TheInputStyle = ({id, className, options}) => (
 TheInputStyle.displayName = 'TheInputStyle'
 TheInputStyle.propTypes = {
   /** Style options */
-  options: PropTypes.object
+  options: PropTypes.object,
 }
 
 TheInputStyle.defaultProps = {
-  options: {}
+  options: {},
 }
 
 TheInputStyle.data = (options) => {
   const {ThemeValues} = TheStyle
   const {
-    dominantColor = ThemeValues.dominantColor,
-    contentWidth = ThemeValues.contentWidth,
-    inputBorderColor = ThemeValues.inputBorderColor,
-    inputShadowColor = ThemeValues.inputShadowColor,
-    tappableHeight = ThemeValues.tappableHeight,
-    lightBorderColor = ThemeValues.lightBorderColor,
-    lightTextColor = ThemeValues.lightTextColor,
+    activeOpacity = ThemeValues.activeOpacity,
+    animationDuration = 400,
     backgroundColor = ThemeValues.backgroundColor,
     contentPadding = ThemeValues.contentPadding,
-    hoverOpacity = ThemeValues.hoverOpacity,
-    activeOpacity = ThemeValues.activeOpacity,
-    warnColor = ThemeValues.warnColor,
+    contentWidth = ThemeValues.contentWidth,
+    dominantColor = ThemeValues.dominantColor,
     errorColor = ThemeValues.errorColor,
-    toggleHandleSize = 24,
-    animationDuration = 400,
-    offLabelBackgroundColor = '#FAFAFA',
-    sliderPadding = 6,
     handlePaddingRate = -20,
+    hoverOpacity = ThemeValues.hoverOpacity,
+    inputBorderColor = ThemeValues.inputBorderColor,
+    inputShadowColor = ThemeValues.inputShadowColor,
+    lightBorderColor = ThemeValues.lightBorderColor,
+    lightTextColor = ThemeValues.lightTextColor,
+    offLabelBackgroundColor = '#FAFAFA',
+    sliderBarHeight = 4,
     sliderHandleSize = 24,
-    sliderBarHeight = 4
+    sliderPadding = 6,
+    tappableHeight = ThemeValues.tappableHeight,
+    toggleHandleSize = 24,
+    warnColor = ThemeValues.warnColor,
   } = options
 
   const ToggleIconStyle = (values) => Object.assign({
-    position: 'absolute',
-    right: 0,
-    display: 'inline-flex',
+    '&:active': {opacity: activeOpacity},
+    '&:hover': {opacity: hoverOpacity},
     alignItems: 'center',
-    justifyContent: 'center',
     bottom: 0,
+    cursor: 'pointer',
+    display: 'inline-flex',
     height: '30px',
-    zIndex: 4,
-    padding: '0 4px',
+    justifyContent: 'center',
     minWidth: '1em',
     outlineColor: colorAlpha(dominantColor, 0.2),
-    cursor: 'pointer',
-    '&:hover': {opacity: hoverOpacity},
-    '&:active': {opacity: activeOpacity}
+    padding: '0 4px',
+    position: 'absolute',
+    right: 0,
+    zIndex: 4,
   }, values)
 
   return Object.assign({},
     asStyleData('.the-input', {
-      '&': {}
+      '&': {},
     }),
     asStyleData('.the-input-message', {
       '&': {
-        transition: 'max-height 300ms',
         display: 'block',
         fontSize: 'small',
-        padding: '4px 4px 0',
-        margin: '0 0 -2px',
         fontStyle: 'italic',
+        margin: '0 0 -2px',
+        maxHeight: '2em',
         overflow: 'hidden',
-        maxHeight: '2em'
+        padding: '4px 4px 0',
+        transition: 'max-height 300ms',
       },
       '&.the-input-message-empty': {
+        margin: 0,
         maxHeight: '0em',
         padding: 0,
-        margin: 0
-      }
+      },
     }),
     asStyleData('.the-input-text', {
-      '&': {
-        display: 'inline-block',
-        maxWidth: contentWidth,
-        margin: '0 4px',
-        verticalAlign: 'middle',
-        width: '100%',
-        boxSizing: 'border-box',
-        position: 'relative'
-      },
       '.the-input-text-input': {
-        display: 'block',
-        outlineColor: dominantColor,
-        minHeight: '28px',
+        border: `1px solid ${inputBorderColor}`,
+        borderRadius: '2px',
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         boxSizing: 'border-box',
+        display: 'block',
+        minHeight: '28px',
+        outlineColor: dominantColor,
         padding: '4px 8px',
-        borderRadius: '2px',
         width: '100%',
-        border: `1px solid ${inputBorderColor}`
-      },
-      '.the-input-text-options': {
-        padding: 0,
-        top: '100%',
-        margin: '-1px 0 0',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        listStyle: 'none',
-        zIndex: 8,
-        border: `1px solid ${lightBorderColor}`,
-        boxShadow: '2px 2px 4px rgba(0,0,0,0.33)',
-        boxSizing: 'border-box',
-        borderRadius: '0 0 2px 2px',
-        backgroundColor
       },
       '.the-input-text-option': {
-        display: 'flex',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        cursor: 'pointer',
-        minHeight: tappableHeight,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: backgroundColor,
-        borderBottom: `1px solid ${lightBorderColor}`,
-        padding: contentPadding,
-        boxSizing: 'border-box',
         '&:last-child': {
-          borderBottom: 'none'
+          borderBottom: 'none',
         },
         '&.the-input-text-option-selected': {
-          backgroundColor: colorAlpha(dominantColor, 0.2)
-        }
-      }
+          backgroundColor: colorAlpha(dominantColor, 0.2),
+        },
+        alignItems: 'center',
+        backgroundColor: backgroundColor,
+        borderBottom: `1px solid ${lightBorderColor}`,
+        boxSizing: 'border-box',
+        cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        minHeight: tappableHeight,
+        overflow: 'hidden',
+        padding: contentPadding,
+        textOverflow: 'ellipsis',
+      },
+      '.the-input-text-options': {
+        backgroundColor,
+        border: `1px solid ${lightBorderColor}`,
+        borderRadius: '0 0 2px 2px',
+        boxShadow: '2px 2px 4px rgba(0,0,0,0.33)',
+        boxSizing: 'border-box',
+        left: 0,
+        listStyle: 'none',
+        margin: '-1px 0 0',
+        padding: 0,
+        position: 'absolute',
+        right: 0,
+        top: '100%',
+        zIndex: 8,
+      },
+      '&': {
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        margin: '0 4px',
+        maxWidth: contentWidth,
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: '100%',
+      },
     }),
     asStyleData('.the-input-password', {
+      '.the-input-password-toggle': ToggleIconStyle({
+        color: 'inherit',
+        textDecoration: 'none',
+      }),
       '&': {
         position: 'relative',
       },
-      '.the-input-password-toggle': ToggleIconStyle({
-        textDecoration: 'none',
-        color: 'inherit'
-      })
     }),
     asStyleData('.the-input-search', {
-      '&': {
-        position: 'relative',
-        transition: `max-width ${animationDuration}ms`,
-        maxWidth: '2em'
-      },
-      '&.the-input-search-open': {
-        maxWidth: contentWidth,
-        '.the-input-text-input': {
-          opacity: 1
-        },
-        '.the-input-search-toggle': {
-          padding: '0 4px'
-        }
-      },
       '.the-input-search-toggle': ToggleIconStyle({
         color: dominantColor,
         outline: 'none',
         padding: '0 8px',
-        transition: `opacity ${animationDuration}ms`
+        transition: `opacity ${animationDuration}ms`,
       }),
       '.the-input-text-input': {
         opacity: 0,
-        transition: `opacity ${animationDuration}ms`
-      }
+        transition: `opacity ${animationDuration}ms`,
+      },
+      '&': {
+        maxWidth: '2em',
+        position: 'relative',
+        transition: `max-width ${animationDuration}ms`,
+      },
+      '&.the-input-search-open': {
+        '.the-input-search-toggle': {
+          padding: '0 4px',
+        },
+        '.the-input-text-input': {
+          opacity: 1,
+        },
+        maxWidth: contentWidth,
+      },
     }),
     asStyleData('.the-input-textarea', {
-      '&': {
-        display: 'inline-block',
-        maxWidth: contentWidth,
-        verticalAlign: 'middle',
-        width: '100%',
-        margin: '0 4px',
-        boxSizing: 'border-box',
-        position: 'relative'
-      },
       '.the-input-textarea-input': {
-        display: 'block',
-        outlineColor: dominantColor,
+        border: `1px solid ${inputBorderColor}`,
+        borderRadius: '2px',
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         boxSizing: 'border-box',
+        display: 'block',
+        outlineColor: dominantColor,
         padding: '4px 8px',
-        borderRadius: '2px',
+        resize: 'none',
         width: '100%',
-        border: `1px solid ${inputBorderColor}`,
-        resize: 'none'
-      }
-    }),
-    asStyleData('.the-input-radio', {
+      },
       '&': {
+        boxSizing: 'border-box',
         display: 'inline-block',
+        margin: '0 4px',
         maxWidth: contentWidth,
+        position: 'relative',
         verticalAlign: 'middle',
         width: '100%',
-        margin: '4px 0',
-        borderRadius: '2px',
-        boxSizing: 'border-box',
-        position: 'relative'
+      },
+    }),
+    asStyleData('.the-input-radio', {
+      '.the-input-radio-icon': {
+        color: dominantColor,
       },
       '.the-input-radio-item': {
+        alignItems: 'center',
+        boxSizing: 'border-box',
         display: 'inline-flex',
         justifyContent: 'center',
+        margin: '0 2px',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        boxSizing: 'border-box',
-        alignItems: 'center',
-        margin: '0 2px'
       },
       '.the-input-radio-label': {
+        '&:active': {opacity: activeOpacity},
+        '&:hover': {opacity: hoverOpacity},
+        cursor: 'pointer',
         display: 'inline-block',
         padding: '2px 4px',
-        cursor: 'pointer',
-        '&:hover': {opacity: hoverOpacity},
-        '&:active': {opacity: activeOpacity}
       },
       '.the-input-radio-radio': {
+        height: 1,
+        left: 0,
+        marginBottom: -1,
+        marginRight: -1,
         opacity: 0,
         overflow: 'hidden',
-        width: 1,
-        height: 1,
-        marginRight: -1,
-        marginBottom: -1,
-        visibility: 'hidden',
-        zIndex: -1,
         position: 'absolute',
-        left: 0,
-        top: 0
+        top: 0,
+        visibility: 'hidden',
+        width: 1,
+        zIndex: -1,
 
       },
-      '.the-input-radio-icon': {
-        color: dominantColor
+      '&': {
+        borderRadius: '2px',
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        margin: '4px 0',
+        maxWidth: contentWidth,
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: '100%',
       },
       '&.the-input-asButton': {
         '.the-input-radio-icon': {
-          display: 'none'
+          display: 'none',
         },
         '.the-input-radio-item': {
+          background: backgroundColor,
           border: `1px solid #CCC`,
           borderRadius: '4px',
+          fontSize: 'smaller',
+          margin: '4px',
           padding: '4px 8px',
           textAlign: 'center',
-          margin: '4px',
-          background: backgroundColor,
-          fontSize: 'smaller'
         },
         '.the-input-radio-item-checked': {
-          border: `2px solid ${dominantColor}`
-        }
-      }
+          border: `2px solid ${dominantColor}`,
+        },
+      },
     }),
     asStyleData('.the-input-checkbox', {
-      '&': {
-        display: 'inline-block',
-        maxWidth: contentWidth,
-        verticalAlign: 'middle',
-        width: '100%',
-        margin: '4px 0',
-        borderRadius: '2px',
-        boxSizing: 'border-box',
-        position: 'relative'
-      },
-      '.the-input-checkbox-item': {
-        display: 'inline-flex',
-        justifyContent: 'flex-center',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        boxSizing: 'border-box',
-        alignItems: 'center',
-        margin: '0 2px'
-      },
-      '.the-input-checkbox-label': {
-        display: 'inline-block',
-        padding: '2px 4px',
-        cursor: 'pointer',
-        '&:hover': {opacity: hoverOpacity},
-        '&:active': {opacity: activeOpacity}
-      },
       '.the-input-checkbox-checkbox': {
+        height: 1,
+        left: 0,
+        marginBottom: -1,
+        marginRight: -1,
         opacity: 0,
         overflow: 'hidden',
-        width: 1,
-        height: 1,
-        marginRight: -1,
-        marginBottom: -1,
-        visibility: 'hidden',
-        zIndex: -1,
         position: 'absolute',
-        left: 0,
-        top: 0
+        top: 0,
+        visibility: 'hidden',
+        width: 1,
+        zIndex: -1,
 
       },
       '.the-input-checkbox-icon': {
         color: dominantColor,
-        minWidth: '1em'
-      }
+        minWidth: '1em',
+      },
+      '.the-input-checkbox-item': {
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        display: 'inline-flex',
+        justifyContent: 'flex-center',
+        margin: '0 2px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      },
+      '.the-input-checkbox-label': {
+        '&:active': {opacity: activeOpacity},
+        '&:hover': {opacity: hoverOpacity},
+        cursor: 'pointer',
+        display: 'inline-block',
+        padding: '2px 4px',
+      },
+      '&': {
+        borderRadius: '2px',
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        margin: '4px 0',
+        maxWidth: contentWidth,
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: '100%',
+      },
     }),
     asStyleData('.the-input-toggle', {
-      '&': {
-        display: 'inline-flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer'
+      '.the-input-toggle-handle': {
+        backgroundColor: 'white',
+        border: `1px solid ${inputBorderColor}`,
+        borderRadius: '50%',
+        display: 'inline-block',
+        flexGrow: 0,
+        flexShrink: 0,
+        height: toggleHandleSize,
+        position: 'relative',
+        width: toggleHandleSize,
+        zIndex: 4,
       },
-      '.the-input-toggle-radio': {
-        display: 'none'
+      '.the-input-toggle-inner': {
+        alignItems: 'center',
+        backgroundColor: backgroundColor,
+        border: `1px solid ${inputBorderColor}`,
+        borderRadius: (toggleHandleSize / 2 + 1),
+        display: 'inline-flex',
+        height: toggleHandleSize,
+        justifyContent: 'flex-start',
+        minWidth: toggleHandleSize * 3 + 2,
+        overflow: 'hidden',
+        width: '100%',
       },
       '.the-input-toggle-label': {
-        width: '100%',
-        height: '100%',
         boxSizing: 'border-box',
-        textAlign: 'center',
-        fontSize: '14px',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        padding: 0,
+        cursor: 'pointer',
         flexGrow: 1,
         flexShrink: 1,
-        cursor: 'pointer',
+        fontSize: '14px',
+        height: '100%',
+        lineHeight: `${toggleHandleSize}px`,
+        overflow: 'hidden',
+        padding: 0,
+        textAlign: 'center',
+        textOverflow: 'ellipsis',
         transition: `width ${animationDuration}ms`,
-        lineHeight: `${toggleHandleSize}px`
+        whiteSpace: 'nowrap',
+        width: '100%',
       },
       '.the-input-toggle-label-text': {
-        display: 'inline-block',
-        width: '100%',
-        padding: '0 8px',
         boxSizing: 'border-box',
-        whiteSpace: 'nowrap',
+        display: 'inline-block',
+        minWidth: toggleHandleSize * 1.5,
         overflow: 'hidden',
+        padding: '0 8px',
         textOverflow: 'ellipsis',
-        minWidth: toggleHandleSize * 1.5
-      },
-      '.the-input-toggle-on-label': {
-        background: dominantColor,
-        color: 'white',
-        borderRadius: `${toggleHandleSize / 2}px 0 0 ${toggleHandleSize / 2}px`,
-        boxShadow: `2px 0 0 ${toggleHandleSize / 4}px ${dominantColor}`
+        whiteSpace: 'nowrap',
+        width: '100%',
       },
       '.the-input-toggle-off-label': {
         background: offLabelBackgroundColor,
-        color: '#AAA',
         borderRadius: `0 ${toggleHandleSize / 2}px ${toggleHandleSize / 2}px 0`,
-        boxShadow: `-2px 0 0 ${toggleHandleSize / 4}px ${offLabelBackgroundColor}`
+        boxShadow: `-2px 0 0 ${toggleHandleSize / 4}px ${offLabelBackgroundColor}`,
+        color: '#AAA',
       },
-      '&.the-input-toggle-on .the-input-toggle-off-label': {
-        width: `0 !important`
+      '.the-input-toggle-on-label': {
+        background: dominantColor,
+        borderRadius: `${toggleHandleSize / 2}px 0 0 ${toggleHandleSize / 2}px`,
+        boxShadow: `2px 0 0 ${toggleHandleSize / 4}px ${dominantColor}`,
+        color: 'white',
+      },
+      '.the-input-toggle-radio': {
+        display: 'none',
+      },
+      '&': {
+        alignItems: 'center',
+        cursor: 'pointer',
+        display: 'inline-flex',
+        justifyContent: 'center',
       },
       '&.the-input-toggle-off .the-input-toggle-on-label': {
-        width: `0 !important`
+        width: `0 !important`,
       },
-      '.the-input-toggle-inner': {
-        display: 'inline-flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-        height: toggleHandleSize,
-        borderRadius: (toggleHandleSize / 2 + 1),
-        minWidth: toggleHandleSize * 3 + 2,
-        border: `1px solid ${inputBorderColor}`,
-        overflow: 'hidden',
-        width: '100%'
+      '&.the-input-toggle-on .the-input-toggle-off-label': {
+        width: `0 !important`,
       },
-      '.the-input-toggle-handle': {
-        display: 'inline-block',
-        borderRadius: '50%',
-        width: toggleHandleSize,
-        height: toggleHandleSize,
-        backgroundColor: 'white',
-        border: `1px solid ${inputBorderColor}`,
-        flexGrow: 0,
-        flexShrink: 0,
-        position: 'relative',
-        zIndex: 4
-      }
 
     }),
     asStyleData('.the-input-select', {
-      '&': {
-        display: 'inline-block',
-        maxWidth: contentWidth,
-        verticalAlign: 'middle',
-        width: '100%',
-        boxSizing: 'border-box',
-        position: 'relative'
-      },
       '.the-input-select-display': {
-        verticalAlign: 'middle',
-        display: 'inline-flex',
         alignItems: 'center',
-        padding: '4px 2px 4px 8px',
-        color: 'inherit',
-        fontSize: 'smaller',
-        minHeight: '28px',
-        maxWidth: contentWidth,
-        width: '100%',
-        cursor: 'pointer',
         backgroundColor,
-        boxSizing: 'border-box',
-        borderRadius: '2px',
         border: `1px solid ${inputBorderColor}`,
+        borderRadius: '2px',
+        boxSizing: 'border-box',
+        color: 'inherit',
+        cursor: 'pointer',
+        display: 'inline-flex',
+        fontSize: 'smaller',
         justifyContent: 'space-between',
+        maxWidth: contentWidth,
+        minHeight: '28px',
         overflow: 'hidden',
-        textOverflow: 'ellipsis'
+        padding: '4px 2px 4px 8px',
+        textOverflow: 'ellipsis',
+        verticalAlign: 'middle',
+        width: '100%',
       },
-      '.the-input-select-display-value': {},
       '.the-input-select-display-alt': {
         color: lightTextColor,
         display: 'block',
+        textAlign: 'left',
         width: '100%',
-        textAlign: 'left'
       },
-      '.the-input-select-options': {
-        padding: 0,
-        margin: '-1px 0 0',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        listStyle: 'none',
-        zIndex: 8,
-        border: `1px solid ${lightBorderColor}`,
-        boxShadow: '2px 2px 4px rgba(0,0,0,0.33)',
-        boxSizing: 'border-box',
-        borderRadius: '0 0 2px 2px',
-        backgroundColor
-      },
+      '.the-input-select-display-value': {},
       '.the-input-select-option': {
-        display: 'flex',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        cursor: 'pointer',
-        minHeight: tappableHeight,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: backgroundColor,
-        borderBottom: `1px solid ${lightBorderColor}`,
-        padding: `${contentPadding}px ${contentPadding * 2}px`,
-        boxSizing: 'border-box',
-        '&:last-child': {
-          borderBottom: 'none'
-        },
         '&:hover': {
-          backgroundColor: colorAlpha(dominantColor, 0.1)
+          backgroundColor: colorAlpha(dominantColor, 0.1),
+        },
+        '&:last-child': {
+          borderBottom: 'none',
         },
         '&.the-input-select-option-selected': {
-          backgroundColor: colorAlpha(dominantColor, 0.2)
-        }
+          backgroundColor: colorAlpha(dominantColor, 0.2),
+        },
+        alignItems: 'center',
+        backgroundColor: backgroundColor,
+        borderBottom: `1px solid ${lightBorderColor}`,
+        boxSizing: 'border-box',
+        cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        minHeight: tappableHeight,
+        overflow: 'hidden',
+        padding: `${contentPadding}px ${contentPadding * 2}px`,
+        textOverflow: 'ellipsis',
+      },
+      '.the-input-select-options': {
+        backgroundColor,
+        border: `1px solid ${lightBorderColor}`,
+        borderRadius: '0 0 2px 2px',
+        boxShadow: '2px 2px 4px rgba(0,0,0,0.33)',
+        boxSizing: 'border-box',
+        left: 0,
+        listStyle: 'none',
+        margin: '-1px 0 0',
+        padding: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 8,
       },
       '.the-input-select-select,.the-input-select-input': {
-        opacity: '0',
-        zIndex: '-99',
-        position: 'absolute',
         display: 'block',
-        width: '1px',
         height: '1px',
-        overflow: 'hidden'
-      }
+        opacity: '0',
+        overflow: 'hidden',
+        position: 'absolute',
+        width: '1px',
+        zIndex: '-99',
+      },
+      '&': {
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        maxWidth: contentWidth,
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: '100%',
+      },
     }),
     asStyleData('.the-input-warn', {
-      '.the-input-text-input,.the-input-textarea-input': {
-        borderColor: warnColor
-      },
       '.the-input-select-display': {
-        borderColor: warnColor
+        borderColor: warnColor,
       },
-      '&.the-input-radio,&.the-input-checkbox': {
-        border: `1px solid ${warnColor}`
+      '.the-input-text-input,.the-input-textarea-input': {
+        borderColor: warnColor,
       },
       '.the-input-warn-message': {
-        color: warnColor
-      }
-    }),
-    asStyleData('.the-input-error', {
-      '.the-input-text-input,.the-input-textarea-input': {
-        borderColor: errorColor
-      },
-      '.the-input-select-display': {
-        borderColor: errorColor
+        color: warnColor,
       },
       '&.the-input-radio,&.the-input-checkbox': {
-        border: `1px solid ${errorColor}`
+        border: `1px solid ${warnColor}`,
       },
+    }),
+    asStyleData('.the-input-error', {
       '.the-input-error-message': {
-        color: errorColor
-      }
+        color: errorColor,
+      },
+      '.the-input-select-display': {
+        borderColor: errorColor,
+      },
+      '.the-input-text-input,.the-input-textarea-input': {
+        borderColor: errorColor,
+      },
+      '&.the-input-radio,&.the-input-checkbox': {
+        border: `1px solid ${errorColor}`,
+      },
     }),
     asStyleData('.the-input-slider', {
-      '&': {
-        position: 'relative',
-        height: `${sliderHandleSize + 2}px`,
-      },
-      '.the-input-slider-inner': {
-        display: 'flex',
-        margin: '2px 0'
-      },
-      '.the-input-slider-bar-wrap': {
-        display: 'block',
-        position: 'relative',
-        width: '100%',
-        boxSizing: 'border-box'
-      },
       '.the-input-slider-bar': {
-        position: 'absolute',
-        left: 0,
-        right: 0,
         height: `${sliderBarHeight + sliderPadding}px`,
+        left: 0,
+        position: 'absolute',
+        right: 0,
         top: `${sliderHandleSize / 2 - sliderPadding}px`,
       },
-      '.the-input-slider-bar-tap': {
-        display: 'block',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: -8,
-        bottom: -8,
-        zIndex: 1
-      },
       '.the-input-slider-bar-bg': {
-        position: 'absolute',
-        left: 0,
-        top: `${sliderPadding}px`,
-        right: 0,
-        height: `${sliderBarHeight}px`,
-        borderRadius: sliderBarHeight / 2,
+        backgroundColor: '#CCC',
         border: '1px solid #BBB',
-        backgroundColor: '#CCC'
+        borderRadius: sliderBarHeight / 2,
+        height: `${sliderBarHeight}px`,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: `${sliderPadding}px`,
       },
       '.the-input-slider-bar-highlight': {
         backgroundColor: dominantColor,
-        top: sliderPadding,
-        position: 'absolute',
-        height: sliderBarHeight,
-        borderRadius: sliderBarHeight / 2,
         border: '1px solid rgba(0,0,0,0.1)',
-        maxWidth: '100%'
+        borderRadius: sliderBarHeight / 2,
+        height: sliderBarHeight,
+        maxWidth: '100%',
+        position: 'absolute',
+        top: sliderPadding,
       },
-      '.the-input-slider-handle': {
-        position: 'relative',
-        display: 'inline-block',
-        cursor: '-webkit-grab',
-        borderRadius: '50%',
-        zIndex: 4,
-        '&:active': {
-          cursor: '-webkit-grabbing',
-          backgroundColor: '#FCFCFC'
-        },
-        '.the-input-slider-handle-area': {
-          position: 'absolute',
-          display: 'inline-block',
-          color: 'transparent',
-          opacity: 0,
-          left: `${handlePaddingRate}%`,
-          top: `${handlePaddingRate}%`,
-          right: `${handlePaddingRate}%`,
-          bottom: `${handlePaddingRate}%`
-        },
-        '.the-input-slider-handle-icon': {
-          width: `${sliderHandleSize}px`,
-          height: `${sliderHandleSize}px`,
-          borderRadius: '50%',
-          display: 'inline-block',
-          backgroundColor: 'white',
-          border: '1px solid #DDD',
-          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
-          position: 'relative',
-          zIndex: 3,
-          '&:hover': {
-            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)'
-          },
-          '.the-input-slider-label': {
-            display: 'inline-block',
-            padding: '2px 4px',
-            textAlign: 'right',
-            minWidth: '24px',
-            fontSize: '14px',
-            lineHeight: `${sliderHandleSize}px`,
-            boxSizing: 'border-box'
-          }
-        },
-      }
-    }),
-    asStyleData('.the-input-range', {
-      '&': {
-        position: 'relative',
-        height: `${sliderHandleSize + 2}px`,
+      '.the-input-slider-bar-tap': {
+        bottom: -8,
+        display: 'block',
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: -8,
+        zIndex: 1,
       },
-      '.the-input-range-inner': {
-        display: 'flex',
-        margin: '2px 0'
-      },
-      '.the-input-range-bar-wrap': {
+      '.the-input-slider-bar-wrap': {
+        boxSizing: 'border-box',
         display: 'block',
         position: 'relative',
         width: '100%',
-        boxSizing: 'border-box'
       },
+      '.the-input-slider-handle': {
+        '.the-input-slider-handle-area': {
+          bottom: `${handlePaddingRate}%`,
+          color: 'transparent',
+          display: 'inline-block',
+          left: `${handlePaddingRate}%`,
+          opacity: 0,
+          position: 'absolute',
+          right: `${handlePaddingRate}%`,
+          top: `${handlePaddingRate}%`,
+        },
+        '.the-input-slider-handle-icon': {
+          '.the-input-slider-label': {
+            boxSizing: 'border-box',
+            display: 'inline-block',
+            fontSize: '14px',
+            lineHeight: `${sliderHandleSize}px`,
+            minWidth: '24px',
+            padding: '2px 4px',
+            textAlign: 'right',
+          },
+          '&:hover': {
+            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+          },
+          backgroundColor: 'white',
+          border: '1px solid #DDD',
+          borderRadius: '50%',
+          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+          display: 'inline-block',
+          height: `${sliderHandleSize}px`,
+          position: 'relative',
+          width: `${sliderHandleSize}px`,
+          zIndex: 3,
+        },
+        '&:active': {
+          backgroundColor: '#FCFCFC',
+          cursor: '-webkit-grabbing',
+        },
+        borderRadius: '50%',
+        cursor: '-webkit-grab',
+        display: 'inline-block',
+        position: 'relative',
+        zIndex: 4,
+      },
+      '.the-input-slider-inner': {
+        display: 'flex',
+        margin: '2px 0',
+      },
+      '&': {
+        height: `${sliderHandleSize + 2}px`,
+        position: 'relative',
+      },
+    }),
+    asStyleData('.the-input-range', {
       '.the-input-range-bar': {
-        position: 'absolute',
-        left: 0,
-        right: 0,
         height: `${sliderBarHeight + sliderPadding}px`,
+        left: 0,
+        position: 'absolute',
+        right: 0,
         top: `${sliderHandleSize / 2 - sliderPadding}px`,
       },
-      '.the-input-range-bar-tap': {
-        display: 'block',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: -8,
-        bottom: -8,
-        zIndex: 1
-      },
       '.the-input-range-bar-bg': {
-        position: 'absolute',
-        left: 0,
-        top: `${sliderPadding}px`,
-        right: 0,
-        height: `${sliderBarHeight}px`,
-        borderRadius: sliderBarHeight / 2,
+        backgroundColor: '#CCC',
         border: '1px solid #BBB',
-        backgroundColor: '#CCC'
+        borderRadius: sliderBarHeight / 2,
+        height: `${sliderBarHeight}px`,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: `${sliderPadding}px`,
       },
       '.the-input-range-bar-highlight': {
         backgroundColor: dominantColor,
-        top: sliderPadding,
-        position: 'absolute',
-        height: sliderBarHeight,
-        borderRadius: sliderBarHeight / 2,
         border: '1px solid rgba(0,0,0,0.1)',
-        maxWidth: '100%'
+        borderRadius: sliderBarHeight / 2,
+        height: sliderBarHeight,
+        maxWidth: '100%',
+        position: 'absolute',
+        top: sliderPadding,
+      },
+      '.the-input-range-bar-tap': {
+        bottom: -8,
+        display: 'block',
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: -8,
+        zIndex: 1,
+      },
+      '.the-input-range-bar-wrap': {
+        boxSizing: 'border-box',
+        display: 'block',
+        position: 'relative',
+        width: '100%',
       },
       '.the-input-range-handle': {
-        position: 'absolute',
-        display: 'inline-block',
-        left: 0,
-        cursor: '-webkit-grab',
-        borderRadius: '50%',
-        zIndex: 4,
-        '&:active': {
-          cursor: '-webkit-grabbing',
-          backgroundColor: '#FCFCFC',
-          zIndex: 5
-        },
         '.the-input-range-handle-area': {
-          position: 'absolute',
-          display: 'inline-block',
+          bottom: `${handlePaddingRate}%`,
           color: 'transparent',
-          opacity: 0,
+          display: 'inline-block',
           left: `${handlePaddingRate}%`,
-          top: `${handlePaddingRate}%`,
+          opacity: 0,
+          position: 'absolute',
           right: `${handlePaddingRate}%`,
-          bottom: `${handlePaddingRate}%`
+          top: `${handlePaddingRate}%`,
         },
         '.the-input-range-handle-icon': {
-          width: `${sliderHandleSize}px`,
-          height: `${sliderHandleSize}px`,
-          borderRadius: '50%',
-          display: 'inline-block',
-          backgroundColor: 'white',
-          border: '1px solid #DDD',
-          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
-          position: 'relative',
-          zIndex: 3,
-          '&:hover': {
-            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)'
-          },
           '.the-input-range-label': {
+            boxSizing: 'border-box',
             display: 'inline-block',
-            padding: '2px 4px',
-            textAlign: 'right',
-            minWidth: '24px',
             fontSize: '14px',
             lineHeight: `${sliderHandleSize}px`,
-            boxSizing: 'border-box'
-          }
-        },
-      }
-    }),
-    asStyleData('.the-input-upload', {
-      '&': {
-        position: 'relative',
-        display: 'inline-block',
-        color: '#888',
-        overflow: 'hidden',
-        '&:hover': {
-          color: '#555'
+            minWidth: '24px',
+            padding: '2px 4px',
+            textAlign: 'right',
+          },
+          '&:hover': {
+            boxShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+          },
+          backgroundColor: 'white',
+          border: '1px solid #DDD',
+          borderRadius: '50%',
+          boxShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+          display: 'inline-block',
+          height: `${sliderHandleSize}px`,
+          position: 'relative',
+          width: `${sliderHandleSize}px`,
+          zIndex: 3,
         },
         '&:active': {
-          textShadow: 'none',
-          opacity: 1,
-          color: '#777'
-        }
-      },
-      '.the-input-upload-input': {
-        opacity: 0,
+          backgroundColor: '#FCFCFC',
+          cursor: '-webkit-grabbing',
+          zIndex: 5,
+        },
+        borderRadius: '50%',
+        cursor: '-webkit-grab',
         display: 'inline-block',
-        cursor: 'pointer',
-        position: 'relative',
-        zIndex: 2
-      },
-      '.the-input-upload-label': {
-        position: 'absolute',
-        zIndex: 1,
-        textAlign: 'center',
-        boxSizing: 'border-box',
         left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
-        pointerEvents: 'none',
-        backgroundColor: `${backgroundColor}`,
-        boxShadow: 'inset 1px 1px 2px rgba(0,0,0,0.33)',
-        border: '1px solid #CCC',
-        borderRadius: '2px'
+        position: 'absolute',
+        zIndex: 4,
       },
-      '.the-input-upload-label-inner': {
-        display: 'inline-block',
-        verticalAlign: 'middle'
+      '.the-input-range-inner': {
+        display: 'flex',
+        margin: '2px 0',
       },
-      '.the-input-upload-icon': {
-        display: 'block',
-        fontSize: '2em'
+      '&': {
+        height: `${sliderHandleSize + 2}px`,
+        position: 'relative',
       },
+    }),
+    asStyleData('.the-input-upload', {
       '.the-input-upload-aligner': {
-        display: 'inline-block',
-        width: '1px',
-        marginRight: '-1px',
-        height: '100%',
         boxSizing: 'border-box',
-        verticalAlign: 'middle'
-      },
-      '.the-input-upload-text': {},
-      '.the-input-upload-spin': {},
-      '.the-input-upload-close': {
         display: 'inline-block',
+        height: '100%',
+        marginRight: '-1px',
+        verticalAlign: 'middle',
+        width: '1px',
+      },
+      '.the-input-upload-close': {
+        '&:active': {
+          boxShadow: 'none',
+          color: '#555',
+          opacity: 1,
+        },
+        '&:hover': {
+          boxShadow: 'none',
+          color: '#555',
+          opacity: 1,
+        },
+        background: 'rgba(255,255,255,0.2)',
+        border: 'none',
+        borderRadius: 0,
+        color: '#AAA',
+        display: 'inline-block',
+        fontSize: '24px',
+        margin: 0,
+        padding: '8px',
         position: 'absolute',
         right: 0,
         top: 0,
         zIndex: 5,
-        margin: 0,
-        border: 'none',
-        padding: '8px',
-        fontSize: '24px',
-        color: '#AAA',
-        background: 'rgba(255,255,255,0.2)',
-        borderRadius: 0,
-        '&:hover': {
-          opacity: 1,
-          boxShadow: 'none',
-          color: '#555'
-        },
-        '&:active': {
-          opacity: 1,
-          boxShadow: 'none',
-          color: '#555'
-        }
+      },
+      '.the-input-upload-icon': {
+        display: 'block',
+        fontSize: '2em',
+      },
+      '.the-input-upload-input': {
+        cursor: 'pointer',
+        display: 'inline-block',
+        opacity: 0,
+        position: 'relative',
+        zIndex: 2,
+      },
+      '.the-input-upload-label': {
+        backgroundColor: `${backgroundColor}`,
+        border: '1px solid #CCC',
+        borderRadius: '2px',
+        bottom: 0,
+        boxShadow: 'inset 1px 1px 2px rgba(0,0,0,0.33)',
+        boxSizing: 'border-box',
+        left: 0,
+        pointerEvents: 'none',
+        position: 'absolute',
+        right: 0,
+        textAlign: 'center',
+        top: 0,
+        zIndex: 1,
+      },
+      '.the-input-upload-label-inner': {
+        display: 'inline-block',
+        verticalAlign: 'middle',
       },
       '.the-input-upload-preview': {
-        display: 'inline-block',
-        boxSizing: 'border-box',
-        zIndex: 4,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        right: 0,
+        border: '1px solid #AAA',
         bottom: 0,
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        left: 0,
         pointerEvents: 'none',
-        border: '1px solid #AAA'
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 4,
       },
       '.the-input-upload-preview-img': {},
+      '.the-input-upload-spin': {},
+      '.the-input-upload-text': {},
+      '&': {
+        '&:active': {
+          color: '#777',
+          opacity: 1,
+          textShadow: 'none',
+        },
+        '&:hover': {
+          color: '#555',
+        },
+        color: '#888',
+        display: 'inline-block',
+        overflow: 'hidden',
+        position: 'relative',
+      },
     }),
     asStyleData('.the-input-tag', {
-      '&': {
-        display: 'inline-flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
-        border: `1px solid ${inputBorderColor}`,
-        boxSizing: 'border-box',
-        alignItems: 'center',
-        padding: '4px',
-        overflow: 'auto',
-        justifyContent: 'flex-start'
-      },
-      '&.the-input-tag-focused': {
-        outline: `5px auto ${dominantColor}`,
-        outlineOffset: '-2px'
+      '.the-input-tag-remover': {
+        '.the-icon': {
+          padding: '0',
+        },
+        '&:hover': {
+          cursor: 'pointer',
+        },
+        display: 'inline-block',
+        padding: '2px',
+        verticalAlign: 'middle',
       },
       '.the-input-tag-tag': {
-        display: 'inline-flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '0 2px',
-        margin: '2px',
-        fontSize: 'small',
-        borderRadius: '2px',
         backgroundColor: colorAlpha(dominantColor, 0.2),
+        borderRadius: '2px',
         color: dominantColor,
+        display: 'inline-flex',
+        flexGrow: '1',
+        fontSize: 'small',
+        justifyContent: 'space-between',
+        margin: '2px',
+        padding: '0 2px',
         position: 'relative',
         zIndex: '1',
-        flexGrow: '1',
       },
       '.the-input-tag-text': {
         display: 'inline-block',
-        verticalAlign: 'middle',
-        padding: '2px'
-      },
-      '.the-input-tag-remover': {
-        display: 'inline-block',
-        verticalAlign: 'middle',
         padding: '2px',
-        '.the-icon': {
-          padding: '0'
-        },
-        '&:hover': {
-          cursor: 'pointer'
-        }
+        verticalAlign: 'middle',
       },
       '.the-input-text-input': {
         backgroundColor: 'transparent',
-        outline: 'none',
         border: 'none',
         boxShadow: 'none',
-        minWidth: '48px',
         flexGrow: 1,
-        width: 'auto'
-      }
+        minWidth: '48px',
+        outline: 'none',
+        width: 'auto',
+      },
+      '&': {
+        alignItems: 'center',
+        backgroundColor: backgroundColor,
+        border: `1px solid ${inputBorderColor}`,
+        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
+        boxSizing: 'border-box',
+        display: 'inline-flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        overflow: 'auto',
+        padding: '4px',
+      },
+      '&.the-input-tag-focused': {
+        outline: `5px auto ${dominantColor}`,
+        outlineOffset: '-2px',
+      },
     })
   )
 }

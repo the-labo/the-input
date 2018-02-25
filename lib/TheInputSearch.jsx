@@ -1,10 +1,10 @@
 'use strict'
 
-import React from 'react'
-import c from 'classnames'
-import TheInputText from './TheInputText'
-import { TheIcon } from 'the-icon'
 import { clone } from 'asobj'
+import c from 'classnames'
+import React from 'react'
+import { TheIcon } from 'the-icon'
+import TheInputText from './TheInputText'
 
 class TheInputSearch extends React.PureComponent {
   constructor (props) {
@@ -12,9 +12,22 @@ class TheInputSearch extends React.PureComponent {
     const s = this
     let {open = false} = props
     s.state = {
-      open
+      open,
     }
     s._focusTimer = -1
+  }
+
+  componentWillUnmount () {
+    const s = this
+    clearTimeout(s._focusTimer)
+  }
+
+  handleFocus (e) {
+    const s = this
+    const {props} = s
+    let {onFocus} = props
+    onFocus && onFocus(e)
+    s.toggleOpen(true)
   }
 
   render () {
@@ -25,27 +38,22 @@ class TheInputSearch extends React.PureComponent {
     return (
       <TheInputText {...props}
                     className={c('the-input-search', {
-                      'the-input-search-open': open || !!value
+                      'the-input-search-open': open || !!value,
                     })}
-                    type={'search'}
                     inputRef={(input) => { s.input = input }}
                     onFocus={(e) => s.handleFocus()}
+                    type='search'
       >
         {!value && (
           <a className={c('the-input-search-toggle')}
-             tabIndex={-1}
              onClick={() => s.toggleOpen()}
+             tabIndex={-1}
           >
             <TheIcon className={TheInputSearch.SEARCH_ICON}/>
           </a>
         )}
       </TheInputText>
     )
-  }
-
-  componentWillUnmount () {
-    const s = this
-    clearTimeout(s._focusTimer)
   }
 
   toggleOpen (open) {
@@ -63,14 +71,6 @@ class TheInputSearch extends React.PureComponent {
         s.input.focus()
       }
     })
-  }
-
-  handleFocus (e) {
-    const s = this
-    const {props} = s
-    let {onFocus} = props
-    onFocus && onFocus(e)
-    s.toggleOpen(true)
   }
 }
 

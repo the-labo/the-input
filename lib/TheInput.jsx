@@ -1,73 +1,73 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
+import { renderErrorMessage } from './helpers'
+import TheInputCheckbox from './TheInputCheckbox'
+import TheInputPassword from './TheInputPassword'
+import TheInputRadio from './TheInputRadio'
+import TheInputRange from './TheInputRange'
+import TheInputSearch from './TheInputSearch'
+import TheInputSelect from './TheInputSelect'
+import TheInputSlider from './TheInputSlider'
 import TheInputStyle from './TheInputStyle'
+import TheInputTag from './TheInputTag'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
-import TheInputUpload from './TheInputUpload'
-import TheInputRadio from './TheInputRadio'
-import TheInputCheckbox from './TheInputCheckbox'
-import TheInputSelect from './TheInputSelect'
-import TheInputPassword from './TheInputPassword'
-import TheInputSearch from './TheInputSearch'
 import TheInputToggle from './TheInputToggle'
-import TheInputSlider from './TheInputSlider'
-import TheInputRange from './TheInputRange'
-import TheInputTag from './TheInputTag'
-import { renderErrorMessage } from './helpers'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import TheInputUpload from './TheInputUpload'
 
 /**
  * Input of the-components
  */
 class TheInput extends React.PureComponent {
+  handleChange (e) {
+    const s = this
+    const {onChange, onUpdate, parser} = s.props
+    const {name, value} = e.target
+    onChange && onChange(e)
+    onUpdate && onUpdate({[name]: parser(value)})
+  }
+
   render () {
     const {props} = this
     let {
-      id,
-      className,
-      children,
-      type,
-      name,
-      required,
-      value,
-      error,
-      placeholder,
-      autoFocus,
       autoComplete,
-      inputRef
+      autoFocus,
+      children,
+      className,
+      error,
+      id,
+      inputRef,
+      name,
+      placeholder,
+      required,
+      type,
+      value,
     } = props
     return (
       <div {...htmlAttributesFor(props, {
         except: [
           'id', 'className', 'type', 'value', 'required', 'name', 'placeholder', 'autoFocus', 'autoComplete'
-        ]
+        ],
       })}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input', className, {
-             'the-input-error': !!error
+             'the-input-error': !!error,
            })}
       >
         {renderErrorMessage(error)}
         {children}
         <input type='the-input-input'
-               {...{id, type, name, required, placeholder, autoFocus, autoComplete}}
-               value={value || ''}
+               {...{autoComplete, autoFocus, id, name, placeholder, required, type}}
                onChange={(e) => this.handleChange(e)}
                ref={inputRef}
+               value={value || ''}
         />
       </div>
     )
-  }
-
-  handleChange (e) {
-    const s = this
-    const {parser, onChange, onUpdate} = s.props
-    const {name, value} = e.target
-    onChange && onChange(e)
-    onUpdate && onUpdate({[name]: parser(value)})
   }
 }
 
@@ -87,25 +87,25 @@ TheInput.Tag = TheInputTag
 
 TheInput.propTypes = {
   /** Input type */
-  type: PropTypes.string,
-  /** Name of input */
-  name: PropTypes.string,
-  /** Value of input */
-  value: PropTypes.string,
-  /** Handle for update */
-  onUpdate: PropTypes.func,
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
-  ])
+  ]),
+  /** Name of input */
+  name: PropTypes.string,
+  /** Handle for update */
+  onUpdate: PropTypes.func,
+  type: PropTypes.string,
+  /** Value of input */
+  value: PropTypes.string,
 }
 
 TheInput.defaultProps = {
+  error: null,
+  name: '_the',
+  options: {},
   type: 'text',
   value: '',
-  name: '_the',
-  error: null,
-  options: {}
 }
 
 TheInput.displayName = 'TheInput'

@@ -1,77 +1,53 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
-import { htmlAttributesFor, eventHandlersFor, newId } from 'the-component-util'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { normalizeOptions, normalizeArrayValue, renderErrorMessage } from './helpers'
+import { normalizeArrayValue, normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
  * Checkbox input of the-components
  */
 class TheInputCheckbox extends React.PureComponent {
+  static Option ({checked, id, label, name, onChange, value}) {
+    const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
+    return (
+      <div className={c('the-input-checkbox-item', {
+        'the-input-checkbox-item-checked': checked,
+      })}
+           data-value={value}
+           key={value}
+      >
+        <input className='the-input-checkbox-checkbox'
+               type='checkbox'
+               {...{checked, id, name, onChange, value}}
+        />
+        <label className='the-input-checkbox-label'
+               htmlFor={id}
+        >
+          <TheIcon className={c('the-input-checkbox-icon', icon)}/>
+          {label}
+        </label>
+      </div>
+    )
+  }
+
   constructor (props) {
     super(props)
     this.id = newId()
   }
 
-  render () {
-    const {props} = this
-    let {
-      id = this.id,
-      className,
-      name,
-      readOnly,
-      options,
-      value,
-      error,
-      splitter
-    } = props
-
-    options = normalizeOptions(options)
-    value = normalizeArrayValue(value, splitter).map((value) => String(value).trim())
-
-    return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
-           {...eventHandlersFor(props, {except: []})}
-           className={c('the-input-checkbox', className, {
-             'the-input-error': !!error
-           })}
-           data-value={value}
-           id={id}
-      >
-        {renderErrorMessage(error)}
-
-        {
-          readOnly ? (
-            <span className='the-input-checkbox-readonly'>{options[value]}</span>
-          ) : (
-            Object.keys(options).map((optionValue) => (
-              <TheInputCheckbox.Option name={name}
-                                       checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
-                                       id={this.idFor(optionValue)}
-                                       key={optionValue}
-                                       value={optionValue}
-                                       onChange={(e) => this.handleChange(e)}
-                                       label={options[optionValue]}
-              />
-            ))
-          )
-        }
-      </div>
-    )
-  }
-
   handleChange (e) {
     let {
-      parser,
       onChange,
       onUpdate,
+      parser,
+      splitter,
       value,
-      splitter
     } = this.props
-    let {name, value: changedValue, checked} = e.target
+    let {checked, name, value: changedValue} = e.target
     changedValue = String(changedValue).trim()
     value = normalizeArrayValue(value, splitter)
       .map((value) => String(value).trim())
@@ -84,7 +60,7 @@ class TheInputCheckbox extends React.PureComponent {
     }
     onChange && onChange(e)
     onUpdate && onUpdate({
-      [name]: parser(value)
+      [name]: parser(value),
     })
   }
 
@@ -93,25 +69,49 @@ class TheInputCheckbox extends React.PureComponent {
     return [id, ...[].concat(optionValue)].join('-')
   }
 
-  static Option ({name, value, id, checked, onChange, label}) {
-    const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
+  render () {
+    const {props} = this
+    let {
+      className,
+      error,
+      id = this.id,
+      name,
+      options,
+      readOnly,
+      splitter,
+      value,
+    } = props
+
+    options = normalizeOptions(options)
+    value = normalizeArrayValue(value, splitter).map((value) => String(value).trim())
+
     return (
-      <div className={c('the-input-checkbox-item', {
-        'the-input-checkbox-item-checked': checked
-      })}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
+           {...eventHandlersFor(props, {except: []})}
+           className={c('the-input-checkbox', className, {
+             'the-input-error': !!error,
+           })}
            data-value={value}
-           key={value}
+           id={id}
       >
-        <input type='checkbox'
-               className='the-input-checkbox-checkbox'
-               {...{name, checked, id, value, onChange}}
-        />
-        <label htmlFor={id}
-               className='the-input-checkbox-label'
-        >
-          <TheIcon className={c('the-input-checkbox-icon', icon)}/>
-          {label}
-        </label>
+        {renderErrorMessage(error)}
+
+        {
+          readOnly ? (
+            <span className='the-input-checkbox-readonly'>{options[value]}</span>
+          ) : (
+            Object.keys(options).map((optionValue) => (
+              <TheInputCheckbox.Option checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
+                                       id={this.idFor(optionValue)}
+                                       key={optionValue}
+                                       label={options[optionValue]}
+                                       name={name}
+                                       onChange={(e) => this.handleChange(e)}
+                                       value={optionValue}
+              />
+            ))
+          )
+        }
       </div>
     )
   }
@@ -122,37 +122,37 @@ TheInputCheckbox.CHECKED_ICON = 'fas fa-check-square'
 
 TheInputCheckbox.propTypes = {
   /** Name of input */
-  name: PropTypes.string.isRequired,
-  /** Value of input */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  /** Handle for update */
-  onUpdate: PropTypes.func.isRequired,
-  /** Value parser */
-  parser: PropTypes.func,
   /** Error message */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
+  name: PropTypes.string.isRequired,
+  /** Handle for update */
+  onUpdate: PropTypes.func.isRequired,
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.bool)
   ]),
+  /** Value parser */
+  parser: PropTypes.func,
   /** Value Splitter text */
-  splitter: PropTypes.string
+  splitter: PropTypes.string,
+  /** Value of input */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
 }
 
 TheInputCheckbox.defaultProps = {
-  value: '',
-  parser: String,
   error: null,
   options: {},
-  splitter: ','
+  parser: String,
+  splitter: ',',
+  value: '',
 }
 
 TheInputCheckbox.displayName = 'TheInputCheckbox'

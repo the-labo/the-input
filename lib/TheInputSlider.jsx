@@ -1,26 +1,68 @@
 'use strict'
 
+import chopcal from 'chopcal'
+import c from 'classnames'
+import PropTypes from 'prop-types'
+import rangecal from 'rangecal'
 import React from 'react'
 import Draggable from 'react-draggable'
-import PropTypes from 'prop-types'
-import c from 'classnames'
+import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheCondition } from 'the-condition'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 import { get } from 'the-window'
-import rangecal from 'rangecal'
-import chopcal from 'chopcal'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
 /**
  * Slider Input
  */
 class TheInputSlider extends React.PureComponent {
+  static Handle (props) {
+    const {
+      elmRef,
+      maxX,
+      minX,
+      onMove,
+      shouldMove = true,
+      step,
+      x,
+    } = props
+    return (
+      <Draggable axis='x'
+                 bounds={{left: minX, right: maxX}}
+                 grid={step && [step, step]}
+                 onDrag={(e, {x, y}) => shouldMove && onMove({x, y})}
+                 onStart={(e, {x, y}) => shouldMove && onMove({x, y})}
+                 onStop={(e, {x, y}) => shouldMove && onMove({x, y})}
+                 position={{x, y: 0}}
+      >
+        <div className='the-input-slider-handle'
+             data-max-x={maxX}
+             data-min-x={minX}
+             ref={elmRef}
+        >
+          <div className='the-input-slider-handle-area'>
+          </div>
+          <div className='the-input-slider-handle-icon'>
+          </div>
+        </div>
+      </Draggable>
+    )
+  }
+
+  static Label ({children, className, ref}) {
+    return (
+      <label className={c('the-input-slider-label', className)}
+             ref={ref}>
+        <span>{children}</span>
+      </label>
+    )
+  }
+
   constructor (props) {
     super(props)
     this.state = {
-      x: 0,
+      maxX: 0,
       minX: 0,
-      maxX: 0
+      x: 0,
     }
     this.elm = null
     this.barElm = null
@@ -32,71 +74,6 @@ class TheInputSlider extends React.PureComponent {
     }
   }
 
-  render () {
-    const {props, state} = this
-    const {
-      className,
-      name,
-      value,
-      error,
-      barOnly,
-      min,
-      max
-    } = props
-    const {
-      x,
-      minX,
-      maxX
-    } = state
-    return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
-           {...eventHandlersFor(props, {except: []})}
-           className={c('the-input-slider', className, {
-             'the-input-error': !!error
-           })}
-           data-value={value}
-           ref={(elm) => {
-             this.elm = elm
-             this.handleResize()
-           }}
-      >
-        {renderErrorMessage(error)}
-        <input type='hidden' name={name} value={value} onChange={(v) => {}}/>
-        <div className='the-input-slider-inner'>
-          <TheCondition unless={barOnly}>
-            <TheInputSlider.Label>{min}</TheInputSlider.Label>
-          </TheCondition>
-          <div className='the-input-slider-bar-wrap'>
-            <div className='the-input-slider-bar'
-                 ref={(barElm) => {
-                   this.barElm = barElm
-                   this.handleResize()
-                 }}
-                 onClick={(e) => this.handleBarClick(e)}
-            >
-              <div className='the-input-slider-bar-tap'>
-              </div>
-              <div className='the-input-slider-bar-bg'>
-              </div>
-              <div className='the-input-slider-bar-highlight' style={{left: 0, width: x}}>
-              </div>
-            </div>
-            <TheInputSlider.Handle {...{x, minX, maxX}}
-                                   elmRef={(handleElm) => {
-                                     this.handleElm = handleElm
-                                     this.handleResize()
-                                   }}
-                                   onMove={(e) => this.handleHandleMove(e)}
-            />
-          </div>
-          <TheCondition unless={barOnly}>
-            <TheInputSlider.Label>{max}</TheInputSlider.Label>
-          </TheCondition>
-        </div>
-      </div>
-    )
-  }
-
   componentDidMount () {
     const {window} = get('window')
     window.addEventListener('resize', this.handleResize)
@@ -106,23 +83,6 @@ class TheInputSlider extends React.PureComponent {
   componentWillUnmount () {
     const {window} = get('window')
     window.removeEventListener('resize', this.handleResize)
-  }
-
-  handleResize () {
-    const {barElm, props} = this
-    if (!barElm) {
-      return
-    }
-    const w = barElm.offsetWidth
-    const handleRadius = this.getHandleRadius()
-    const minX = 0 - handleRadius
-    const maxX = w - handleRadius
-    const rate = this._rateWithValue(props.value)
-    this.setState({
-      minX: minX,
-      maxX: maxX,
-      x: rangecal.value(minX, maxX, rate)
-    })
   }
 
   getHandleRadius () {
@@ -153,17 +113,99 @@ class TheInputSlider extends React.PureComponent {
     this.setSliderValue(value)
   }
 
+  handleResize () {
+    const {barElm, props} = this
+    if (!barElm) {
+      return
+    }
+    const w = barElm.offsetWidth
+    const handleRadius = this.getHandleRadius()
+    const minX = 0 - handleRadius
+    const maxX = w - handleRadius
+    const rate = this._rateWithValue(props.value)
+    this.setState({
+      maxX: maxX,
+      minX: minX,
+      x: rangecal.value(minX, maxX, rate),
+    })
+  }
+
+  render () {
+    const {props, state} = this
+    const {
+      barOnly,
+      className,
+      error,
+      max,
+      min,
+      name,
+      value,
+    } = props
+    const {
+      maxX,
+      minX,
+      x,
+    } = state
+    return (
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
+           {...eventHandlersFor(props, {except: []})}
+           className={c('the-input-slider', className, {
+             'the-input-error': !!error,
+           })}
+           data-value={value}
+           ref={(elm) => {
+             this.elm = elm
+             this.handleResize()
+           }}
+      >
+        {renderErrorMessage(error)}
+        <input name={name} onChange={(v) => {}} type='hidden' value={value}/>
+        <div className='the-input-slider-inner'>
+          <TheCondition unless={barOnly}>
+            <TheInputSlider.Label>{min}</TheInputSlider.Label>
+          </TheCondition>
+          <div className='the-input-slider-bar-wrap'>
+            <div className='the-input-slider-bar'
+                 onClick={(e) => this.handleBarClick(e)}
+                 ref={(barElm) => {
+                   this.barElm = barElm
+                   this.handleResize()
+                 }}
+            >
+              <div className='the-input-slider-bar-tap'>
+              </div>
+              <div className='the-input-slider-bar-bg'>
+              </div>
+              <div className='the-input-slider-bar-highlight' style={{left: 0, width: x}}>
+              </div>
+            </div>
+            <TheInputSlider.Handle {...{maxX, minX, x}}
+                                   elmRef={(handleElm) => {
+                                     this.handleElm = handleElm
+                                     this.handleResize()
+                                   }}
+                                   onMove={(e) => this.handleHandleMove(e)}
+            />
+          </div>
+          <TheCondition unless={barOnly}>
+            <TheInputSlider.Label>{max}</TheInputSlider.Label>
+          </TheCondition>
+        </div>
+      </div>
+    )
+  }
+
   setSliderValue (value) {
-    const {state, props} = this
-    const {step, name, onUpdate} = props
+    const {props, state} = this
+    const {name, onUpdate, step} = props
     const duplicate = props.value === value
     if (duplicate) {
       return
     }
-    const {minX, maxX} = state
+    const {maxX, minX} = state
     const rate = this._rateWithValue(value)
     this.setState({
-      x: rangecal.value(minX, maxX, rate)
+      x: rangecal.value(minX, maxX, rate),
     })
 
     value = chopcal.round(value, step)
@@ -179,103 +221,61 @@ class TheInputSlider extends React.PureComponent {
     }
   }
 
+  _rateWithValue (value) {
+    const {props} = this
+    const {max, min} = props
+
+    value = rangecal.round(min, max, value)
+    return chopcal.round(rangecal.rate(min, max, value), 0.01)
+  }
+
   _rateWithX (x) {
     const {state} = this
-    const {minX, maxX} = state
+    const {maxX, minX} = state
     if (minX === maxX) {
       return 0
     }
     return rangecal.rate(minX, maxX, x + 2)
   }
 
-  _rateWithValue (value) {
-    const {props} = this
-    const {min, max} = props
-
-    value = rangecal.round(min, max, value)
-    return chopcal.round(rangecal.rate(min, max, value), 0.01)
-  }
-
   _valueWithRate (rate) {
     const {props} = this
-    const {min, max} = props
+    const {max, min} = props
 
     const value = chopcal.round(rangecal.value(min, max, rate), 0.01)
     return rangecal.round(min, max, value)
-  }
-
-  static Label ({className, children, ref}) {
-    return (
-      <label ref={ref}
-             className={c('the-input-slider-label', className)}>
-        <span>{children}</span>
-      </label>
-    )
-  }
-
-  static Handle (props) {
-    const {
-      step,
-      x,
-      minX,
-      maxX,
-      elmRef,
-      onMove,
-      shouldMove = true
-    } = props
-    return (
-      <Draggable axis='x'
-                 grid={step && [step, step]}
-                 position={{x, y: 0}}
-                 onStart={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 onDrag={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 onStop={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 bounds={{left: minX, right: maxX}}
-      >
-        <div className='the-input-slider-handle'
-             ref={elmRef}
-             data-min-x={minX}
-             data-max-x={maxX}
-        >
-          <div className='the-input-slider-handle-area'>
-          </div>
-          <div className='the-input-slider-handle-icon'>
-          </div>
-        </div>
-      </Draggable>
-    )
   }
 }
 
 TheInputSlider.propTypes = {
   /** Name of input */
-  name: PropTypes.string.isRequired,
-  /** Value of input */
-  value: PropTypes.number,
-  /** Handle for update */
-  onUpdate: PropTypes.func.isRequired,
+  /** Hides min/max value text */
+  barOnly: PropTypes.bool,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
-  /** Min value */
-  min: PropTypes.number,
   /** Max value */
   max: PropTypes.number,
+  /** Min value */
+  min: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  /** Handle for update */
+  onUpdate: PropTypes.func.isRequired,
   /** Value step */
   step: PropTypes.number,
-  /** Hides min/max value text */
-  barOnly: PropTypes.bool
+  /** Value of input */
+  value: PropTypes.number,
 }
 
 TheInputSlider.defaultProps = {
-  value: 0,
+  barOnly: false,
   error: null,
-  min: 0,
   max: 100,
+  min: 0,
   step: 0.1,
-  barOnly: false
+  value: 0,
 }
 
 TheInputSlider.displayName = 'TheInputSlider'

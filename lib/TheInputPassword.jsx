@@ -1,16 +1,16 @@
 'use strict'
 
-import React from 'react'
-import c from 'classnames'
-import TheInputText from './TheInputText'
-import { TheIcon } from 'the-icon'
 import { clone } from 'asobj'
+import c from 'classnames'
+import React from 'react'
+import { TheIcon } from 'the-icon'
+import TheInputText from './TheInputText'
 
 class TheInputPassword extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      showing: false
+      showing: false,
     }
   }
 
@@ -23,15 +23,15 @@ class TheInputPassword extends React.PureComponent {
     return (
       <TheInputText {...props}
                     className={c('the-input-password')}
-                    type={showing ? 'text' : 'password'}
                     options={[]}
+                    type={showing ? 'text' : 'password'}
       >
         {
           value && (
             <a className={c('the-input-password-toggle')}
-               tabIndex={-1}
-               href={'javascript:void(0)'}
+               href='javascript:void(0)'
                onClick={() => s.toggleShowing(!s.state.showing)}
+               tabIndex={-1}
             >
               <TheIcon className={icon}/>
             </a>

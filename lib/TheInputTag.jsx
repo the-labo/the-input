@@ -1,19 +1,19 @@
 'use strict'
 
-import React from 'react'
+import { clone } from 'asobj'
 import c from 'classnames'
 import PropTypes from 'prop-types'
-import TheInputText from './TheInputText'
-import { TheIcon } from 'the-icon'
+import React from 'react'
 import { uniqueFilter } from 'the-array'
-import { clone } from 'asobj'
+import { TheIcon } from 'the-icon'
+import TheInputText from './TheInputText'
 
 class TheInputTag extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
     s.state = {
-      focused: false
+      focused: false,
     }
     s.handleKeyDown = s.handleKeyDown.bind(s)
     s.handleUpdate = s.handleUpdate.bind(s)
@@ -22,68 +22,55 @@ class TheInputTag extends React.PureComponent {
     s.handleBlur = s.handleBlur.bind(s)
   }
 
-  render () {
-    const s = this
-    const {props} = s
-    const [edittingValue, ...tagValues] = s.splitValue()
-    const inputProps = clone(props, {without: ['value', 'splitter', 'options']})
-    const {options} = props
-    const {focused} = s.state
-    return (
-      <TheInputText {...inputProps}
-                    className={c('the-input-tag', {
-                      'the-input-tag-focused': focused
-                    })}
-                    value={String(edittingValue).trim()}
-                    onUpdate={s.handleUpdate}
-                    onKeyDown={s.handleKeyDown}
-                    onFocus={s.handleFocus}
-                    onBlur={s.handleBlur}
-                    inputRef={s.handleInputRef}
-                    options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
-      >
-        {
-          tagValues.filter(Boolean)
-            .filter(uniqueFilter())
-            .reverse()
-            .map((text) => (
-              <span key={text}
-                    className={'the-input-tag-tag'}
-              >
-              <span className='the-input-tag-text'>
-                {text}
-              </span>
-              <span className={c('the-input-tag-remover')}
-                    onClick={() => s.removeTag(text)}>
-              <TheIcon className={TheInputTag.CLOSE_ICON}/>
-              </span>
-            </span>
-            ))
-        }
-      </TheInputText>
-    )
-  }
-
   componentDidMount () {
-
   }
 
   componentWillUnmount () {
     const s = this
   }
 
-  handleUpdate (values) {
+  handleBack () {
     const s = this
-    const {name} = s.props
-    const edittingValue = values[name]
-    const [, ...tagValues] = s.splitValue()
-    s.updateBySplitValues([edittingValue, ...tagValues])
+    const [edittingValue, ...tagValues] = s.splitValue()
+    if (edittingValue.length === 0) {
+      s.updateBySplitValues(
+        ['', ...tagValues.slice(1)]
+      )
+    }
   }
 
-  splitValue () {
+  handleBlur (e) {
     const s = this
-    const {splitter, value} = s.props
-    return String(value || '').split(splitter).reverse()
+    const {onBlur} = s.props
+    const [edittingValue, ...tagValues] = s.splitValue()
+    if (edittingValue.length > 0) {
+      s.updateBySplitValues(['', edittingValue, ...tagValues])
+    }
+
+    onBlur && onBlur(e)
+    s.setState({focused: false})
+  }
+
+  handleEnter () {
+    const s = this
+    const [edittingValue, ...tagValues] = s.splitValue()
+    if (edittingValue.length > 0) {
+      s.updateBySplitValues(
+        ['', edittingValue, ...tagValues.slice()]
+      )
+    }
+  }
+
+  handleFocus (e) {
+    const s = this
+    const {onFocus} = s.props
+    onFocus && onFocus(e)
+    s.setState({focused: true})
+  }
+
+  handleInputRef (input) {
+    const s = this
+    s.input = input
   }
 
   handleKeyDown (e) {
@@ -102,48 +89,12 @@ class TheInputTag extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  handleBack () {
+  handleUpdate (values) {
     const s = this
-    const [edittingValue, ...tagValues] = s.splitValue()
-    if (edittingValue.length === 0) {
-      s.updateBySplitValues(
-        ['', ...tagValues.slice(1)]
-      )
-    }
-  }
-
-  handleEnter () {
-    const s = this
-    const [edittingValue, ...tagValues] = s.splitValue()
-    if (edittingValue.length > 0) {
-      s.updateBySplitValues(
-        ['', edittingValue, ...tagValues.slice()]
-      )
-    }
-  }
-
-  handleInputRef (input) {
-    const s = this
-    s.input = input
-  }
-
-  handleFocus (e) {
-    const s = this
-    const {onFocus} = s.props
-    onFocus && onFocus(e)
-    s.setState({focused: true})
-  }
-
-  handleBlur (e) {
-    const s = this
-    const {onBlur} = s.props
-    const [edittingValue, ...tagValues] = s.splitValue()
-    if (edittingValue.length > 0) {
-      s.updateBySplitValues(['', edittingValue, ...tagValues])
-    }
-
-    onBlur && onBlur(e)
-    s.setState({focused: false})
+    const {name} = s.props
+    const edittingValue = values[name]
+    const [, ...tagValues] = s.splitValue()
+    s.updateBySplitValues([edittingValue, ...tagValues])
   }
 
   removeTag (text) {
@@ -152,6 +103,54 @@ class TheInputTag extends React.PureComponent {
     s.updateBySplitValues(
       tagValues.filter((tagValue) => tagValue !== text)
     )
+  }
+
+  render () {
+    const s = this
+    const {props} = s
+    const [edittingValue, ...tagValues] = s.splitValue()
+    const inputProps = clone(props, {without: ['value', 'splitter', 'options']})
+    const {options} = props
+    const {focused} = s.state
+    return (
+      <TheInputText {...inputProps}
+                    className={c('the-input-tag', {
+                      'the-input-tag-focused': focused,
+                    })}
+                    inputRef={s.handleInputRef}
+                    onBlur={s.handleBlur}
+                    onFocus={s.handleFocus}
+                    onKeyDown={s.handleKeyDown}
+                    onUpdate={s.handleUpdate}
+                    options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
+                    value={String(edittingValue).trim()}
+      >
+        {
+          tagValues.filter(Boolean)
+            .filter(uniqueFilter())
+            .reverse()
+            .map((text) => (
+              <span className='the-input-tag-tag'
+                    key={text}
+              >
+              <span className='the-input-tag-text'>
+                {text}
+              </span>
+              <span className={c('the-input-tag-remover')}
+                    onClick={() => s.removeTag(text)}>
+              <TheIcon className={TheInputTag.CLOSE_ICON}/>
+              </span>
+            </span>
+            ))
+        }
+      </TheInputText>
+    )
+  }
+
+  splitValue () {
+    const s = this
+    const {splitter, value} = s.props
+    return String(value || '').split(splitter).reverse()
   }
 
   updateBySplitValues (splitValues) {
@@ -168,14 +167,14 @@ TheInputTag.CLOSE_ICON = 'fa fa-close'
 TheInputTag.propTypes = Object.assign(
   clone(TheInputText.propTypes, {without: []}),
   {
-    splitter: PropTypes.any
+    splitter: PropTypes.any,
   }
 )
 TheInputTag.defaultProps = Object.assign(
   clone(TheInputText.defaultProps, {without: []}),
   {
+    options: [],
     splitter: /[\s,]+/,
-    options: []
   }
 )
 TheInputTag.displayName = 'TheInputTag'

@@ -1,9 +1,9 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage, renderWarningMessage } from './helpers'
 import * as patterns from './patterns'
@@ -12,14 +12,37 @@ import * as patterns from './patterns'
  * Text Input
  */
 class TheInputText extends React.PureComponent {
+  static Options ({candidates, onSelect, parser, selectedCandidate}) {
+    if (candidates.length === 0) {
+      return null
+    }
+    return (
+      <ul className='the-input-text-options'>
+        {
+          candidates.map((candidate) => (
+            <li className={c('the-input-text-option', {
+              'the-input-text-option-selected': selectedCandidate === candidate,
+            })}
+                data-value={parser(candidate)}
+                key={candidate}
+                onClick={() => onSelect({value: candidate})}
+            >
+              {candidate}
+            </li>
+          ))
+        }
+      </ul>
+    )
+  }
+
   constructor (props) {
     super(props)
     this.elm = null
     this.state = {
-      suggesting: false,
-      selectedCandidate: null,
       candidates: [],
-      committedValue: null
+      committedValue: null,
+      selectedCandidate: null,
+      suggesting: false,
     }
     this.handleDocumentClick = this.handleDocumentClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -31,78 +54,15 @@ class TheInputText extends React.PureComponent {
     this._offSuggestionOffTimer = -1
   }
 
-  render () {
-    const {props, state} = this
-    const {
-      id,
-      className,
-      children,
-      parser,
-      type,
-      name,
-      required,
-      readOnly,
-      value,
-      error,
-      placeholder,
-      autoFocus,
-      inputRef
-    } = props
-    let {autoComplete} = props
-    const {suggesting, candidates, selectedCandidate, committedValue} = state
-    if (!autoComplete && candidates.length >= 0) {
-      autoComplete = 'off'
+  commitValue () {
+    const {name, onUpdate, parser, value} = this.props
+    const committedValue = parser(value)
+    onUpdate && onUpdate({[name]: committedValue})
+
+    if (this.state.committedValue === committedValue) {
+      return
     }
-    const warning = this.getPatternWarning()
-    return (
-      <div {...htmlAttributesFor(props, {
-        except: [
-          'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
-        ]
-      })}
-           {...eventHandlersFor(props, {
-             except: [
-               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
-             ]
-           })}
-           className={c('the-input-text', className, {
-             'the-input-warn': !!warning,
-             'the-input-error': !!error,
-           })}
-           data-value={value}
-           ref={(elm) => { this.elm = elm }}
-      >
-        {renderWarningMessage(warning)}
-        {renderErrorMessage(error)}
-        {children}
-        {
-          readOnly ? (
-            <span className='the-input-text-readonly'>{value || ''}</span>
-          ) : (
-            <input className='the-input-text-input'
-                   {...{id, readOnly, type, name, required, placeholder, autoFocus, autoComplete}}
-                   value={value || ''}
-                   onChange={this.handleChange}
-                   onFocus={this.handleFocus}
-                   onBlur={this.handleBlur}
-                   onKeyUp={this.handleKeyUp}
-                   onKeyPress={this.handleKeyPress}
-                   onKeyDown={this.handleKeyDown}
-                   ref={inputRef}
-
-            />
-          )
-        }
-
-        {
-          !readOnly && suggesting && (
-            <TheInputText.Options {...{parser, candidates, selectedCandidate}}
-                                  onSelect={({value}) => this.enterCandidate(value)}
-            />
-          )
-        }
-      </div>
-    )
+    this.setState({committedValue})
   }
 
   componentDidMount () {
@@ -118,6 +78,51 @@ class TheInputText extends React.PureComponent {
     clearTimeout(s._offSuggestionOffTimer)
   }
 
+  enterCandidate (value) {
+    const {name} = this.props
+    this.handleChange({
+      target: {
+        name,
+        value,
+      },
+    })
+    this.offSuggestion()
+  }
+
+  getPatternWarning () {
+    const {props, state} = this
+    const {pattern, patternWarning, value} = props
+    const {committedValue} = state
+    if (!committedValue) {
+      return null
+    }
+    if (!pattern) {
+      return null
+    }
+    const ok = pattern.test(committedValue)
+    if (ok) {
+      return null
+    }
+    const willBeOK = value && pattern.test(value)
+    if (willBeOK) {
+      return null
+    }
+    return patternWarning
+  }
+
+  handleBlur (e) {
+    const {onBlur} = this.props
+    onBlur && onBlur(e)
+    this.commitValue()
+  }
+
+  handleChange (e) {
+    const {onChange, onUpdate} = this.props
+    const {name, value} = e.target
+    onChange && onChange(e)
+    onUpdate && onUpdate({[name]: value})
+  }
+
   handleDocumentClick (e) {
     const {elm} = this
 
@@ -130,13 +135,6 @@ class TheInputText extends React.PureComponent {
     }
   }
 
-  handleChange (e) {
-    const {onChange, onUpdate} = this.props
-    const {name, value} = e.target
-    onChange && onChange(e)
-    onUpdate && onUpdate({[name]: value})
-  }
-
   handleFocus (e) {
     clearTimeout(this._offSuggestionOffTimer)
     this.setState({suggesting: true})
@@ -145,31 +143,14 @@ class TheInputText extends React.PureComponent {
     onFocus && onFocus(e)
   }
 
-  handleBlur (e) {
-    const {onBlur} = this.props
-    onBlur && onBlur(e)
-    this.commitValue()
-  }
-
-  handleKeyUp (e) {
-    this.updateCandidates()
-    const {onKeyUp} = this.props
-    onKeyUp && onKeyUp(e)
-  }
-
-  handleKeyPress (e) {
-    const {onKeyPress} = this.props
-    onKeyPress && onKeyPress(e)
-  }
-
   handleKeyDown (e) {
     const {
-      onKeyDown,
-      onEnter,
-      onUp,
       onDown,
+      onEnter,
+      onKeyDown,
       onLeft,
-      onRight
+      onRight,
+      onUp,
     } = this.props
     switch (e.keyCode) {
       case 37: // LEFT
@@ -205,24 +186,15 @@ class TheInputText extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  updateCandidates (index) {
-    let {options, value, matcher} = this.props
-    options = normalizeOptions(options)
-    value = value && String(value).trim()
-    const {selectedCandidate} = this.state
-    const candidates = Object.keys(options)
-      .map((name) => options[name])
-      .map((candidate) => String(candidate).trim())
-      .filter((candidate) => !!candidate)
-      .filter((candidate) => candidate !== value)
-      .filter((candidate) => !value || matcher(String(candidate), String(value)))
-    if (typeof index === 'undefined') {
-      index = candidates.indexOf(selectedCandidate)
-    }
-    this.setState({
-      candidates,
-      selectedCandidate: candidates[index] || null
-    })
+  handleKeyPress (e) {
+    const {onKeyPress} = this.props
+    onKeyPress && onKeyPress(e)
+  }
+
+  handleKeyUp (e) {
+    this.updateCandidates()
+    const {onKeyUp} = this.props
+    onKeyUp && onKeyUp(e)
   }
 
   moveCandidateIndex (amount) {
@@ -238,17 +210,6 @@ class TheInputText extends React.PureComponent {
     this.updateCandidates(index)
   }
 
-  enterCandidate (value) {
-    const {name} = this.props
-    this.handleChange({
-      target: {
-        name,
-        value
-      }
-    })
-    this.offSuggestion()
-  }
-
   offSuggestion (delay = 10) {
     clearTimeout(this._offSuggestionOffTimer)
     this._offSuggestionOffTimer = setTimeout(() => {
@@ -256,113 +217,152 @@ class TheInputText extends React.PureComponent {
     }, delay)
   }
 
-  commitValue () {
-    const {value, onUpdate, parser, name} = this.props
-    const committedValue = parser(value)
-    onUpdate && onUpdate({[name]: committedValue})
-
-    if (this.state.committedValue === committedValue) {
-      return
+  render () {
+    const {props, state} = this
+    const {
+      autoFocus,
+      children,
+      className,
+      error,
+      id,
+      inputRef,
+      name,
+      parser,
+      placeholder,
+      readOnly,
+      required,
+      type,
+      value,
+    } = props
+    let {autoComplete} = props
+    const {candidates, committedValue, selectedCandidate, suggesting} = state
+    if (!autoComplete && candidates.length >= 0) {
+      autoComplete = 'off'
     }
-    this.setState({committedValue})
-  }
-
-  getPatternWarning () {
-    const {state, props} = this
-    const {value, pattern, patternWarning} = props
-    const {committedValue} = state
-    if (!committedValue) {
-      return null
-    }
-    if (!pattern) {
-      return null
-    }
-    const ok = pattern.test(committedValue)
-    if (ok) {
-      return null
-    }
-    const willBeOK = value && pattern.test(value)
-    if (willBeOK) {
-      return null
-    }
-    return patternWarning
-  }
-
-  static Options ({parser, candidates, selectedCandidate, onSelect}) {
-    if (candidates.length === 0) {
-      return null
-    }
+    const warning = this.getPatternWarning()
     return (
-      <ul className='the-input-text-options'>
+      <div {...htmlAttributesFor(props, {
+        except: [
+          'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
+        ],
+      })}
+           {...eventHandlersFor(props, {
+             except: [
+               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
+             ],
+           })}
+           className={c('the-input-text', className, {
+             'the-input-error': !!error,
+             'the-input-warn': !!warning,
+           })}
+           data-value={value}
+           ref={(elm) => { this.elm = elm }}
+      >
+        {renderWarningMessage(warning)}
+        {renderErrorMessage(error)}
+        {children}
         {
-          candidates.map((candidate) => (
-            <li className={c('the-input-text-option', {
-              'the-input-text-option-selected': selectedCandidate === candidate
-            })}
-                key={candidate}
-                data-value={parser(candidate)}
-                onClick={() => onSelect({value: candidate})}
-            >
-              {candidate}
-            </li>
-          ))
+          readOnly ? (
+            <span className='the-input-text-readonly'>{value || ''}</span>
+          ) : (
+            <input className='the-input-text-input'
+                   {...{autoComplete, autoFocus, id, name, placeholder, readOnly, required, type}}
+                   onBlur={this.handleBlur}
+                   onChange={this.handleChange}
+                   onFocus={this.handleFocus}
+                   onKeyDown={this.handleKeyDown}
+                   onKeyPress={this.handleKeyPress}
+                   onKeyUp={this.handleKeyUp}
+                   ref={inputRef}
+                   value={value || ''}
+
+            />
+          )
         }
-      </ul>
+
+        {
+          !readOnly && suggesting && (
+            <TheInputText.Options {...{candidates, parser, selectedCandidate}}
+                                  onSelect={({value}) => this.enterCandidate(value)}
+            />
+          )
+        }
+      </div>
     )
+  }
+
+  updateCandidates (index) {
+    let {matcher, options, value} = this.props
+    options = normalizeOptions(options)
+    value = value && String(value).trim()
+    const {selectedCandidate} = this.state
+    const candidates = Object.keys(options)
+      .map((name) => options[name])
+      .map((candidate) => String(candidate).trim())
+      .filter((candidate) => !!candidate)
+      .filter((candidate) => candidate !== value)
+      .filter((candidate) => !value || matcher(String(candidate), String(value)))
+    if (typeof index === 'undefined') {
+      index = candidates.indexOf(selectedCandidate)
+    }
+    this.setState({
+      candidates,
+      selectedCandidate: candidates[index] || null,
+    })
   }
 }
 
 TheInputText.propTypes = {
   /** Text type */
-  type: PropTypes.string,
-  /** Name of input */
-  name: PropTypes.string.isRequired,
-  /** Value of input */
-  value: PropTypes.string,
-  /** Handle for update */
-  onUpdate: PropTypes.func.isRequired,
-  /** Handle for enter */
-  onEnter: PropTypes.func,
-  /** Handle for up */
-  onUp: PropTypes.func,
-  /** Handle for down */
-  onDown: PropTypes.func,
-  /** Handle for left */
-  onLeft: PropTypes.func,
-  /** Handle for right */
-  onRight: PropTypes.func,
-  /** Value parser */
-  parser: PropTypes.func,
-  /** Options parser */
-  matcher: PropTypes.func,
-  /** Regexp for input */
-  pattern: PropTypes.instanceOf(RegExp),
-  /** Warning text when pattern failed */
-  patternWarning: PropTypes.string,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
+  /** Options parser */
+  matcher: PropTypes.func,
+  /** Name of input */
+  name: PropTypes.string.isRequired,
+  /** Handle for down */
+  onDown: PropTypes.func,
+  /** Handle for enter */
+  onEnter: PropTypes.func,
+  /** Handle for left */
+  onLeft: PropTypes.func,
+  /** Handle for right */
+  onRight: PropTypes.func,
+  /** Handle for up */
+  onUp: PropTypes.func,
+  /** Handle for update */
+  onUpdate: PropTypes.func.isRequired,
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.string)
-  ])
+  ]),
+  /** Value parser */
+  parser: PropTypes.func,
+  /** Regexp for input */
+  pattern: PropTypes.instanceOf(RegExp),
+  /** Warning text when pattern failed */
+  patternWarning: PropTypes.string,
+  type: PropTypes.string,
+  /** Value of input */
+  value: PropTypes.string,
 }
 
 TheInputText.defaultProps = {
-  type: 'text',
-  value: '',
-  parser: String,
+  error: null,
   matcher: (candidate, value) => {
     return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
   },
+  onEnter: null,
+  options: {},
+  parser: String,
   pattern: null,
   patternWarning: null,
-  error: null,
-  options: {},
-  onEnter: null
+  type: 'text',
+  value: '',
 }
 
 TheInputText.displayName = 'TheInputText'
