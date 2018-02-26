@@ -120,7 +120,7 @@ class TheInputText extends React.PureComponent {
     const {onChange, onUpdate} = this.props
     const {name, value} = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: value})
+    onUpdate && onUpdate({[name]: value || ''})
   }
 
   handleDocumentClick (e) {
@@ -294,14 +294,14 @@ class TheInputText extends React.PureComponent {
   updateCandidates (index) {
     let {matcher, options, value} = this.props
     options = normalizeOptions(options)
-    value = value && String(value).trim()
+    value = value && String(value || '').trim()
     const {selectedCandidate} = this.state
     const candidates = Object.keys(options)
       .map((name) => options[name])
       .map((candidate) => String(candidate).trim())
       .filter((candidate) => !!candidate)
       .filter((candidate) => candidate !== value)
-      .filter((candidate) => !value || matcher(String(candidate), String(value)))
+      .filter((candidate) => !value || matcher(String(candidate), String(value || '')))
     if (typeof index === 'undefined') {
       index = candidates.indexOf(selectedCandidate)
     }
