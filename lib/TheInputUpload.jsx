@@ -172,8 +172,8 @@ class TheInputUpload extends React.PureComponent {
 
 }
 
-TheInputUpload.GUIDE_ICON = 'fa fa-cloud-upload'
-TheInputUpload.CLOSE_ICON = 'fa fa-close'
+TheInputUpload.GUIDE_ICON = 'fas fa-cloud-upload-alt'
+TheInputUpload.CLOSE_ICON = 'fas fa-close'
 
 TheInputUpload.propTypes = {
   /** Name of input */
