@@ -765,7 +765,9 @@ TheInputStyle.data = (options) => {
         top: 0,
         zIndex: 4,
       },
-      '.the-input-upload-preview-img': {},
+      '.the-input-upload-preview-img': {
+        objectFit: 'contain',
+      },
       '.the-input-upload-spin': {},
       '.the-input-upload-text': {},
       '&': {
