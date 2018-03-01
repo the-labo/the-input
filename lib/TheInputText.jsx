@@ -57,7 +57,7 @@ class TheInputText extends React.PureComponent {
   commitValue () {
     const {name, onUpdate, parser, value} = this.props
     const committedValue = parser(value)
-    onUpdate && onUpdate({[name]: committedValue})
+    onUpdate && onUpdate({[name]: committedValue || ''})
 
     if (this.state.committedValue === committedValue) {
       return
