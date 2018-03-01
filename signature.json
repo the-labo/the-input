@@ -1534,8 +1534,8 @@
         "required": false,
         "description": "Value parser",
         "defaultValue": {
-          "value": "String",
-          "computed": true
+          "value": "(v) => String(v || '')",
+          "computed": false
         }
       },
       "pattern": {
