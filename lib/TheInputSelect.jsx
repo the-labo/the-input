@@ -277,7 +277,7 @@ class TheInputSelect extends React.PureComponent {
                   <option key={optionValue}
                           name={name}
                           value={optionValue}
-                  >{options[optionValue]}</option>
+                  >{optionValue}</option>
                 ))
               }
             </select>
