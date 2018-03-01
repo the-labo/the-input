@@ -54,18 +54,17 @@ class TheInputRadio extends React.Component {
 
   render () {
     const {props} = this
-    let {
+    const {
       asButton,
       className,
       error,
       id = this.id,
       name,
-      options,
       readOnly,
       value,
     } = props
 
-    options = normalizeOptions(options)
+    const options = normalizeOptions(props.options)
 
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className']})}

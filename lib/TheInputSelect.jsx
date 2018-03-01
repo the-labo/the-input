@@ -204,8 +204,7 @@ class TheInputSelect extends React.PureComponent {
   }
 
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {
       children,
       className,
@@ -220,7 +219,7 @@ class TheInputSelect extends React.PureComponent {
       value,
     } = props
     const options = normalizeOptions(props.options)
-    const {suggesting, suggestingIndex} = s.state
+    const {suggesting, suggestingIndex} = this.state
     const selectedValue = options[value]
     const hasNotSelect = typeof selectedValue === 'undefined'
     return (
@@ -230,14 +229,14 @@ class TheInputSelect extends React.PureComponent {
              'the-input-error': !!error,
            })}
            data-value={value}
-           ref={(elm) => { s.elm = elm }}
+           ref={(elm) => { this.elm = elm }}
       >
         {renderErrorMessage(error)}
 
         {
           !readOnly && (
             <a className='the-input-select-display'
-               onClick={(e) => s.handleDisplayClick(e)}
+               onClick={(e) => this.handleDisplayClick(e)}
             >
           <span className='the-input-select-display-value'>
             {selectedValue}
@@ -254,13 +253,13 @@ class TheInputSelect extends React.PureComponent {
 
         <input className='the-input-select-input'
                {...{id, name, placeholder, type}}
-               onBlur={(e) => s.handleBlur(e)}
+               onBlur={(e) => this.handleBlur(e)}
                onChange={(value) => {}}
-               onFocus={(e) => s.handleFocus(e)}
-               onKeyDown={(e) => s.handleKeyDown(e)}
-               onKeyUp={(e) => s.handleKeyUp(e)}
+               onFocus={(e) => this.handleFocus(e)}
+               onKeyDown={(e) => this.handleKeyDown(e)}
+               onKeyUp={(e) => this.handleKeyUp(e)}
                readOnly
-               ref={(input) => { s.input = input }}
+               ref={(input) => { this.input = input }}
                value={value || ''}
         />
 
@@ -269,16 +268,16 @@ class TheInputSelect extends React.PureComponent {
             <span className='the-input-select-readonly'>{options[value]}</span>
           ) : (
             <select className='the-input-select-select'
-                    onChange={(e) => s.handleChange(e)}
+                    onChange={(e) => this.handleChange(e)}
                     tabIndex={-1}
                     value={value || ''}
             >
               {
-                Object.keys(options).map((value) => (
-                  <option key={value}
+                Object.keys(options).map((optionValue) => (
+                  <option key={optionValue}
                           name={name}
-                          value={value}
-                  >{value}</option>
+                          value={optionValue}
+                  >{options[optionValue]}</option>
                 ))
               }
             </select>
@@ -290,7 +289,7 @@ class TheInputSelect extends React.PureComponent {
         {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
-                                    onSelect={({value}) => s.enterSuggested(value)}
+                                    onSelect={({value}) => this.enterSuggested(value)}
             />
           )
         }
