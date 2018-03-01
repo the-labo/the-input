@@ -358,7 +358,7 @@ TheInputText.defaultProps = {
   },
   onEnter: null,
   options: {},
-  parser: String,
+  parser: (v) => String(v || ''),
   pattern: null,
   patternWarning: null,
   type: 'text',
