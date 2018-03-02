@@ -28,9 +28,9 @@ class TheInputTextArea extends React.PureComponent {
 
   handleKeyDown (e) {
     const {
+      onCombineEnter,
       onEnter,
       onKeyDown,
-      onCombineEnter,
     } = this.props
     switch (e.keyCode) {
       case 13: { // Enter

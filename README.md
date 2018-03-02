@@ -164,7 +164,8 @@ class ExampleComponent extends React.PureComponent {
         <TextArea name='value01'
                   value={values['value01']}
                   onUpdate={onUpdate}
-                  onMetaEnter={() => console.log('meta enter')}
+                  onCombineEnter={() => console.log('combine enter')}
+                  onEnter={() => console.log('enter')}
                   placeholder='value01'
         />
 
