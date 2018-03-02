@@ -88,6 +88,8 @@ class ExampleComponent extends React.PureComponent {
         <TextArea name='value01'
                   value={values['value01']}
                   onUpdate={onUpdate}
+                  onCombineEnter={() => console.log('combine enter')}
+                  onEnter={() => console.log('enter')}
                   placeholder='value01'
         />
 

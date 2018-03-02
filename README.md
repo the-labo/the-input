@@ -164,6 +164,7 @@ class ExampleComponent extends React.PureComponent {
         <TextArea name='value01'
                   value={values['value01']}
                   onUpdate={onUpdate}
+                  onMetaEnter={() => console.log('meta enter')}
                   placeholder='value01'
         />
 
@@ -536,7 +537,7 @@ Text Input
 | `onUp` | func  | Handle for up | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
-| `parser` | func  | Value parser | `String` |
+| `parser` | func  | Value parser | `(v) => String(v || '')` |
 | `pattern` | instanceOf  | Regexp for input | `null` |
 | `patternWarning` | string  | Warning text when pattern failed | `null` |
 | `type` | string  |  | `'text'` |

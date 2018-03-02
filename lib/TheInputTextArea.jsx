@@ -12,24 +12,44 @@ import { renderErrorMessage } from './helpers'
 class TheInputTextArea extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.state = {}
+    this.state = {}
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   componentWillUnmount () {
   }
 
   handleChange (e) {
-    const s = this
-    let {onChange, onUpdate, parser} = s.props
-    let {name, value} = e.target
+    const {onChange, onUpdate, parser} = this.props
+    const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
   }
 
+  handleKeyDown (e) {
+    const {
+      onEnter,
+      onKeyDown,
+      onCombineEnter,
+    } = this.props
+    switch (e.keyCode) {
+      case 13: { // Enter
+        const isCombine = e.metaKey || e.shiftKey || e.altKey || e.ctrlKey
+        if (isCombine) {
+          onCombineEnter && onCombineEnter()
+        } else {
+          onEnter && onEnter()
+        }
+        break
+      }
+      default:
+        break
+    }
+    onKeyDown && onKeyDown(e)
+  }
+
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {
       children,
       className,
@@ -67,8 +87,9 @@ class TheInputTextArea extends React.PureComponent {
 
         <textarea className='the-input-textarea-input'
                   {...{id, name, placeholder, required, rows}}
-                  {...{onBlur, onChange, onFocus, onKeyDown, onKeyPress, onKeyUp}}
-                  onChange={(e) => s.handleChange(e)}
+                  {...{onBlur, onChange, onFocus, onKeyPress, onKeyUp}}
+                  onChange={(e) => this.handleChange(e)}
+                  onKeyDown={this.handleKeyDown}
                   value={value || ''}
 
         />
