@@ -1561,6 +1561,28 @@
           "computed": false
         }
       },
+      "prefix": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "prefix",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "suffix": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "suffix",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
       "type": {
         "type": {
           "name": "string"
