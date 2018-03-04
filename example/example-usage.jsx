@@ -13,11 +13,10 @@ class ExampleComponent extends React.PureComponent {
   }
 
   render () {
-    const s = this
-    const {values} = s.state
+    const {values} = this.state
     const onUpdate = (values) => {
-      s.setState({
-        values: Object.assign({}, s.state.values, values)
+      this.setState({
+        values: Object.assign({}, this.state.values, values)
       })
     }
 
@@ -53,6 +52,15 @@ class ExampleComponent extends React.PureComponent {
               onUpdate={onUpdate}
               parser={(v) => String(v).toUpperCase()}
               placeholder='value01 only with uppercase parser'
+              options={['Banana', 'Orange', 'Apple']}
+        />
+
+        <Text name='value01'
+              value={values['value01']}
+              prefix={'Oh!'}
+              suffix={', Yes it is!'}
+              onUpdate={onUpdate}
+              placeholder='value01'
               options={['Banana', 'Orange', 'Apple']}
         />
 

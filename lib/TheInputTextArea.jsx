@@ -51,6 +51,7 @@ class TheInputTextArea extends React.PureComponent {
   render () {
     const {props} = this
     let {
+      autoFocus,
       children,
       className,
       error,
@@ -59,7 +60,6 @@ class TheInputTextArea extends React.PureComponent {
       onBlur,
       onChange,
       onFocus,
-      onKeyDown,
       onKeyPress,
       onKeyUp,
       placeholder,
@@ -86,7 +86,7 @@ class TheInputTextArea extends React.PureComponent {
         {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{id, name, placeholder, required, rows}}
+                  {...{autoFocus, id, name, placeholder, required, rows}}
                   {...{onBlur, onChange, onFocus, onKeyPress, onKeyUp}}
                   onChange={(e) => this.handleChange(e)}
                   onKeyDown={this.handleKeyDown}

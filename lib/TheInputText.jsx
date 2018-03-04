@@ -229,8 +229,10 @@ class TheInputText extends React.PureComponent {
       name,
       parser,
       placeholder,
+      prefix,
       readOnly,
       required,
+      suffix,
       type,
       value,
     } = props
@@ -265,18 +267,21 @@ class TheInputText extends React.PureComponent {
           readOnly ? (
             <span className='the-input-text-readonly'>{value || ''}</span>
           ) : (
-            <input className='the-input-text-input'
-                   {...{autoComplete, autoFocus, id, name, placeholder, readOnly, required, type}}
-                   onBlur={this.handleBlur}
-                   onChange={this.handleChange}
-                   onFocus={this.handleFocus}
-                   onKeyDown={this.handleKeyDown}
-                   onKeyPress={this.handleKeyPress}
-                   onKeyUp={this.handleKeyUp}
-                   ref={inputRef}
-                   value={value || ''}
-
-            />
+            <span className='the-input-text-input-wrap'>
+              {prefix}
+              <input className='the-input-text-input'
+                     {...{autoComplete, autoFocus, id, name, placeholder, readOnly, required, type}}
+                     onBlur={this.handleBlur}
+                     onChange={this.handleChange}
+                     onFocus={this.handleFocus}
+                     onKeyDown={this.handleKeyDown}
+                     onKeyPress={this.handleKeyPress}
+                     onKeyUp={this.handleKeyUp}
+                     ref={inputRef}
+                     value={value || ''}
+              />
+              {suffix}
+            </span>
           )
         }
 
@@ -346,6 +351,10 @@ TheInputText.propTypes = {
   pattern: PropTypes.instanceOf(RegExp),
   /** Warning text when pattern failed */
   patternWarning: PropTypes.string,
+  /** prefix */
+  prefix: PropTypes.node,
+  /** suffix */
+  suffix: PropTypes.node,
   type: PropTypes.string,
   /** Value of input */
   value: PropTypes.string,
@@ -361,6 +370,8 @@ TheInputText.defaultProps = {
   parser: (v) => String(v || ''),
   pattern: null,
   patternWarning: null,
+  prefix: null,
+  suffix: null,
   type: 'text',
   value: '',
 }

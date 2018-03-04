@@ -99,6 +99,13 @@ TheInputStyle.data = (options) => {
         padding: '4px 8px',
         width: '100%',
       },
+      '.the-input-text-input-wrap': {
+        alignItems: 'center',
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'stretch',
+        whiteSpace: 'nowrap',
+      },
       '.the-input-text-option': {
         '&:last-child': {
           borderBottom: 'none',
