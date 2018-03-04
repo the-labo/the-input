@@ -91,6 +91,7 @@ class ExampleComponent extends React.PureComponent {
   render () {
     const {values} = this.state
     const onUpdate = (values) => {
+      console.log('values', values)
       this.setState({
         values: Object.assign({}, this.state.values, values)
       })
@@ -549,6 +550,8 @@ Text Input
 | `parser` | func  | Value parser | `(v) => String(v || '')` |
 | `pattern` | instanceOf  | Regexp for input | `null` |
 | `patternWarning` | string  | Warning text when pattern failed | `null` |
+| `prefix` | node  | prefix | `null` |
+| `suffix` | node  | suffix | `null` |
 | `type` | string  |  | `'text'` |
 | `value` | string  | Value of input | `''` |
 

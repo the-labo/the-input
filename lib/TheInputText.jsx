@@ -168,12 +168,11 @@ class TheInputText extends React.PureComponent {
         this.moveCandidateIndex(+1)
         break
       case 13: { // Enter
-        let {selectedCandidate} = this.state
+        const {selectedCandidate} = this.state
         if (selectedCandidate) {
           this.enterCandidate(selectedCandidate)
         }
         onEnter && onEnter()
-        this.commitValue()
         break
       }
       case 9: // Tab

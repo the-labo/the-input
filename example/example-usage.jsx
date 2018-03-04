@@ -15,6 +15,7 @@ class ExampleComponent extends React.PureComponent {
   render () {
     const {values} = this.state
     const onUpdate = (values) => {
+      console.log('values', values)
       this.setState({
         values: Object.assign({}, this.state.values, values)
       })
