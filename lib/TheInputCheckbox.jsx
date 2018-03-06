@@ -14,11 +14,13 @@ class TheInputCheckbox extends React.PureComponent {
   static Option ({checked, id, label, name, onChange, value}) {
     const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
     return (
-      <div className={c('the-input-checkbox-item', {
-        'the-input-checkbox-item-checked': checked,
-      })}
+      <div aria-checked={checked}
+           className={c('the-input-checkbox-item', {
+             'the-input-checkbox-item-checked': checked,
+           })}
            data-value={value}
            key={value}
+           role='checkbox'
       >
         <input className='the-input-checkbox-checkbox'
                type='checkbox'
@@ -101,13 +103,14 @@ class TheInputCheckbox extends React.PureComponent {
             <span className='the-input-checkbox-readonly'>{options[value]}</span>
           ) : (
             Object.keys(options).map((optionValue) => (
-              <TheInputCheckbox.Option checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
-                                       id={this.idFor(optionValue)}
-                                       key={optionValue}
-                                       label={options[optionValue]}
-                                       name={name}
-                                       onChange={(e) => this.handleChange(e)}
-                                       value={optionValue}
+              <TheInputCheckbox.Option
+                checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
+                id={this.idFor(optionValue)}
+                key={optionValue}
+                label={options[optionValue]}
+                name={name}
+                onChange={(e) => this.handleChange(e)}
+                value={optionValue}
               />
             ))
           )

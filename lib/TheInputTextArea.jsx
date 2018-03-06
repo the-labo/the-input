@@ -115,6 +115,7 @@ TheInputTextArea.propTypes = {
 TheInputTextArea.defaultProps = {
   error: null,
   parser: String,
+  role: 'textbox',
   rows: 5,
   value: '',
 }

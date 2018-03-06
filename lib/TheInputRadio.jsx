@@ -14,11 +14,13 @@ class TheInputRadio extends React.Component {
   static Option ({checked, id, label, name, onChange, value}) {
     const icon = checked ? TheInputRadio.CHECKED_ICON : TheInputRadio.NORMAL_ICON
     return (
-      <div className={c('the-input-radio-item', {
+      <div aria-checked={checked}
+           className={c('the-input-radio-item', {
         'the-input-radio-item-checked': checked,
       })}
            data-value={value}
            key={value}
+           role='radio'
       >
         <input className='the-input-radio-radio'
                type='radio'
@@ -133,6 +135,7 @@ TheInputRadio.defaultProps = {
   error: null,
   options: {},
   parser: String,
+  role: 'radiogroup',
   value: '',
 }
 

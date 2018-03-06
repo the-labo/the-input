@@ -455,6 +455,7 @@ Radio input of the-components
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
 | `value` | union  | Value of input | `''` |
+| `role` |   |  | `'radiogroup'` |
 
 ### TheInputRange
 
@@ -554,6 +555,7 @@ Text Input
 | `suffix` | node  | suffix | `null` |
 | `type` | string  |  | `'text'` |
 | `value` | string  | Value of input | `''` |
+| `role` |   |  | `'textbox'` |
 
 ### TheInputTextArea
 
@@ -569,6 +571,7 @@ TextArea Input
 | `rows` | number  |  | `5` |
 | `value` | string  | Value of input | `''` |
 | `error` |   |  | `null` |
+| `role` |   |  | `'textbox'` |
 
 ### TheInputToggle
 

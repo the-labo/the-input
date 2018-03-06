@@ -370,6 +370,7 @@ TheInputText.defaultProps = {
   pattern: null,
   patternWarning: null,
   prefix: null,
+  role: 'textbox',
   suffix: null,
   type: 'text',
   value: '',

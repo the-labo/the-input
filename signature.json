@@ -392,6 +392,12 @@
           "value": "''",
           "computed": false
         }
+      },
+      "role": {
+        "defaultValue": {
+          "value": "'radiogroup'",
+          "computed": false
+        }
       }
     }
   },
@@ -1604,6 +1610,12 @@
           "value": "''",
           "computed": false
         }
+      },
+      "role": {
+        "defaultValue": {
+          "value": "'textbox'",
+          "computed": false
+        }
       }
     }
   },
@@ -1687,6 +1699,12 @@
       "error": {
         "defaultValue": {
           "value": "null",
+          "computed": false
+        }
+      },
+      "role": {
+        "defaultValue": {
+          "value": "'textbox'",
           "computed": false
         }
       }
