@@ -1722,7 +1722,7 @@
         ],
         "params": [
           {
-            "name": "{className, htmlFor, title }",
+            "name": "{className, htmlFor, title}",
             "type": null
           }
         ],
@@ -1736,7 +1736,7 @@
         ],
         "params": [
           {
-            "name": "{checked, id, name, onChange, onClick, value }",
+            "name": "{checked, id, name, onChange, onClick, value}",
             "type": null
           }
         ],
