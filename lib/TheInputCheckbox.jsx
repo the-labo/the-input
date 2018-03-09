@@ -15,6 +15,7 @@ class TheInputCheckbox extends React.PureComponent {
     const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
     return (
       <div aria-checked={checked}
+           aria-label={label}
            className={c('the-input-checkbox-item', {
              'the-input-checkbox-item-checked': checked,
            })}

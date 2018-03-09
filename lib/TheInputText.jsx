@@ -22,7 +22,8 @@ class TheInputText extends React.PureComponent {
       >
         {
           candidates.map((candidate) => (
-            <li className={c('the-input-text-option', {
+            <li aria-label={candidate}
+                className={c('the-input-text-option', {
               'the-input-text-option-selected': selectedCandidate === candidate,
             })}
                 data-value={parser(candidate)}

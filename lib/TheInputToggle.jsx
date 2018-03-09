@@ -10,19 +10,19 @@ import TheInputRadio from './TheInputRadio'
  * Toggle input of the-components
  */
 class TheInputToggle extends React.PureComponent {
-  static Label ({className, htmlFor, title }) {
+  static Label ({className, htmlFor, title}) {
     return (
-      <label className={ c('the-input-toggle-label', className) }
-             htmlFor={ htmlFor }>
-        <span className='the-input-toggle-label-text'>{ title }</span>
+      <label className={c('the-input-toggle-label', className)}
+             htmlFor={htmlFor}>
+        <span className='the-input-toggle-label-text'>{title}</span>
       </label>
     )
   }
 
-  static Radio ({checked, id, name, onChange, onClick, value }) {
+  static Radio ({checked, id, name, onChange, onClick, value}) {
     return (
       <input type='radio'
-             {...{checked, id, name, onChange, onClick, value }}
+             {...{checked, id, name, onChange, onClick, value}}
              className='the-input-toggle-radio'/>
     )
   }
@@ -35,20 +35,20 @@ class TheInputToggle extends React.PureComponent {
 
   handleChange (e) {
     const s = this
-    let {onChange } = s.props
+    let {onChange} = s.props
     onChange && onChange(e)
   }
 
   handleClick (e) {
     const s = this
-    let {on, onUpdate } = s.props
-    let {name } = s.props
-    onUpdate && onUpdate({[name]: !on })
+    let {on, onUpdate} = s.props
+    let {name} = s.props
+    onUpdate && onUpdate({[name]: !on})
   }
 
   render () {
     const s = this
-    const {props } = s
+    const {props} = s
     let {
       className,
       error,
@@ -60,17 +60,19 @@ class TheInputToggle extends React.PureComponent {
       style,
       width,
     } = props
-    const {Label, Radio } = TheInputToggle
+    const {Label, Radio} = TheInputToggle
     return (
-      <div {...htmlAttributesFor(props, {except: [ 'id', 'className' ] })}
-           {...eventHandlersFor(props, {except: [] })}
-           {...{id }}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
+           {...eventHandlersFor(props, {except: []})}
+           {...{id}}
+           aria-checked={on}
            className={c('the-input-toggle', className, {
              'the-input-error': !!error,
              'the-input-toggle-off': !on,
              'the-input-toggle-on': on,
            })}
-           style={Object.assign({}, style, {width })}
+           role='switch'
+           style={Object.assign({}, style, {width})}
       >
         <div className='the-input-toggle-inner'
         >
@@ -101,7 +103,7 @@ class TheInputToggle extends React.PureComponent {
                  value='on'
           />
         </div>
-        { props.children }
+        {props.children}
       </div>
     )
   }
