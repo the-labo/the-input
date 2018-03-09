@@ -19,7 +19,9 @@ class TheInputSelect extends React.PureComponent {
       return null
     }
     return (
-      <ul className='the-input-select-options'>
+      <ul className='the-input-select-options'
+          role='listbox'
+      >
         {
           optionValues.sort(sorter).map((optionValue, i) => (
             <li className={c('the-input-select-option', {
@@ -28,6 +30,7 @@ class TheInputSelect extends React.PureComponent {
                 data-value={parser(optionValue)}
                 key={optionValue}
                 onClick={() => onSelect({value: optionValue})}
+                role='option'
             >
               {options[optionValue]}
             </li>

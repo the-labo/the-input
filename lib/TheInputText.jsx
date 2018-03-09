@@ -17,7 +17,9 @@ class TheInputText extends React.PureComponent {
       return null
     }
     return (
-      <ul className='the-input-text-options'>
+      <ul className='the-input-text-options'
+          role='listbox'
+      >
         {
           candidates.map((candidate) => (
             <li className={c('the-input-text-option', {
@@ -26,6 +28,7 @@ class TheInputText extends React.PureComponent {
                 data-value={parser(candidate)}
                 key={candidate}
                 onClick={() => onSelect({value: candidate})}
+                role='option'
             >
               {candidate}
             </li>

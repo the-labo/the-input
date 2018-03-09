@@ -64,13 +64,14 @@ class TheInputTextArea extends React.PureComponent {
       onKeyUp,
       placeholder,
       required,
+      role,
       rows,
       value,
     } = props
     return (
       <div {...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder'
+          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder', 'role'
         ],
       })}
            {...eventHandlersFor(props, {
@@ -86,8 +87,9 @@ class TheInputTextArea extends React.PureComponent {
         {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{autoFocus, id, name, placeholder, required, rows}}
+                  {...{autoFocus, id, name, placeholder, required, role, rows}}
                   {...{onBlur, onChange, onFocus, onKeyPress, onKeyUp}}
+                  aria-multiline='true'
                   onChange={(e) => this.handleChange(e)}
                   onKeyDown={this.handleKeyDown}
                   value={value || ''}
