@@ -440,11 +440,6 @@ Checkbox input of the-components
 
 
 
-**Props**
-
-| Name | Type | Description | Default |
-| --- | --- | ---- | ---- |
-| `spellCheck` |   |  | `false` |
 
 ### TheInputRadio
 
@@ -578,6 +573,7 @@ TextArea Input
 | `value` | string  | Value of input | `''` |
 | `error` |   |  | `null` |
 | `role` |   |  | `'textbox'` |
+| `spellCheck` |   |  | `false` |
 
 ### TheInputToggle
 
