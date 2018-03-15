@@ -53,6 +53,8 @@ TheInputPassword.defaultProps = Object.assign({},
   clone(TheInputText.defaultProps, {without: ['type', 'options']}),
   {
     spellCheck: false,
+    autoCorrect: false,
+    autoCapitalize: false,
   }
 )
 TheInputPassword.displayName = 'TheInputPassword'
