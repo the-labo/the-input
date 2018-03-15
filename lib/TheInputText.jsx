@@ -263,7 +263,18 @@ class TheInputText extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'type', 'value', 'name', 'required', 'placeholder', 'autoFocus', 'autoComplete'
+          'id',
+          'className',
+          'type',
+          'value',
+          'name',
+          'required',
+          'placeholder',
+          'autoFocus',
+          'autoComplete',
+          'autoCapitalize',
+          'autoCorrect',
+          'spellCheck'
         ],
       })}
            {...eventHandlersFor(props, {
