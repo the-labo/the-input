@@ -249,6 +249,14 @@
         "returns": null
       }
     ],
+    "props": {
+      "spellCheck": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      }
+    },
     "composes": [
       "asobj"
     ]

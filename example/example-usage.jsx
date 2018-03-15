@@ -6,8 +6,7 @@ import { TheInput, TheInputStyle } from 'the-input'
 class ExampleComponent extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.state = {
+    this.state = {
       values: {}
     }
   }
@@ -53,6 +52,8 @@ class ExampleComponent extends React.PureComponent {
               onUpdate={onUpdate}
               parser={(v) => String(v).toUpperCase()}
               placeholder='value01 only with uppercase parser'
+              autoCapitalize={false}
+              autoCorrect="off"
               options={['Banana', 'Orange', 'Apple']}
         />
 

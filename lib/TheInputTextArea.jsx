@@ -66,6 +66,7 @@ class TheInputTextArea extends React.PureComponent {
       required,
       role,
       rows,
+      spellCheck,
       value,
     } = props
     return (
@@ -87,7 +88,7 @@ class TheInputTextArea extends React.PureComponent {
         {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{autoFocus, id, name, placeholder, required, role, rows}}
+                  {...{autoFocus, id, name, placeholder, required, role, rows, spellCheck}}
                   {...{onBlur, onChange, onFocus, onKeyPress, onKeyUp}}
                   aria-multiline='true'
                   onChange={(e) => this.handleChange(e)}
@@ -119,6 +120,7 @@ TheInputTextArea.defaultProps = {
   parser: String,
   role: 'textbox',
   rows: 5,
+  spellCheck: false,
   value: '',
 }
 

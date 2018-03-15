@@ -8,6 +8,13 @@ import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage, renderWarningMessage } from './helpers'
 import * as patterns from './patterns'
 
+const onOffBoolean = (v) => {
+  if (typeof v === 'boolean') {
+    return v ? 'on' : 'off'
+  }
+  return v
+}
+
 /**
  * Text Input
  */
@@ -24,8 +31,8 @@ class TheInputText extends React.PureComponent {
           candidates.map((candidate) => (
             <li aria-label={candidate}
                 className={c('the-input-text-option', {
-              'the-input-text-option-selected': selectedCandidate === candidate,
-            })}
+                  'the-input-text-option-selected': selectedCandidate === candidate,
+                })}
                 data-value={parser(candidate)}
                 key={candidate}
                 onClick={() => onSelect({value: candidate})}
@@ -235,15 +242,23 @@ class TheInputText extends React.PureComponent {
       prefix,
       readOnly,
       required,
+      spellCheck,
       suffix,
       type,
       value,
     } = props
-    let {autoComplete} = props
+    let {
+      autoCapitalize,
+      autoComplete,
+      autoCorrect,
+    } = props
     const {candidates, committedValue, selectedCandidate, suggesting} = state
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
+    autoCapitalize = onOffBoolean(autoCapitalize)
+    autoCorrect = onOffBoolean(autoCorrect)
+
     const warning = this.getPatternWarning()
     return (
       <div {...htmlAttributesFor(props, {
@@ -273,7 +288,19 @@ class TheInputText extends React.PureComponent {
             <span className='the-input-text-input-wrap'>
               {prefix}
               <input className='the-input-text-input'
-                     {...{autoComplete, autoFocus, id, name, placeholder, readOnly, required, type}}
+                     {...{
+                       autoCapitalize,
+                       autoComplete,
+                       autoCorrect,
+                       autoFocus,
+                       id,
+                       name,
+                       placeholder,
+                       readOnly,
+                       required,
+                       spellCheck,
+                       type,
+                     }}
                      onBlur={this.handleBlur}
                      onChange={this.handleChange}
                      onFocus={this.handleFocus}
