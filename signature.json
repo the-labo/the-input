@@ -249,14 +249,6 @@
         "returns": null
       }
     ],
-    "props": {
-      "spellCheck": {
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      }
-    },
     "composes": [
       "asobj"
     ]
@@ -1713,6 +1705,12 @@
       "role": {
         "defaultValue": {
           "value": "'textbox'",
+          "computed": false
+        }
+      },
+      "spellCheck": {
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       }
