@@ -1790,7 +1790,7 @@
           "name": "bool"
         },
         "required": true,
-        "description": "",
+        "description": "Switch on or not",
         "defaultValue": {
           "value": "false",
           "computed": false

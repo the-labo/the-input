@@ -584,7 +584,7 @@ Toggle input of the-components
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
 | `offTitle` | string  | Title text for off state | `''` |
-| `on` | bool  |  | `false` |
+| `on` | bool  | Switch on or not | `false` |
 | `onTitle` | string  | Title text for on state | `''` |
 | `width` | number  | Width of component | `64` |
 | `error` |   |  | `null` |
