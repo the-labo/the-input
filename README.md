@@ -223,7 +223,7 @@ class ExampleComponent extends React.PureComponent {
                   value={values['value04']}
                   onUpdate={onUpdate}
                   sorter={(a, b) => a.localeCompare(b)}
-                  options={['Tea', 'Coffee', 'Water']}
+                  options={['Tea', 'Coffee', 'Water', ...'abcdefghijlkmnlopqrstu'.split('')]}
           />
         </div>
 
