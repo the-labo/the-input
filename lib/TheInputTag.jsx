@@ -115,7 +115,8 @@ class TheInputTag extends React.PureComponent {
                     value={String(edittingValue).trim()}
       >
         {
-          tagValues.filter(Boolean)
+          tagValues
+            .filter(Boolean)
             .filter(uniqueFilter())
             .reverse()
             .map((text) => (
@@ -138,7 +139,9 @@ class TheInputTag extends React.PureComponent {
 
   splitValue () {
     const {splitter, value} = this.props
-    return String(value || '').split(splitter).reverse()
+    const {focused} = this.state
+    const split = String(value || '').split(splitter).reverse()
+    return focused ? split : ['', ...split]
   }
 
   updateBySplitValues (splitValues) {
