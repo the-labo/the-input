@@ -13,13 +13,21 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  * Select Input
  */
 class TheInputSelect extends React.PureComponent {
-  static Options ({onSelect, options, parser, sorter, suggestingIndex}) {
+  static Options ({
+                    onSelect,
+                    options,
+                    optionsRef,
+                    parser,
+                    sorter,
+                    suggestingIndex,
+                  }) {
     const optionValues = Object.keys(options)
     if (optionValues.length === 0) {
       return null
     }
     return (
       <ul className='the-input-select-options'
+          ref={optionsRef}
           role='listbox'
       >
         {
@@ -55,6 +63,21 @@ class TheInputSelect extends React.PureComponent {
   componentDidMount () {
     const window = get('window')
     window.addEventListener('click', this.handleDocumentClick)
+  }
+
+  componentDidUpdate () {
+    const {optionsElm} = this
+    if (optionsElm) {
+      const minY = get('document.body.clientTop')
+      const maxY = get('document.body.clientHeight')
+      const rect = optionsElm.getBoundingClientRect()
+      const topOut = rect.top < minY
+      const bottomOut = rect.bottom > maxY
+      if (!topOut && bottomOut) {
+        const amount = Math.min(rect.bottom - maxY, rect.top - minY)
+        optionsElm.style.top -= amount
+      }
+    }
   }
 
   componentWillUnmount () {
@@ -290,6 +313,7 @@ class TheInputSelect extends React.PureComponent {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
                                     onSelect={({value}) => this.enterSuggested(value)}
+                                    optionsRef={(optionsElm) => { this.optionsElm = optionsElm }}
             />
           )
         }
