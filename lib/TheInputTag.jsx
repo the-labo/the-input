@@ -11,77 +11,69 @@ import TheInputText from './TheInputText'
 class TheInputTag extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.state = {
+    this.state = {
       focused: false,
     }
-    s.handleKeyDown = s.handleKeyDown.bind(s)
-    s.handleUpdate = s.handleUpdate.bind(s)
-    s.handleInputRef = s.handleInputRef.bind(s)
-    s.handleFocus = s.handleFocus.bind(s)
-    s.handleBlur = s.handleBlur.bind(s)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleInputRef = this.handleInputRef.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
   }
 
   componentDidMount () {
   }
 
   componentWillUnmount () {
-    const s = this
   }
 
   handleBack () {
-    const s = this
-    const [edittingValue, ...tagValues] = s.splitValue()
+    const [edittingValue, ...tagValues] = this.splitValue()
     if (edittingValue.length === 0) {
-      s.updateBySplitValues(
+      this.updateBySplitValues(
         ['', ...tagValues.slice(1)]
       )
     }
   }
 
   handleBlur (e) {
-    const s = this
-    const {onBlur} = s.props
-    const [edittingValue, ...tagValues] = s.splitValue()
+    const {onBlur} = this.props
+    const [edittingValue, ...tagValues] = this.splitValue()
     if (edittingValue.length > 0) {
-      s.updateBySplitValues(['', edittingValue, ...tagValues])
+      this.updateBySplitValues(['', edittingValue, ...tagValues])
     }
 
     onBlur && onBlur(e)
-    s.setState({focused: false})
+    this.setState({focused: false})
   }
 
   handleEnter () {
-    const s = this
-    const [edittingValue, ...tagValues] = s.splitValue()
+    const [edittingValue, ...tagValues] = this.splitValue()
     if (edittingValue.length > 0) {
-      s.updateBySplitValues(
+      this.updateBySplitValues(
         ['', edittingValue, ...tagValues.slice()]
       )
     }
   }
 
   handleFocus (e) {
-    const s = this
-    const {onFocus} = s.props
+    const {onFocus} = this.props
     onFocus && onFocus(e)
-    s.setState({focused: true})
+    this.setState({focused: true})
   }
 
   handleInputRef (input) {
-    const s = this
-    s.input = input
+    this.input = input
   }
 
   handleKeyDown (e) {
-    const s = this
-    const {onKeyDown} = s.props
+    const {onKeyDown} = this.props
     switch (e.keyCode) {
       case 8:
-        s.handleBack()
+        this.handleBack()
         break
       case 13:
-        s.handleEnter()
+        this.handleEnter()
         break
       default:
         break
@@ -90,38 +82,35 @@ class TheInputTag extends React.PureComponent {
   }
 
   handleUpdate (values) {
-    const s = this
-    const {name} = s.props
+    const {name} = this.props
     const edittingValue = values[name]
-    const [, ...tagValues] = s.splitValue()
-    s.updateBySplitValues([edittingValue, ...tagValues])
+    const [, ...tagValues] = this.splitValue()
+    this.updateBySplitValues([edittingValue, ...tagValues])
   }
 
   removeTag (text) {
-    const s = this
-    const tagValues = s.splitValue()
-    s.updateBySplitValues(
+    const tagValues = this.splitValue()
+    this.updateBySplitValues(
       tagValues.filter((tagValue) => tagValue !== text)
     )
   }
 
   render () {
-    const s = this
-    const {props} = s
-    const [edittingValue, ...tagValues] = s.splitValue()
+    const {props} = this
+    const [edittingValue, ...tagValues] = this.splitValue()
     const inputProps = clone(props, {without: ['value', 'splitter', 'options']})
     const {options} = props
-    const {focused} = s.state
+    const {focused} = this.state
     return (
       <TheInputText {...inputProps}
                     className={c('the-input-tag', {
                       'the-input-tag-focused': focused,
                     })}
-                    inputRef={s.handleInputRef}
-                    onBlur={s.handleBlur}
-                    onFocus={s.handleFocus}
-                    onKeyDown={s.handleKeyDown}
-                    onUpdate={s.handleUpdate}
+                    inputRef={this.handleInputRef}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    onKeyDown={this.handleKeyDown}
+                    onUpdate={this.handleUpdate}
                     options={([].concat(options || [])).filter((option) => !tagValues.includes(option))}
                     value={String(edittingValue).trim()}
       >
@@ -137,7 +126,7 @@ class TheInputTag extends React.PureComponent {
                 {text}
               </span>
               <span className={c('the-input-tag-remover')}
-                    onClick={() => s.removeTag(text)}>
+                    onClick={() => this.removeTag(text)}>
               <TheIcon className={TheInputTag.CLOSE_ICON}/>
               </span>
             </span>
@@ -148,22 +137,19 @@ class TheInputTag extends React.PureComponent {
   }
 
   splitValue () {
-    const s = this
-    const {splitter, value} = s.props
+    const {splitter, value} = this.props
     return String(value || '').split(splitter).reverse()
   }
 
   updateBySplitValues (splitValues) {
-    const s = this
-    const {name, onUpdate} = s.props
+    const {name, onUpdate} = this.props
     const [edittingValue, ...tagValues] = splitValues
     const value = [edittingValue, ...tagValues.filter(uniqueFilter())].reverse().join(' ')
     onUpdate && onUpdate({[name]: value})
   }
 }
 
-TheInputTag.TAG_ICON = 'fa fa-tags'
-TheInputTag.CLOSE_ICON = 'fa fa-close'
+TheInputTag.CLOSE_ICON = 'fas fa-times'
 TheInputTag.propTypes = Object.assign(
   clone(TheInputText.propTypes, {without: []}),
   {

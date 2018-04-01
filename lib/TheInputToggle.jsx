@@ -29,30 +29,25 @@ class TheInputToggle extends React.PureComponent {
 
   constructor (props) {
     super(props)
-    const s = this
-    s.id = newId()
+    this.id = newId()
   }
 
   handleChange (e) {
-    const s = this
-    let {onChange} = s.props
+    const {onChange} = this.props
     onChange && onChange(e)
   }
 
   handleClick (e) {
-    const s = this
-    let {on, onUpdate} = s.props
-    let {name} = s.props
+    const {name, on, onUpdate} = this.props
     onUpdate && onUpdate({[name]: !on})
   }
 
   render () {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {
       className,
       error,
-      id = s.id,
+      id = this.id,
       name,
       offTitle,
       on,
@@ -83,12 +78,12 @@ class TheInputToggle extends React.PureComponent {
           <Radio checked={!on}
                  id={`${id}-radio-off`}
                  name={name}
-                 onChange={(e) => s.handleChange(e)}
-                 onClick={(e) => s.handleClick(e)}
+                 onChange={(e) => this.handleChange(e)}
+                 onClick={(e) => this.handleClick(e)}
                  value='off'
           />
           <div className='the-input-toggle-handle'
-               onClick={(e) => s.handleClick(e)}
+               onClick={(e) => this.handleClick(e)}
           >
           </div>
           <Label className='the-input-toggle-off-label'
@@ -98,8 +93,8 @@ class TheInputToggle extends React.PureComponent {
           <Radio checked={!!on}
                  id={`${id}-radio-on`}
                  name={name}
-                 onChange={(e) => s.handleChange(e)}
-                 onClick={(e) => s.handleClick(e)}
+                 onChange={(e) => this.handleChange(e)}
+                 onClick={(e) => this.handleClick(e)}
                  value='on'
           />
         </div>

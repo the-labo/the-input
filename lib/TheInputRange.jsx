@@ -83,16 +83,14 @@ class TheInputRange extends React.PureComponent {
   }
 
   componentDidMount () {
-    const s = this
     const {window} = get('window')
-    window.addEventListener('resize', s.handleResize)
-    s.handleResize()
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
   }
 
   componentWillUnmount () {
-    const s = this
     const {window} = get('window')
-    window.removeEventListener('resize', s.handleResize)
+    window.removeEventListener('resize', this.handleResize)
   }
 
   getHandleRadius () {
@@ -104,35 +102,33 @@ class TheInputRange extends React.PureComponent {
   }
 
   handleBarClick (e) {
-    const s = this
-    const {barElm, state} = s
+    const {barElm, state} = this
     if (!barElm) {
       return
     }
-    const handleRadius = s.getHandleRadius()
+    const handleRadius = this.getHandleRadius()
     const {fromX, toX} = state
     const {left} = barElm.getBoundingClientRect()
     const x = e.clientX - left - handleRadius
     const xWithFromX = Math.abs(x - fromX)
     const xWithToX = Math.abs(x - toX)
-    const rate = s._rateWithX(x)
-    const value = s._valueWithRate(rate)
-    const [from, to] = s.props.value
+    const rate = this._rateWithX(x)
+    const value = this._valueWithRate(rate)
+    const [from, to] = this.props.value
     if (xWithFromX > xWithToX) {
-      s.setState({toX: x})
-      s.setRangeValue(from, value)
+      this.setState({toX: x})
+      this.setRangeValue(from, value)
     } else {
-      s.setState({fromX: x})
-      s.setRangeValue(value, to)
+      this.setState({fromX: x})
+      this.setRangeValue(value, to)
     }
   }
 
   handleFromHandleMove ({x}) {
-    const s = this
-    const rate = s._rateWithX(x)
-    const from = s._valueWithRate(rate)
-    const [, to] = s.props.value
-    s.setRangeValue(from, to)
+    const rate = this._rateWithX(x)
+    const from = this._valueWithRate(rate)
+    const [, to] = this.props.value
+    this.setRangeValue(from, to)
   }
 
   handleResize () {
@@ -159,11 +155,10 @@ class TheInputRange extends React.PureComponent {
   }
 
   handleToHandleMove ({x}) {
-    const s = this
-    const rate = s._rateWithX(x)
-    const to = s._valueWithRate(rate)
-    const [from] = s.props.value
-    s.setRangeValue(from, to)
+    const rate = this._rateWithX(x)
+    const to = this._valueWithRate(rate)
+    const [from] = this.props.value
+    this.setRangeValue(from, to)
   }
 
   render () {
@@ -243,8 +238,7 @@ class TheInputRange extends React.PureComponent {
   }
 
   setRangeValue (from, to) {
-    const s = this
-    const {props, state} = s
+    const {props, state} = this
     const {maxX, minX} = state
     if (minX === maxX) {
       return
@@ -267,9 +261,9 @@ class TheInputRange extends React.PureComponent {
       return
     }
 
-    const fromRate = s._rateWithValue(from)
-    const toRate = s._rateWithValue(to)
-    s.setState({
+    const fromRate = this._rateWithValue(from)
+    const toRate = this._rateWithValue(to)
+    this.setState({
       fromX: rangecal.value(minX, maxX, fromRate),
       toX: rangecal.value(minX, maxX, toRate),
     })
@@ -277,13 +271,13 @@ class TheInputRange extends React.PureComponent {
     from = chopcal.round(from, step)
     to = chopcal.round(to, step)
 
-    const notChanged = (s._from === from) && (s._to === to)
+    const notChanged = (this._from === from) && (this._to === to)
     if (notChanged) {
       return
     }
 
-    s._from = from
-    s._to = to
+    this._from = from
+    this._to = to
 
     if (props.onUpdate) {
       props.onUpdate({[name]: [from, to]})
@@ -291,8 +285,7 @@ class TheInputRange extends React.PureComponent {
   }
 
   _rateWithValue (value) {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {max, min} = props
 
     value = rangecal.round(min, max, value)
@@ -300,8 +293,7 @@ class TheInputRange extends React.PureComponent {
   }
 
   _rateWithX (x) {
-    const s = this
-    const {state} = s
+    const {state} = this
     const {maxX, minX} = state
     if (minX === maxX) {
       return 0
@@ -310,8 +302,7 @@ class TheInputRange extends React.PureComponent {
   }
 
   _valueWithRate (rate) {
-    const s = this
-    const {props} = s
+    const {props} = this
     const {max, min} = props
 
     let value = chopcal.round(rangecal.value(min, max, rate), 0.01)

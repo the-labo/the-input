@@ -77,16 +77,14 @@ class TheInputText extends React.PureComponent {
   }
 
   componentDidMount () {
-    const s = this
     const window = get('window')
-    window.addEventListener('click', s.handleDocumentClick)
+    window.addEventListener('click', this.handleDocumentClick)
   }
 
   componentWillUnmount () {
-    const s = this
     const window = get('window')
-    window.removeEventListener('click', s.handleDocumentClick)
-    clearTimeout(s._offSuggestionOffTimer)
+    window.removeEventListener('click', this.handleDocumentClick)
+    clearTimeout(this._offSuggestionOffTimer)
   }
 
   enterCandidate (value) {

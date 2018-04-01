@@ -89,15 +89,13 @@ class TheInputSelect extends React.PureComponent {
   }
 
   handleBlur (e) {
-    const s = this
-    const {onBlur} = s.props
+    const {onBlur} = this.props
     onBlur && onBlur(e)
   }
 
   handleChange (e) {
-    const s = this
-    let {onChange, onUpdate, parser} = s.props
-    let {name, value} = e.target
+    const {onChange, onUpdate, parser} = this.props
+    const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
   }
@@ -180,8 +178,7 @@ class TheInputSelect extends React.PureComponent {
   }
 
   handleKeyUp (e) {
-    const s = this
-    const {onKeyUp} = s.props
+    const {onKeyUp} = this.props
     onKeyUp && onKeyUp(e)
   }
 

@@ -9,30 +9,26 @@ import TheInputText from './TheInputText'
 class TheInputSearch extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
     let {open = false} = props
-    s.state = {
+    this.state = {
       open,
     }
-    s._focusTimer = -1
+    this._focusTimer = -1
   }
 
   componentWillUnmount () {
-    const s = this
-    clearTimeout(s._focusTimer)
+    clearTimeout(this._focusTimer)
   }
 
   handleFocus (e) {
-    const s = this
-    const {props} = s
+    const {props} = this
     let {onFocus} = props
     onFocus && onFocus(e)
-    s.toggleOpen(true)
+    this.toggleOpen(true)
   }
 
   render () {
-    const s = this
-    const {props, state} = s
+    const {props, state} = this
     let {value} = props
     let {open} = state
     return (
@@ -40,13 +36,13 @@ class TheInputSearch extends React.PureComponent {
                     className={c('the-input-search', {
                       'the-input-search-open': open || !!value,
                     })}
-                    inputRef={(input) => { s.input = input }}
-                    onFocus={(e) => s.handleFocus()}
+                    inputRef={(input) => { this.input = input }}
+                    onFocus={(e) => this.handleFocus()}
                     type='search'
       >
         {!value && (
           <a className={c('the-input-search-toggle')}
-             onClick={() => s.toggleOpen()}
+             onClick={() => this.toggleOpen()}
              tabIndex={-1}
           >
             <TheIcon className={TheInputSearch.SEARCH_ICON}/>
@@ -57,18 +53,17 @@ class TheInputSearch extends React.PureComponent {
   }
 
   toggleOpen (open) {
-    const s = this
     if (typeof open === 'undefined') {
-      open = !s.state.open
+      open = !this.state.open
     }
-    if (open === s.state.open) {
+    if (open === this.state.open) {
       return
     }
-    s.setState({open})
-    clearTimeout(s._focusTimer)
-    s._focusTimer = setTimeout(() => {
-      if (open && s.input) {
-        s.input.focus()
+    this.setState({open})
+    clearTimeout(this._focusTimer)
+    this._focusTimer = setTimeout(() => {
+      if (open && this.input) {
+        this.input.focus()
       }
     })
   }
