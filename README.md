@@ -225,6 +225,15 @@ class ExampleComponent extends React.PureComponent {
                   sorter={(a, b) => a.localeCompare(b)}
                   options={['Tea', 'Coffee', 'Water', ...'abcdefghijlkmnlopqrstu'.split('')]}
           />
+
+
+          <Select name='value04'
+                  value={values['value04']}
+                  placeholder='Full screen select'
+                  onUpdate={onUpdate}
+                  fullScreen
+                  options={['Tea', 'Coffee', 'Water', ...new Array(100).fill(null).map((_, i) => `option-${i}`)]}
+          />
         </div>
 
         <hr/>

@@ -14,6 +14,7 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  */
 class TheInputSelect extends React.PureComponent {
   static Options ({
+                    full = false,
                     onSelect,
                     options,
                     optionsRef,
@@ -26,25 +27,29 @@ class TheInputSelect extends React.PureComponent {
       return null
     }
     return (
-      <ul className='the-input-select-options'
-          ref={optionsRef}
-          role='listbox'
-      >
-        {
-          optionValues.sort(sorter).map((optionValue, i) => (
-            <li className={c('the-input-select-option', {
-              'the-input-select-option-selected': i === suggestingIndex,
-            })}
-                data-value={parser(optionValue)}
-                key={optionValue}
-                onClick={() => onSelect({value: optionValue})}
-                role='option'
-            >
-              {options[optionValue]}
-            </li>
-          ))
-        }
-      </ul>
+      <div className={c('the-input-select-options', {
+        'the-input-select-options-full': full,
+      })}>
+        <ul className='the-input-select-options-list'
+            ref={optionsRef}
+            role='listbox'
+        >
+          {
+            optionValues.sort(sorter).map((optionValue, i) => (
+              <li className={c('the-input-select-option', {
+                'the-input-select-option-selected': i === suggestingIndex,
+              })}
+                  data-value={parser(optionValue)}
+                  key={optionValue}
+                  onClick={() => onSelect({value: optionValue})}
+                  role='option'
+              >
+                {options[optionValue]}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     )
   }
 
@@ -232,6 +237,7 @@ class TheInputSelect extends React.PureComponent {
       children,
       className,
       error,
+      fullScreen,
       id,
       name,
       parser,
@@ -312,6 +318,7 @@ class TheInputSelect extends React.PureComponent {
         {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
+                                    full={fullScreen}
                                     onSelect={({value}) => this.enterSuggested(value)}
                                     optionsRef={(optionsElm) => { this.optionsElm = optionsElm }}
             />
