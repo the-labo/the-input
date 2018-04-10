@@ -675,7 +675,7 @@
         ],
         "params": [
           {
-            "name": "{\n                  full = false,\n                  onSelect,\n                  options,\n                  optionsRef,\n                  parser,\n                  sorter,\n                  suggestingIndex,\n                }",
+            "name": "{\n                  full = false,\n                  onClose,\n                  onSelect,\n                  options,\n                  optionsRef,\n                  parser,\n                  sorter,\n                  suggestingIndex,\n                }",
             "type": null
           }
         ],
@@ -791,6 +791,18 @@
         "params": [
           {
             "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleSelect",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "{value}",
             "type": null
           }
         ],
