@@ -9,12 +9,15 @@ import { TheIcon } from 'the-icon'
 import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
+const noop = () => null
+
 /**
  * Select Input
  */
-class TheInputSelect extends React.PureComponent {
+class TheInputSelect extends React.Component {
   static Options ({
                     full = false,
+                    onClose,
                     onSelect,
                     options,
                     optionsRef,
@@ -30,6 +33,10 @@ class TheInputSelect extends React.PureComponent {
       <div className={c('the-input-select-options', {
         'the-input-select-options-full': full,
       })}>
+        <div className='the-input-select-options-back'
+             onClick={onClose}
+        >
+        </div>
         <ul className='the-input-select-options-list'
             ref={optionsRef}
             role='listbox'
@@ -61,6 +68,14 @@ class TheInputSelect extends React.PureComponent {
       suggestingIndex: this.getIndexForValue(this.props.value),
     }
     this.handleDocumentClick = this.handleDocumentClick.bind(this)
+    this.handleDisplayClick = this.handleDisplayClick.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.offSuggestion = this.offSuggestion.bind(this)
     this._suggestOffTimer = -1
     this.input = null
   }
@@ -210,6 +225,10 @@ class TheInputSelect extends React.PureComponent {
     onKeyUp && onKeyUp(e)
   }
 
+  handleSelect ({value}) {
+    this.enterSuggested(value)
+  }
+
   moveCandidateIndex (amount) {
     const {state} = this
     const values = this.getOptionValues()
@@ -265,7 +284,7 @@ class TheInputSelect extends React.PureComponent {
         {
           !readOnly && (
             <a className='the-input-select-display'
-               onClick={(e) => this.handleDisplayClick(e)}
+               onClick={this.handleDisplayClick}
             >
           <span className='the-input-select-display-value'>
             {selectedValue}
@@ -282,11 +301,11 @@ class TheInputSelect extends React.PureComponent {
 
         <input className='the-input-select-input'
                {...{id, name, placeholder, type}}
-               onBlur={(e) => this.handleBlur(e)}
-               onChange={(value) => {}}
-               onFocus={(e) => this.handleFocus(e)}
-               onKeyDown={(e) => this.handleKeyDown(e)}
-               onKeyUp={(e) => this.handleKeyUp(e)}
+               onBlur={this.handleBlur}
+               onChange={noop}
+               onFocus={this.handleFocus}
+               onKeyDown={this.handleKeyDown}
+               onKeyUp={this.handleKeyUp}
                readOnly
                ref={(input) => { this.input = input }}
                value={value || ''}
@@ -297,7 +316,7 @@ class TheInputSelect extends React.PureComponent {
             <span className='the-input-select-readonly'>{options[value]}</span>
           ) : (
             <select className='the-input-select-select'
-                    onChange={(e) => this.handleChange(e)}
+                    onChange={this.handleChange}
                     tabIndex={-1}
                     value={value || ''}
             >
@@ -319,7 +338,8 @@ class TheInputSelect extends React.PureComponent {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
                                     full={fullScreen}
-                                    onSelect={({value}) => this.enterSuggested(value)}
+                                    onClose={this.offSuggestion}
+                                    onSelect={this.handleSelect}
                                     optionsRef={(optionsElm) => { this.optionsElm = optionsElm }}
             />
           )

@@ -447,7 +447,19 @@ TheInputStyle.data = (options) => {
         textOverflow: 'ellipsis',
       },
       '.the-input-select-options': {
+        '.the-input-select-options-back': {
+          display: 'none',
+        },
         '&.the-input-select-options-full': {
+          '.the-input-select-options-back': {
+            bottom: 0,
+            display: 'block',
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            zIndex: 40,
+          },
           '.the-input-select-options-list': {
             '.the-input-select-option': {
               background: 'transparent',
@@ -462,10 +474,11 @@ TheInputStyle.data = (options) => {
             border: '1px solid #FAFAFA',
             borderRadius: '4px',
             boxShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            boxSizing: 'border-box',
             display: 'inline-flex',
             flexWrap: 'wrap',
-            margin: '16px',
-            maxHeight: '90vh',
+            margin: '24px',
+            maxHeight: 'calc(100% - 48px)',
             maxWidth: '480px',
             overflow: 'scroll',
             padding: '16px',
