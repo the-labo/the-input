@@ -17,11 +17,15 @@ const noop = () => null
 class TheInputSelect extends React.Component {
   static Options ({
                     full = false,
+                    nullable = false,
+                    nullText,
                     onClose,
+                    onNull,
                     onSelect,
                     options,
                     optionsRef,
                     parser,
+                    placeholder,
                     sorter,
                     suggestingIndex,
                   }) {
@@ -41,6 +45,15 @@ class TheInputSelect extends React.Component {
             ref={optionsRef}
             role='listbox'
         >
+          {
+            nullable && (
+              <li className={c('the-input-select-option')}
+                  onClick={onNull}
+              >
+                {nullText || ''}
+              </li>
+            )
+          }
           {
             optionValues.sort(sorter).map((optionValue, i) => (
               <li className={c('the-input-select-option', {
@@ -75,6 +88,7 @@ class TheInputSelect extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.handleNull = this.handleNull.bind(this)
     this.offSuggestion = this.offSuggestion.bind(this)
     this._suggestOffTimer = -1
     this.input = null
@@ -107,7 +121,7 @@ class TheInputSelect extends React.Component {
   }
 
   enterSuggested (value) {
-    let {props, state} = this
+    const {state} = this
     if (!state.suggesting) {
       return
     }
@@ -225,6 +239,12 @@ class TheInputSelect extends React.Component {
     onKeyUp && onKeyUp(e)
   }
 
+  handleNull () {
+    const {name, onUpdate} = this.props
+    onUpdate && onUpdate({[name]: null})
+    this.setState({suggesting: false})
+  }
+
   handleSelect ({value}) {
     this.enterSuggested(value)
   }
@@ -259,6 +279,8 @@ class TheInputSelect extends React.Component {
       fullScreen,
       id,
       name,
+      nullable,
+      nullText,
       parser,
       placeholder,
       readOnly,
@@ -320,6 +342,7 @@ class TheInputSelect extends React.Component {
                     tabIndex={-1}
                     value={value || ''}
             >
+              {nullable && <option name={name} value={null}/>}
               {
                 Object.keys(options).map((optionValue) => (
                   <option key={optionValue}
@@ -338,7 +361,10 @@ class TheInputSelect extends React.Component {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
                                     full={fullScreen}
+                                    nullable={nullable}
+                                    nullText={nullText}
                                     onClose={this.offSuggestion}
+                                    onNull={this.handleNull}
                                     onSelect={this.handleSelect}
                                     optionsRef={(optionsElm) => { this.optionsElm = optionsElm }}
             />
@@ -359,6 +385,10 @@ TheInputSelect.propTypes = {
     PropTypes.object
   ]),
   name: PropTypes.string.isRequired,
+  /** Allow null select */
+  nullable: PropTypes.bool,
+  /** Text for null */
+  nullText: PropTypes.string,
   /** Handle for enter */
   onEnter: PropTypes.func,
   /** Handle for update */
@@ -378,6 +408,8 @@ TheInputSelect.propTypes = {
 
 TheInputSelect.defaultProps = {
   error: null,
+  nullable: false,
+  nullText: '( no select )',
   onEnter: null,
   options: {},
   parser: String,

@@ -144,6 +144,7 @@ class ExampleComponent extends React.PureComponent {
         <div>
           <Select name='value04'
                   placeholder='Any drink?'
+                  nullable
                   value={values['value04']}
                   onUpdate={onUpdate}
                   sorter={(a, b) => a.localeCompare(b)}
@@ -156,6 +157,7 @@ class ExampleComponent extends React.PureComponent {
                   placeholder='Full screen select'
                   onUpdate={onUpdate}
                   fullScreen
+                  nullable
                   options={['Tea', 'Coffee', 'Water', ...new Array(100).fill(null).map((_, i) => `option-${i}`)]}
           />
         </div>
