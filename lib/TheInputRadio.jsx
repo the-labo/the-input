@@ -3,6 +3,7 @@
 import c from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { unlessProduction } from 'the-check'
 import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { normalizeOptions, renderErrorMessage } from './helpers'
@@ -59,6 +60,7 @@ class TheInputRadio extends React.Component {
     const {props} = this
     const {
       asButton,
+      asToggle,
       className,
       error,
       id = this.id,
@@ -69,34 +71,42 @@ class TheInputRadio extends React.Component {
 
     const options = normalizeOptions(props.options)
 
+    unlessProduction(() => {
+      if (asToggle && asButton) {
+        throw new Error(`[TheButton] You cannot use \`asToggle\` and \`asButton\` at same time`)
+      }
+    })
+
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-radio', className, {
-             'the-input-asButton': asButton,
+             'the-input-as-button': asButton,
+             'the-input-as-toggle': asToggle,
              'the-input-error': !!error,
            })}
            data-value={value}
            id={id}
       >
         {renderErrorMessage(error)}
-
-        {
-          readOnly ? (
-            <span className='the-input-radio-readonly'>{options[value]}</span>
-          ) : (
-            Object.keys(options).map((optionValue) => (
-              <TheInputRadio.Option checked={String(optionValue).trim() === String(value).trim()}
-                                    id={this.idFor(optionValue)}
-                                    key={optionValue}
-                                    label={options[optionValue]}
-                                    name={name}
-                                    onChange={this.handleChange}
-                                    value={optionValue}
-              />
-            ))
-          )
-        }
+        <div className={c('the-input-radio-inner')}>
+          {
+            readOnly ? (
+              <span className='the-input-radio-readonly'>{options[value]}</span>
+            ) : (
+              Object.keys(options).map((optionValue) => (
+                <TheInputRadio.Option checked={String(optionValue).trim() === String(value).trim()}
+                                      id={this.idFor(optionValue)}
+                                      key={optionValue}
+                                      label={options[optionValue]}
+                                      name={name}
+                                      onChange={this.handleChange}
+                                      value={optionValue}
+                />
+              ))
+            )
+          }
+        </div>
       </div>
     )
   }
@@ -106,14 +116,16 @@ TheInputRadio.NORMAL_ICON = 'far fa-circle'
 TheInputRadio.CHECKED_ICON = 'far fa-dot-circle'
 
 TheInputRadio.propTypes = {
-  /** Name of input */
-  /** Use button like style */
+  /** Using button-like style */
   asButton: PropTypes.bool,
+  /** Using toggle-like style */
+  asToggle: PropTypes.bool,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
+  /** Name of input */
   name: PropTypes.string.isRequired,
   /** Handle for update */
   onUpdate: PropTypes.func.isRequired,
@@ -133,6 +145,7 @@ TheInputRadio.propTypes = {
 
 TheInputRadio.defaultProps = {
   asButton: false,
+  asToggle: false,
   error: null,
   options: {},
   parser: String,

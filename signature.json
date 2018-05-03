@@ -302,7 +302,18 @@
           "name": "bool"
         },
         "required": false,
-        "description": "Use button like style",
+        "description": "Using button-like style",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "asToggle": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Using toggle-like style",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -332,7 +343,7 @@
           "name": "string"
         },
         "required": true,
-        "description": ""
+        "description": "Name of input"
       },
       "onUpdate": {
         "type": {

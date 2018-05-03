@@ -126,6 +126,17 @@ class ExampleComponent extends React.PureComponent {
 
         </div>
 
+        <div>
+
+          <Radio name='value02'
+                 value={values['value02']}
+                 onUpdate={onUpdate}
+                 options={['Car', 'Ship', 'Plane']}
+                 asToggle
+          />
+
+        </div>
+
         <hr/>
 
         <h3>Checkbox</h3>

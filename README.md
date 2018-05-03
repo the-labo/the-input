@@ -202,6 +202,17 @@ class ExampleComponent extends React.PureComponent {
 
         </div>
 
+        <div>
+
+          <Radio name='value02'
+                 value={values['value02']}
+                 onUpdate={onUpdate}
+                 options={['Car', 'Ship', 'Plane']}
+                 asToggle
+          />
+
+        </div>
+
         <hr/>
 
         <h3>Checkbox</h3>
@@ -460,9 +471,10 @@ Radio input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `asButton` | bool  | Use button like style | `false` |
+| `asButton` | bool  | Using button-like style | `false` |
+| `asToggle` | bool  | Using toggle-like style | `false` |
 | `error` | union  | Input error | `null` |
-| `name` | string  |  | `` |
+| `name` | string  | Name of input | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |

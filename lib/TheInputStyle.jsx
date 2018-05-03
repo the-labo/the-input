@@ -253,7 +253,7 @@ TheInputStyle.data = (options) => {
         verticalAlign: 'middle',
         width: '100%',
       },
-      '&.the-input-asButton': {
+      '&.the-input-as-button': {
         '.the-input-radio-icon': {
           display: 'none',
         },
@@ -263,6 +263,38 @@ TheInputStyle.data = (options) => {
           borderRadius: '4px',
           fontSize: 'smaller',
           margin: '4px',
+          padding: '4px 8px',
+          textAlign: 'center',
+        },
+        '.the-input-radio-item-checked': {
+          border: `2px solid ${dominantColor}`,
+        },
+      },
+      '&.the-input-as-toggle': {
+        '.the-input-radio-icon': {
+          display: 'none',
+        },
+        '.the-input-radio-item': {
+          '&:first-child': {
+            borderRadius: '4px 0 0 4px',
+            marginLeft: '4px',
+          },
+          '&:last-child': {
+            borderRadius: '0 4px 4px 0',
+            marginRight: '4px',
+          },
+          '&.the-input-radio-item-checked': {
+            backgroundColor: dominantColor,
+            borderWidth: '1px',
+            color: backgroundColor,
+            position: 'relative',
+            zIndex: 1,
+          },
+          background: backgroundColor,
+          border: `1px solid #CCC`,
+          borderRadius: '0',
+          fontSize: 'smaller',
+          margin: '4px -1px 4px 0',
           padding: '4px 8px',
           textAlign: 'center',
         },
