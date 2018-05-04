@@ -275,6 +275,10 @@ TheInputStyle.data = (options) => {
           display: 'none',
         },
         '.the-input-radio-item': {
+          '.the-input-radio-label': {
+            boxSizing: 'border-box',
+            padding: '6px 12px',
+          },
           '&:first-child': {
             borderRadius: '4px 0 0 4px',
             marginLeft: '4px',
@@ -295,7 +299,7 @@ TheInputStyle.data = (options) => {
           borderRadius: '0',
           fontSize: 'smaller',
           margin: '4px -1px 4px 0',
-          padding: '4px 8px',
+          padding: '0',
           textAlign: 'center',
         },
         '.the-input-radio-item-checked': {
