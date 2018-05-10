@@ -908,14 +908,18 @@ TheInputStyle.data = (options) => {
         fontSize: 'small',
         justifyContent: 'space-between',
         margin: '2px',
+        overflow: 'hidden',
         padding: '0 2px',
         position: 'relative',
         zIndex: '1',
       },
       '.the-input-tag-text': {
         display: 'inline-block',
+        overflow: 'hidden',
         padding: '2px',
+        textOverflow: 'ellipsis',
         verticalAlign: 'middle',
+        whiteSpace: 'nowrap',
       },
       '.the-input-text-input': {
         backgroundColor: 'transparent',
