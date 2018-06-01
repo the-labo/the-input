@@ -235,7 +235,58 @@
   "TheInputDate": {
     "description": "",
     "displayName": "TheInputDate",
-    "methods": []
+    "methods": [
+      {
+        "name": "updatePicker",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "config",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "maxDate": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "minDate": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": ""
+      },
+      "onUpdate": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": ""
+      }
+    }
   },
   "TheInputPassword": {
     "description": "",
