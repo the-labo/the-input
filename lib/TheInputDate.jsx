@@ -1,16 +1,16 @@
 'use strict'
 
-import { clone } from 'asobj'
+import { cleanup } from 'asobj'
 import c from 'classnames'
 import flatpickr from 'flatpickr'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { uniqueFilter } from 'the-array'
-import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
+import { changedProps, eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { onOffBoolean } from './helpers'
 
-class TheInputDate extends React.PureComponent {
+class TheInputDate extends React.Component {
   constructor (props) {
     super(props)
     this.elmRef = React.createRef()
@@ -18,11 +18,24 @@ class TheInputDate extends React.PureComponent {
   }
 
   componentDidMount () {
-    this.picker = flatpickr(this.elmRef.current)
+    this.picker = flatpickr(this.elmRef.current, {
+      defaultDate: this.props.value,
+      maxDate: this.props.maxDate,
+      minDate: this.props.minDate,
+      onChange: (selectedDates, dateStr) => {
+        const {name, onUpdate} = this.props
+        onUpdate && onUpdate({[name]: dateStr})
+      },
+    })
+  }
+
+  componentDidUpdate (prevProps) {
+    const changed = changedProps(prevProps, this.props)
+    this.updatePicker(changed)
   }
 
   componentWillUnmount () {
-    this.picker?.destroy()
+    this.picker.destroy()
     this.picker = null
   }
 
@@ -35,15 +48,11 @@ class TheInputDate extends React.PureComponent {
       className,
       error,
       id,
-      inputRef,
       name,
-      parser,
       placeholder,
-      prefix,
       readOnly,
       required,
       spellCheck,
-      suffix,
       type,
       value,
     } = props
@@ -94,14 +103,40 @@ class TheInputDate extends React.PureComponent {
                  type,
                }}
         />
+        {children}
       </div>
     )
   }
 
+  updatePicker (config) {
+    const skip = Object.keys(config).length === 0
+    if (skip) {
+      return
+    }
+    const {picker} = this
+    if (!picker) {
+      return
+    }
+    const {maxDate, minDate, value} = config
+    picker.set(cleanup({maxDate, minDate}))
+    if (value) {
+      picker.jumpToDate(value)
+    }
+    picker.redraw()
+  }
+
 }
 
-TheInputDate.propTypes = {}
-TheInputDate.defaultProps = {}
+TheInputDate.propTypes = {
+  maxDate: PropTypes.string,
+  minDate: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+}
+TheInputDate.defaultProps = {
+  maxDate: null,
+  minDate: null,
+}
 TheInputDate.displayName = 'TheInputDate'
 
 export default TheInputDate

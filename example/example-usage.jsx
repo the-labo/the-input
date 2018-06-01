@@ -247,6 +247,7 @@ class ExampleComponent extends React.PureComponent {
         <h3>Date</h3>
         <Date name='value-date-01'
               value={values['value-date-01']}
+              minDate={'2018-03-09'}
               onUpdate={onUpdate}
         />
 

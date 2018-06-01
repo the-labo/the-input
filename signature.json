@@ -232,6 +232,11 @@
       }
     }
   },
+  "TheInputDate": {
+    "description": "",
+    "displayName": "TheInputDate",
+    "methods": []
+  },
   "TheInputPassword": {
     "description": "",
     "displayName": "TheInputPassword",
@@ -1185,24 +1190,6 @@
       }
     }
   },
-  "TheInputStyle": {
-    "description": "Style for TheInput",
-    "displayName": "TheInputStyle",
-    "methods": [],
-    "props": {
-      "options": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": "Style options",
-        "defaultValue": {
-          "value": "{}",
-          "computed": false
-        }
-      }
-    }
-  },
   "TheInputTag": {
     "description": "",
     "displayName": "TheInputTag",
@@ -1731,7 +1718,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "TextArea rows",
         "defaultValue": {
           "value": "5",
           "computed": false
