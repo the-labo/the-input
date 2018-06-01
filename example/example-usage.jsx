@@ -32,6 +32,7 @@ class ExampleComponent extends React.PureComponent {
       Slider,
       Range,
       Upload,
+      Date,
       Tag
     } = TheInput
     return (
@@ -239,6 +240,16 @@ class ExampleComponent extends React.PureComponent {
              placeholder='value01'
              options={['Banana', 'Orange', 'Apple']}
         />
+
+        <hr/>
+
+
+        <h3>Date</h3>
+        <Date name='value-date-01'
+              value={values['value-date-01']}
+              onUpdate={onUpdate}
+        />
+
         <br/>
         <br/>
         <br/>

@@ -5,15 +5,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { get } from 'the-window'
-import { normalizeOptions, renderErrorMessage, renderWarningMessage } from './helpers'
+import { normalizeOptions, onOffBoolean, renderErrorMessage, renderWarningMessage } from './helpers'
 import * as patterns from './patterns'
-
-const onOffBoolean = (v) => {
-  if (typeof v === 'boolean') {
-    return v ? 'on' : 'off'
-  }
-  return v
-}
 
 /**
  * Text Input

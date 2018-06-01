@@ -6,6 +6,7 @@ import React from 'react'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { renderErrorMessage } from './helpers'
 import TheInputCheckbox from './TheInputCheckbox'
+import TheInputDate from './TheInputDate'
 import TheInputPassword from './TheInputPassword'
 import TheInputRadio from './TheInputRadio'
 import TheInputRange from './TheInputRange'
@@ -83,6 +84,7 @@ TheInput.Slider = TheInputSlider
 TheInput.Range = TheInputRange
 TheInput.Upload = TheInputUpload
 TheInput.Tag = TheInputTag
+TheInput.Date = TheInputDate
 
 TheInput.propTypes = {
   /** Input type */

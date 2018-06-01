@@ -82,10 +82,18 @@ export function isImageUrl (src) {
   return !!~imageExtensions.indexOf(extname)
 }
 
+export function onOffBoolean (v) {
+  if (typeof v === 'boolean') {
+    return v ? 'on' : 'off'
+  }
+  return v
+}
+
 export default {
   isImageUrl,
   normalizeArrayValue,
   normalizeOptions,
+  onOffBoolean,
   readFile,
   renderErrorMessage,
   renderWarningMessage,

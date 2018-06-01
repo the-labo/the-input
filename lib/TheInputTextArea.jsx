@@ -103,13 +103,13 @@ class TheInputTextArea extends React.PureComponent {
 }
 
 TheInputTextArea.propTypes = {
-  /** TextArea rows */
   /** Name of input */
   name: PropTypes.string.isRequired,
   /** Handle for update */
   onUpdate: PropTypes.func.isRequired,
   /** Value parser */
   parser: PropTypes.func,
+  /** TextArea rows */
   rows: PropTypes.number,
   /** Value of input */
   value: PropTypes.string,

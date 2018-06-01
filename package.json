@@ -1,7 +1,7 @@
 {
   "name": "the-input",
   "description": "Input of the-components",
-  "version": "3.3.4",
+  "version": "3.4.0",
   "author": {
     "name": "Taka Okunishi",
     "email": "okunishinishi@gmail.com",
@@ -14,6 +14,7 @@
     "asobj": "^2.1.0",
     "chopcal": "^3.0.1",
     "classnames": "^2.2.5",
+    "flatpickr": "^4.5.0",
     "prop-types": "^15.6.1",
     "rangecal": "^2.0.0",
     "react-draggable": "^3.0.5",

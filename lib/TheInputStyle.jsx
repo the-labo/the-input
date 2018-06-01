@@ -8,10 +8,21 @@ import { TheStyle } from 'the-style'
 
 /** Style for TheInput */
 const TheInputStyle = ({className, id, options}) => (
-  <TheStyle {...{id}}
-            className={c('the-input-style', className)}
-            styles={TheInputStyle.data(options)}
-  />
+  [
+    <TheStyle {...{id}}
+              className={c('the-input-style', className)}
+              key='base'
+              styles={TheInputStyle.data(options)}
+    />,
+    ...TheInputStyle.externals.map((src) => (
+      <link className={c('the-input-style-external')}
+            href={src}
+            key={src}
+            rel='stylesheet'
+      />
+    ))
+  ]
+
 )
 
 TheInputStyle.displayName = 'TheInputStyle'
@@ -24,6 +35,9 @@ TheInputStyle.defaultProps = {
   options: {},
 }
 
+TheInputStyle.externals = [
+  'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'
+]
 TheInputStyle.data = (options) => {
   const {ThemeValues} = TheStyle
   const {
@@ -575,7 +589,7 @@ TheInputStyle.data = (options) => {
       '.the-input-select-display': {
         borderColor: warnColor,
       },
-      '.the-input-text-input,.the-input-textarea-input': {
+      '.the-input-text-input,.the-input-textarea-input,.the-input-date-input': {
         borderColor: warnColor,
       },
       '.the-input-warn-message': {
@@ -592,7 +606,7 @@ TheInputStyle.data = (options) => {
       '.the-input-select-display': {
         borderColor: errorColor,
       },
-      '.the-input-text-input,.the-input-textarea-input': {
+      '.the-input-text-input,.the-input-textarea-input,.the-input-date-input': {
         borderColor: errorColor,
       },
       '&.the-input-radio,&.the-input-checkbox': {
@@ -946,6 +960,28 @@ TheInputStyle.data = (options) => {
       '&.the-input-tag-focused': {
         outline: `5px auto ${dominantColor}`,
         outlineOffset: '-2px',
+      },
+    }),
+    asStyleData('.the-input-date', {
+      '.the-input-date-input': {
+        border: `1px solid ${inputBorderColor}`,
+        borderRadius: '2px',
+        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
+        boxSizing: 'border-box',
+        display: 'block',
+        minHeight: '28px',
+        outlineColor: dominantColor,
+        padding: '4px 8px',
+        width: 'auto',
+      },
+      '&': {
+        boxSizing: 'border-box',
+        display: 'inline-block',
+        margin: '0 4px',
+        maxWidth: contentWidth,
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: '100%',
       },
     })
   )
