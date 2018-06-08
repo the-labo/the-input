@@ -413,7 +413,7 @@ TheInputSelect.defaultProps = {
   onEnter: null,
   options: {},
   parser: String,
-  sorter: () => 1,
+  sorter: (v1, v2) => String(v1).localeCompare(v2),
   value: '',
 }
 

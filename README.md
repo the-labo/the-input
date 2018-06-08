@@ -469,6 +469,14 @@ Checkbox input of the-components
 
 
 
+**Props**
+
+| Name | Type | Description | Default |
+| --- | --- | ---- | ---- |
+| `maxDate` | string  |  | `null` |
+| `minDate` | string  |  | `null` |
+| `name` | string  |  | `` |
+| `onUpdate` | func  |  | `` |
 
 ### TheInputPassword
 
