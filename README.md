@@ -473,8 +473,8 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `maxDate` | string  |  | `null` |
-| `minDate` | string  |  | `null` |
+| `maxDate` | union  |  | `null` |
+| `minDate` | union  |  | `null` |
 | `name` | string  |  | `` |
 | `onUpdate` | func  |  | `` |
 
@@ -539,7 +539,7 @@ Select Input
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
-| `sorter` | func  | Options sorter | `() => 1` |
+| `sorter` | func  | Options sorter | `(v1, v2) => String(v1).localeCompare(v2)` |
 | `value` | string  | Value of input | `''` |
 
 ### TheInputSlider
