@@ -128,8 +128,8 @@ class TheInputDate extends React.Component {
 }
 
 TheInputDate.propTypes = {
-  maxDate: PropTypes.string,
-  minDate: PropTypes.string,
+  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   name: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
 }

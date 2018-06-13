@@ -16,7 +16,7 @@ class TheInputRadio extends React.Component {
     const icon = checked ? TheInputRadio.CHECKED_ICON : TheInputRadio.NORMAL_ICON
     return (
       <div aria-checked={checked}
-           aria-label={label}
+           aria-label={typeof label === 'string' ? label : null}
            className={c('the-input-radio-item', {
              'the-input-radio-item-checked': checked,
            })}

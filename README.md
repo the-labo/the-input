@@ -473,8 +473,8 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `maxDate` | string  |  | `null` |
-| `minDate` | string  |  | `null` |
+| `maxDate` | union  |  | `null` |
+| `minDate` | union  |  | `null` |
 | `name` | string  |  | `` |
 | `onUpdate` | func  |  | `` |
 
@@ -539,7 +539,7 @@ Select Input
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
-| `sorter` | func  | Options sorter | `() => 1` |
+| `sorter` | func  | Options sorter | `(v1, v2) => String(v1).localeCompare(v2)` |
 | `value` | string  | Value of input | `''` |
 
 ### TheInputSlider
@@ -603,7 +603,7 @@ TextArea Input
 | --- | --- | ---- | ---- |
 | `autoExpand` | bool  | Auto expanding text area height | `false` |
 | `maxRows` | number  | Max rows when autoExpand is enabled | `10` |
-| `minRows` | number  | Min rows when autoExpand is enabled | `5` |
+| `minRows` | number  | Min rows when autoExpand is enabled | `1` |
 | `name` | string  | Name of input | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |

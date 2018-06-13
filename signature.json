@@ -252,7 +252,15 @@
     "props": {
       "maxDate": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
         },
         "required": false,
         "description": "",
@@ -263,7 +271,15 @@
       },
       "minDate": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "object"
+            }
+          ]
         },
         "required": false,
         "description": "",
@@ -1014,7 +1030,7 @@
         "required": false,
         "description": "Options sorter",
         "defaultValue": {
-          "value": "() => 1",
+          "value": "(v1, v2) => String(v1).localeCompare(v2)",
           "computed": false
         }
       },
@@ -1768,7 +1784,7 @@
         "required": false,
         "description": "Min rows when autoExpand is enabled",
         "defaultValue": {
-          "value": "5",
+          "value": "1",
           "computed": false
         }
       },
