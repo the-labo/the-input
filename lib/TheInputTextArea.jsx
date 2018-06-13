@@ -14,6 +14,10 @@ class TheInputTextArea extends React.PureComponent {
     super(props)
     this.state = {}
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.textareaRef = React.createRef()
+    this.state = {
+      actualRows: props.minRows,
+    }
   }
 
   componentWillUnmount () {
@@ -24,6 +28,22 @@ class TheInputTextArea extends React.PureComponent {
     const {name, value} = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
+
+    const {autoExpand, maxRows, minRows} = this.props
+    if (autoExpand) {
+      const textarea = this.textareaRef.current
+      const lineHeight = textarea.offsetHeight / this.state.actualRows
+      let rows = Math.ceil(textarea.scrollHeight / lineHeight)
+      if (rows < minRows) {
+        rows = minRows
+      }
+      if (maxRows && rows > maxRows) {
+        rows = maxRows
+      }
+      if (rows !== this.state.actualRows) {
+        this.setState({actualRows: rows})
+      }
+    }
   }
 
   handleKeyDown (e) {
@@ -51,6 +71,7 @@ class TheInputTextArea extends React.PureComponent {
   render () {
     const {props} = this
     let {
+      autoExpand,
       autoFocus,
       children,
       className,
@@ -58,17 +79,16 @@ class TheInputTextArea extends React.PureComponent {
       id,
       name,
       onBlur,
-      onChange,
       onFocus,
       onKeyPress,
       onKeyUp,
       placeholder,
       required,
       role,
-      rows,
       spellCheck,
       value,
     } = props
+    const rows = autoExpand ? this.state.actualRows : this.props.rows
     return (
       <div {...htmlAttributesFor(props, {
         except: [
@@ -88,13 +108,14 @@ class TheInputTextArea extends React.PureComponent {
         {renderErrorMessage(error)}
 
         <textarea className='the-input-textarea-input'
-                  {...{autoFocus, id, name, placeholder, required, role, rows, spellCheck}}
-                  {...{onBlur, onChange, onFocus, onKeyPress, onKeyUp}}
+                  {...{autoFocus, id, name, placeholder, required, role, spellCheck}}
+                  {...{onBlur, onFocus, onKeyPress, onKeyUp}}
                   aria-multiline='true'
                   onChange={(e) => this.handleChange(e)}
                   onKeyDown={this.handleKeyDown}
+                  ref={this.textareaRef}
+                  rows={rows}
                   value={value || ''}
-
         />
         {children}
       </div>
@@ -103,6 +124,12 @@ class TheInputTextArea extends React.PureComponent {
 }
 
 TheInputTextArea.propTypes = {
+  /** Auto expanding text area height */
+  autoExpand: PropTypes.bool,
+  /** Max rows when autoExpand is enabled */
+  maxRows: PropTypes.number,
+  /** Min rows when autoExpand is enabled */
+  minRows: PropTypes.number,
   /** Name of input */
   name: PropTypes.string.isRequired,
   /** Handle for update */
@@ -116,7 +143,10 @@ TheInputTextArea.propTypes = {
 }
 
 TheInputTextArea.defaultProps = {
+  autoExpand: false,
   error: null,
+  maxRows: 10,
+  minRows: 1,
   parser: String,
   role: 'textbox',
   rows: 5,
