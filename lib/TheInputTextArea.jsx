@@ -20,6 +20,38 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
+  adjustRows () {
+    const {maxRows, minRows} = this.props
+    const textarea = this.textareaRef.current
+    const lineHeight = textarea.offsetHeight / this.state.actualRows
+
+    // 入力行数が少なくなったらそれに合わせてテキストエリアの行数も減らす
+    // テキストエリアが offsetHeight < scrollHeight になるまで高さを小さくして、scrollHeight の最小値を求める
+    const originalHeight = textarea.style.height
+    let height = textarea.offsetHeight
+    while (true) {
+      if (textarea.offsetHeight < textarea.scrollHeight || textarea.offsetHeight < lineHeight * minRows) {
+        break
+      }
+      height -= 3
+      textarea.style.height = height + 'px'
+    }
+    const minScrollHeight = textarea.scrollHeight
+    textarea.style.height = originalHeight
+
+    let rows = Math.round(minScrollHeight / lineHeight)
+    if (rows < minRows) {
+      rows = minRows
+    }
+    if (maxRows && rows > maxRows) {
+      rows = maxRows
+    }
+
+    if (rows !== this.state.actualRows) {
+      this.setState({actualRows: rows})
+    }
+  }
+
   componentWillUnmount () {
   }
 
@@ -29,20 +61,9 @@ class TheInputTextArea extends React.PureComponent {
     onChange && onChange(e)
     onUpdate && onUpdate({[name]: parser(value)})
 
-    const {autoExpand, maxRows, minRows} = this.props
+    const {autoExpand} = this.props
     if (autoExpand) {
-      const textarea = this.textareaRef.current
-      const lineHeight = textarea.offsetHeight / this.state.actualRows
-      let rows = Math.ceil(textarea.scrollHeight / lineHeight)
-      if (rows < minRows) {
-        rows = minRows
-      }
-      if (maxRows && rows > maxRows) {
-        rows = maxRows
-      }
-      if (rows !== this.state.actualRows) {
-        this.setState({actualRows: rows})
-      }
+      this.adjustRows()
     }
   }
 
