@@ -1730,6 +1730,13 @@
     "displayName": "TheInputTextArea",
     "methods": [
       {
+        "name": "adjustRows",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "handleChange",
         "docblock": null,
         "modifiers": [],
