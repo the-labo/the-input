@@ -40,11 +40,11 @@ class TheInputTextArea extends React.PureComponent {
     textarea.style.height = originalHeight
 
     let rows = Math.round(minScrollHeight / lineHeight)
-    if (rows < minRows) {
-      rows = minRows
+    if (minRows) {
+      rows = Math.max(minRows, rows)
     }
-    if (maxRows && rows > maxRows) {
-      rows = maxRows
+    if (maxRows) {
+      rows = Math.min(maxRows, rows)
     }
 
     if (rows !== this.state.actualRows) {
