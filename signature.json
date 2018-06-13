@@ -1755,6 +1755,39 @@
       }
     ],
     "props": {
+      "autoExpand": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Auto expanding text area height",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "maxRows": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Max rows when autoExpand is enabled",
+        "defaultValue": {
+          "value": "10",
+          "computed": false
+        }
+      },
+      "minRows": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Min rows when autoExpand is enabled",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
       "name": {
         "type": {
           "name": "string"

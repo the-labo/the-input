@@ -601,6 +601,9 @@ TextArea Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
+| `autoExpand` | bool  | Auto expanding text area height | `false` |
+| `maxRows` | number  | Max rows when autoExpand is enabled | `10` |
+| `minRows` | number  | Min rows when autoExpand is enabled | `1` |
 | `name` | string  | Name of input | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `parser` | func  | Value parser | `String` |
