@@ -175,6 +175,17 @@ class ExampleComponent extends React.PureComponent {
                   placeholder='value01'
         />
 
+        <TextArea name='value01'
+                  autoExpand
+                  minRows={1}
+                  maxRows={8}
+                  value={values['value01']}
+                  onUpdate={onUpdate}
+                  onCombineEnter={() => console.log('combine enter')}
+                  onEnter={() => console.log('enter')}
+                  placeholder='auto expand'
+        />
+
         <hr/>
 
         <h3>Radio</h3>

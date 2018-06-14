@@ -30,10 +30,14 @@ class TheInputTextArea extends React.PureComponent {
     const originalHeight = textarea.style.height
     let height = textarea.offsetHeight
     while (true) {
-      if (textarea.offsetHeight < textarea.scrollHeight || textarea.offsetHeight < lineHeight * minRows) {
+      const smallEnough = textarea.offsetHeight < textarea.scrollHeight || textarea.offsetHeight < lineHeight * minRows
+      if (smallEnough) {
         break
       }
       height -= 3
+      if (height < 0) {
+        break
+      }
       textarea.style.height = height + 'px'
     }
     const minScrollHeight = textarea.scrollHeight
