@@ -15,6 +15,7 @@ class TheInputTextArea extends React.PureComponent {
     this.state = {}
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.textareaRef = React.createRef()
+    this.gone = false
     this.state = {
       actualRows: props.minRows,
     }
@@ -30,6 +31,9 @@ class TheInputTextArea extends React.PureComponent {
     const originalHeight = textarea.style.height
     let height = textarea.offsetHeight
     while (true) {
+      if (this.gone) {
+        break
+      }
       const smallEnough = textarea.offsetHeight < textarea.scrollHeight || textarea.offsetHeight < lineHeight * minRows
       if (smallEnough) {
         break
@@ -57,6 +61,7 @@ class TheInputTextArea extends React.PureComponent {
   }
 
   componentWillUnmount () {
+    this.gone = true
   }
 
   handleChange (e) {
