@@ -85,7 +85,9 @@ class TheInputUpload extends React.PureComponent {
       accept,
       children,
       className,
+      closeIcon,
       error,
+      guideIcon,
       height,
       id = this.id,
       multiple,
@@ -122,7 +124,7 @@ class TheInputUpload extends React.PureComponent {
           <span className='the-input-upload-aligner'>
           </span>
           <span className='the-input-upload-label-inner'>
-            <i className={c('the-input-upload-icon', TheInputUpload.GUIDE_ICON)}/>
+            <i className={c('the-input-upload-icon', guideIcon || TheInputUpload.GUIDE_ICON)}/>
             <span className='the-input-upload-text'>{text}</span>
             {children}
           </span>
@@ -138,7 +140,7 @@ class TheInputUpload extends React.PureComponent {
             <a className='the-input-upload-close'
                onClick={this.handleRemove}
             >
-              <TheIcon className={c(TheInputUpload.CLOSE_ICON)}
+              <TheIcon className={c('the-input-upload-close-icon', closeIcon || TheInputUpload.CLOSE_ICON)}
 
               />
             </a>
