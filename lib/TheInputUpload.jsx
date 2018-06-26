@@ -69,13 +69,14 @@ class TheInputUpload extends React.PureComponent {
 
   handleRemove () {
     const {props} = this
-    const {onLoad} = props
+    const {onLoad, onUpdate, name} = props
     const urls = []
     this.setState({
       error: null,
       urls,
     })
     onLoad && onLoad(urls)
+    onUpdate && onUpdate({[name]: null})
   }
 
   render () {
