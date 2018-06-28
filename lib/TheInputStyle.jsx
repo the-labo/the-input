@@ -239,7 +239,7 @@ TheInputStyle.data = (options) => {
       '.the-input-radio-label': {
         '&:active': {opacity: activeOpacity},
         '&:hover': {opacity: hoverOpacity},
-        '> *': { // https://github.com/ftlabs/fastclick/issues/60
+        '> *': {// https://github.com/ftlabs/fastclick/issues/60
           pointerEvents: 'none',
         },
         cursor: 'pointer',
@@ -355,7 +355,7 @@ TheInputStyle.data = (options) => {
       '.the-input-checkbox-label': {
         '&:active': {opacity: activeOpacity},
         '&:hover': {opacity: hoverOpacity},
-        '> *': { // https://github.com/ftlabs/fastclick/issues/60
+        '> *': {// https://github.com/ftlabs/fastclick/issues/60
           pointerEvents: 'none',
         },
         cursor: 'pointer',
