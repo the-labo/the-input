@@ -239,6 +239,9 @@ TheInputStyle.data = (options) => {
       '.the-input-radio-label': {
         '&:active': {opacity: activeOpacity},
         '&:hover': {opacity: hoverOpacity},
+        '> *': {
+          pointerEvents: 'none',
+        },
         cursor: 'pointer',
         display: 'inline-block',
         padding: '2px 4px',
@@ -352,6 +355,9 @@ TheInputStyle.data = (options) => {
       '.the-input-checkbox-label': {
         '&:active': {opacity: activeOpacity},
         '&:hover': {opacity: hoverOpacity},
+        '> *': {
+          pointerEvents: 'none',
+        },
         cursor: 'pointer',
         display: 'inline-block',
         padding: '2px 4px',
