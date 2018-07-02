@@ -66,6 +66,7 @@ class TheInputRadio extends React.Component {
       id = this.id,
       name,
       readOnly,
+      sorter,
       value,
     } = props
 
@@ -78,7 +79,7 @@ class TheInputRadio extends React.Component {
     })
 
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'name']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-radio', className, {
              'the-input-as-button': asButton,
@@ -94,7 +95,7 @@ class TheInputRadio extends React.Component {
             readOnly ? (
               <span className='the-input-radio-readonly'>{options[value]}</span>
             ) : (
-              Object.keys(options).map((optionValue) => (
+              Object.keys(options).sort(sorter).map((optionValue) => (
                 <TheInputRadio.Option checked={String(optionValue).trim() === String(value).trim()}
                                       id={this.idFor(optionValue)}
                                       key={optionValue}
@@ -136,6 +137,8 @@ TheInputRadio.propTypes = {
   ]),
   /** Value parser */
   parser: PropTypes.func,
+  /** Options sorter */
+  sorter: PropTypes.func,
   /** Value of input */
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -150,6 +153,7 @@ TheInputRadio.defaultProps = {
   options: {},
   parser: String,
   role: 'radiogroup',
+  sorter: (v1, v2) => String(v1).localeCompare(v2),
   value: '',
 }
 
