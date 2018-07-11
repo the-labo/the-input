@@ -228,6 +228,13 @@ TheInputStyle.data = (options) => {
         color: dominantColor,
       },
       '.the-input-radio-item': {
+        '&.the-input-radio-item-disabled': {
+          '.the-input-radio-icon': {
+            color: 'inherit',
+          },
+          opacity: '0.5',
+          pointerEvents: 'none',
+        },
         alignItems: 'center',
         boxSizing: 'border-box',
         display: 'inline-flex',
@@ -344,34 +351,66 @@ TheInputStyle.data = (options) => {
         minWidth: '1em',
       },
       '.the-input-checkbox-item': {
-        alignItems: 'center',
-        boxSizing: 'border-box',
-        display: 'inline-flex',
-        justifyContent: 'flex-center',
-        margin: '0 2px',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      },
-      '.the-input-checkbox-label': {
-        '&:active': {opacity: activeOpacity},
-        '&:hover': {opacity: hoverOpacity},
-        '> *': {// https://github.com/ftlabs/fastclick/issues/60
+        '&.the-input-checkbox-item-disabled': {
+          '.the-input-checkbox-icon': {
+            color: 'inherit',
+          },
+          opacity: '0.5',
           pointerEvents: 'none',
         },
-        cursor: 'pointer',
-        display: 'inline-block',
-        padding: '2px 4px',
+        alignItems: 'center',
+        boxSizing:
+          'border-box',
+        display:
+          'inline-flex',
+        justifyContent:
+          'flex-center',
+        margin:
+          '0 2px',
+        overflow:
+          'hidden',
+        textOverflow:
+          'ellipsis',
       },
-      '&': {
-        borderRadius: '2px',
-        boxSizing: 'border-box',
-        display: 'inline-block',
-        margin: '0',
-        maxWidth: contentWidth,
-        position: 'relative',
-        verticalAlign: 'middle',
-        width: '100%',
-      },
+      '.the-input-checkbox-label':
+        {
+          '&:active':
+            {opacity: activeOpacity}
+          ,
+          '&:hover':
+            {opacity: hoverOpacity}
+          ,
+          '> *':
+            {// https://github.com/ftlabs/fastclick/issues/60
+              pointerEvents: 'none',
+            }
+          ,
+          cursor: 'pointer',
+          display:
+            'inline-block',
+          padding:
+            '2px 4px',
+        }
+      ,
+      '&':
+        {
+          borderRadius: '2px',
+          boxSizing:
+            'border-box',
+          display:
+            'inline-block',
+          margin:
+            '0',
+          maxWidth:
+          contentWidth,
+          position:
+            'relative',
+          verticalAlign:
+            'middle',
+          width:
+            '100%',
+        }
+      ,
     }),
     asStyleData('.the-input-toggle', {
       '.the-input-toggle-handle': {

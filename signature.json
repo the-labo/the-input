@@ -96,7 +96,7 @@
         ],
         "params": [
           {
-            "name": "{checked, id, label, name, onChange, value}",
+            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 value,\n               }",
             "type": null
           }
         ],
@@ -128,6 +128,17 @@
       }
     ],
     "props": {
+      "disabledValues": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Disabled values",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
       "error": {
         "type": {
           "name": "union",
@@ -141,7 +152,7 @@
           ]
         },
         "required": false,
-        "description": "Error message",
+        "description": "",
         "defaultValue": {
           "value": "null",
           "computed": false
@@ -337,7 +348,7 @@
         ],
         "params": [
           {
-            "name": "{checked, id, label, name, onChange, value}",
+            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 value,\n               }",
             "type": null
           }
         ],
@@ -388,6 +399,17 @@
         "description": "Using toggle-like style",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "disabledValues": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Disabled values",
+        "defaultValue": {
+          "value": "[]",
           "computed": false
         }
       },

@@ -385,6 +385,7 @@ class ExampleComponent extends React.PureComponent {
                   value={values['value03']}
                   onUpdate={onUpdate}
                   options={['Green', 'Pink', 'Brown']}
+                  disabledValues={['Pink']}
                   error='Something Wrong with This!'
         />
 
@@ -468,7 +469,8 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `error` | union  | Error message | `null` |
+| `disabledValues` | array  | Disabled values | `[]` |
+| `error` | union  |  | `null` |
 | `name` | string  |  | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
@@ -504,11 +506,13 @@ Radio input of the-components
 | --- | --- | ---- | ---- |
 | `asButton` | bool  | Using button-like style | `false` |
 | `asToggle` | bool  | Using toggle-like style | `false` |
+| `disabledValues` | array  | Disabled values | `[]` |
 | `error` | union  | Input error | `null` |
 | `name` | string  | Name of input | `` |
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
+| `sorter` | func  | Options sorter | `(v1, v2) => String(v1).localeCompare(v2)` |
 | `value` | union  | Value of input | `''` |
 | `role` |   |  | `'radiogroup'` |
 

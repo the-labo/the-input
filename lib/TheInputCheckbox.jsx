@@ -11,13 +11,22 @@ import { normalizeArrayValue, normalizeOptions, renderErrorMessage } from './hel
  * Checkbox input of the-components
  */
 class TheInputCheckbox extends React.PureComponent {
-  static Option ({checked, id, label, name, onChange, value}) {
+  static Option ({
+                   checked,
+                   disabled,
+                   id,
+                   label,
+                   name,
+                   onChange,
+                   value,
+                 }) {
     const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
     return (
       <div aria-checked={checked}
            aria-label={label}
            className={c('the-input-checkbox-item', {
              'the-input-checkbox-item-checked': checked,
+             'the-input-checkbox-item-disabled': disabled,
            })}
            data-value={value}
            key={value}
@@ -25,7 +34,7 @@ class TheInputCheckbox extends React.PureComponent {
       >
         <input className='the-input-checkbox-checkbox'
                type='checkbox'
-               {...{checked, id, name, onChange, value}}
+               {...{checked, disabled, id, name, onChange, value}}
         />
         <label className='the-input-checkbox-label'
                htmlFor={id}
@@ -76,6 +85,7 @@ class TheInputCheckbox extends React.PureComponent {
     const {props} = this
     let {
       className,
+      disabledValues,
       error,
       id = this.id,
       name,
@@ -106,6 +116,7 @@ class TheInputCheckbox extends React.PureComponent {
             Object.keys(options).map((optionValue) => (
               <TheInputCheckbox.Option
                 checked={optionValue.split(splitter).some((optionValue) => value.includes(String(optionValue).trim()))}
+                disabled={disabledValues.includes(optionValue)}
                 id={this.idFor(optionValue)}
                 key={optionValue}
                 label={options[optionValue]}
@@ -127,6 +138,8 @@ TheInputCheckbox.CHECKED_ICON = 'fas fa-check-square'
 TheInputCheckbox.propTypes = {
   /** Name of input */
   /** Error message */
+  /** Disabled values */
+  disabledValues: PropTypes.array,
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
@@ -152,6 +165,7 @@ TheInputCheckbox.propTypes = {
 }
 
 TheInputCheckbox.defaultProps = {
+  disabledValues: [],
   error: null,
   options: {},
   parser: String,

@@ -314,6 +314,7 @@ class ExampleComponent extends React.PureComponent {
                   value={values['value03']}
                   onUpdate={onUpdate}
                   options={['Green', 'Pink', 'Brown']}
+                  disabledValues={['Pink']}
                   error='Something Wrong with This!'
         />
 

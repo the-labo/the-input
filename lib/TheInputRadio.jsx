@@ -12,13 +12,22 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  * Radio input of the-components
  */
 class TheInputRadio extends React.Component {
-  static Option ({checked, id, label, name, onChange, value}) {
+  static Option ({
+                   checked,
+                   disabled,
+                   id,
+                   label,
+                   name,
+                   onChange,
+                   value,
+                 }) {
     const icon = checked ? TheInputRadio.CHECKED_ICON : TheInputRadio.NORMAL_ICON
     return (
       <div aria-checked={checked}
            aria-label={typeof label === 'string' ? label : null}
            className={c('the-input-radio-item', {
              'the-input-radio-item-checked': checked,
+             'the-input-radio-item-disabled': disabled,
            })}
            data-value={value}
            key={value}
@@ -26,7 +35,7 @@ class TheInputRadio extends React.Component {
       >
         <input className='the-input-radio-radio'
                type='radio'
-               {...{checked, id, name, onChange, value}}
+               {...{checked, disabled, id, name, onChange, value}}
         />
         <label className='the-input-radio-label'
                htmlFor={id}
@@ -62,6 +71,7 @@ class TheInputRadio extends React.Component {
       asButton,
       asToggle,
       className,
+      disabledValues,
       error,
       id = this.id,
       name,
@@ -97,6 +107,7 @@ class TheInputRadio extends React.Component {
             ) : (
               Object.keys(options).sort(sorter).map((optionValue) => (
                 <TheInputRadio.Option checked={String(optionValue).trim() === String(value).trim()}
+                                      disabled={disabledValues.includes(optionValue)}
                                       id={this.idFor(optionValue)}
                                       key={optionValue}
                                       label={options[optionValue]}
@@ -121,6 +132,8 @@ TheInputRadio.propTypes = {
   asButton: PropTypes.bool,
   /** Using toggle-like style */
   asToggle: PropTypes.bool,
+  /** Disabled values */
+  disabledValues: PropTypes.array,
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -149,6 +162,7 @@ TheInputRadio.propTypes = {
 TheInputRadio.defaultProps = {
   asButton: false,
   asToggle: false,
+  disabledValues: [],
   error: null,
   options: {},
   parser: String,
