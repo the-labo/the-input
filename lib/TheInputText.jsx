@@ -55,6 +55,7 @@ class TheInputText extends React.PureComponent {
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.elmRef = React.createRef()
     this._offSuggestionOffTimer = -1
   }
 
@@ -126,7 +127,7 @@ class TheInputText extends React.PureComponent {
   }
 
   handleDocumentClick (e) {
-    const {elm} = this
+    const elm = this.elmRef.current
 
     if (!elm) {
       return
@@ -278,7 +279,7 @@ class TheInputText extends React.PureComponent {
              'the-input-warn': !!warning,
            })}
            data-value={value}
-           ref={(elm) => { this.elm = elm }}
+           ref={this.elmRef}
       >
         {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
