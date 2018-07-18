@@ -384,6 +384,18 @@
         "returns": null
       },
       {
+        "name": "handleItemClick",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "index",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "handleKeyDown",
         "docblock": null,
         "modifiers": [],
