@@ -336,6 +336,79 @@
       "asobj"
     ]
   },
+  "TheInputPinCode": {
+    "description": "",
+    "displayName": "TheInputPinCode",
+    "methods": [
+      {
+        "name": "handleBack",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleEnter",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleFocus",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleKeyDown",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleUpdate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "values",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ]
+  },
   "TheInputRadio": {
     "description": "Radio input of the-components",
     "displayName": "TheInputRadio",

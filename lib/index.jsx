@@ -9,6 +9,7 @@ import TheInput from './TheInput'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputDate from './TheInputDate'
 import TheInputPassword from './TheInputPassword'
+import TheInputPinCode from './TheInputPinCode'
 import TheInputRadio from './TheInputRadio'
 import TheInputRange from './TheInputRange'
 import TheInputSearch from './TheInputSearch'
@@ -28,6 +29,7 @@ export {
  TheInputCheckbox,
  TheInputDate,
  TheInputPassword,
+ TheInputPinCode,
  TheInputRadio,
  TheInputRange,
  TheInputSearch,

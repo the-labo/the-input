@@ -8,6 +8,7 @@ import { renderErrorMessage } from './helpers'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputDate from './TheInputDate'
 import TheInputPassword from './TheInputPassword'
+import TheInputPinCode from './TheInputPinCode'
 import TheInputRadio from './TheInputRadio'
 import TheInputRange from './TheInputRange'
 import TheInputSearch from './TheInputSearch'
@@ -76,6 +77,7 @@ TheInput.Text = TheInputText
 TheInput.Search = TheInputSearch
 TheInput.Password = TheInputPassword
 TheInput.TextArea = TheInputTextArea
+TheInput.PinCode = TheInputPinCode
 TheInput.Radio = TheInputRadio
 TheInput.Checkbox = TheInputCheckbox
 TheInput.Select = TheInputSelect

@@ -29,6 +29,7 @@ class ExampleComponent extends React.PureComponent {
       Checkbox,
       Select,
       Toggle,
+      PinCode,
       Slider,
       Range,
       Upload,
@@ -263,6 +264,14 @@ class ExampleComponent extends React.PureComponent {
         />
 
         <br/>
+
+
+        <h3>PinCode</h3>
+        <PinCode name='value-pin-code-01'
+                 value={values['value-pin-code-01']}
+                 onUpdate={onUpdate}
+        />
+
         <br/>
         <br/>
 
