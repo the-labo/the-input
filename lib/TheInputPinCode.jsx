@@ -122,7 +122,7 @@ class TheInputPinCode extends React.PureComponent {
                                    key={i}
                                    onClick={this.handleItemClick}
                                    selected={focused && index === i}
-                                   value={props.value[i]}
+                                   value={(props.value || '')[i]}
               />
             ))
           }
