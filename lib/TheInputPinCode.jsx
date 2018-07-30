@@ -60,6 +60,10 @@ class TheInputPinCode extends React.PureComponent {
     this.setState({
       index,
     })
+    const {name, onUpdate, value} = this.props
+    if (value.length > index) {
+      onUpdate && onUpdate({[name]: value.substr(0, index)})
+    }
   }
 
   handleKeyDown (e) {
