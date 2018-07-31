@@ -944,6 +944,9 @@ TheInputStyle.data = (options) => {
         overflow: 'hidden',
         position: 'relative',
       },
+      '&.the-input-upload-read-only': {
+        pointerEvents: 'none',
+      },
     }),
     asStyleData('.the-input-tag', {
       '.the-input-tag-remover': {

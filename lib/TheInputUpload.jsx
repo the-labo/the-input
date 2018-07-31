@@ -9,6 +9,8 @@ import { TheIcon } from 'the-icon'
 import { TheSpin } from 'the-spin'
 import { isImageUrl, normalizeArrayValue, readFile, renderErrorMessage } from './helpers'
 
+const isImageUrlFilter = (url) => isImageUrl(url)
+
 class TheInputUpload extends React.PureComponent {
   constructor (props) {
     super(props)
@@ -92,6 +94,7 @@ class TheInputUpload extends React.PureComponent {
       id = this.id,
       multiple,
       name,
+      readOnly,
       text,
       value,
       width,
@@ -101,11 +104,13 @@ class TheInputUpload extends React.PureComponent {
       urls,
     } = state
 
+    const hasImage = !!urls && urls.length > 0
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-upload', className, {
              'the-input-error': !!error,
+             'the-input-upload-read-only': !!readOnly,
            })}
            data-value={value}
            id={id}
@@ -117,38 +122,42 @@ class TheInputUpload extends React.PureComponent {
                multiple={multiple}
                name={name}
                onChange={this.handleChange}
-               style={{height, width}}
+               readOnly={readOnly}
+               style={(readOnly && !hasImage) ? {} : {height, width}}
                type='file'
         />
-        <label className='the-input-upload-label' htmlFor={`${id}-file`}>
+        <TheCondition unless={readOnly}>
+          <label className='the-input-upload-label' htmlFor={`${id}-file`}>
           <span className='the-input-upload-aligner'>
           </span>
-          <span className='the-input-upload-label-inner'>
+            <span className='the-input-upload-label-inner'>
             <i className={c('the-input-upload-icon', guideIcon || TheInputUpload.GUIDE_ICON)}/>
             <span className='the-input-upload-text'>{text}</span>
-            {children}
+              {children}
           </span>
-        </label>
+          </label>
+        </TheCondition>
         <TheCondition if={spinning}>
           <TheSpin className='the-input-upload-spin'
                    cover
                    enabled
           />
         </TheCondition>
-        <TheCondition if={!!urls && urls.length > 0}>
+        <TheCondition if={hasImage}>
           <div>
-            <a className='the-input-upload-close'
-               onClick={this.handleRemove}
-            >
-              <TheIcon className={c('the-input-upload-close-icon', closeIcon || TheInputUpload.CLOSE_ICON)}
+            <TheCondition unless={readOnly}>
+              <a className='the-input-upload-close'
+                 onClick={this.handleRemove}
+              >
+                <TheIcon className={c('the-input-upload-close-icon', closeIcon || TheInputUpload.CLOSE_ICON)}
 
-              />
-            </a>
-
+                />
+              </a>
+            </TheCondition>
             {
               (urls || [])
                 .filter(Boolean)
-                .filter((url) => isImageUrl(url))
+                .filter(isImageUrlFilter)
                 .map((url, i) => (
                   <div className={c('the-input-upload-preview')}
                        key={url}
@@ -216,6 +225,7 @@ TheInputUpload.defaultProps = {
   error: null,
   height: 180,
   multiple: false,
+  readOnly: false,
   text: 'Upload File',
   width: 180,
 }

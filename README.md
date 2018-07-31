@@ -434,7 +434,12 @@ class ExampleComponent extends React.PureComponent {
                   readOnly
         />
 
-
+        <Upload name='value08'
+                value={values['value08']}
+                multiple={true}
+                readOnly
+                onUpdate={onUpdate}
+        />
       </div>
 
     )
