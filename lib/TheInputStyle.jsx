@@ -947,7 +947,7 @@ TheInputStyle.data = (options) => {
       '&.the-input-upload-read-only': {
         '.the-input-upload-input': {
           pointerEvents: 'none',
-        }
+        },
       },
     }),
     asStyleData('.the-input-tag', {

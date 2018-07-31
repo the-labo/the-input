@@ -2238,6 +2238,12 @@
           "value": "180",
           "computed": false
         }
+      },
+      "readOnly": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       }
     }
   }
