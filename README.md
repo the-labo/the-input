@@ -681,6 +681,7 @@ Toggle input of the-components
 | `text` | string  | Guide text | `'Upload File'` |
 | `value` | union  | Value of input | `` |
 | `width` | number  | Image width | `180` |
+| `readOnly` |   |  | `false` |
 
 
 

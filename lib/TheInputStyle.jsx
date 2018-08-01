@@ -330,6 +330,10 @@ TheInputStyle.data = (options) => {
           border: `2px solid ${dominantColor}`,
         },
       },
+      'the-input-radio-readonly-label': {
+        display: 'inline-block',
+        margin: '4px 0',
+      },
     }),
     asStyleData('.the-input-checkbox', {
       '.the-input-checkbox-checkbox': {

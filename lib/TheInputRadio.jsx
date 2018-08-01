@@ -103,7 +103,7 @@ class TheInputRadio extends React.Component {
         <div className={c('the-input-radio-inner')}>
           {
             readOnly ? (
-              <span className='the-input-radio-readonly'>{options[value]}</span>
+              <span className='the-input-radio-readonly-label'>{options[value]}</span>
             ) : (
               Object.keys(options).sort(sorter).map((optionValue) => (
                 <TheInputRadio.Option checked={String(optionValue).trim() === String(value).trim()}
