@@ -561,6 +561,9 @@ TheInputStyle.data = (options) => {
           },
           '.the-input-select-options-list': {
             '.the-input-select-option': {
+              '&:hover': {
+                opacity: 0.8,
+              },
               background: 'transparent',
               border: 'none',
               color: dominantColor,
@@ -581,6 +584,7 @@ TheInputStyle.data = (options) => {
             maxWidth: '480px',
             overflow: 'scroll',
             padding: '16px',
+            position: 'relative',
             zIndex: 45,
           },
           alignItems: 'center',

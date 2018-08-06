@@ -10,7 +10,7 @@ import { changedProps, eventHandlersFor, htmlAttributesFor } from 'the-component
 import { TheIcon } from 'the-icon'
 import { onOffBoolean } from './helpers'
 
-class TheInputDate extends React.Component {
+class TheInputDate extends React.PureComponent {
   constructor (props) {
     super(props)
     this.elmRef = React.createRef()

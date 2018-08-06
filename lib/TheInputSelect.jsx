@@ -14,7 +14,7 @@ const noop = () => null
 /**
  * Select Input
  */
-class TheInputSelect extends React.Component {
+class TheInputSelect extends React.PureComponent {
   static Options ({
                     full = false,
                     nullable = false,

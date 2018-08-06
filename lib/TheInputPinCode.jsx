@@ -136,7 +136,7 @@ class TheInputPinCode extends React.PureComponent {
   }
 }
 
-class TheInputPinCodeItem extends React.Component {
+class TheInputPinCodeItem extends React.PureComponent {
   constructor () {
     super(...arguments)
     this.handleClick = this.handleClick.bind(this)

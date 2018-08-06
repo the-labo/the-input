@@ -27,9 +27,9 @@ class TheInputUpload extends React.PureComponent {
   componentDidMount () {
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (prevProps) {
     const {props} = this
-    const {value} = nextProps
+    const {value} = prevProps
     const hasValue = value && value.length > 0
     if (hasValue && (props.value !== value)) {
       this.setState({urls: [].concat(value)})

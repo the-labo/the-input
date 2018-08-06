@@ -11,7 +11,7 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
 /**
  * Radio input of the-components
  */
-class TheInputRadio extends React.Component {
+class TheInputRadio extends React.PureComponent {
   static Option ({
                    checked,
                    disabled,
