@@ -20,6 +20,7 @@ class TheInputDate extends React.PureComponent {
   componentDidMount () {
     this.picker = flatpickr(this.elmRef.current, {
       defaultDate: this.props.value,
+      enableTime: this.props.timeEnabled,
       maxDate: this.props.maxDate,
       minDate: this.props.minDate,
       onChange: (selectedDates, dateStr) => {
@@ -132,10 +133,12 @@ TheInputDate.propTypes = {
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   name: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  timeEnabled: PropTypes.bool,
 }
 TheInputDate.defaultProps = {
   maxDate: null,
   minDate: null,
+  timeEnabled: false,
 }
 TheInputDate.displayName = 'TheInputDate'
 

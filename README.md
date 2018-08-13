@@ -334,6 +334,15 @@ class ExampleComponent extends React.PureComponent {
         <Date name='value-date-01'
               value={values['value-date-01']}
               minDate={'2018-03-09'}
+              placeholder={'date only'}
+              onUpdate={onUpdate}
+        />
+
+        <Date name='value-date-01'
+              value={values['value-date-01']}
+              placeholder={'date and time'}
+              timeEnabled
+              minDate={'2018-03-09'}
               onUpdate={onUpdate}
         />
 
@@ -507,6 +516,7 @@ Checkbox input of the-components
 | `minDate` | union  |  | `null` |
 | `name` | string  |  | `` |
 | `onUpdate` | func  |  | `` |
+| `timeEnabled` | bool  |  | `false` |
 
 ### TheInputPassword
 
