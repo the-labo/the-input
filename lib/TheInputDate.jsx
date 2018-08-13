@@ -8,7 +8,7 @@ import React from 'react'
 import { uniqueFilter } from 'the-array'
 import { changedProps, eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { onOffBoolean } from './helpers'
+import { onOffBoolean, renderErrorMessage } from './helpers'
 
 class TheInputDate extends React.PureComponent {
   constructor (props) {
@@ -87,6 +87,7 @@ class TheInputDate extends React.PureComponent {
            })}
            data-value={value}
       >
+        {renderErrorMessage(error)}
         <input className='the-input-date-input'
                name={name}
                ref={this.elmRef}
