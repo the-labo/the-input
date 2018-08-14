@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "asobj": "^3.0.0",
-    "chopcal": "^3.0.1",
+    "chopcal": "^3.0.2",
     "classnames": "^2.2.6",
     "flatpickr": "^4.5.1",
     "prop-types": "^15.6.2",
-    "rangecal": "^2.0.0",
+    "rangecal": "^2.0.1",
     "react-draggable": "^3.0.5",
     "regex-email": "^1.0.2",
     "regex-url": "^1.0.0",
