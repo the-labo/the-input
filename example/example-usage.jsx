@@ -175,6 +175,7 @@ class ExampleComponent extends React.PureComponent {
                   value={values['value04']}
                   onUpdate={onUpdate}
                   sorter={(a, b) => a.localeCompare(b)}
+                  disabledValues={['Coffee']}
                   options={['Tea', 'Coffee', 'Water', ...'abcdefghijlkmnlopqrstu'.split('')]}
           />
 
@@ -185,6 +186,7 @@ class ExampleComponent extends React.PureComponent {
                   onUpdate={onUpdate}
                   fullScreen
                   nullable
+                  disabledValues={['Coffee']}
                   options={['Tea', 'Coffee', 'Water', ...new Array(100).fill(null).map((_, i) => `option-${i}`)]}
           />
         </div>

@@ -16,6 +16,7 @@ const noop = () => null
  */
 class TheInputSelect extends React.PureComponent {
   static Options ({
+                    disabledValues,
                     full = false,
                     nullable = false,
                     nullText,
@@ -57,7 +58,9 @@ class TheInputSelect extends React.PureComponent {
           {
             optionValues.sort(sorter).map((optionValue, i) => (
               <li className={c('the-input-select-option', {
+                'the-input-select-option-disabled': disabledValues.includes(optionValue),
                 'the-input-select-option-selected': i === suggestingIndex,
+
               })}
                   data-value={parser(optionValue)}
                   key={optionValue}
@@ -275,6 +278,7 @@ class TheInputSelect extends React.PureComponent {
     const {
       children,
       className,
+      disabledValues = [],
       error,
       fullScreen,
       id,
@@ -345,7 +349,8 @@ class TheInputSelect extends React.PureComponent {
               {nullable && <option name={name} value={null}/>}
               {
                 Object.keys(options).map((optionValue) => (
-                  <option key={optionValue}
+                  <option disabled={disabledValues.includes(optionValue)}
+                          key={optionValue}
                           name={name}
                           value={optionValue}
                   >{optionValue}</option>
@@ -360,6 +365,7 @@ class TheInputSelect extends React.PureComponent {
         {
           !readOnly && suggesting && (
             <TheInputSelect.Options {...{options, parser, sorter, suggestingIndex}}
+                                    disabledValues={disabledValues}
                                     full={fullScreen}
                                     nullable={nullable}
                                     nullText={nullText}
@@ -380,6 +386,10 @@ TheInputSelect.OPEN_ICON = 'fa fa-caret-down'
 TheInputSelect.propTypes = {
   /** Name of input */
   /** Input error */
+  /** Unselecatable values */
+  disabledValues: PropTypes.arrayOf(
+    PropTypes.string,
+  ),
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
@@ -407,6 +417,7 @@ TheInputSelect.propTypes = {
 }
 
 TheInputSelect.defaultProps = {
+  disabledValues: [],
   error: null,
   nullable: false,
   nullText: '( no select )',

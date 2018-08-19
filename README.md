@@ -246,6 +246,7 @@ class ExampleComponent extends React.PureComponent {
                   value={values['value04']}
                   onUpdate={onUpdate}
                   sorter={(a, b) => a.localeCompare(b)}
+                  disabledValues={['Coffee']}
                   options={['Tea', 'Coffee', 'Water', ...'abcdefghijlkmnlopqrstu'.split('')]}
           />
 
@@ -256,6 +257,7 @@ class ExampleComponent extends React.PureComponent {
                   onUpdate={onUpdate}
                   fullScreen
                   nullable
+                  disabledValues={['Coffee']}
                   options={['Tea', 'Coffee', 'Water', ...new Array(100).fill(null).map((_, i) => `option-${i}`)]}
           />
         </div>
@@ -578,7 +580,8 @@ Select Input
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `error` | union  | Input error | `null` |
+| `disabledValues` | arrayOf string | Unselecatable values | `[]` |
+| `error` | union  |  | `null` |
 | `name` | string  |  | `` |
 | `nullable` | bool  | Allow null select | `false` |
 | `nullText` | string  | Text for null | `'( no select )'` |

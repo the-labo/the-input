@@ -530,6 +530,10 @@ TheInputStyle.data = (options) => {
         '&:last-child': {
           borderBottom: 'none',
         },
+        '&.the-input-select-option-disabled': {
+          opacity: 0.33,
+          pointerEvents: 'none',
+        },
         '&.the-input-select-option-selected': {
           backgroundColor: colorAlpha(dominantColor, 0.2),
         },

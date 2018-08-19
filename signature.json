@@ -887,7 +887,7 @@
         ],
         "params": [
           {
-            "name": "{\n                  full = false,\n                  nullable = false,\n                  nullText,\n                  onClose,\n                  onNull,\n                  onSelect,\n                  options,\n                  optionsRef,\n                  parser,\n                  placeholder,\n                  sorter,\n                  suggestingIndex,\n                }",
+            "name": "{\n                  disabledValues,\n                  full = false,\n                  nullable = false,\n                  nullText,\n                  onClose,\n                  onNull,\n                  onSelect,\n                  options,\n                  optionsRef,\n                  parser,\n                  placeholder,\n                  sorter,\n                  suggestingIndex,\n                }",
             "type": null
           }
         ],
@@ -1053,6 +1053,20 @@
       }
     ],
     "props": {
+      "disabledValues": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Unselecatable values",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
       "error": {
         "type": {
           "name": "union",
@@ -1066,7 +1080,7 @@
           ]
         },
         "required": false,
-        "description": "Input error",
+        "description": "",
         "defaultValue": {
           "value": "null",
           "computed": false
