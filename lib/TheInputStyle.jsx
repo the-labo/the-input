@@ -1043,7 +1043,6 @@ TheInputStyle.data = (options) => {
         maxWidth: contentWidth,
         position: 'relative',
         verticalAlign: 'middle',
-        width: '100%',
       },
     }),
     asStyleData('.the-input-pin-code', {
