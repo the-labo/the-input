@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { TheInput, TheInputStyle } from 'the-input'
+import { TheSpinStyle } from 'the-spin'
 
 class ExampleComponent extends React.PureComponent {
   constructor (props) {
@@ -42,6 +43,7 @@ class ExampleComponent extends React.PureComponent {
     return (
       <div>
         <TheInputStyle/>
+        <TheSpinStyle/>
 
         <h3>Text</h3>
 
@@ -321,6 +323,14 @@ class ExampleComponent extends React.PureComponent {
         />
 
         <Select name='value04'
+                value={values['value04']}
+                onUpdate={onUpdate}
+                options={['Tea', 'Coffee', 'Water']}
+                error='Something Wrong with This!'
+        />
+
+        <Select name='value04'
+                spinning
                 value={values['value04']}
                 onUpdate={onUpdate}
                 options={['Tea', 'Coffee', 'Water']}

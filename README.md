@@ -73,6 +73,7 @@ Usage
 
 import React from 'react'
 import { TheInput, TheInputStyle } from 'the-input'
+import { TheSpinStyle } from 'the-spin'
 
 class ExampleComponent extends React.PureComponent {
   constructor (props) {
@@ -113,6 +114,7 @@ class ExampleComponent extends React.PureComponent {
     return (
       <div>
         <TheInputStyle/>
+        <TheSpinStyle/>
 
         <h3>Text</h3>
 
@@ -398,6 +400,14 @@ class ExampleComponent extends React.PureComponent {
                 error='Something Wrong with This!'
         />
 
+        <Select name='value04'
+                spinning
+                value={values['value04']}
+                onUpdate={onUpdate}
+                options={['Tea', 'Coffee', 'Water']}
+                error='Something Wrong with This!'
+        />
+
         <Radio name='value02'
                value={values['value02']}
                onUpdate={onUpdate}
@@ -581,8 +591,8 @@ Select Input
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
 | `disabledValues` | arrayOf string | Unselecatable values | `[]` |
-| `error` | union  |  | `null` |
-| `name` | string  |  | `` |
+| `error` | union  | Input error | `null` |
+| `name` | string  | Name of input | `` |
 | `nullable` | bool  | Allow null select | `false` |
 | `nullText` | string  | Text for null | `'( no select )'` |
 | `onEnter` | func  | Handle for enter | `null` |
@@ -590,6 +600,7 @@ Select Input
 | `options` | union  | Options | `{}` |
 | `parser` | func  | Value parser | `String` |
 | `sorter` | func  | Options sorter | `(v1, v2) => String(v1).localeCompare(v2)` |
+| `spinning` | bool  |  | `false` |
 | `value` | string  | Value of input | `''` |
 
 ### TheInputSlider

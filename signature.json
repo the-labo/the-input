@@ -1080,7 +1080,7 @@
           ]
         },
         "required": false,
-        "description": "",
+        "description": "Input error",
         "defaultValue": {
           "value": "null",
           "computed": false
@@ -1091,7 +1091,7 @@
           "name": "string"
         },
         "required": true,
-        "description": ""
+        "description": "Name of input"
       },
       "nullable": {
         "type": {
@@ -1174,6 +1174,17 @@
         "description": "Options sorter",
         "defaultValue": {
           "value": "(v1, v2) => String(v1).localeCompare(v2)",
+          "computed": false
+        }
+      },
+      "spinning": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },

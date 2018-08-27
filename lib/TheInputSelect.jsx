@@ -6,6 +6,7 @@ import React from 'react'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { TheIcon } from 'the-icon'
+import { TheSpin } from 'the-spin'
 import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
@@ -289,6 +290,7 @@ class TheInputSelect extends React.PureComponent {
       placeholder,
       readOnly,
       sorter,
+      spinning = false,
       type,
       value,
     } = props
@@ -306,7 +308,13 @@ class TheInputSelect extends React.PureComponent {
            ref={(elm) => { this.elm = elm }}
       >
         {renderErrorMessage(error)}
-
+        {
+          spinning ? (
+            <TheSpin className='the-input-select-spin'
+                     cover
+                     enabled/>
+          ) : null
+        }
         {
           !readOnly && (
             <a className='the-input-select-display'
@@ -384,16 +392,16 @@ class TheInputSelect extends React.PureComponent {
 TheInputSelect.OPEN_ICON = 'fa fa-caret-down'
 
 TheInputSelect.propTypes = {
-  /** Name of input */
-  /** Input error */
   /** Unselecatable values */
   disabledValues: PropTypes.arrayOf(
     PropTypes.string,
   ),
+  /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
+  /** Name of input */
   name: PropTypes.string.isRequired,
   /** Allow null select */
   nullable: PropTypes.bool,
@@ -412,6 +420,7 @@ TheInputSelect.propTypes = {
   parser: PropTypes.func,
   /** Options sorter */
   sorter: PropTypes.func,
+  spinning: PropTypes.bool,
   /** Value of input */
   value: PropTypes.string,
 }
@@ -425,6 +434,7 @@ TheInputSelect.defaultProps = {
   options: {},
   parser: String,
   sorter: (v1, v2) => String(v1).localeCompare(v2),
+  spinning: false,
   value: '',
 }
 
