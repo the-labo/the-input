@@ -36,7 +36,7 @@
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",
     "the-component-demo": "^4.0.17",
-    "the-script-build": "^4.0.7",
+    "the-script-build": "^4.0.8",
     "the-script-doc": "^1.0.2",
     "the-script-release": "^1.0.6",
     "the-script-share": "^1.0.5",

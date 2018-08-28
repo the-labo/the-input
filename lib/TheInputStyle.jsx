@@ -169,6 +169,7 @@ TheInputStyle.data = (options) => {
     asStyleData('.the-input-password', {
       '.the-input-password-toggle': ToggleIconStyle({
         color: 'inherit',
+        margin: '0 8px',
         textDecoration: 'none',
       }),
       '&': {
