@@ -8,6 +8,8 @@ import React from 'react'
 import { get } from 'the-window'
 import url from 'url'
 
+const videoExtensions = require('video-extensions')
+
 const {parse: parseUrl} = url
 
 export const normalizeOptions = (options) => [].concat(options)
@@ -77,9 +79,20 @@ export function isImageUrl (src) {
   ]
   const extname = path.extname(parseUrl(src).pathname)
   if (!extname) {
+    return false
+  }
+  return imageExtensions.includes(extname)
+}
+
+export function isVideoUrl (src) {
+  if (/^data:video/.test(src)) {
     return true
   }
-  return !!~imageExtensions.indexOf(extname)
+  const extname = path.extname(parseUrl(src).pathname)
+  if (!extname) {
+    return false
+  }
+  return videoExtensions.includes(extname.replace(/^\./, ''))
 }
 
 export function onOffBoolean (v) {
@@ -91,6 +104,7 @@ export function onOffBoolean (v) {
 
 export default {
   isImageUrl,
+  isVideoUrl,
   normalizeArrayValue,
   normalizeOptions,
   onOffBoolean,

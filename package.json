@@ -1,7 +1,7 @@
 {
   "name": "the-input",
   "description": "Input of the-components",
-  "version": "3.5.24",
+  "version": "3.5.25",
   "author": {
     "name": "Taka Okunishi",
     "email": "okunishinishi@gmail.com",
@@ -27,7 +27,8 @@
     "the-icon": "^4.0.9",
     "the-spin": "^3.1.10",
     "the-style": "^2.2.2",
-    "the-window": "^7.0.1"
+    "the-window": "^7.0.1",
+    "video-extensions": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.2",

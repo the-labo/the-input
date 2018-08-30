@@ -7,9 +7,9 @@ import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { TheIcon } from 'the-icon'
 import { TheSpin } from 'the-spin'
-import { isImageUrl, normalizeArrayValue, readFile, renderErrorMessage } from './helpers'
+import { isImageUrl, isVideoUrl, normalizeArrayValue, readFile, renderErrorMessage } from './helpers'
 
-const isImageUrlFilter = (url) => isImageUrl(url)
+const previewUrlFilter = (url) => isImageUrl(url) || isVideoUrl(url)
 
 class TheInputUpload extends React.PureComponent {
   constructor (props) {
@@ -157,7 +157,7 @@ class TheInputUpload extends React.PureComponent {
             {
               (urls || [])
                 .filter(Boolean)
-                .filter(isImageUrlFilter)
+                .filter(previewUrlFilter)
                 .map((url, i) => (
                   <div className={c('the-input-upload-preview')}
                        key={url}
@@ -167,10 +167,20 @@ class TheInputUpload extends React.PureComponent {
                          top: `${i * 10}%`,
                          width,
                        }}>
-                    <img src={url}
-                         {...{height, width}}
-                         className={c('the-input-upload-preview-img')}
-                    />
+                    {
+                      isVideoUrl(url) ? (
+                        <video src={url}
+                               {...{height, width}}
+                               className={c('the-input-upload-preview-video')}
+                        />
+                      ) : (
+                        <img src={url}
+                             {...{height, width}}
+                             className={c('the-input-upload-preview-img')}
+                        />
+                      )
+                    }
+
                   </div>
                 ))
             }
