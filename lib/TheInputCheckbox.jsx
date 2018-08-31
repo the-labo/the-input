@@ -18,6 +18,7 @@ class TheInputCheckbox extends React.PureComponent {
                    label,
                    name,
                    onChange,
+                   tabIndex,
                    value,
                  }) {
     const icon = checked ? TheInputCheckbox.CHECKED_ICON : TheInputCheckbox.NORMAL_ICON
@@ -34,7 +35,7 @@ class TheInputCheckbox extends React.PureComponent {
       >
         <input className='the-input-checkbox-checkbox'
                type='checkbox'
-               {...{checked, disabled, id, name, onChange, value}}
+               {...{checked, disabled, id, name, onChange, tabIndex, value}}
         />
         <label className='the-input-checkbox-label'
                htmlFor={id}
@@ -92,6 +93,7 @@ class TheInputCheckbox extends React.PureComponent {
       options,
       readOnly,
       splitter,
+      tabIndex,
       value,
     } = props
 
@@ -99,7 +101,7 @@ class TheInputCheckbox extends React.PureComponent {
     value = normalizeArrayValue(value, splitter).map((value) => String(value).trim())
 
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'tabIndex', 'value']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-checkbox', className, {
              'the-input-error': !!error,
@@ -122,6 +124,7 @@ class TheInputCheckbox extends React.PureComponent {
                 label={options[optionValue]}
                 name={name}
                 onChange={(e) => this.handleChange(e)}
+                tabIndex={tabIndex}
                 value={optionValue}
               />
             ))

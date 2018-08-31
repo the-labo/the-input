@@ -54,6 +54,7 @@ class TheInputDate extends React.PureComponent {
       readOnly,
       required,
       spellCheck,
+      tabIndex,
       type,
       value,
     } = props
@@ -66,6 +67,7 @@ class TheInputDate extends React.PureComponent {
           'className',
           'type',
           'value',
+          'tabIndex',
           'name',
           'required',
           'placeholder',
@@ -102,6 +104,7 @@ class TheInputDate extends React.PureComponent {
                  readOnly,
                  required,
                  spellCheck,
+                 tabIndex,
                  type,
                }}
         />

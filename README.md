@@ -650,7 +650,8 @@ Text Input
 | `patternWarning` | string  | Warning text when pattern failed | `null` |
 | `prefix` | node  | prefix | `null` |
 | `suffix` | node  | suffix | `null` |
-| `type` | string  |  | `'text'` |
+| `tabIndex` | number  | Tab index | `` |
+| `type` | string  | Text type | `'text'` |
 | `value` | string  | Value of input | `''` |
 | `role` |   |  | `'textbox'` |
 

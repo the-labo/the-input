@@ -116,13 +116,14 @@ class TheInputTextArea extends React.PureComponent {
       required,
       role,
       spellCheck,
+      tabIndex,
       value,
     } = props
     const rows = autoExpand ? this.state.actualRows : this.props.rows
     return (
       <div {...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder', 'role'
+          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder', 'role', 'tabIndex'
         ],
       })}
            {...eventHandlersFor(props, {
@@ -145,6 +146,7 @@ class TheInputTextArea extends React.PureComponent {
                   onKeyDown={this.handleKeyDown}
                   ref={this.textareaRef}
                   rows={rows}
+                  tabIndex={tabIndex}
                   value={value || ''}
         />
         {children}

@@ -291,6 +291,7 @@ class TheInputSelect extends React.PureComponent {
       readOnly,
       sorter,
       spinning = false,
+      tabIndex,
       type,
       value,
     } = props
@@ -299,7 +300,7 @@ class TheInputSelect extends React.PureComponent {
     const selectedValue = options[value]
     const hasNotSelect = typeof selectedValue === 'undefined'
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder', 'tabIndex']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-select', className, {
              'the-input-error': !!error,
@@ -334,7 +335,7 @@ class TheInputSelect extends React.PureComponent {
         }
 
         <input className='the-input-select-input'
-               {...{id, name, placeholder, type}}
+               {...{id, name, placeholder, tabIndex, type}}
                onBlur={this.handleBlur}
                onChange={noop}
                onFocus={this.handleFocus}

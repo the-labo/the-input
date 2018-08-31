@@ -124,6 +124,7 @@ class TheInputUpload extends React.PureComponent {
                onChange={this.handleChange}
                readOnly={readOnly}
                style={(readOnly && !hasImage) ? {} : {height, width}}
+               tabIndex={-1}
                type='file'
         />
         <TheCondition unless={readOnly}>

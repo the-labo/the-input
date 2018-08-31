@@ -96,7 +96,7 @@
         ],
         "params": [
           {
-            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 value,\n               }",
+            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 tabIndex,\n                 value,\n               }",
             "type": null
           }
         ],
@@ -444,7 +444,7 @@
         ],
         "params": [
           {
-            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 value,\n               }",
+            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 tabIndex,\n                 value,\n               }",
             "type": null
           }
         ],
@@ -1849,12 +1849,19 @@
           "computed": false
         }
       },
+      "tabIndex": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Tab index"
+      },
       "type": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "",
+        "description": "Text type",
         "defaultValue": {
           "value": "'text'",
           "computed": false

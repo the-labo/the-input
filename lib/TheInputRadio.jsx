@@ -19,6 +19,7 @@ class TheInputRadio extends React.PureComponent {
                    label,
                    name,
                    onChange,
+                   tabIndex,
                    value,
                  }) {
     const icon = checked ? TheInputRadio.CHECKED_ICON : TheInputRadio.NORMAL_ICON
@@ -35,7 +36,7 @@ class TheInputRadio extends React.PureComponent {
       >
         <input className='the-input-radio-radio'
                type='radio'
-               {...{checked, disabled, id, name, onChange, value}}
+               {...{checked, disabled, id, name, onChange, tabIndex, value}}
         />
         <label className='the-input-radio-label'
                htmlFor={id}
@@ -77,6 +78,7 @@ class TheInputRadio extends React.PureComponent {
       name,
       readOnly,
       sorter,
+      tabIndex,
       value,
     } = props
 
@@ -89,7 +91,7 @@ class TheInputRadio extends React.PureComponent {
     })
 
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'name']})}
+      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'name', 'value', 'tabIndex']})}
            {...eventHandlersFor(props, {except: []})}
            className={c('the-input-radio', className, {
              'the-input-as-button': asButton,
@@ -113,6 +115,7 @@ class TheInputRadio extends React.PureComponent {
                                       label={options[optionValue]}
                                       name={name}
                                       onChange={this.handleChange}
+                                      tabIndex={tabIndex}
                                       value={optionValue}
                 />
               ))

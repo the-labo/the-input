@@ -236,6 +236,7 @@ class TheInputText extends React.PureComponent {
       required,
       spellCheck,
       suffix,
+      tabIndex,
       type,
       value,
     } = props
@@ -260,6 +261,7 @@ class TheInputText extends React.PureComponent {
           'type',
           'value',
           'name',
+          'tabIndex',
           'required',
           'placeholder',
           'autoFocus',
@@ -302,6 +304,7 @@ class TheInputText extends React.PureComponent {
                        readOnly,
                        required,
                        spellCheck,
+                       tabIndex,
                        type,
                      }}
                      onBlur={this.handleBlur}
@@ -351,7 +354,6 @@ class TheInputText extends React.PureComponent {
 }
 
 TheInputText.propTypes = {
-  /** Text type */
   /** Input error */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -388,6 +390,9 @@ TheInputText.propTypes = {
   prefix: PropTypes.node,
   /** suffix */
   suffix: PropTypes.node,
+  /** Tab index */
+  tabIndex: PropTypes.number,
+  /** Text type */
   type: PropTypes.string,
   /** Value of input */
   value: PropTypes.string,
