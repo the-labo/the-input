@@ -81,6 +81,12 @@
           "value": "{}",
           "computed": false
         }
+      },
+      "parser": {
+        "defaultValue": {
+          "value": "String",
+          "computed": true
+        }
       }
     }
   },

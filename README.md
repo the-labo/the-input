@@ -498,6 +498,7 @@ Input of the-components
 | `type` | string  |  | `'text'` |
 | `value` | string  | Value of input | `''` |
 | `options` |   |  | `{}` |
+| `parser` |   |  | `String` |
 
 ### TheInputCheckbox
 

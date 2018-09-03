@@ -107,6 +107,7 @@ TheInput.defaultProps = {
   error: null,
   name: '_the',
   options: {},
+  parser: String,
   type: 'text',
   value: '',
 }
