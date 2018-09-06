@@ -9,7 +9,7 @@ import { TheIcon } from 'the-icon'
 import { TheSpin } from 'the-spin'
 import { isImageUrl, isVideoUrl, normalizeArrayValue, readFile, renderErrorMessage } from './helpers'
 
-const previewUrlFilter = (url) => isImageUrl(url) || isVideoUrl(url)
+const previewUrlFilter = (url) => isImageUrl(url) || isVideoUrl(url) || isUnknownTypeUrl(url)
 
 class TheInputUpload extends React.PureComponent {
   constructor (props) {

@@ -95,6 +95,14 @@ export function isVideoUrl (src) {
   return videoExtensions.includes(extname.replace(/^\./, ''))
 }
 
+export function isUnknownTypeUrl (src) {
+  if (/^data:/.test(src)) {
+    return false
+  }
+  const extname = path.extname(parseUrl(src).pathname)
+  return !extname
+}
+
 export function onOffBoolean (v) {
   if (typeof v === 'boolean') {
     return v ? 'on' : 'off'
