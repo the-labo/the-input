@@ -112,6 +112,7 @@ export function onOffBoolean (v) {
 
 export default {
   isImageUrl,
+  isUnknownTypeUrl,
   isVideoUrl,
   normalizeArrayValue,
   normalizeOptions,

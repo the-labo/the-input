@@ -7,7 +7,14 @@ import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { TheIcon } from 'the-icon'
 import { TheSpin } from 'the-spin'
-import { isImageUrl, isVideoUrl, normalizeArrayValue, readFile, renderErrorMessage } from './helpers'
+import {
+  isImageUrl,
+  isUnknownTypeUrl,
+  isVideoUrl,
+  normalizeArrayValue,
+  readFile,
+  renderErrorMessage,
+} from './helpers'
 
 const previewUrlFilter = (url) => isImageUrl(url) || isVideoUrl(url) || isUnknownTypeUrl(url)
 
