@@ -332,6 +332,27 @@
       }
     }
   },
+  "TheInputNumber": {
+    "description": "",
+    "displayName": "TheInputNumber",
+    "methods": [
+      {
+        "name": "toggleShowing",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "showing",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "composes": [
+      "asobj"
+    ]
+  },
   "TheInputPassword": {
     "description": "",
     "displayName": "TheInputPassword",
@@ -1875,7 +1896,15 @@
       },
       "value": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
         },
         "required": false,
         "description": "Value of input",

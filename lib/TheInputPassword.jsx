@@ -6,7 +6,7 @@ import React from 'react'
 import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
-class TheInputPassword extends React.PureComponent {
+class TheInputPassword extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

@@ -395,7 +395,10 @@ TheInputText.propTypes = {
   /** Text type */
   type: PropTypes.string,
   /** Value of input */
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 }
 
 TheInputText.defaultProps = {

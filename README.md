@@ -531,6 +531,11 @@ Checkbox input of the-components
 | `onUpdate` | func  |  | `` |
 | `timeEnabled` | bool  |  | `false` |
 
+### TheInputNumber
+
+
+
+
 ### TheInputPassword
 
 
@@ -653,7 +658,7 @@ Text Input
 | `suffix` | node  | suffix | `null` |
 | `tabIndex` | number  | Tab index | `` |
 | `type` | string  | Text type | `'text'` |
-| `value` | string  | Value of input | `''` |
+| `value` | union  | Value of input | `''` |
 | `role` |   |  | `'textbox'` |
 
 ### TheInputTextArea
