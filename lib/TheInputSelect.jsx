@@ -441,4 +441,18 @@ TheInputSelect.defaultProps = {
 
 TheInputSelect.displayName = 'TheInputSelect'
 
+TheInputSelect.WithOptionsArray = function WithOptionsArray ({optionsArray, ...props}) {
+  const valueArray = optionsArray.map(([v, node]) => v)
+  return (
+    <TheInputSelect {...props}
+                    options={Object.assign({},
+                      ...optionsArray.map(([v, node]) => ({
+                        [k]: node,
+                      }))
+                    )}
+                    sorter={(a, b) => valueArray.indexOf(a) - valueArray.indexOf(b)}
+    />
+  )
+}
+
 export default TheInputSelect

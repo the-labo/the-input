@@ -1093,6 +1093,20 @@
           }
         ],
         "returns": null
+      },
+      {
+        "name": "WithOptionsArray",
+        "docblock": null,
+        "modifiers": [
+          "static"
+        ],
+        "params": [
+          {
+            "name": "{optionsArray, ...props}",
+            "type": null
+          }
+        ],
+        "returns": null
       }
     ],
     "props": {
