@@ -192,6 +192,14 @@ class ExampleComponent extends React.PureComponent {
                   disabledValues={['Coffee']}
                   options={['Tea', 'Coffee', 'Water', ...new Array(100).fill(null).map((_, i) => `option-${i}`)]}
           />
+
+          <Select.WithOptionsArray name='value04'
+                                   value={values['value04']}
+                                   optionsArray={[
+                                     ['Tea', 'This is Tea!'],
+                                     ['Water', 'This is Water!'],
+                                   ]}
+          />
         </div>
 
         <hr/>

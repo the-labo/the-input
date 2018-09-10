@@ -447,7 +447,7 @@ TheInputSelect.WithOptionsArray = function WithOptionsArray ({optionsArray, ...p
     <TheInputSelect {...props}
                     options={Object.assign({},
                       ...optionsArray.map(([v, node]) => ({
-                        [k]: node,
+                        [v]: node,
                       }))
                     )}
                     sorter={(a, b) => valueArray.indexOf(a) - valueArray.indexOf(b)}
