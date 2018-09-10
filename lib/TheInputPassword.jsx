@@ -40,7 +40,8 @@ class TheInputPassword extends React.Component {
     )
   }
 
-  toggleShowing (showing) {
+  toggleShowing () {
+    const showing = !this.state.showing
     this.setState({showing})
   }
 }
