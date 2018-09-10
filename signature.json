@@ -1943,6 +1943,12 @@
           "computed": false
         }
       },
+      "readOnly": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "role": {
         "defaultValue": {
           "value": "'textbox'",
@@ -2071,6 +2077,12 @@
       "error": {
         "defaultValue": {
           "value": "null",
+          "computed": false
+        }
+      },
+      "readOnly": {
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },
