@@ -6,7 +6,7 @@ import React from 'react'
 import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
-class TheInputPassword extends React.Component {
+class TheInputPassword extends React.PureComponent {
   constructor (props) {
     super(props)
     this.toggleShowing = this.toggleShowing.bind(this)

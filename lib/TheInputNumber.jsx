@@ -8,7 +8,7 @@ import TheInputText from './TheInputText'
 
 const zeroIfNaN = (v) => isNaN(Number(v)) ? 0 : v
 
-class TheInputNumber extends React.Component {
+class TheInputNumber extends React.PureComponent {
   constructor (props) {
     super(props)
     this.incrementValue = this.incrementValue.bind(this)

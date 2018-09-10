@@ -25,7 +25,7 @@ import TheInputUpload from './TheInputUpload'
 /**
  * Input of the-components
  */
-class TheInput extends React.Component {
+class TheInput extends React.PureComponent {
   handleChange (e) {
     const {onChange, onUpdate, parser} = this.props
     const {name, value} = e.target
