@@ -113,6 +113,7 @@ class TheInputTextArea extends React.PureComponent {
       onKeyPress,
       onKeyUp,
       placeholder,
+      readOnly,
       required,
       role,
       spellCheck,
@@ -123,7 +124,16 @@ class TheInputTextArea extends React.PureComponent {
     return (
       <div {...htmlAttributesFor(props, {
         except: [
-          'id', 'className', 'rows', 'value', 'name', 'required', 'placeholder', 'role', 'tabIndex'
+          'id',
+          'className',
+          'readOnly',
+          'rows',
+          'value',
+          'name',
+          'required',
+          'placeholder',
+          'role',
+          'tabIndex'
         ],
       })}
            {...eventHandlersFor(props, {
@@ -138,17 +148,23 @@ class TheInputTextArea extends React.PureComponent {
       >
         {renderErrorMessage(error)}
 
-        <textarea className='the-input-textarea-input'
-                  {...{autoFocus, id, name, placeholder, required, role, spellCheck}}
-                  {...{onBlur, onFocus, onKeyPress, onKeyUp}}
-                  aria-multiline='true'
-                  onChange={(e) => this.handleChange(e)}
-                  onKeyDown={this.handleKeyDown}
-                  ref={this.textareaRef}
-                  rows={rows}
-                  tabIndex={tabIndex}
-                  value={value || ''}
-        />
+        {
+          readOnly ? (
+            <pre className='the-input-textarea-readonly'>{value || ''}</pre>
+          ) : (
+            <textarea className='the-input-textarea-input'
+                      {...{autoFocus, id, name, placeholder, required, role, spellCheck}}
+                      {...{onBlur, onFocus, onKeyPress, onKeyUp}}
+                      aria-multiline='true'
+                      onChange={(e) => this.handleChange(e)}
+                      onKeyDown={this.handleKeyDown}
+                      ref={this.textareaRef}
+                      rows={rows}
+                      tabIndex={tabIndex}
+                      value={value || ''}
+            />
+          )
+        }
         {children}
       </div>
     )
@@ -180,6 +196,7 @@ TheInputTextArea.defaultProps = {
   maxRows: 10,
   minRows: 1,
   parser: String,
+  readOnly: false,
   role: 'textbox',
   rows: 5,
   spellCheck: false,

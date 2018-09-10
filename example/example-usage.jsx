@@ -122,6 +122,14 @@ class ExampleComponent extends React.PureComponent {
                   placeholder='auto expand'
         />
 
+        <TextArea name='value01'
+                  value={values['value01']}
+                  onUpdate={onUpdate}
+                  placeholder='value01 readonly'
+                  readOnly
+        />
+
+
         <hr/>
 
         <h3>Radio</h3>
