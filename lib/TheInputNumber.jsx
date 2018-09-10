@@ -6,47 +6,76 @@ import React from 'react'
 import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
+const zeroIfNaN = (v) => isNaN(Number(v)) ? 0 : v
+
 class TheInputNumber extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      showing: false,
+    this.incrementValue = this.incrementValue.bind(this)
+    this.decrementValue = this.decrementValue.bind(this)
+  }
+
+  get value () {
+    let value = Number(this.props.value)
+    const min = Number(this.props.min)
+    const max = Number(this.props.max)
+    if (!isNaN(min)) {
+      value = Math.max(min, value)
     }
+    if (!isNaN(max)) {
+      value = Math.min(max, value)
+    }
+    return zeroIfNaN(value)
+  }
+
+  changeValue (amount) {
+    const {name, onUpdate, step, value} = this.props
+    onUpdate && onUpdate({
+      [name]: zeroIfNaN(Number(value)) + (amount * step),
+    })
+  }
+
+  decrementValue () {
+    this.changeValue(-1)
+  }
+
+  incrementValue () {
+    this.changeValue(1)
   }
 
   render () {
-    const {props, state} = this
-    const {value} = props
-    const {showing} = state
-    const icon = showing ? TheInputNumber.HIDE_ICON : TheInputNumber.SHOW_ICON
+    const {props, value} = this
+
     return (
       <TheInputText {...props}
-                    className={c('the-input-password')}
+                    className={c('the-input-number')}
                     options={[]}
-                    type={showing ? 'text' : 'password'}
-      >
-        {
-          value && (
-            <a className={c('the-input-password-toggle')}
-               href='javascript:void(0)'
-               onClick={() => this.toggleShowing(!this.state.showing)}
-               tabIndex={-1}
-            >
-              <TheIcon className={icon}/>
-            </a>
-          )
-        }
-      </TheInputText>
+                    prefix={
+                      <a className={c('the-input-number-changer', {
+                        'the-input-number-changer-disabled': value <= props.min,
+                      })}
+                         href='javascript:void(0)'
+                         onClick={this.decrementValue}>
+                        <TheIcon className={TheInputNumber.DECREMENT_ICON}/>
+                      </a>
+                    }
+                    suffix={
+                      <a className={c('the-input-number-changer', {
+                        'the-input-number-changer-disabled': value >= props.max,
+                      })}
+                         href='javascript:void(0)'
+                         onClick={this.incrementValue}>
+                        <TheIcon className={TheInputNumber.INCREMENT_ICON}/>
+                      </a>
+                    }
+                    value={String(value)}
+      />
     )
-  }
-
-  toggleShowing (showing) {
-    this.setState({showing})
   }
 }
 
-TheInputNumber.SHOW_ICON = 'fa fa-eye'
-TheInputNumber.HIDE_ICON = 'fa fa-eye-slash'
+TheInputNumber.INCREMENT_ICON = 'fas fa-caret-right'
+TheInputNumber.DECREMENT_ICON = 'fas fa-caret-left'
 
 TheInputNumber.propTypes = clone(TheInputText.propTypes, {without: ['type', 'options']})
 TheInputNumber.defaultProps = Object.assign({},
@@ -54,7 +83,14 @@ TheInputNumber.defaultProps = Object.assign({},
   {
     autoCapitalize: false,
     autoCorrect: false,
+    max: null,
+    min: null,
+    pattern: /^[0-9\-.]*$/,
+    patternWarning: 'Invalid Number',
     spellCheck: false,
+    step: 1,
+    type: 'text',
+    value: 0,
   }
 )
 TheInputNumber.displayName = 'TheInputNumber'

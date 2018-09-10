@@ -28,6 +28,7 @@ class ExampleComponent extends React.PureComponent {
       Text,
       Password,
       Search,
+      Number,
       TextArea,
       Radio,
       Checkbox,
@@ -286,6 +287,16 @@ class ExampleComponent extends React.PureComponent {
         <PinCode name='value-pin-code-01'
                  value={values['value-pin-code-01']}
                  onUpdate={onUpdate}
+        />
+
+        <br/>
+
+        <h3>Number</h3>
+        <Number name='value-number-01'
+                value={values['value-number-01']}
+                min={-2}
+                max={100}
+                onUpdate={onUpdate}
         />
 
         <br/>

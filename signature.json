@@ -337,15 +337,29 @@
     "displayName": "TheInputNumber",
     "methods": [
       {
-        "name": "toggleShowing",
+        "name": "changeValue",
         "docblock": null,
         "modifiers": [],
         "params": [
           {
-            "name": "showing",
+            "name": "amount",
             "type": null
           }
         ],
+        "returns": null
+      },
+      {
+        "name": "decrementValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "incrementValue",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
         "returns": null
       }
     ],
@@ -361,12 +375,7 @@
         "name": "toggleShowing",
         "docblock": null,
         "modifiers": [],
-        "params": [
-          {
-            "name": "showing",
-            "type": null
-          }
-        ],
+        "params": [],
         "returns": null
       }
     ],

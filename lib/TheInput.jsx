@@ -7,6 +7,7 @@ import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { renderErrorMessage } from './helpers'
 import TheInputCheckbox from './TheInputCheckbox'
 import TheInputDate from './TheInputDate'
+import TheInputNumber from './TheInputNumber'
 import TheInputPassword from './TheInputPassword'
 import TheInputPinCode from './TheInputPinCode'
 import TheInputRadio from './TheInputRadio'
@@ -24,7 +25,7 @@ import TheInputUpload from './TheInputUpload'
 /**
  * Input of the-components
  */
-class TheInput extends React.PureComponent {
+class TheInput extends React.Component {
   handleChange (e) {
     const {onChange, onUpdate, parser} = this.props
     const {name, value} = e.target
@@ -87,6 +88,7 @@ TheInput.Range = TheInputRange
 TheInput.Upload = TheInputUpload
 TheInput.Tag = TheInputTag
 TheInput.Date = TheInputDate
+TheInput.Number = TheInputNumber
 
 TheInput.propTypes = {
   /** Input type */

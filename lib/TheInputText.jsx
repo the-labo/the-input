@@ -102,7 +102,7 @@ class TheInputText extends React.PureComponent {
     if (!pattern) {
       return null
     }
-    const ok = pattern.test(committedValue)
+    const ok = pattern.test(String(committedValue))
     if (ok) {
       return null
     }

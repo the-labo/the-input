@@ -863,6 +863,27 @@ TheInputStyle.data = (options) => {
         position: 'relative',
       },
     }),
+    asStyleData('.the-input-number', {
+      '.the-input-number-changer': {
+        color: dominantColor,
+        cursor: 'pointer',
+        display: 'inline-block',
+        outlineColor: dominantColor,
+        padding: '5px 4px',
+        verticalAlign: 'middle',
+      },
+      '.the-input-number-changer-disabled': {
+        color: '#AAA',
+        pointerEvents: 'none',
+      },
+      '.the-input-text-input': {
+        textAlign: 'right',
+      },
+      '&': {
+        textAlign: 'right',
+        width: 'auto',
+      },
+    }),
     asStyleData('.the-input-upload', {
       '.the-input-upload-aligner': {
         boxSizing: 'border-box',

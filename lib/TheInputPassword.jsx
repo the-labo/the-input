@@ -9,6 +9,7 @@ import TheInputText from './TheInputText'
 class TheInputPassword extends React.Component {
   constructor (props) {
     super(props)
+    this.toggleShowing = this.toggleShowing.bind(this)
     this.state = {
       showing: false,
     }
@@ -29,7 +30,7 @@ class TheInputPassword extends React.Component {
           value && (
             <a className={c('the-input-password-toggle')}
                href='javascript:void(0)'
-               onClick={() => this.toggleShowing(!this.state.showing)}
+               onClick={this.toggleShowing}
                tabIndex={-1}
             >
               <TheIcon className={icon}/>
