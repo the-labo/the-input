@@ -337,6 +337,13 @@
     "displayName": "TheInputNumber",
     "methods": [
       {
+        "name": "value",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
         "name": "changeValue",
         "docblock": null,
         "modifiers": [],
