@@ -266,6 +266,7 @@ class ExampleComponent extends React.PureComponent {
 
           <Select.WithOptionsArray name='value04'
                                    value={values['value04']}
+                                   onUpdate={onUpdate}
                                    optionsArray={[
                                      ['Tea', 'This is Tea!'],
                                      ['Water', 'This is Water!'],
