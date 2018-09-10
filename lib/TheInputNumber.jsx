@@ -17,6 +17,9 @@ class TheInputNumber extends React.PureComponent {
 
   get value () {
     let value = Number(this.props.value)
+    if (isNaN(value)) {
+      return value
+    }
     const min = Number(this.props.min)
     const max = Number(this.props.max)
     if (!isNaN(min)) {
