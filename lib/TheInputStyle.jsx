@@ -886,9 +886,9 @@ TheInputStyle.data = (options) => {
     }),
     asStyleData('.the-input-upload', {
       '.the-input-error-message': {
+        background: 'rgba(255,255,255,0.5)',
         position: 'relative',
         zIndex: 44,
-        background: 'rgba(255,255,255,0.5)',
       },
       '.the-input-upload-aligner': {
         boxSizing: 'border-box',
