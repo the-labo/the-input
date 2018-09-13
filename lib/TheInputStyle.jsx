@@ -885,6 +885,11 @@ TheInputStyle.data = (options) => {
       },
     }),
     asStyleData('.the-input-upload', {
+      '.the-input-error-message': {
+        position: 'relative',
+        zIndex: 44,
+        background: 'rgba(255,255,255,0.5)',
+      },
       '.the-input-upload-aligner': {
         boxSizing: 'border-box',
         display: 'inline-block',
@@ -980,6 +985,11 @@ TheInputStyle.data = (options) => {
         display: 'inline-block',
         overflow: 'hidden',
         position: 'relative',
+      },
+      '&.the-input-error': {
+        '.the-input-upload-label': {
+          borderColor: errorColor,
+        },
       },
       '&.the-input-upload-read-only': {
         '.the-input-upload-input': {

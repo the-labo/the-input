@@ -379,6 +379,13 @@ class ExampleComponent extends React.PureComponent {
                   error='Something Wrong with This!'
         />
 
+        <Upload name='value08'
+                value={values['value08']}
+                multiple={true}
+                error='Something Wrong with This!'
+                onUpdate={onUpdate}
+        />
+
 
         <br/>
         <br/>

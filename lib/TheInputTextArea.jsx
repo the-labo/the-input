@@ -14,7 +14,9 @@ class TheInputTextArea extends React.PureComponent {
     super(props)
     this.state = {}
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.textareaRef = React.createRef()
+    this.adjustRowTimer = -1
     this.gone = false
     this.state = {
       actualRows: props.minRows,
@@ -24,13 +26,17 @@ class TheInputTextArea extends React.PureComponent {
   adjustRows () {
     const {maxRows, minRows} = this.props
     const textarea = this.textareaRef.current
+    if (!textarea) {
+      return
+    }
     const lineHeight = textarea.offsetHeight / this.state.actualRows
 
     // 入力行数が少なくなったらそれに合わせてテキストエリアの行数も減らす
     // テキストエリアが offsetHeight < scrollHeight になるまで高さを小さくして、scrollHeight の最小値を求める
     const originalHeight = textarea.style.height
     let height = textarea.offsetHeight
-    while (true) {
+    let retry = 100
+    while (0 < retry--) {
       if (this.gone) {
         break
       }
@@ -60,7 +66,13 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
+  componentDidUpdate () {
+    clearInterval(this.adjustRowTimer)
+    this.adjustRowTimer = setTimeout(() => this.adjustRows(), 100)
+  }
+
   componentWillUnmount () {
+    clearInterval(this.adjustRowTimer)
     this.gone = true
   }
 
@@ -100,7 +112,7 @@ class TheInputTextArea extends React.PureComponent {
 
   render () {
     const {props} = this
-    let {
+    const {
       autoExpand,
       autoFocus,
       children,
@@ -154,9 +166,9 @@ class TheInputTextArea extends React.PureComponent {
           ) : (
             <textarea className='the-input-textarea-input'
                       {...{autoFocus, id, name, placeholder, required, role, spellCheck}}
-                      {...{onBlur, onFocus, onKeyPress, onKeyUp}}
+                      {...{onBlur, onFocus, onKeyPress, onKeyUp, readOnly}}
                       aria-multiline='true'
-                      onChange={(e) => this.handleChange(e)}
+                      onChange={this.handleChange}
                       onKeyDown={this.handleKeyDown}
                       ref={this.textareaRef}
                       rows={rows}

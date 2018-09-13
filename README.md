@@ -450,6 +450,13 @@ class ExampleComponent extends React.PureComponent {
                   error='Something Wrong with This!'
         />
 
+        <Upload name='value08'
+                value={values['value08']}
+                multiple={true}
+                error='Something Wrong with This!'
+                onUpdate={onUpdate}
+        />
+
 
         <br/>
         <br/>
@@ -687,6 +694,7 @@ Text Input
 | `tabIndex` | number  | Tab index | `` |
 | `type` | string  | Text type | `'text'` |
 | `value` | union  | Value of input | `''` |
+| `readOnly` |   |  | `false` |
 | `role` |   |  | `'textbox'` |
 
 ### TheInputTextArea
@@ -706,6 +714,7 @@ TextArea Input
 | `rows` | number  | TextArea rows | `5` |
 | `value` | string  | Value of input | `''` |
 | `error` |   |  | `null` |
+| `readOnly` |   |  | `false` |
 | `role` |   |  | `'textbox'` |
 | `spellCheck` |   |  | `false` |
 
