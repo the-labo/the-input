@@ -66,9 +66,13 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
+  componentDidMount () {
+    this.adjustRows()
+  }
+
   componentDidUpdate () {
     clearInterval(this.adjustRowTimer)
-    this.adjustRowTimer = setTimeout(() => this.adjustRows(), 100)
+    this.adjustRowTimer = setTimeout(() => this.adjustRows(), 300)
   }
 
   componentWillUnmount () {
