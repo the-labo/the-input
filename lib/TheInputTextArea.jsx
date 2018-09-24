@@ -30,6 +30,9 @@ class TheInputTextArea extends React.PureComponent {
       return
     }
     const lineHeight = textarea.offsetHeight / this.state.actualRows
+    if (isNaN(lineHeight)) {
+      return
+    }
 
     // 入力行数が少なくなったらそれに合わせてテキストエリアの行数も減らす
     // テキストエリアが offsetHeight < scrollHeight になるまで高さを小さくして、scrollHeight の最小値を求める
