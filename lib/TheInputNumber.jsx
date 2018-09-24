@@ -7,6 +7,7 @@ import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
 const zeroIfNaN = (v) => isNaN(Number(v)) ? 0 : v
+const sureNumber = (v) => zeroIfNaN(Number(v))
 
 class TheInputNumber extends React.PureComponent {
   constructor (props) {
@@ -18,7 +19,7 @@ class TheInputNumber extends React.PureComponent {
   get value () {
     let value = Number(this.props.value)
     if (isNaN(value)) {
-      return value
+      return this.props.value
     }
     const min = Number(this.props.min)
     const max = Number(this.props.max)
@@ -34,7 +35,7 @@ class TheInputNumber extends React.PureComponent {
   changeValue (amount) {
     const {name, onUpdate, step, value} = this.props
     onUpdate && onUpdate({
-      [name]: zeroIfNaN(Number(value)) + (amount * step),
+      [name]: sureNumber(value) + (sureNumber(amount) * sureNumber(step)),
     })
   }
 
@@ -86,8 +87,8 @@ TheInputNumber.defaultProps = Object.assign({},
   {
     autoCapitalize: false,
     autoCorrect: false,
-    max: null,
-    min: null,
+    max: Infinity,
+    min: -Infinity,
     pattern: /^[0-9\-.]*$/,
     patternWarning: 'Invalid Number',
     spellCheck: false,

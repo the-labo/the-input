@@ -574,7 +574,7 @@ TheInputStyle.data = (options) => {
               color: dominantColor,
               display: 'inline-block',
               flexGrow: '1',
-              padding: '4px',
+              padding: '4px 8px',
               textAlign: 'center',
             },
             background: 'white',

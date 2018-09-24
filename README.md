@@ -387,6 +387,12 @@ class ExampleComponent extends React.PureComponent {
                 onUpdate={onUpdate}
         />
 
+        <Number name='value-number-01'
+                value={values['value-number-01']}
+                placeholder={'number without min/max'}
+                onUpdate={onUpdate}
+        />
+
         <br/>
         <br/>
 
