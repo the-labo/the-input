@@ -298,7 +298,7 @@ class TheInputSelect extends React.PureComponent {
     const options = normalizeOptions(props.options)
     const {suggesting, suggestingIndex} = this.state
     const selectedValue = options[value]
-    const hasNotSelect = typeof selectedValue === 'undefined'
+    const hasSelect = typeof selectedValue !== 'undefined'
     return (
       <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder', 'tabIndex']})}
            {...eventHandlersFor(props, {except: []})}
@@ -321,13 +321,15 @@ class TheInputSelect extends React.PureComponent {
             <a className='the-input-select-display'
                onClick={this.handleDisplayClick}
             >
-          <span className='the-input-select-display-value'>
-            {selectedValue}
-          </span>
-              <TheCondition if={hasNotSelect}>
-            <span className='the-input-select-display-alt'>
-              {placeholder}
-            </span>
+              <TheCondition if={hasSelect}>
+                <span className='the-input-select-display-value'>
+                  {selectedValue}
+                </span>
+              </TheCondition>
+              <TheCondition if={!hasSelect}>
+                <span className='the-input-select-display-alt'>
+                  {placeholder}
+                </span>
               </TheCondition>
               <TheIcon className={TheInputSelect.OPEN_ICON}/>
             </a>
