@@ -250,6 +250,7 @@ class TheInputText extends React.PureComponent {
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
+    autoComplete = onOffBoolean(autoComplete)
     autoCapitalize = onOffBoolean(autoCapitalize)
     autoCorrect = onOffBoolean(autoCorrect)
 
