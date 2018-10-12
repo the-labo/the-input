@@ -49,10 +49,9 @@ class TheInputNumber extends React.PureComponent {
 
   render () {
     const {props, value} = this
-
     return (
-      <TheInputText {...props}
-                    className={c('the-input-number')}
+      <TheInputText {...textProps}
+                    className={c('the-input-number', props.className)}
                     options={[]}
                     prefix={
                       <a className={c('the-input-number-changer', {
