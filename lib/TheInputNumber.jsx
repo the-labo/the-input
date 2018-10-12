@@ -49,8 +49,9 @@ class TheInputNumber extends React.PureComponent {
 
   render () {
     const {props, value} = this
+    const hasValue = Boolean(props.value) || props.value === 0
     return (
-      <TheInputText {...textProps}
+      <TheInputText {...props}
                     className={c('the-input-number', props.className)}
                     options={[]}
                     prefix={
@@ -71,7 +72,7 @@ class TheInputNumber extends React.PureComponent {
                         <TheIcon className={TheInputNumber.INCREMENT_ICON}/>
                       </a>
                     }
-                    value={String(value)}
+                    value={hasValue ? String(value) : null}
       />
     )
   }
