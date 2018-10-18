@@ -438,7 +438,7 @@ TheInputStyle.data = (options) => {
         display: 'inline-flex',
         height: toggleHandleSize,
         justifyContent: 'flex-start',
-        minWidth: toggleHandleSize * 3 + 2,
+        minWidth: toggleHandleSize * 2 + 2,
         overflow: 'hidden',
         width: '100%',
       },
