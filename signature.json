@@ -1954,6 +1954,12 @@
           "value": "'textbox'",
           "computed": false
         }
+      },
+      "selectOnFocus": {
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       }
     }
   },
