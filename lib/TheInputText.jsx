@@ -142,8 +142,15 @@ class TheInputText extends React.PureComponent {
     clearTimeout(this._offSuggestionOffTimer)
     this.setState({suggesting: true})
     this.updateCandidates(-1)
-    const {onFocus} = this.props
+    const {onFocus, selectOnFocus} = this.props
     onFocus && onFocus(e)
+
+    if (selectOnFocus) {
+      const elm = this.elmRef.current
+      if (elm) {
+        elm.querySelector('input').select()
+      }
+    }
   }
 
   handleKeyDown (e) {
@@ -419,6 +426,7 @@ TheInputText.defaultProps = {
   prefix: null,
   readOnly: false,
   role: 'textbox',
+  selectOnFocus: false,
   suffix: null,
   type: 'text',
   value: '',

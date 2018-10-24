@@ -132,6 +132,7 @@ class ExampleComponent extends React.PureComponent {
               parser={(v) => String(v).toUpperCase()}
               placeholder='value01 only with uppercase parser'
               autoCapitalize={false}
+              selectWhenFocused
               autoCorrect="off"
               options={['Banana', 'Orange', 'Apple']}
         />
@@ -411,6 +412,8 @@ class ExampleComponent extends React.PureComponent {
               options={['Banana', 'Orange', 'Apple']}
               error='Something Wrong with This!'
         />
+
+
 
         <Password name='value01'
                   value={values['value01']}
