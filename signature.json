@@ -254,6 +254,18 @@
     "displayName": "TheInputDate",
     "methods": [
       {
+        "name": "handleBlur",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "updatePicker",
         "docblock": null,
         "modifiers": [],
