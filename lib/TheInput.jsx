@@ -27,14 +27,14 @@ import TheInputUpload from './TheInputUpload'
  */
 class TheInput extends React.PureComponent {
   handleChange (e) {
-    const {onChange, onUpdate, parser} = this.props
-    const {name, value} = e.target
+    const { onChange, onUpdate, parser } = this.props
+    const { name, value } = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: parser(value)})
+    onUpdate && onUpdate({ [name]: parser(value) })
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     let {
       autoComplete,
       autoFocus,
@@ -55,7 +55,7 @@ class TheInput extends React.PureComponent {
           'id', 'className', 'type', 'value', 'required', 'name', 'placeholder', 'autoFocus', 'autoComplete'
         ],
       })}
-           {...eventHandlersFor(props, {except: []})}
+           {...eventHandlersFor(props, { except: [] })}
            className={c('the-input', className, {
              'the-input-error': !!error,
            })}
@@ -63,7 +63,7 @@ class TheInput extends React.PureComponent {
         {renderErrorMessage(error)}
         {children}
         <input type='the-input-input'
-               {...{autoComplete, autoFocus, id, name, placeholder, required, type}}
+               {...{ autoComplete, autoFocus, id, name, placeholder, required, type }}
                onChange={(e) => this.handleChange(e)}
                ref={inputRef}
                value={value || ''}

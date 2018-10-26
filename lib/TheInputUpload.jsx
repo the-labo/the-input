@@ -35,11 +35,11 @@ class TheInputUpload extends React.PureComponent {
   }
 
   componentDidUpdate (prevProps) {
-    const {props} = this
-    const {value} = props
+    const { props } = this
+    const { value } = props
     const hasValue = value && value.length > 0
     if (hasValue && (prevProps.value !== value)) {
-      this.setState({urls: [].concat(value)})
+      this.setState({ urls: [].concat(value) })
     }
   }
 
@@ -48,13 +48,13 @@ class TheInputUpload extends React.PureComponent {
   }
 
   handleChange (e) {
-    const {props} = this
-    const {target} = e
-    const {multiple, name, onChange, onError, onLoad, onUpdate} = props
+    const { props } = this
+    const { target } = e
+    const { multiple, name, onChange, onError, onLoad, onUpdate } = props
     if (target.files.length === 0) {
       return
     }
-    this.setState({spinning: true})
+    this.setState({ spinning: true })
     onChange && onChange(e)
     ;(async () => {
       try {
@@ -64,32 +64,32 @@ class TheInputUpload extends React.PureComponent {
         if (this.gone) {
           return
         }
-        onLoad && onLoad({target, urls})
-        onUpdate && onUpdate({[name]: multiple ? urls : urls[0]})
-        this.setState({urls})
+        onLoad && onLoad({ target, urls })
+        onUpdate && onUpdate({ [name]: multiple ? urls : urls[0] })
+        this.setState({ urls })
       } catch (error) {
         onError && onError(error)
-        this.setState({error, spinning: false, urls: []})
+        this.setState({ error, spinning: false, urls: [] })
       } finally {
-        this.setState({spinning: false})
+        this.setState({ spinning: false })
       }
     })()
   }
 
   handleRemove () {
-    const {props} = this
-    const {name, onLoad, onUpdate} = props
+    const { props } = this
+    const { name, onLoad, onUpdate } = props
     const urls = []
     this.setState({
       error: null,
       urls,
     })
     onLoad && onLoad(urls)
-    onUpdate && onUpdate({[name]: null})
+    onUpdate && onUpdate({ [name]: null })
   }
 
   render () {
-    const {props, state} = this
+    const { props, state } = this
     const {
       accept,
       children,
@@ -113,8 +113,8 @@ class TheInputUpload extends React.PureComponent {
 
     const hasImage = !!urls && urls.length > 0
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className']})}
-           {...eventHandlersFor(props, {except: []})}
+      <div {...htmlAttributesFor(props, { except: ['id', 'className'] })}
+           {...eventHandlersFor(props, { except: [] })}
            className={c('the-input-upload', className, {
              'the-input-error': !!error,
              'the-input-upload-read-only': !!readOnly,
@@ -130,7 +130,7 @@ class TheInputUpload extends React.PureComponent {
                name={name}
                onChange={this.handleChange}
                readOnly={readOnly}
-               style={(readOnly && !hasImage) ? {} : {height, width}}
+               style={(readOnly && !hasImage) ? {} : { height, width }}
                tabIndex={-1}
                type='file'
         />
@@ -178,12 +178,12 @@ class TheInputUpload extends React.PureComponent {
                     {
                       isVideoUrl(url) ? (
                         <video src={url}
-                               {...{height, width}}
+                               {...{ height, width }}
                                className={c('the-input-upload-preview-video')}
                         />
                       ) : (
                         <img src={url}
-                             {...{height, width}}
+                             {...{ height, width }}
                              className={c('the-input-upload-preview-img')}
                         />
                       )
@@ -199,7 +199,6 @@ class TheInputUpload extends React.PureComponent {
       </div>
     )
   }
-
 }
 
 TheInputUpload.GUIDE_ICON = 'fas fa-cloud-upload-alt'

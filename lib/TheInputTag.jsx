@@ -37,14 +37,14 @@ class TheInputTag extends React.PureComponent {
   }
 
   handleBlur (e) {
-    const {onBlur} = this.props
+    const { onBlur } = this.props
     const [edittingValue, ...tagValues] = this.splitValue()
     if (edittingValue.length > 0) {
       this.updateBySplitValues(['', edittingValue, ...tagValues])
     }
 
     onBlur && onBlur(e)
-    this.setState({focused: false})
+    this.setState({ focused: false })
   }
 
   handleEnter () {
@@ -57,9 +57,9 @@ class TheInputTag extends React.PureComponent {
   }
 
   handleFocus (e) {
-    const {onFocus} = this.props
+    const { onFocus } = this.props
     onFocus && onFocus(e)
-    this.setState({focused: true})
+    this.setState({ focused: true })
   }
 
   handleInputRef (input) {
@@ -67,7 +67,7 @@ class TheInputTag extends React.PureComponent {
   }
 
   handleKeyDown (e) {
-    const {onKeyDown} = this.props
+    const { onKeyDown } = this.props
     switch (e.keyCode) {
       case 8:
         this.handleBack()
@@ -82,7 +82,7 @@ class TheInputTag extends React.PureComponent {
   }
 
   handleUpdate (values) {
-    const {name} = this.props
+    const { name } = this.props
     const edittingValue = values[name]
     const [, ...tagValues] = this.splitValue()
     this.updateBySplitValues([edittingValue, ...tagValues])
@@ -96,11 +96,11 @@ class TheInputTag extends React.PureComponent {
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     const [edittingValue, ...tagValues] = this.splitValue()
-    const inputProps = clone(props, {without: ['value', 'splitter', 'options']})
-    const {options} = props
-    const {focused} = this.state
+    const inputProps = clone(props, { without: ['value', 'splitter', 'options'] })
+    const { options } = props
+    const { focused } = this.state
     return (
       <TheInputText {...inputProps}
                     className={c('the-input-tag', {
@@ -138,29 +138,29 @@ class TheInputTag extends React.PureComponent {
   }
 
   splitValue () {
-    const {splitter, value} = this.props
-    const {focused} = this.state
+    const { splitter, value } = this.props
+    const { focused } = this.state
     const split = String(value || '').split(splitter).reverse()
     return focused ? split : ['', ...split]
   }
 
   updateBySplitValues (splitValues) {
-    const {name, onUpdate} = this.props
+    const { name, onUpdate } = this.props
     const [edittingValue, ...tagValues] = splitValues
     const value = [edittingValue, ...tagValues.filter(uniqueFilter())].reverse().join(' ')
-    onUpdate && onUpdate({[name]: value})
+    onUpdate && onUpdate({ [name]: value })
   }
 }
 
 TheInputTag.CLOSE_ICON = 'fas fa-times'
 TheInputTag.propTypes = Object.assign(
-  clone(TheInputText.propTypes, {without: []}),
+  clone(TheInputText.propTypes, { without: [] }),
   {
     splitter: PropTypes.any,
   }
 )
 TheInputTag.defaultProps = Object.assign(
-  clone(TheInputText.defaultProps, {without: []}),
+  clone(TheInputText.defaultProps, { without: [] }),
   {
     options: [],
     splitter: /[\s,]+/,

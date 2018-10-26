@@ -92,8 +92,8 @@ class ExampleComponent extends React.PureComponent {
   }
 
   render () {
-    const {values} = this.state
-    const {onUpdate} = this
+    const { values } = this.state
+    const { onUpdate } = this
 
     const {
       Text,
@@ -369,6 +369,16 @@ class ExampleComponent extends React.PureComponent {
               onUpdate={onUpdate}
         />
 
+        <Date name='value-date-01'
+              value={values['value-date-01']}
+              placeholder={'time only'}
+              noCalendar
+              dateFormat={'H:i'}
+              timeEnabled
+              minDate={'2018-03-09'}
+              onUpdate={onUpdate}
+        />
+
         <br/>
 
 
@@ -412,7 +422,6 @@ class ExampleComponent extends React.PureComponent {
               options={['Banana', 'Orange', 'Apple']}
               error='Something Wrong with This!'
         />
-
 
 
         <Password name='value01'
@@ -572,6 +581,7 @@ Checkbox input of the-components
 | `maxDate` | union  |  | `null` |
 | `minDate` | union  |  | `null` |
 | `name` | string  |  | `` |
+| `noCalendar` | bool  |  | `false` |
 | `onUpdate` | func  |  | `` |
 | `timeEnabled` | bool  |  | `false` |
 
@@ -705,6 +715,7 @@ Text Input
 | `value` | union  | Value of input | `''` |
 | `readOnly` |   |  | `false` |
 | `role` |   |  | `'textbox'` |
+| `selectOnFocus` |   |  | `false` |
 
 ### TheInputTextArea
 

@@ -33,7 +33,7 @@ class TheInputNumber extends React.PureComponent {
   }
 
   changeValue (amount) {
-    const {name, onUpdate, step, value} = this.props
+    const { name, onUpdate, step, value } = this.props
     onUpdate && onUpdate({
       [name]: sureNumber(value) + (sureNumber(amount) * sureNumber(step)),
     })
@@ -48,7 +48,7 @@ class TheInputNumber extends React.PureComponent {
   }
 
   render () {
-    const {props, value} = this
+    const { props, value } = this
     const hasValue = Boolean(props.value) || props.value === 0
     return (
       <TheInputText {...props}
@@ -81,9 +81,9 @@ class TheInputNumber extends React.PureComponent {
 TheInputNumber.INCREMENT_ICON = 'fas fa-caret-right'
 TheInputNumber.DECREMENT_ICON = 'fas fa-caret-left'
 
-TheInputNumber.propTypes = clone(TheInputText.propTypes, {without: ['type', 'options']})
+TheInputNumber.propTypes = clone(TheInputText.propTypes, { without: ['type', 'options'] })
 TheInputNumber.defaultProps = Object.assign({},
-  clone(TheInputText.defaultProps, {without: ['type', 'options']}),
+  clone(TheInputText.defaultProps, { without: ['type', 'options'] }),
   {
     autoCapitalize: false,
     autoCorrect: false,

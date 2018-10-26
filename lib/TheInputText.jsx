@@ -12,7 +12,7 @@ import * as patterns from './patterns'
  * Text Input
  */
 class TheInputText extends React.PureComponent {
-  static Options ({candidates, onSelect, parser, selectedCandidate}) {
+  static Options ({ candidates, onSelect, parser, selectedCandidate }) {
     if (candidates.length === 0) {
       return null
     }
@@ -28,7 +28,7 @@ class TheInputText extends React.PureComponent {
                 })}
                 data-value={parser(candidate)}
                 key={candidate}
-                onClick={() => onSelect({value: candidate})}
+                onClick={() => onSelect({ value: candidate })}
                 role='option'
             >
               {candidate}
@@ -60,14 +60,14 @@ class TheInputText extends React.PureComponent {
   }
 
   commitValue () {
-    const {name, onUpdate, parser, value} = this.props
+    const { name, onUpdate, parser, value } = this.props
     const committedValue = parser(value)
-    onUpdate && onUpdate({[name]: committedValue || ''})
+    onUpdate && onUpdate({ [name]: committedValue || '' })
 
     if (this.state.committedValue === committedValue) {
       return
     }
-    this.setState({committedValue})
+    this.setState({ committedValue })
   }
 
   componentDidMount () {
@@ -82,7 +82,7 @@ class TheInputText extends React.PureComponent {
   }
 
   enterCandidate (value) {
-    const {name} = this.props
+    const { name } = this.props
     this.handleChange({
       target: {
         name,
@@ -93,9 +93,9 @@ class TheInputText extends React.PureComponent {
   }
 
   getPatternWarning () {
-    const {props, state} = this
-    const {pattern, patternWarning, value} = props
-    const {committedValue} = state
+    const { props, state } = this
+    const { pattern, patternWarning, value } = props
+    const { committedValue } = state
     if (!committedValue) {
       return null
     }
@@ -114,16 +114,16 @@ class TheInputText extends React.PureComponent {
   }
 
   handleBlur (e) {
-    const {onBlur} = this.props
+    const { onBlur } = this.props
     onBlur && onBlur(e)
     this.commitValue()
   }
 
   handleChange (e) {
-    const {onChange, onUpdate} = this.props
-    const {name, value} = e.target
+    const { onChange, onUpdate } = this.props
+    const { name, value } = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: value || ''})
+    onUpdate && onUpdate({ [name]: value || '' })
   }
 
   handleDocumentClick (e) {
@@ -140,9 +140,9 @@ class TheInputText extends React.PureComponent {
 
   handleFocus (e) {
     clearTimeout(this._offSuggestionOffTimer)
-    this.setState({suggesting: true})
+    this.setState({ suggesting: true })
     this.updateCandidates(-1)
-    const {onFocus, selectOnFocus} = this.props
+    const { onFocus, selectOnFocus } = this.props
     onFocus && onFocus(e)
 
     if (selectOnFocus) {
@@ -178,7 +178,7 @@ class TheInputText extends React.PureComponent {
         this.moveCandidateIndex(+1)
         break
       case 13: { // Enter
-        const {selectedCandidate} = this.state
+        const { selectedCandidate } = this.state
         if (selectedCandidate) {
           this.enterCandidate(selectedCandidate)
         }
@@ -189,25 +189,25 @@ class TheInputText extends React.PureComponent {
         this.offSuggestion()
         break
       default:
-        this.setState({suggesting: true})
+        this.setState({ suggesting: true })
         break
     }
     onKeyDown && onKeyDown(e)
   }
 
   handleKeyPress (e) {
-    const {onKeyPress} = this.props
+    const { onKeyPress } = this.props
     onKeyPress && onKeyPress(e)
   }
 
   handleKeyUp (e) {
     this.updateCandidates()
-    const {onKeyUp} = this.props
+    const { onKeyUp } = this.props
     onKeyUp && onKeyUp(e)
   }
 
   moveCandidateIndex (amount) {
-    const {candidates, selectedCandidate} = this.state
+    const { candidates, selectedCandidate } = this.state
     if (!candidates) {
       return
     }
@@ -222,12 +222,12 @@ class TheInputText extends React.PureComponent {
   offSuggestion (delay = 10) {
     clearTimeout(this._offSuggestionOffTimer)
     this._offSuggestionOffTimer = setTimeout(() => {
-      this.setState({suggesting: false})
+      this.setState({ suggesting: false })
     }, delay)
   }
 
   render () {
-    const {props, state} = this
+    const { props, state } = this
     const {
       autoFocus,
       children,
@@ -253,7 +253,7 @@ class TheInputText extends React.PureComponent {
       autoComplete,
       autoCorrect,
     } = props
-    const {candidates, committedValue, selectedCandidate, suggesting} = state
+    const { candidates, committedValue, selectedCandidate, suggesting } = state
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
     }
@@ -335,8 +335,8 @@ class TheInputText extends React.PureComponent {
 
         {
           !readOnly && suggesting && (
-            <TheInputText.Options {...{candidates, parser, selectedCandidate}}
-                                  onSelect={({value}) => this.enterCandidate(value)}
+            <TheInputText.Options {...{ candidates, parser, selectedCandidate }}
+                                  onSelect={({ value }) => this.enterCandidate(value)}
             />
           )
         }
@@ -345,10 +345,10 @@ class TheInputText extends React.PureComponent {
   }
 
   updateCandidates (index) {
-    let {matcher, options, value} = this.props
+    let { matcher, options, value } = this.props
     options = normalizeOptions(options)
     value = value && String(value || '').trim()
-    const {selectedCandidate} = this.state
+    const { selectedCandidate } = this.state
     const candidates = Object.keys(options)
       .map((name) => options[name])
       .map((candidate) => String(candidate).trim())

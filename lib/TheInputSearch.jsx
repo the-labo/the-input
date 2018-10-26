@@ -9,7 +9,7 @@ import TheInputText from './TheInputText'
 class TheInputSearch extends React.PureComponent {
   constructor (props) {
     super(props)
-    let {open = false} = props
+    let { open = false } = props
     this.state = {
       open,
     }
@@ -21,16 +21,16 @@ class TheInputSearch extends React.PureComponent {
   }
 
   handleFocus (e) {
-    const {props} = this
-    let {onFocus} = props
+    const { props } = this
+    let { onFocus } = props
     onFocus && onFocus(e)
     this.toggleOpen(true)
   }
 
   render () {
-    const {props, state} = this
-    let {value} = props
-    let {open} = state
+    const { props, state } = this
+    let { value } = props
+    let { open } = state
     return (
       <TheInputText {...props}
                     className={c('the-input-search', {
@@ -59,7 +59,7 @@ class TheInputSearch extends React.PureComponent {
     if (open === this.state.open) {
       return
     }
-    this.setState({open})
+    this.setState({ open })
     clearTimeout(this._focusTimer)
     this._focusTimer = setTimeout(() => {
       if (open && this.input) {
@@ -70,8 +70,8 @@ class TheInputSearch extends React.PureComponent {
 }
 
 TheInputSearch.SEARCH_ICON = 'fa fa-search'
-TheInputSearch.propTypes = clone(TheInputText.propTypes, {without: ['type']})
-TheInputSearch.defaultProps = clone(TheInputText.defaultProps, {without: ['type']})
+TheInputSearch.propTypes = clone(TheInputText.propTypes, { without: ['type'] })
+TheInputSearch.defaultProps = clone(TheInputText.defaultProps, { without: ['type'] })
 TheInputSearch.displayName = 'TheInputSearch'
 
 export default TheInputSearch

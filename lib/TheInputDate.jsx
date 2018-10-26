@@ -18,16 +18,18 @@ class TheInputDate extends React.PureComponent {
   }
 
   componentDidMount () {
-    this.picker = flatpickr(this.elmRef.current, {
+    this.picker = flatpickr(this.elmRef.current, cleanup({
+      dateFormat: this.props.dateFormat,
       defaultDate: this.props.value,
       enableTime: this.props.timeEnabled,
       maxDate: this.props.maxDate,
       minDate: this.props.minDate,
+      noCalendar: this.props.noCalendar,
       onChange: (selectedDates, dateStr) => {
-        const {name, onUpdate} = this.props
-        onUpdate && onUpdate({[name]: dateStr})
+        const { name, onUpdate } = this.props
+        onUpdate && onUpdate({ [name]: dateStr })
       },
-    })
+    }, { delNull: true }))
   }
 
   componentDidUpdate (prevProps) {
@@ -41,7 +43,7 @@ class TheInputDate extends React.PureComponent {
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     const {
       autoComplete,
       autoFocus,
@@ -118,30 +120,33 @@ class TheInputDate extends React.PureComponent {
     if (skip) {
       return
     }
-    const {picker} = this
+    const { picker } = this
     if (!picker) {
       return
     }
-    const {maxDate, minDate, value} = config
-    picker.set(cleanup({maxDate, minDate}))
+    const { maxDate, minDate, value } = config
+    picker.set(cleanup({ maxDate, minDate }))
     if (value) {
       picker.jumpToDate(value)
     }
     picker.redraw()
   }
-
 }
 
 TheInputDate.propTypes = {
+  dateFormat: PropTypes.string,
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   name: PropTypes.string.isRequired,
+  noCalendar: PropTypes.bool,
   onUpdate: PropTypes.func.isRequired,
   timeEnabled: PropTypes.bool,
 }
 TheInputDate.defaultProps = {
+  dateFormat: null,
   maxDate: null,
   minDate: null,
+  noCalendar: false,
   timeEnabled: false,
 }
 TheInputDate.displayName = 'TheInputDate'

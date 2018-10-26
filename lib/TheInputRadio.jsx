@@ -36,7 +36,7 @@ class TheInputRadio extends React.PureComponent {
       >
         <input className='the-input-radio-radio'
                type='radio'
-               {...{checked, disabled, id, name, onChange, tabIndex, value}}
+               {...{ checked, disabled, id, name, onChange, tabIndex, value }}
         />
         <label className='the-input-radio-label'
                htmlFor={id}
@@ -55,19 +55,19 @@ class TheInputRadio extends React.PureComponent {
   }
 
   handleChange (e) {
-    const {onChange, onUpdate, parser} = this.props
-    const {name, value} = e.target
+    const { onChange, onUpdate, parser } = this.props
+    const { name, value } = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: parser(value)})
+    onUpdate && onUpdate({ [name]: parser(value) })
   }
 
   idFor (optionValue) {
-    const {id = this.id} = this.props
+    const { id = this.id } = this.props
     return [id, optionValue].join('-')
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     const {
       asButton,
       asToggle,
@@ -91,8 +91,8 @@ class TheInputRadio extends React.PureComponent {
     })
 
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'name', 'value', 'tabIndex']})}
-           {...eventHandlersFor(props, {except: []})}
+      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'name', 'value', 'tabIndex'] })}
+           {...eventHandlersFor(props, { except: [] })}
            className={c('the-input-radio', className, {
              'the-input-as-button': asButton,
              'the-input-as-toggle': asToggle,

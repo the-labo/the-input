@@ -35,7 +35,7 @@ class TheInputCheckbox extends React.PureComponent {
       >
         <input className='the-input-checkbox-checkbox'
                type='checkbox'
-               {...{checked, disabled, id, name, onChange, tabIndex, value}}
+               {...{ checked, disabled, id, name, onChange, tabIndex, value }}
         />
         <label className='the-input-checkbox-label'
                htmlFor={id}
@@ -60,7 +60,7 @@ class TheInputCheckbox extends React.PureComponent {
       splitter,
       value,
     } = this.props
-    let {checked, name, value: changedValue} = e.target
+    let { checked, name, value: changedValue } = e.target
     changedValue = String(changedValue).trim()
     value = normalizeArrayValue(value, splitter)
       .map((value) => String(value).trim())
@@ -78,12 +78,12 @@ class TheInputCheckbox extends React.PureComponent {
   }
 
   idFor (optionValue) {
-    const {id = this.id} = this.props
+    const { id = this.id } = this.props
     return [id, ...[].concat(optionValue)].join('-')
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     let {
       className,
       disabledValues,
@@ -101,8 +101,8 @@ class TheInputCheckbox extends React.PureComponent {
     value = normalizeArrayValue(value, splitter).map((value) => String(value).trim())
 
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'tabIndex', 'value']})}
-           {...eventHandlersFor(props, {except: []})}
+      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'tabIndex', 'value'] })}
+           {...eventHandlersFor(props, { except: [] })}
            className={c('the-input-checkbox', className, {
              'the-input-error': !!error,
            })}

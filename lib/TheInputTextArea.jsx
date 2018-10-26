@@ -24,7 +24,7 @@ class TheInputTextArea extends React.PureComponent {
   }
 
   adjustRows () {
-    const {maxRows, minRows} = this.props
+    const { maxRows, minRows } = this.props
     const textarea = this.textareaRef.current
     if (!textarea) {
       return
@@ -65,7 +65,7 @@ class TheInputTextArea extends React.PureComponent {
     }
 
     if (rows !== this.state.actualRows) {
-      this.setState({actualRows: rows})
+      this.setState({ actualRows: rows })
     }
   }
 
@@ -74,7 +74,7 @@ class TheInputTextArea extends React.PureComponent {
   }
 
   componentDidUpdate () {
-    const {autoExpand} = this.props
+    const { autoExpand } = this.props
     if (autoExpand) {
       clearInterval(this.adjustRowTimer)
       this.adjustRowTimer = setTimeout(() => this.adjustRows(), 300)
@@ -87,12 +87,12 @@ class TheInputTextArea extends React.PureComponent {
   }
 
   handleChange (e) {
-    const {onChange, onUpdate, parser} = this.props
-    const {name, value} = e.target
+    const { onChange, onUpdate, parser } = this.props
+    const { name, value } = e.target
     onChange && onChange(e)
-    onUpdate && onUpdate({[name]: parser(value)})
+    onUpdate && onUpdate({ [name]: parser(value) })
 
-    const {autoExpand} = this.props
+    const { autoExpand } = this.props
     if (autoExpand) {
       this.adjustRows()
     }
@@ -121,7 +121,7 @@ class TheInputTextArea extends React.PureComponent {
   }
 
   render () {
-    const {props} = this
+    const { props } = this
     const {
       autoExpand,
       autoFocus,
@@ -175,8 +175,8 @@ class TheInputTextArea extends React.PureComponent {
             <pre className='the-input-textarea-readonly'>{value || ''}</pre>
           ) : (
             <textarea className='the-input-textarea-input'
-                      {...{autoFocus, id, name, placeholder, required, role, spellCheck}}
-                      {...{onBlur, onFocus, onKeyPress, onKeyUp, readOnly}}
+                      {...{ autoFocus, id, name, placeholder, required, role, spellCheck }}
+                      {...{ onBlur, onFocus, onKeyPress, onKeyUp, readOnly }}
                       aria-multiline='true'
                       onChange={this.handleChange}
                       onKeyDown={this.handleKeyDown}

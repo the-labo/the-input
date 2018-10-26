@@ -16,9 +16,9 @@ class TheInputPassword extends React.PureComponent {
   }
 
   render () {
-    const {props, state} = this
-    const {value} = props
-    const {showing} = state
+    const { props, state } = this
+    const { value } = props
+    const { showing } = state
     const icon = showing ? TheInputPassword.HIDE_ICON : TheInputPassword.SHOW_ICON
     return (
       <TheInputText {...props}
@@ -43,16 +43,16 @@ class TheInputPassword extends React.PureComponent {
 
   toggleShowing () {
     const showing = !this.state.showing
-    this.setState({showing})
+    this.setState({ showing })
   }
 }
 
 TheInputPassword.SHOW_ICON = 'fa fa-eye'
 TheInputPassword.HIDE_ICON = 'fa fa-eye-slash'
 
-TheInputPassword.propTypes = clone(TheInputText.propTypes, {without: ['type', 'options']})
+TheInputPassword.propTypes = clone(TheInputText.propTypes, { without: ['type', 'options'] })
 TheInputPassword.defaultProps = Object.assign({},
-  clone(TheInputText.defaultProps, {without: ['type', 'options']}),
+  clone(TheInputText.defaultProps, { without: ['type', 'options'] }),
   {
     autoCapitalize: false,
     autoCorrect: false,

@@ -34,7 +34,7 @@ class TheInputPinCode extends React.PureComponent {
   }
 
   handleBlur (e) {
-    const {onBlur} = this.props
+    const { onBlur } = this.props
 
     onBlur && onBlur(e)
     this.setState({
@@ -43,12 +43,12 @@ class TheInputPinCode extends React.PureComponent {
   }
 
   handleEnter (e) {
-    const {onEnter} = this.props
+    const { onEnter } = this.props
     onEnter && onEnter(e)
   }
 
   handleFocus (e) {
-    const {onFocus, value} = this.props
+    const { onFocus, value } = this.props
     onFocus && onFocus(e)
     this.setState({
       focused: true,
@@ -60,14 +60,14 @@ class TheInputPinCode extends React.PureComponent {
     this.setState({
       index,
     })
-    const {name, onUpdate, value} = this.props
+    const { name, onUpdate, value } = this.props
     if (value.length > index) {
-      onUpdate && onUpdate({[name]: value.substr(0, index)})
+      onUpdate && onUpdate({ [name]: value.substr(0, index) })
     }
   }
 
   handleKeyDown (e) {
-    const {onKeyDown} = this.props
+    const { onKeyDown } = this.props
     switch (e.keyCode) {
       case 8:
         this.handleBack()
@@ -82,7 +82,7 @@ class TheInputPinCode extends React.PureComponent {
   }
 
   handleUpdate (values) {
-    const {digit, name, only, onUpdate, value} = this.props
+    const { digit, name, only, onUpdate, value } = this.props
     const newValue =
       String(values[name])
         .split('')
@@ -101,10 +101,10 @@ class TheInputPinCode extends React.PureComponent {
   }
 
   render () {
-    const {props} = this
-    const inputProps = clone(props, {without: ['digit']})
-    const {focused, index} = this.state
-    const {digit, id = this.id, name, value} = props
+    const { props } = this
+    const inputProps = clone(props, { without: ['digit'] })
+    const { focused, index } = this.state
+    const { digit, id = this.id, name, value } = props
     return (
       <TheInputText {...inputProps}
                     className={c('the-input-pin-code', {
@@ -143,12 +143,12 @@ class TheInputPinCodeItem extends React.PureComponent {
   }
 
   handleClick () {
-    const {index, onClick} = this.props
+    const { index, onClick } = this.props
     onClick && onClick(index)
   }
 
   render () {
-    const {htmlFor, selected, value} = this.props
+    const { htmlFor, selected, value } = this.props
     return (
       <label className={c('the-input-pin-code-item', {
         'the-input-pin-code-item-selected': selected,
@@ -163,14 +163,14 @@ class TheInputPinCodeItem extends React.PureComponent {
 }
 
 TheInputPinCode.propTypes = Object.assign(
-  clone(TheInputText.propTypes, {without: []}),
+  clone(TheInputText.propTypes, { without: [] }),
   {
     digit: PropTypes.number.isRequired,
     only: PropTypes.any,
   }
 )
 TheInputPinCode.defaultProps = Object.assign(
-  clone(TheInputText.defaultProps, {without: []}),
+  clone(TheInputText.defaultProps, { without: [] }),
   {
     digit: 4,
     only: /\d/,

@@ -7,9 +7,9 @@ import { asStyleData, colorAlpha } from 'the-component-util'
 import { TheStyle } from 'the-style'
 
 /** Style for TheInput */
-const TheInputStyle = ({className, id, options}) => (
+const TheInputStyle = ({ className, id, options }) => (
   [
-    <TheStyle {...{id}}
+    <TheStyle {...{ id }}
               className={c('the-input-style', className)}
               key='base'
               styles={TheInputStyle.data(options)}
@@ -39,7 +39,7 @@ TheInputStyle.externals = [
   'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'
 ]
 TheInputStyle.data = (options) => {
-  const {ThemeValues} = TheStyle
+  const { ThemeValues } = TheStyle
   const {
     activeOpacity = ThemeValues.activeOpacity,
     animationDuration = 400,
@@ -64,8 +64,8 @@ TheInputStyle.data = (options) => {
   } = options
 
   const ToggleIconStyle = (values) => Object.assign({
-    '&:active': {opacity: activeOpacity},
-    '&:hover': {opacity: hoverOpacity},
+    '&:active': { opacity: activeOpacity },
+    '&:hover': { opacity: hoverOpacity },
     alignItems: 'center',
     bottom: 0,
     cursor: 'pointer',
@@ -245,9 +245,9 @@ TheInputStyle.data = (options) => {
         textOverflow: 'ellipsis',
       },
       '.the-input-radio-label': {
-        '&:active': {opacity: activeOpacity},
-        '&:hover': {opacity: hoverOpacity},
-        '> *': {// https://github.com/ftlabs/fastclick/issues/60
+        '&:active': { opacity: activeOpacity },
+        '&:hover': { opacity: hoverOpacity },
+        '> *': { // https://github.com/ftlabs/fastclick/issues/60
           pointerEvents: 'none',
         },
         cursor: 'pointer',
@@ -380,13 +380,13 @@ TheInputStyle.data = (options) => {
       '.the-input-checkbox-label':
         {
           '&:active':
-            {opacity: activeOpacity}
+            { opacity: activeOpacity }
           ,
           '&:hover':
-            {opacity: hoverOpacity}
+            { opacity: hoverOpacity }
           ,
           '> *':
-            {// https://github.com/ftlabs/fastclick/issues/60
+            { // https://github.com/ftlabs/fastclick/issues/60
               pointerEvents: 'none',
             }
           ,

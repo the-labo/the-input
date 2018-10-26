@@ -10,14 +10,14 @@ import url from 'url'
 
 const videoExtensions = require('video-extensions')
 
-const {parse: parseUrl} = url
+const { parse: parseUrl } = url
 
 export const normalizeOptions = (options) => [].concat(options)
   .filter(Boolean)
   .reduce((normalized, value) => {
     const isObject = typeof value === 'object'
     return Object.assign(normalized,
-      isObject ? value : {[value]: value}
+      isObject ? value : { [value]: value }
     )
   }, {})
 
@@ -37,7 +37,7 @@ export function renderErrorMessage (error) {
     return <span className='the-input-message the-input-message-empty'/>
   }
   if (typeof error === 'string') {
-    error = {message: error}
+    error = { message: error }
   }
   return (
     <span className='the-input-message the-input-error-message'>{error.message}</span>
@@ -49,7 +49,7 @@ export function renderWarningMessage (warning) {
     return <span className='the-input-message the-input-message-empty'/>
   }
   if (typeof warning === 'string') {
-    warning = {message: warning}
+    warning = { message: warning }
   }
   return (
     <span className='the-input-message the-input-warn-message'>{warning.message}</span>

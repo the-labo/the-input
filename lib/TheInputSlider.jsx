@@ -27,12 +27,12 @@ class TheInputSlider extends React.PureComponent {
     } = props
     return (
       <Draggable axis='x'
-                 bounds={{left: minX, right: maxX}}
+                 bounds={{ left: minX, right: maxX }}
                  grid={step && [step, step]}
-                 onDrag={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 onStart={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 onStop={(e, {x, y}) => shouldMove && onMove({x, y})}
-                 position={{x, y: 0}}
+                 onDrag={(e, { x, y }) => shouldMove && onMove({ x, y })}
+                 onStart={(e, { x, y }) => shouldMove && onMove({ x, y })}
+                 onStop={(e, { x, y }) => shouldMove && onMove({ x, y })}
+                 position={{ x, y: 0 }}
       >
         <div className='the-input-slider-handle'
              data-max-x={maxX}
@@ -48,7 +48,7 @@ class TheInputSlider extends React.PureComponent {
     )
   }
 
-  static Label ({children, className, ref}) {
+  static Label ({ children, className, ref }) {
     return (
       <label className={c('the-input-slider-label', className)}
              ref={ref}>
@@ -75,18 +75,18 @@ class TheInputSlider extends React.PureComponent {
   }
 
   componentDidMount () {
-    const {window} = get('window')
+    const { window } = get('window')
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
   }
 
   componentWillUnmount () {
-    const {window} = get('window')
+    const { window } = get('window')
     window.removeEventListener('resize', this.handleResize)
   }
 
   getHandleRadius () {
-    const {handleElm} = this
+    const { handleElm } = this
     if (!handleElm) {
       return 0
     }
@@ -94,27 +94,27 @@ class TheInputSlider extends React.PureComponent {
   }
 
   handleBarClick (e) {
-    const {barElm} = this
+    const { barElm } = this
     if (!barElm) {
       return
     }
     const handleRadius = this.getHandleRadius()
-    const {left} = barElm.getBoundingClientRect()
+    const { left } = barElm.getBoundingClientRect()
     const x = e.clientX - left - handleRadius
-    this.setState({x})
+    this.setState({ x })
     const rate = this._rateWithX(x)
     const value = this._valueWithRate(rate)
     this.setSliderValue(value)
   }
 
-  handleHandleMove ({x}) {
+  handleHandleMove ({ x }) {
     const rate = this._rateWithX(x)
     const value = this._valueWithRate(rate)
     this.setSliderValue(value)
   }
 
   handleResize () {
-    const {barElm, props} = this
+    const { barElm, props } = this
     if (!barElm) {
       return
     }
@@ -131,7 +131,7 @@ class TheInputSlider extends React.PureComponent {
   }
 
   render () {
-    const {props, state} = this
+    const { props, state } = this
     const {
       barOnly,
       className,
@@ -147,8 +147,8 @@ class TheInputSlider extends React.PureComponent {
       x,
     } = state
     return (
-      <div {...htmlAttributesFor(props, {except: ['id', 'className', 'type', 'value', 'name', 'placeholder']})}
-           {...eventHandlersFor(props, {except: []})}
+      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'type', 'value', 'name', 'placeholder'] })}
+           {...eventHandlersFor(props, { except: [] })}
            className={c('the-input-slider', className, {
              'the-input-error': !!error,
            })}
@@ -176,10 +176,10 @@ class TheInputSlider extends React.PureComponent {
               </div>
               <div className='the-input-slider-bar-bg'>
               </div>
-              <div className='the-input-slider-bar-highlight' style={{left: 0, width: x}}>
+              <div className='the-input-slider-bar-highlight' style={{ left: 0, width: x }}>
               </div>
             </div>
-            <TheInputSlider.Handle {...{maxX, minX, x}}
+            <TheInputSlider.Handle {...{ maxX, minX, x }}
                                    elmRef={(handleElm) => {
                                      this.handleElm = handleElm
                                      this.handleResize()
@@ -196,13 +196,13 @@ class TheInputSlider extends React.PureComponent {
   }
 
   setSliderValue (value) {
-    const {props, state} = this
-    const {name, onUpdate, step} = props
+    const { props, state } = this
+    const { name, onUpdate, step } = props
     const duplicate = props.value === value
     if (duplicate) {
       return
     }
-    const {maxX, minX} = state
+    const { maxX, minX } = state
     const rate = this._rateWithValue(value)
     this.setState({
       x: rangecal.value(minX, maxX, rate),
@@ -217,21 +217,21 @@ class TheInputSlider extends React.PureComponent {
     this._value = value
 
     if (onUpdate) {
-      onUpdate({[name]: value})
+      onUpdate({ [name]: value })
     }
   }
 
   _rateWithValue (value) {
-    const {props} = this
-    const {max, min} = props
+    const { props } = this
+    const { max, min } = props
 
     value = rangecal.round(min, max, value)
     return chopcal.round(rangecal.rate(min, max, value), 0.01)
   }
 
   _rateWithX (x) {
-    const {state} = this
-    const {maxX, minX} = state
+    const { state } = this
+    const { maxX, minX } = state
     if (minX === maxX) {
       return 0
     }
@@ -239,8 +239,8 @@ class TheInputSlider extends React.PureComponent {
   }
 
   _valueWithRate (rate) {
-    const {props} = this
-    const {max, min} = props
+    const { props } = this
+    const { max, min } = props
 
     const value = chopcal.round(rangecal.value(min, max, rate), 0.01)
     return rangecal.round(min, max, value)

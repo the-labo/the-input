@@ -312,6 +312,17 @@
         "required": true,
         "description": ""
       },
+      "noCalendar": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "onUpdate": {
         "type": {
           "name": "func"
@@ -682,7 +693,7 @@
         ],
         "params": [
           {
-            "name": "{children, className, ref}",
+            "name": "{ children, className, ref }",
             "type": null
           }
         ],
@@ -713,7 +724,7 @@
         "modifiers": [],
         "params": [
           {
-            "name": "{x}",
+            "name": "{ x }",
             "type": null
           }
         ],
@@ -732,7 +743,7 @@
         "modifiers": [],
         "params": [
           {
-            "name": "{x}",
+            "name": "{ x }",
             "type": null
           }
         ],
@@ -1064,7 +1075,7 @@
         "modifiers": [],
         "params": [
           {
-            "name": "{value}",
+            "name": "{ value }",
             "type": null
           }
         ],
@@ -1102,7 +1113,7 @@
         ],
         "params": [
           {
-            "name": "{optionsArray, ...props}",
+            "name": "{ optionsArray, ...props }",
             "type": null
           }
         ],
@@ -1284,7 +1295,7 @@
         ],
         "params": [
           {
-            "name": "{children, className, ref}",
+            "name": "{ children, className, ref }",
             "type": null
           }
         ],
@@ -1315,7 +1326,7 @@
         "modifiers": [],
         "params": [
           {
-            "name": "{x}",
+            "name": "{ x }",
             "type": null
           }
         ],
@@ -1591,7 +1602,7 @@
         ],
         "params": [
           {
-            "name": "{candidates, onSelect, parser, selectedCandidate}",
+            "name": "{ candidates, onSelect, parser, selectedCandidate }",
             "type": null
           }
         ],
@@ -2118,7 +2129,7 @@
         ],
         "params": [
           {
-            "name": "{className, htmlFor, title}",
+            "name": "{ className, htmlFor, title }",
             "type": null
           }
         ],
@@ -2132,7 +2143,7 @@
         ],
         "params": [
           {
-            "name": "{checked, id, name, onChange, onClick, value}",
+            "name": "{ checked, id, name, onChange, onClick, value }",
             "type": null
           }
         ],
