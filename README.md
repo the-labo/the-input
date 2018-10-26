@@ -369,8 +369,8 @@ class ExampleComponent extends React.PureComponent {
               onUpdate={onUpdate}
         />
 
-        <Date name='value-date-01'
-              value={values['value-date-01']}
+        <Date name='value-date-01-time'
+              value={values['value-date-01-time']}
               placeholder={'time only'}
               noCalendar
               dateFormat={'H:i'}
@@ -578,6 +578,7 @@ Checkbox input of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
+| `dateFormat` | string  |  | `null` |
 | `maxDate` | union  |  | `null` |
 | `minDate` | union  |  | `null` |
 | `name` | string  |  | `` |

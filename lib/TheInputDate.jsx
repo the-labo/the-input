@@ -14,6 +14,7 @@ class TheInputDate extends React.PureComponent {
   constructor (props) {
     super(props)
     this.elmRef = React.createRef()
+    this.handleBlur = this.handleBlur.bind(this)
     this.picker = null
   }
 
@@ -40,6 +41,12 @@ class TheInputDate extends React.PureComponent {
   componentWillUnmount () {
     this.picker.destroy()
     this.picker = null
+  }
+
+  handleBlur (e) {
+    const { name, onBlur, onUpdate, value } = this.props
+    onBlur && onBlur(e)
+    onUpdate && onUpdate({ [name]: e.target.value })
   }
 
   render () {
@@ -94,6 +101,7 @@ class TheInputDate extends React.PureComponent {
         {renderErrorMessage(error)}
         <input className='the-input-date-input'
                name={name}
+               onBlur={this.handleBlur}
                ref={this.elmRef}
                {...{
                  autoCapitalize,
