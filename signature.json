@@ -267,6 +267,17 @@
       }
     ],
     "props": {
+      "dateFormat": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
       "maxDate": {
         "type": {
           "name": "union",
