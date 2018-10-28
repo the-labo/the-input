@@ -1066,6 +1066,7 @@ TheInputStyle.data = (options) => {
         boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
         boxSizing: 'border-box',
         display: 'block',
+        lineHeight: '20px',
         minHeight: '28px',
         outlineColor: dominantColor,
         padding: '4px 8px',
