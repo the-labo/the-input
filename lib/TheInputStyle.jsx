@@ -1068,6 +1068,7 @@ TheInputStyle.data = (options) => {
         display: 'block',
         lineHeight: '20px',
         minHeight: '28px',
+        maxWidth: '100%',
         outlineColor: dominantColor,
         padding: '4px 8px',
         width: 'auto',
