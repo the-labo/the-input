@@ -409,7 +409,7 @@ TheInputSelect.propTypes = {
   /** Allow null select */
   nullable: PropTypes.bool,
   /** Text for null */
-  nullText: PropTypes.string,
+  nullText: PropTypes.node,
   /** Handle for enter */
   onEnter: PropTypes.func,
   /** Handle for update */

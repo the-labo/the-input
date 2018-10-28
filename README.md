@@ -655,7 +655,7 @@ Select Input
 | `error` | union  | Input error | `null` |
 | `name` | string  | Name of input | `` |
 | `nullable` | bool  | Allow null select | `false` |
-| `nullText` | string  | Text for null | `'( no select )'` |
+| `nullText` | node  | Text for null | `'( no select )'` |
 | `onEnter` | func  | Handle for enter | `null` |
 | `onUpdate` | func  | Handle for update | `` |
 | `options` | union  | Options | `{}` |
