@@ -50,7 +50,15 @@ class TheInputUpload extends React.PureComponent {
   handleChange (e) {
     const { props } = this
     const { target } = e
-    const { multiple, name, onChange, onError, onLoad, onUpdate } = props
+    const {
+      convertFile,
+      multiple,
+      name,
+      onChange,
+      onError,
+      onLoad,
+      onUpdate,
+    } = props
     if (target.files.length === 0) {
       return
     }
@@ -59,7 +67,12 @@ class TheInputUpload extends React.PureComponent {
     ;(async () => {
       try {
         const urls = await Promise.all(
-          [...target.files].map(readFile)
+          [...target.files].map(async (file) => {
+            if (convertFile) {
+              file = await convertFile(file, props)
+            }
+            return await readFile(file)
+          })
         )
         if (this.gone) {
           return
@@ -208,6 +221,8 @@ TheInputUpload.propTypes = {
   /** Name of input */
   /** Accept file type */
   accept: PropTypes.string,
+  /** Convert input file */
+  convertFile: PropTypes.func,
   /** Error message */
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -239,6 +254,7 @@ TheInputUpload.propTypes = {
 
 TheInputUpload.defaultProps = {
   accept: null,
+  convertFile: null,
   error: null,
   height: 180,
   multiple: false,
