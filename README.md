@@ -762,6 +762,7 @@ Toggle input of the-components
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
 | `accept` | string  | Accept file type | `null` |
+| `convertFile` | func  | Convert input file | `null` |
 | `error` | union  | Error message | `null` |
 | `height` | number  | Image height | `180` |
 | `multiple` | bool  | Allow multiple upload | `false` |
