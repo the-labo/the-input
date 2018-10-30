@@ -2286,6 +2286,17 @@
           "computed": false
         }
       },
+      "convertFile": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Convert input file",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
       "error": {
         "type": {
           "name": "union",
