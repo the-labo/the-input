@@ -22,7 +22,7 @@
     "regex-url": "^1.0.0",
     "the-array": "^1.4.1",
     "the-check": "^2.0.10",
-    "the-component-util": "^3.0.14",
+    "the-component-util": "^3.0.16",
     "the-condition": "^3.0.4",
     "the-icon": "^4.0.9",
     "the-spin": "^3.1.10",
@@ -31,8 +31,8 @@
     "video-extensions": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.2",
-    "@babel/runtime": "^7.0.0-rc.2",
+    "@babel/core": "^7.1.2",
+    "@babel/runtime": "^7.1.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
