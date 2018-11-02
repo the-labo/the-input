@@ -56,16 +56,6 @@ export function renderWarningMessage (warning) {
   )
 }
 
-export async function readFile (file) {
-  const FileReader = get('FileReader')
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader
-    reader.onerror = (err) => reject(err)
-    reader.onload = (ev) => resolve(ev.target.result)
-    reader.readAsDataURL(file)
-  })
-}
-
 export function isImageUrl (src) {
   if (/^data:image/.test(src)) {
     return true
@@ -117,7 +107,6 @@ export default {
   normalizeArrayValue,
   normalizeOptions,
   onOffBoolean,
-  readFile,
   renderErrorMessage,
   renderWarningMessage,
 }

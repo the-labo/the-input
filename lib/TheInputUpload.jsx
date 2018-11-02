@@ -4,6 +4,7 @@ import c from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
+import { readFileAsDataURL } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { TheIcon } from 'the-icon'
 import { TheSpin } from 'the-spin'
@@ -12,7 +13,6 @@ import {
   isUnknownTypeUrl,
   isVideoUrl,
   normalizeArrayValue,
-  readFile,
   renderErrorMessage,
 } from './helpers'
 
@@ -67,12 +67,9 @@ class TheInputUpload extends React.PureComponent {
     ;(async () => {
       try {
         const urls = await Promise.all(
-          [...target.files].map(async (file) => {
-            if (convertFile) {
-              file = await convertFile(file, props)
-            }
-            return await readFile(file)
-          })
+          [...target.files].map(async (file) =>
+            await convertFile(file, props)
+          )
         )
         if (this.gone) {
           return
@@ -254,7 +251,7 @@ TheInputUpload.propTypes = {
 
 TheInputUpload.defaultProps = {
   accept: null,
-  convertFile: null,
+  convertFile: (file) => readFileAsDataURL(file),
   error: null,
   height: 180,
   multiple: false,

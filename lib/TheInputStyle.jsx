@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { asStyleData, colorAlpha } from 'the-component-util'
 import { TheStyle } from 'the-style'
+import TheInputDateStyleData from './styleData/TheInputDateStyleData'
 import TheInputUploadStyleData from './styleData/TheInputUploadStyleData'
 
 /** Style for TheInput */
@@ -80,7 +81,6 @@ TheInputStyle.data = (options) => {
     right: 0,
     zIndex: 4,
   }, values)
-
 
   // TODO ./styleData下にファイルを分割する
   return Object.assign({},
@@ -953,28 +953,11 @@ TheInputStyle.data = (options) => {
         outlineOffset: '-2px',
       },
     }),
-    asStyleData('.the-input-date', {
-      '.the-input-date-input': {
-        border: `1px solid ${inputBorderColor}`,
-        borderRadius: '2px',
-        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
-        boxSizing: 'border-box',
-        display: 'block',
-        lineHeight: '20px',
-        maxWidth: '100%',
-        minHeight: '28px',
-        outlineColor: dominantColor,
-        padding: '4px 8px',
-        width: 'auto',
-      },
-      '&': {
-        boxSizing: 'border-box',
-        display: 'inline-block',
-        margin: '0 4px',
-        maxWidth: contentWidth,
-        position: 'relative',
-        verticalAlign: 'middle',
-      },
+    TheInputDateStyleData({
+      contentWidth,
+      dominantColor,
+      inputBorderColor,
+      inputShadowColor,
     }),
     asStyleData('.the-input-pin-code', {
       '.the-input-pin-code-display': {

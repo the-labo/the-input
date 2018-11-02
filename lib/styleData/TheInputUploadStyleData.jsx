@@ -1,7 +1,11 @@
+/**
+ * @function TheInputUploadStyleData
+ */
 'use strict'
 
-import { asStyleData } from 'the-component-util/shim'
+import { asStyleData } from 'the-component-util'
 
+/** @lends TheInputUploadStyleData */
 function TheInputUploadStyleData ({
                                     backgroundColor,
                                     errorColor,

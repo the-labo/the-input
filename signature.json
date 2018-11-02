@@ -2293,7 +2293,7 @@
         "required": false,
         "description": "Convert input file",
         "defaultValue": {
-          "value": "null",
+          "value": "(file) => readFileAsDataURL(file)",
           "computed": false
         }
       },
