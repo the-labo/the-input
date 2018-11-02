@@ -96,7 +96,9 @@ function TheInputUploadStyleData ({
     '.the-input-upload-preview-video': {
       objectFit: 'contain',
     },
-    '.the-input-upload-spin': {},
+    '.the-input-upload-spin': {
+      zIndex: 8,
+    },
     '.the-input-upload-text': {},
     '&': {
       '&:active': {
