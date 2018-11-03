@@ -6,6 +6,7 @@ import React from 'react'
 import { asStyleData, colorAlpha } from 'the-component-util'
 import { TheStyle } from 'the-style'
 import TheInputDateStyleData from './styleData/TheInputDateStyleData'
+import TheInputTextareaStyleData from './styleData/TheInputTextareaStyleData'
 import TheInputUploadStyleData from './styleData/TheInputUploadStyleData'
 
 /** Style for TheInput */
@@ -205,27 +206,11 @@ TheInputStyle.data = (options) => {
         maxWidth: contentWidth,
       },
     }),
-    asStyleData('.the-input-textarea', {
-      '.the-input-textarea-input': {
-        border: `1px solid ${inputBorderColor}`,
-        borderRadius: '2px',
-        boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
-        boxSizing: 'border-box',
-        display: 'block',
-        outlineColor: dominantColor,
-        padding: '4px 8px',
-        resize: 'none',
-        width: '100%',
-      },
-      '&': {
-        boxSizing: 'border-box',
-        display: 'inline-block',
-        margin: '0 4px',
-        maxWidth: contentWidth,
-        position: 'relative',
-        verticalAlign: 'middle',
-        width: '100%',
-      },
+    TheInputTextareaStyleData({
+      contentWidth,
+      dominantColor,
+      inputBorderColor,
+      inputShadowColor,
     }),
     asStyleData('.the-input-radio', {
       '.the-input-radio-icon': {

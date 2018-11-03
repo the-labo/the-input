@@ -37,4 +37,4 @@ function TheInputDateStyleData ({
   })
 }
 
-module.exports = TheInputDateStyleData
+export default TheInputDateStyleData
