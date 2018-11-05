@@ -17,10 +17,6 @@ describe('the-input-text-style-data', () => {
   })
 
   it('Render a component', () => {
-    let element = render(
-       <TheInputTextStyleData />
-    )
-    ok(element)
   })
 })
 
