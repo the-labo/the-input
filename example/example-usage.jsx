@@ -85,6 +85,15 @@ class ExampleComponent extends React.PureComponent {
               patternHint='Needs to be email'
         />
 
+        <h3>Select on focus</h3>
+
+        <Text name='value01'
+              value={values['value01']}
+              onUpdate={onUpdate}
+              placeholder='Select on focus'
+              selectOnFocus
+        />
+
         <br/>
 
         <Search name='value01'

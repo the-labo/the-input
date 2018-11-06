@@ -11,7 +11,7 @@ import * as patterns from './patterns'
 /**
  * Text Input
  */
-class TheInputText extends React.PureComponent {
+class TheInputText extends React.Component {
   static Options ({ candidates, onSelect, parser, selectedCandidate }) {
     if (candidates.length === 0) {
       return null
@@ -148,7 +148,10 @@ class TheInputText extends React.PureComponent {
     if (selectOnFocus) {
       const elm = this.elmRef.current
       if (elm) {
-        elm.querySelector('input').select()
+        clearTimeout(this._selectOnFocusTimer)
+        this._selectOnFocusTimer = setTimeout(() => {
+          elm.querySelector('input').select()
+        }, 10)
       }
     }
   }
