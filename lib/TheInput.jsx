@@ -15,7 +15,6 @@ import TheInputRange from './TheInputRange'
 import TheInputSearch from './TheInputSearch'
 import TheInputSelect from './TheInputSelect'
 import TheInputSlider from './TheInputSlider'
-import TheInputStyle from './TheInputStyle'
 import TheInputTag from './TheInputTag'
 import TheInputText from './TheInputText'
 import TheInputTextArea from './TheInputTextArea'
@@ -73,7 +72,6 @@ class TheInput extends React.PureComponent {
   }
 }
 
-TheInput.Style = TheInputStyle
 TheInput.Text = TheInputText
 TheInput.Search = TheInputSearch
 TheInput.Password = TheInputPassword
