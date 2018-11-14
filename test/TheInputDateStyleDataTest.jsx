@@ -4,7 +4,7 @@
  */
 'use strict'
 
-import TheInputDateStyleData from '../lib/styleData/TheInputDateStyleData'
+import DateStyleData from '../lib/styleData/TheInputDateStyleData'
 import React from 'react'
 import { ok, equal } from 'assert'
 import { render } from 'the-script-test'
@@ -18,7 +18,7 @@ describe('the-input-date-style-data', () => {
 
   it('Render a component', () => {
     let element = render(
-       <TheInputDateStyleData />
+       <DateStyleData />
     )
     ok(element)
   })

@@ -4,7 +4,7 @@
  */
 'use strict'
 
-import TheInputUploadStyleData from '../lib/styleData/TheInputUploadStyleData'
+import UploadStyleData from '../lib/styleData/TheInputUploadStyleData'
 import React from 'react'
 import { ok, equal } from 'assert'
 import { render } from 'the-script-test'
@@ -18,7 +18,7 @@ describe('the-input-upload-style-data', () => {
 
   it('Render a component', () => {
     let element = render(
-       <TheInputUploadStyleData />
+       <UploadStyleData />
     )
     ok(element)
   })
