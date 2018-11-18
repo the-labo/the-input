@@ -11,7 +11,7 @@ import * as patterns from './patterns'
 /**
  * Text Input
  */
-class TheInputText extends React.Component {
+class TheInputText extends React.PureComponent {
   static Options ({ candidates, onSelect, parser, selectedCandidate }) {
     if (candidates.length === 0) {
       return null

@@ -96,6 +96,7 @@ class ExampleComponent extends React.PureComponent {
 
         <br/>
 
+        <h3>Search</h3>
         <Search name='value01'
                 value={values['value01']}
                 onUpdate={onUpdate}
@@ -105,6 +106,7 @@ class ExampleComponent extends React.PureComponent {
 
         <br/>
 
+        <h3>Password</h3>
         <Password name='value01'
                   value={values['value01']}
                   onUpdate={onUpdate}
@@ -113,6 +115,7 @@ class ExampleComponent extends React.PureComponent {
 
         <br/>
 
+        <h3>Text Area</h3>
         <TextArea name='value01'
                   value={values['value01']}
                   onUpdate={onUpdate}
