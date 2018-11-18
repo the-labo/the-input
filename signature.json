@@ -957,20 +957,6 @@
     "displayName": "TheInputSelect",
     "methods": [
       {
-        "name": "Options",
-        "docblock": null,
-        "modifiers": [
-          "static"
-        ],
-        "params": [
-          {
-            "name": "{\n                  disabledValues,\n                  full = false,\n                  nullable = false,\n                  nullText,\n                  onClose,\n                  onNull,\n                  onSelect,\n                  options,\n                  optionsRef,\n                  parser,\n                  placeholder,\n                  sorter,\n                  suggestingIndex,\n                }",
-            "type": null
-          }
-        ],
-        "returns": null
-      },
-      {
         "name": "enterSuggested",
         "docblock": null,
         "modifiers": [],
