@@ -104,7 +104,7 @@ class TheInputSelect extends React.PureComponent {
   handleDisplayClick (e) {
     clearTimeout(this._suggestOffTimer)
     const { state } = this
-    const inputElm = this.input.current
+    const inputElm = this.inputElmRef.current
     const suggesting = !state.suggesting
     if (suggesting) {
       inputElm && inputElm.focus()
