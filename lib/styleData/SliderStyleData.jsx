@@ -91,7 +91,6 @@ function SliderStyleData ({
         zIndex: 3,
       },
       '&:active': {
-        backgroundColor: '#FCFCFC',
         cursor: '-webkit-grabbing',
       },
       borderRadius: '50%',
