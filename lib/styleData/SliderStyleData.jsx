@@ -68,15 +68,6 @@ function SliderStyleData ({
         top: `${handlePaddingRate}%`,
       },
       '.the-input-slider-handle-icon': {
-        '.the-input-slider-label': {
-          boxSizing: 'border-box',
-          display: 'inline-block',
-          fontSize: '14px',
-          lineHeight: `${sliderHandleSize}px`,
-          minWidth: '24px',
-          padding: '2px 4px',
-          textAlign: 'right',
-        },
         '&:hover': {
           boxShadow: '1px 1px 3px rgba(0,0,0,0.5)',
         },
@@ -102,6 +93,15 @@ function SliderStyleData ({
     '.the-input-slider-inner': {
       display: 'flex',
       margin: '2px 0',
+    },
+    '.the-input-slider-label': {
+      boxSizing: 'border-box',
+      display: 'inline-block',
+      fontSize: '14px',
+      lineHeight: `${sliderHandleSize}px`,
+      minWidth: '24px',
+      padding: '2px 4px',
+      textAlign: 'right',
     },
   })
 }
