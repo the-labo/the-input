@@ -58,7 +58,6 @@ function RangeStyleData ({
     },
     '.the-input-range-handle': {
       '&:active': {
-        backgroundColor: '#FCFCFC',
         cursor: '-webkit-grabbing',
         zIndex: 5,
       },
