@@ -53,6 +53,7 @@ function RangeStyleData ({
       boxSizing: 'border-box',
       display: 'block',
       position: 'relative',
+      textAlign: 'left',
       width: '100%',
     },
     '.the-input-range-handle': {
