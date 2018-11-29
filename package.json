@@ -25,7 +25,7 @@
     "the-component-util": "^3.0.20",
     "the-condition": "^3.0.4",
     "the-icon": "^4.0.10",
-    "the-spin": "^3.1.11",
+    "the-spin": "^3.1.12",
     "the-style": "^2.2.3",
     "the-window": "^7.0.1",
     "video-extensions": "^1.1.0"
@@ -37,7 +37,7 @@
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "the-component-demo": "^4.0.17",
-    "the-script-build": "^4.0.13",
+    "the-script-build": "^4.0.15",
     "the-script-doc": "^1.0.2",
     "the-script-release": "^1.0.8",
     "the-script-share": "^1.0.5",
