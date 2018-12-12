@@ -3,15 +3,17 @@
 import { asStyleData } from 'the-component-util'
 
 function TextareaStyleData ({
-                                      contentWidth,
-                                      dominantColor,
-                                      inputBorderColor,
-                                      inputShadowColor,
-                                    }) {
+                              contentWidth,
+                              dominantColor,
+                              inputBorderColor,
+                              inputShadowColor,
+                            }) {
   return asStyleData({
     '.the-input-textarea': {
+      alignItems: 'stretch',
       boxSizing: 'border-box',
-      display: 'inline-block',
+      display: 'inline-flex',
+      justifyContent: 'stretch',
       margin: '0 4px',
       maxWidth: contentWidth,
       position: 'relative',

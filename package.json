@@ -21,7 +21,7 @@
     "regex-email": "^1.0.2",
     "regex-url": "^1.0.0",
     "the-array": "^1.4.1",
-    "the-check": "^2.0.16",
+    "the-check": "^2.0.17",
     "the-component-util": "^3.0.20",
     "the-condition": "^3.0.4",
     "the-icon": "^4.0.10",
@@ -31,8 +31,8 @@
     "video-extensions": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "*",
-    "@babel/runtime": "*",
+    "@babel/core": "^7.2.0",
+    "@babel/runtime": "^7.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
