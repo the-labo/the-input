@@ -2,11 +2,12 @@
 
 import { asStyleData } from 'the-component-util'
 
-function PasswordStyleData({
-                             ToggleIconStyle,
-                           }){
+function PasswordStyleData ({
+                              ToggleIconStyle,
+                            }) {
   return asStyleData({
     '.the-input-password': {
+      fontFamily: ['"SFMono-Regular"', '"Consolas"', '"Liberation Mono"', '"Menlo"', '"Courier"', '"Courier New"', '"Tahoma"', '"Verdana"'].join(', '),
       position: 'relative',
     },
     '.the-input-password-toggle': ToggleIconStyle({
