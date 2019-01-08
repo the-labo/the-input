@@ -190,6 +190,7 @@ class TheInputUpload extends React.PureComponent {
                         <video src={url}
                                {...{ height, width }}
                                className={c('the-input-upload-preview-video')}
+                               preload='metadata'
                         />
                       ) : (
                         <img src={url}
