@@ -78,8 +78,12 @@ class TheInputUpload extends React.PureComponent {
         onUpdate && onUpdate({ [name]: multiple ? urls : urls[0] })
         this.setState({ urls })
       } catch (error) {
-        onError && onError(error)
         this.setState({ error, spinning: false, urls: [] })
+        if (onError) {
+          onError(error)
+        } else {
+          console.error(`[TheInputUpload] File change failed`, error)
+        }
       } finally {
         this.setState({ spinning: false })
       }
