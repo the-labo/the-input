@@ -419,7 +419,7 @@ TheInputText.propTypes = {
 TheInputText.defaultProps = {
   error: null,
   matcher: (candidate, value) => {
-    return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())
+    return candidate.indexOf(value) !== -1 || candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
   },
   onEnter: null,
   options: {},
