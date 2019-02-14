@@ -25,14 +25,14 @@ import TheInputUpload from './TheInputUpload'
  * Input of the-components
  */
 class TheInput extends React.PureComponent {
-  handleChange (e) {
+  handleChange(e) {
     const { onChange, onUpdate, parser } = this.props
     const { name, value } = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({ [name]: parser(value) })
   }
 
-  render () {
+  render() {
     const { props } = this
     let {
       autoComplete,
@@ -49,23 +49,41 @@ class TheInput extends React.PureComponent {
       value,
     } = props
     return (
-      <div {...htmlAttributesFor(props, {
-        except: [
-          'id', 'className', 'type', 'value', 'required', 'name', 'placeholder', 'autoFocus', 'autoComplete'
-        ],
-      })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={c('the-input', className, {
-             'the-input-error': !!error,
-           })}
+      <div
+        {...htmlAttributesFor(props, {
+          except: [
+            'id',
+            'className',
+            'type',
+            'value',
+            'required',
+            'name',
+            'placeholder',
+            'autoFocus',
+            'autoComplete',
+          ],
+        })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-input', className, {
+          'the-input-error': !!error,
+        })}
       >
         {renderErrorMessage(error)}
         {children}
-        <input type='the-input-input'
-               {...{ autoComplete, autoFocus, id, name, placeholder, required, type }}
-               onChange={(e) => this.handleChange(e)}
-               ref={inputRef}
-               value={value || ''}
+        <input
+          type='the-input-input'
+          {...{
+            autoComplete,
+            autoFocus,
+            id,
+            name,
+            placeholder,
+            required,
+            type,
+          }}
+          onChange={(e) => this.handleChange(e)}
+          ref={inputRef}
+          value={value || ''}
         />
       </div>
     )
@@ -90,10 +108,7 @@ TheInput.Number = TheInputNumber
 
 TheInput.propTypes = {
   /** Input type */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Name of input */
   name: PropTypes.string,
   /** Handle for update */

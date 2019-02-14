@@ -12,17 +12,18 @@ const videoExtensions = require('video-extensions')
 
 const { parse: parseUrl } = url
 
-export const normalizeOptions = (options) => [].concat(options)
-  .filter(Boolean)
-  .reduce((normalized, value) => {
-    const isObject = typeof value === 'object'
-    return Object.assign(normalized,
-      isObject ? value : { [value]: value }
-    )
-  }, {})
+export const normalizeOptions = (options) =>
+  []
+    .concat(options)
+    .filter(Boolean)
+    .reduce((normalized, value) => {
+      const isObject = typeof value === 'object'
+      return Object.assign(normalized, isObject ? value : { [value]: value })
+    }, {})
 
-export function normalizeArrayValue (values, splitter = ',') {
-  return [].concat(values)
+export function normalizeArrayValue(values, splitter = ',') {
+  return []
+    .concat(values)
     .filter(Boolean)
     .reduce((normzlied, value) => {
       if (typeof value === 'string') {
@@ -32,41 +33,39 @@ export function normalizeArrayValue (values, splitter = ',') {
     }, [])
 }
 
-export function renderErrorMessage (error) {
+export function renderErrorMessage(error) {
   if (!error) {
-    return <span className='the-input-message the-input-message-empty'/>
+    return <span className='the-input-message the-input-message-empty' />
   }
   if (typeof error === 'string') {
     error = { message: error }
   }
   return (
-    <span className='the-input-message the-input-error-message'>{error.message}</span>
+    <span className='the-input-message the-input-error-message'>
+      {error.message}
+    </span>
   )
 }
 
-export function renderWarningMessage (warning) {
+export function renderWarningMessage(warning) {
   if (!warning) {
-    return <span className='the-input-message the-input-message-empty'/>
+    return <span className='the-input-message the-input-message-empty' />
   }
   if (typeof warning === 'string') {
     warning = { message: warning }
   }
   return (
-    <span className='the-input-message the-input-warn-message'>{warning.message}</span>
+    <span className='the-input-message the-input-warn-message'>
+      {warning.message}
+    </span>
   )
 }
 
-export function isImageUrl (src) {
+export function isImageUrl(src) {
   if (/^data:image/.test(src)) {
     return true
   }
-  const imageExtensions = [
-    '.jpg',
-    '.jpeg',
-    '.svg',
-    '.gif',
-    '.png'
-  ]
+  const imageExtensions = ['.jpg', '.jpeg', '.svg', '.gif', '.png']
   const extname = path.extname(parseUrl(src).pathname)
   if (!extname) {
     return false
@@ -74,7 +73,7 @@ export function isImageUrl (src) {
   return imageExtensions.includes(extname)
 }
 
-export function isVideoUrl (src) {
+export function isVideoUrl(src) {
   if (/^data:video/.test(src)) {
     return true
   }
@@ -85,7 +84,7 @@ export function isVideoUrl (src) {
   return videoExtensions.includes(extname.replace(/^\./, ''))
 }
 
-export function isUnknownTypeUrl (src) {
+export function isUnknownTypeUrl(src) {
   if (/^data:/.test(src)) {
     return false
   }
@@ -93,7 +92,7 @@ export function isUnknownTypeUrl (src) {
   return !extname
 }
 
-export function onOffBoolean (v) {
+export function onOffBoolean(v) {
   if (typeof v === 'boolean') {
     return v ? 'on' : 'off'
   }

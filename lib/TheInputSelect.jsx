@@ -16,7 +16,7 @@ const noop = () => null
  * Select Input
  */
 class TheInputSelect extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.elmRef = React.createRef()
     this.optionsElmRef = React.createRef()
@@ -38,12 +38,12 @@ class TheInputSelect extends React.PureComponent {
     this._suggestOffTimer = -1
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const window = get('window')
     window.addEventListener('click', this.handleDocumentClick)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     const optionsElm = this.optionsElmRef.current
     if (optionsElm) {
       const minY = get('document.body.clientTop')
@@ -58,13 +58,13 @@ class TheInputSelect extends React.PureComponent {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const window = get('window')
     window.removeEventListener('click', this.handleDocumentClick)
     clearTimeout(this._suggestOffTimer)
   }
 
-  enterSuggested (value) {
+  enterSuggested(value) {
     const { state } = this
     if (!state.suggesting) {
       return
@@ -79,29 +79,29 @@ class TheInputSelect extends React.PureComponent {
     })
   }
 
-  getIndexForValue (value) {
+  getIndexForValue(value) {
     return this.getOptionValues().indexOf(value)
   }
 
-  getOptionValues () {
+  getOptionValues() {
     const { props } = this
     const options = normalizeOptions(props.options)
     return Object.keys(options || {}).sort(props.sorter)
   }
 
-  handleBlur (e) {
+  handleBlur(e) {
     const { onBlur } = this.props
     onBlur && onBlur(e)
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const { onChange, onUpdate, parser } = this.props
     const { name, value } = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({ [name]: parser(value) })
   }
 
-  handleDisplayClick (e) {
+  handleDisplayClick(e) {
     clearTimeout(this._suggestOffTimer)
     const { state } = this
     const inputElm = this.inputElmRef.current
@@ -117,7 +117,7 @@ class TheInputSelect extends React.PureComponent {
     })
   }
 
-  handleDocumentClick (e) {
+  handleDocumentClick(e) {
     const elm = this.elmRef.current
 
     if (!elm) {
@@ -129,7 +129,7 @@ class TheInputSelect extends React.PureComponent {
     }
   }
 
-  handleFocus (e) {
+  handleFocus(e) {
     clearTimeout(this._suggestOffTimer)
     this.setState({ suggesting: true })
     const { onFocus } = this.props
@@ -138,7 +138,7 @@ class TheInputSelect extends React.PureComponent {
     onFocus && onFocus(e)
   }
 
-  handleKeyDown (e) {
+  handleKeyDown(e) {
     const { onEnter, onKeyDown } = this.props
     switch (e.keyCode) {
       // UP
@@ -179,26 +179,26 @@ class TheInputSelect extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  handleKeyUp (e) {
+  handleKeyUp(e) {
     const { onKeyUp } = this.props
     onKeyUp && onKeyUp(e)
   }
 
-  handleNull () {
+  handleNull() {
     const { name, onUpdate } = this.props
     onUpdate && onUpdate({ [name]: null })
     this.setState({ suggesting: false })
   }
 
-  handleSelect ({ value }) {
+  handleSelect({ value }) {
     this.enterSuggested(value)
   }
 
-  moveCandidateIndex (amount) {
+  moveCandidateIndex(amount) {
     const { state } = this
     const values = this.getOptionValues()
     const index = state.suggestingIndex + amount
-    const over = (index === -1) || (index === values.length)
+    const over = index === -1 || index === values.length
     if (over) {
       return false
     }
@@ -208,14 +208,14 @@ class TheInputSelect extends React.PureComponent {
     return true
   }
 
-  offSuggestion (delay = 10) {
+  offSuggestion(delay = 10) {
     clearTimeout(this._suggestOffTimer)
     this._suggestOffTimer = setTimeout(() => {
       this.setState({ suggesting: false })
     }, delay)
   }
 
-  render () {
+  render() {
     const { props } = this
     const {
       children,
@@ -241,93 +241,98 @@ class TheInputSelect extends React.PureComponent {
     const selectedValue = options[value]
     const hasSelect = typeof selectedValue !== 'undefined'
     return (
-      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'type', 'value', 'name', 'placeholder', 'tabIndex'] })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={c('the-input-select', className, {
-             'the-input-error': !!error,
-           })}
-           data-value={value}
-           ref={this.elmRef}
+      <div
+        {...htmlAttributesFor(props, {
+          except: [
+            'id',
+            'className',
+            'type',
+            'value',
+            'name',
+            'placeholder',
+            'tabIndex',
+          ],
+        })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-input-select', className, {
+          'the-input-error': !!error,
+        })}
+        data-value={value}
+        ref={this.elmRef}
       >
         {renderErrorMessage(error)}
-        {
-          spinning ? (
-            <TheSpin className='the-input-select-spin'
-                     cover
-                     enabled/>
-          ) : null
-        }
-        {
-          !readOnly && (
-            <a className='the-input-select-display'
-               onClick={this.handleDisplayClick}
-            >
-              <TheCondition if={hasSelect}>
-                <span className='the-input-select-display-value'>
-                  {selectedValue}
-                </span>
-              </TheCondition>
-              <TheCondition if={!hasSelect}>
-                <span className='the-input-select-display-alt'>
-                  {placeholder}
-                </span>
-              </TheCondition>
-              <TheIcon className={TheInputSelect.OPEN_ICON}/>
-            </a>
-          )
-        }
+        {spinning ? (
+          <TheSpin className='the-input-select-spin' cover enabled />
+        ) : null}
+        {!readOnly && (
+          <a
+            className='the-input-select-display'
+            onClick={this.handleDisplayClick}
+          >
+            <TheCondition if={hasSelect}>
+              <span className='the-input-select-display-value'>
+                {selectedValue}
+              </span>
+            </TheCondition>
+            <TheCondition if={!hasSelect}>
+              <span className='the-input-select-display-alt'>
+                {placeholder}
+              </span>
+            </TheCondition>
+            <TheIcon className={TheInputSelect.OPEN_ICON} />
+          </a>
+        )}
 
-        <input className='the-input-select-input'
-               {...{ id, name, placeholder, tabIndex, type }}
-               onBlur={this.handleBlur}
-               onChange={noop}
-               onFocus={this.handleFocus}
-               onKeyDown={this.handleKeyDown}
-               onKeyUp={this.handleKeyUp}
-               readOnly
-               ref={this.inputElmRef}
-               value={value || ''}
+        <input
+          className='the-input-select-input'
+          {...{ id, name, placeholder, tabIndex, type }}
+          onBlur={this.handleBlur}
+          onChange={noop}
+          onFocus={this.handleFocus}
+          onKeyDown={this.handleKeyDown}
+          onKeyUp={this.handleKeyUp}
+          readOnly
+          ref={this.inputElmRef}
+          value={value || ''}
         />
 
-        {
-          readOnly ? (
-            <span className='the-input-select-readonly'>{options[value]}</span>
-          ) : (
-            <select className='the-input-select-select'
-                    onChange={this.handleChange}
-                    tabIndex={-1}
-                    value={value || ''}
-            >
-              {nullable && <option name={name} value={null}/>}
-              {
-                Object.keys(options).map((optionValue) => (
-                  <option disabled={disabledValues.includes(optionValue)}
-                          key={optionValue}
-                          name={name}
-                          value={optionValue}
-                  >{optionValue}</option>
-                ))
-              }
-            </select>
-          )
-        }
-
+        {readOnly ? (
+          <span className='the-input-select-readonly'>{options[value]}</span>
+        ) : (
+          <select
+            className='the-input-select-select'
+            onChange={this.handleChange}
+            tabIndex={-1}
+            value={value || ''}
+          >
+            {nullable && <option name={name} value={null} />}
+            {Object.keys(options).map((optionValue) => (
+              <option
+                disabled={disabledValues.includes(optionValue)}
+                key={optionValue}
+                name={name}
+                value={optionValue}
+              >
+                {optionValue}
+              </option>
+            ))}
+          </select>
+        )}
 
         {children}
-        {
-          !readOnly && suggesting && (
-            <TheInputSelectOptionList {...{ options, parser, sorter, suggestingIndex }}
-                                      disabledValues={disabledValues}
-                                      full={fullScreen}
-                                      nullable={nullable}
-                                      nullText={nullText}
-                                      onClose={this.offSuggestion}
-                                      onNull={this.handleNull}
-                                      onSelect={this.handleSelect}
-                                      optionsRef={this.optionsElmRef}
-            />
-          )
-        }
+        {!readOnly && suggesting && (
+          <TheInputSelectOptionList
+            {...{ options, parser, sorter, suggestingIndex }}
+            disabledValues={disabledValues}
+            full={fullScreen}
+            nullable={nullable}
+            nullText={nullText}
+            onClose={this.offSuggestion}
+            onNull={this.handleNull}
+            onSelect={this.handleSelect}
+            optionsRef={this.optionsElmRef}
+          />
+        )}
       </div>
     )
   }
@@ -337,14 +342,9 @@ TheInputSelect.OPEN_ICON = 'fa fa-caret-down'
 
 TheInputSelect.propTypes = {
   /** Unselecatable values */
-  disabledValues: PropTypes.arrayOf(
-    PropTypes.string,
-  ),
+  disabledValues: PropTypes.arrayOf(PropTypes.string),
   /** Input error */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Name of input */
   name: PropTypes.string.isRequired,
   /** Allow null select */
@@ -358,7 +358,7 @@ TheInputSelect.propTypes = {
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   /** Value parser */
   parser: PropTypes.func,
@@ -384,23 +384,28 @@ TheInputSelect.defaultProps = {
 
 TheInputSelect.displayName = 'TheInputSelect'
 
-TheInputSelect.WithOptionsArray = function WithOptionsArray ({ optionsArray, ...props }) {
+TheInputSelect.WithOptionsArray = function WithOptionsArray({
+  optionsArray,
+  ...props
+}) {
   const valueArray = optionsArray.map(([v, node]) => v)
   const sorter = (a, b) => valueArray.indexOf(a) - valueArray.indexOf(b)
   return (
-    <TheInputSelect {...props}
-                    options={Object.assign({},
-                      ...optionsArray.map(([v, node]) => ({
-                        [v]: node,
-                      }))
-                    )}
-                    sorter={sorter}
+    <TheInputSelect
+      {...props}
+      options={Object.assign(
+        {},
+        ...optionsArray.map(([v, node]) => ({
+          [v]: node,
+        })),
+      )}
+      sorter={sorter}
     />
   )
 }
 
 class TheInputSelectOptionList extends React.PureComponent {
-  render () {
+  render() {
     const {
       disabledValues,
       full = false,
@@ -421,40 +426,34 @@ class TheInputSelectOptionList extends React.PureComponent {
       return null
     }
     return (
-      <div className={c('the-input-select-options', {
-        'the-input-select-options-full': full,
-      })}>
-        <div className='the-input-select-options-back'
-             onClick={onClose}
+      <div
+        className={c('the-input-select-options', {
+          'the-input-select-options-full': full,
+        })}
+      >
+        <div className='the-input-select-options-back' onClick={onClose} />
+        <ul
+          className='the-input-select-options-list'
+          ref={optionsRef}
+          role='listbox'
         >
-        </div>
-        <ul className='the-input-select-options-list'
-            ref={optionsRef}
-            role='listbox'
-        >
-          {
-            nullable && (
-              <li className={c('the-input-select-option')}
-                  onClick={onNull}
-              >
-                {nullText || ''}
-              </li>
-            )
-          }
-          {
-            optionValues.sort(sorter).map((optionValue, i) => (
-              <TheInputSelectOptionListItem
-                disabled={disabledValues.includes(optionValue)}
-                key={optionValue}
-                onSelect={onSelect}
-                role='option'
-                selected={i === suggestingIndex}
-                value={parser(optionValue)}
-              >
-                {options[optionValue]}
-              </TheInputSelectOptionListItem>
-            ))
-          }
+          {nullable && (
+            <li className={c('the-input-select-option')} onClick={onNull}>
+              {nullText || ''}
+            </li>
+          )}
+          {optionValues.sort(sorter).map((optionValue, i) => (
+            <TheInputSelectOptionListItem
+              disabled={disabledValues.includes(optionValue)}
+              key={optionValue}
+              onSelect={onSelect}
+              role='option'
+              selected={i === suggestingIndex}
+              value={parser(optionValue)}
+            >
+              {options[optionValue]}
+            </TheInputSelectOptionListItem>
+          ))}
         </ul>
       </div>
     )
@@ -462,27 +461,27 @@ class TheInputSelectOptionList extends React.PureComponent {
 }
 
 class TheInputSelectOptionListItem extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick () {
+  handleClick() {
     const { onSelect, value } = this.props
     onSelect && onSelect({ value })
   }
 
-  render () {
+  render() {
     const { children, disabled, selected, value } = this.props
     return (
-      <li className={c('the-input-select-option', {
-        'the-input-select-option-disabled': disabled,
-        'the-input-select-option-selected': selected,
-
-      })}
-          data-value={value}
-          onClick={this.handleClick}
-          role='option'
+      <li
+        className={c('the-input-select-option', {
+          'the-input-select-option-disabled': disabled,
+          'the-input-select-option-selected': selected,
+        })}
+        data-value={value}
+        onClick={this.handleClick}
+        role='option'
       >
         {children}
       </li>

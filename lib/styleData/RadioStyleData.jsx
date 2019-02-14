@@ -2,13 +2,13 @@
 
 import { asStyleData } from 'the-component-util'
 
-function RadioStyleData ({
-                           activeOpacity,
-                           backgroundColor,
-                           contentWidth,
-                           dominantColor,
-                           hoverOpacity,
-                         }) {
+function RadioStyleData({
+  activeOpacity,
+  backgroundColor,
+  contentWidth,
+  dominantColor,
+  hoverOpacity,
+}) {
   return asStyleData({
     '.the-input-radio': {
       borderRadius: '2px',
@@ -42,7 +42,8 @@ function RadioStyleData ({
     '.the-input-radio-label': {
       '&:active': { opacity: activeOpacity },
       '&:hover': { opacity: hoverOpacity },
-      '> *': { // https://github.com/ftlabs/fastclick/issues/60
+      '> *': {
+        // https://github.com/ftlabs/fastclick/issues/60
         pointerEvents: 'none',
       },
       cursor: 'pointer',
@@ -61,7 +62,6 @@ function RadioStyleData ({
       visibility: 'hidden',
       width: 1,
       zIndex: -1,
-
     },
     '.the-input-radio.the-input-as-button': {
       '.the-input-radio-icon': {

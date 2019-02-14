@@ -6,10 +6,7 @@
 import { asStyleData } from 'the-component-util'
 
 /** @lends UploadStyleData */
-function UploadStyleData ({
-                            backgroundColor,
-                            errorColor,
-                          }) {
+function UploadStyleData({ backgroundColor, errorColor }) {
   return asStyleData({
     '.the-input-upload': {
       '&:active': {

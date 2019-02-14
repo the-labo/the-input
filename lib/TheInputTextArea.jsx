@@ -10,7 +10,7 @@ import { renderErrorMessage } from './helpers'
  * TextArea Input
  */
 class TheInputTextArea extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {}
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -23,7 +23,7 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
-  adjustRows () {
+  adjustRows() {
     const { maxRows, minRows } = this.props
     const textarea = this.textareaRef.current
     if (!textarea) {
@@ -43,7 +43,9 @@ class TheInputTextArea extends React.PureComponent {
       if (this.gone) {
         break
       }
-      const smallEnough = textarea.offsetHeight < textarea.scrollHeight || textarea.offsetHeight < lineHeight * minRows
+      const smallEnough =
+        textarea.offsetHeight < textarea.scrollHeight ||
+        textarea.offsetHeight < lineHeight * minRows
       if (smallEnough) {
         break
       }
@@ -69,11 +71,11 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.adjustRows()
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     const { autoExpand } = this.props
     if (autoExpand) {
       clearInterval(this.adjustRowTimer)
@@ -81,12 +83,12 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.adjustRowTimer)
     this.gone = true
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const { onChange, onUpdate, parser } = this.props
     const { name, value } = e.target
     onChange && onChange(e)
@@ -98,14 +100,11 @@ class TheInputTextArea extends React.PureComponent {
     }
   }
 
-  handleKeyDown (e) {
-    const {
-      onCombineEnter,
-      onEnter,
-      onKeyDown,
-    } = this.props
+  handleKeyDown(e) {
+    const { onCombineEnter, onEnter, onKeyDown } = this.props
     switch (e.keyCode) {
-      case 13: { // Enter
+      case 13: {
+        // Enter
         const isCombine = e.metaKey || e.shiftKey || e.altKey || e.ctrlKey
         if (isCombine) {
           onCombineEnter && onCombineEnter()
@@ -120,7 +119,7 @@ class TheInputTextArea extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  render () {
+  render() {
     const { props } = this
     const {
       autoExpand,
@@ -144,49 +143,62 @@ class TheInputTextArea extends React.PureComponent {
     } = props
     const rows = autoExpand ? this.state.actualRows : this.props.rows
     return (
-      <div {...htmlAttributesFor(props, {
-        except: [
-          'id',
-          'className',
-          'readOnly',
-          'rows',
-          'value',
-          'name',
-          'required',
-          'placeholder',
-          'role',
-          'tabIndex'
-        ],
-      })}
-           {...eventHandlersFor(props, {
-             except: [
-               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
-             ],
-           })}
-           className={c('the-input-textarea', className, {
-             'the-input-error': !!error,
-           })}
-           data-value={value}
+      <div
+        {...htmlAttributesFor(props, {
+          except: [
+            'id',
+            'className',
+            'readOnly',
+            'rows',
+            'value',
+            'name',
+            'required',
+            'placeholder',
+            'role',
+            'tabIndex',
+          ],
+        })}
+        {...eventHandlersFor(props, {
+          except: [
+            'onChange',
+            'onFocus',
+            'onBlur',
+            'onKeyUp',
+            'onKeyDown',
+            'onKeyPress',
+          ],
+        })}
+        className={c('the-input-textarea', className, {
+          'the-input-error': !!error,
+        })}
+        data-value={value}
       >
         {renderErrorMessage(error)}
 
-        {
-          readOnly ? (
-            <pre className='the-input-textarea-readonly'>{value || ''}</pre>
-          ) : (
-            <textarea className='the-input-textarea-input'
-                      {...{ autoFocus, id, name, placeholder, required, role, spellCheck }}
-                      {...{ onBlur, onFocus, onKeyPress, onKeyUp, readOnly }}
-                      aria-multiline='true'
-                      onChange={this.handleChange}
-                      onKeyDown={this.handleKeyDown}
-                      ref={this.textareaRef}
-                      rows={rows}
-                      tabIndex={tabIndex}
-                      value={value || ''}
-            />
-          )
-        }
+        {readOnly ? (
+          <pre className='the-input-textarea-readonly'>{value || ''}</pre>
+        ) : (
+          <textarea
+            className='the-input-textarea-input'
+            {...{
+              autoFocus,
+              id,
+              name,
+              placeholder,
+              required,
+              role,
+              spellCheck,
+            }}
+            {...{ onBlur, onFocus, onKeyPress, onKeyUp, readOnly }}
+            aria-multiline='true'
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+            ref={this.textareaRef}
+            rows={rows}
+            tabIndex={tabIndex}
+            value={value || ''}
+          />
+        )}
         {children}
       </div>
     )

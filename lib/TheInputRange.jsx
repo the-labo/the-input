@@ -8,7 +8,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Draggable from 'react-draggable'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
-import {TheCondition} from 'the-condition'
+import { TheCondition } from 'the-condition'
 import { get } from 'the-window'
 import { normalizeOptions, renderErrorMessage } from './helpers'
 
@@ -16,49 +16,40 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  * Range Input
  */
 class TheInputRange extends React.PureComponent {
-  static Handle (props) {
-    const {
-      elmRef,
-      maxX,
-      minX,
-      onMove,
-      shouldMove = true,
-      step,
-      x,
-    } = props
+  static Handle(props) {
+    const { elmRef, maxX, minX, onMove, shouldMove = true, step, x } = props
     return (
-      <Draggable axis='x'
-                 bounds={{ left: minX, right: maxX }}
-                 grid={step && [step, step]}
-                 onDrag={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 onStart={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 onStop={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 position={{ x, y: 0 }}
+      <Draggable
+        axis='x'
+        bounds={{ left: minX, right: maxX }}
+        grid={step && [step, step]}
+        onDrag={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        onStart={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        onStop={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        position={{ x, y: 0 }}
       >
-        <div className='the-input-range-handle'
-             data-max-x={maxX}
-             data-min-x={minX}
-             ref={elmRef}
+        <div
+          className='the-input-range-handle'
+          data-max-x={maxX}
+          data-min-x={minX}
+          ref={elmRef}
         >
-          <div className='the-input-range-handle-area'>
-          </div>
-          <div className='the-input-range-handle-icon'>
-          </div>
+          <div className='the-input-range-handle-area' />
+          <div className='the-input-range-handle-icon' />
         </div>
       </Draggable>
     )
   }
 
-  static Label ({ children, className, ref }) {
+  static Label({ children, className, ref }) {
     return (
-      <label className={c('the-input-range-label', className)}
-             ref={ref}>
+      <label className={c('the-input-range-label', className)} ref={ref}>
         <span>{children}</span>
       </label>
     )
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       fromX: 0,
@@ -75,25 +66,25 @@ class TheInputRange extends React.PureComponent {
       'handleResize',
       'handleBarClick',
       'handleFromHandleMove',
-      'handleToHandleMove'
+      'handleToHandleMove',
     ]
     for (const methodName of methodsToBind) {
       this[methodName] = this[methodName].bind(this)
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { window } = get('window')
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const { window } = get('window')
     window.removeEventListener('resize', this.handleResize)
   }
 
-  getHandleRadius () {
+  getHandleRadius() {
     const { fromHandleElm } = this
     if (!fromHandleElm) {
       return 0
@@ -101,7 +92,7 @@ class TheInputRange extends React.PureComponent {
     return fromHandleElm.offsetWidth / 2
   }
 
-  handleBarClick (e) {
+  handleBarClick(e) {
     const { barElm, state } = this
     if (!barElm) {
       return
@@ -124,14 +115,14 @@ class TheInputRange extends React.PureComponent {
     }
   }
 
-  handleFromHandleMove ({ x }) {
+  handleFromHandleMove({ x }) {
     const rate = this._rateWithX(x)
     const from = this._valueWithRate(rate)
     const [, to] = this.props.value
     this.setRangeValue(from, to)
   }
 
-  handleResize () {
+  handleResize() {
     const { barElm, props } = this
     if (!barElm) {
       return
@@ -154,79 +145,82 @@ class TheInputRange extends React.PureComponent {
     })
   }
 
-  handleToHandleMove ({ x }) {
+  handleToHandleMove({ x }) {
     const rate = this._rateWithX(x)
     const to = this._valueWithRate(rate)
     const [from] = this.props.value
     this.setRangeValue(from, to)
   }
 
-  render () {
+  render() {
     const { props, state } = this
-    const {
-      barOnly,
-      className,
-      error,
-      max,
-      min,
-      name,
-      value,
-    } = props
-    const {
-      fromX,
-      maxX,
-      minX,
-      toX,
-    } = state
+    const { barOnly, className, error, max, min, name, value } = props
+    const { fromX, maxX, minX, toX } = state
     const { from, to } = value
     return (
-      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'type', 'value', 'name', 'placeholder'] })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={c('the-input-range', className, {
-             'the-input-error': !!error,
-           })}
-           data-value-from={from}
-           data-value-to={to}
-           ref={(elm) => {
-             this.elm = elm
-             this.handleResize()
-           }}
+      <div
+        {...htmlAttributesFor(props, {
+          except: ['id', 'className', 'type', 'value', 'name', 'placeholder'],
+        })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-input-range', className, {
+          'the-input-error': !!error,
+        })}
+        data-value-from={from}
+        data-value-to={to}
+        ref={(elm) => {
+          this.elm = elm
+          this.handleResize()
+        }}
       >
         {renderErrorMessage(error)}
-        <input name={`${name}[from]`} onChange={(v) => {}} type='hidden' value={from}/>
-        <input name={`${name}[to]`} onChange={(v) => {}} type='hidden' value={to}/>
+        <input
+          name={`${name}[from]`}
+          onChange={(v) => {}}
+          type='hidden'
+          value={from}
+        />
+        <input
+          name={`${name}[to]`}
+          onChange={(v) => {}}
+          type='hidden'
+          value={to}
+        />
         <div className='the-input-range-inner'>
           <TheCondition unless={barOnly}>
             <TheInputRange.Label>{min}</TheInputRange.Label>
           </TheCondition>
           <div className='the-input-range-bar-wrap'>
-            <div className='the-input-range-bar'
-                 onClick={(e) => this.handleBarClick(e)}
-                 ref={(barElm) => {
-                   this.barElm = barElm
-                   this.handleResize()
-                 }}
+            <div
+              className='the-input-range-bar'
+              onClick={(e) => this.handleBarClick(e)}
+              ref={(barElm) => {
+                this.barElm = barElm
+                this.handleResize()
+              }}
             >
-              <div className='the-input-range-bar-tap'>
-              </div>
-              <div className='the-input-range-bar-bg'>
-              </div>
-              <div className='the-input-range-bar-highlight' style={{ left: fromX, width: toX - fromX }}>
-              </div>
+              <div className='the-input-range-bar-tap' />
+              <div className='the-input-range-bar-bg' />
+              <div
+                className='the-input-range-bar-highlight'
+                style={{ left: fromX, width: toX - fromX }}
+              />
             </div>
-            <TheInputRange.Handle {...{ maxX, minX, x: fromX }}
-                                  elmRef={(fromHandleElm) => {
-                                    this.fromHandleElm = fromHandleElm
-                                    this.handleResize()
-                                  }}
-                                  onMove={(e) => this.handleFromHandleMove(e)}
+            <TheInputRange.Handle
+              {...{ maxX, minX, x: fromX }}
+              elmRef={(fromHandleElm) => {
+                this.fromHandleElm = fromHandleElm
+                this.handleResize()
+              }}
+              onMove={(e) => this.handleFromHandleMove(e)}
             />
-            <TheInputRange.Handle {...{ maxX, minX, x: toX }}
-                                  elmRef={(toHandleElm) => {
-                                    this.toHandleElm = toHandleElm
-                                    this.handleResize()
-                                  }}
-                                  onMove={(e) => this.handleToHandleMove(e)}
+            <TheInputRange.Handle
+              {...{ maxX, minX, x: toX }}
+              elmRef={(toHandleElm) => {
+                this.toHandleElm = toHandleElm
+                this.handleResize()
+              }}
+              onMove={(e) => this.handleToHandleMove(e)}
             />
           </div>
           <TheCondition unless={barOnly}>
@@ -237,7 +231,7 @@ class TheInputRange extends React.PureComponent {
     )
   }
 
-  setRangeValue (from, to) {
+  setRangeValue(from, to) {
     const { props, state } = this
     const { maxX, minX } = state
     if (minX === maxX) {
@@ -256,7 +250,7 @@ class TheInputRange extends React.PureComponent {
         from -= step
       }
     }
-    const duplicate = (currentFrom === from) && (currentTo === to)
+    const duplicate = currentFrom === from && currentTo === to
     if (duplicate) {
       return
     }
@@ -271,7 +265,7 @@ class TheInputRange extends React.PureComponent {
     from = chopcal.round(from, step)
     to = chopcal.round(to, step)
 
-    const notChanged = (this._from === from) && (this._to === to)
+    const notChanged = this._from === from && this._to === to
     if (notChanged) {
       return
     }
@@ -284,7 +278,7 @@ class TheInputRange extends React.PureComponent {
     }
   }
 
-  _rateWithValue (value) {
+  _rateWithValue(value) {
     const { props } = this
     const { max, min } = props
 
@@ -292,7 +286,7 @@ class TheInputRange extends React.PureComponent {
     return chopcal.round(rangecal.rate(min, max, value), 0.01)
   }
 
-  _rateWithX (x) {
+  _rateWithX(x) {
     const { state } = this
     const { maxX, minX } = state
     if (minX === maxX) {
@@ -301,7 +295,7 @@ class TheInputRange extends React.PureComponent {
     return rangecal.rate(minX, maxX, x + 2)
   }
 
-  _valueWithRate (rate) {
+  _valueWithRate(rate) {
     const { props } = this
     const { max, min } = props
 
@@ -315,10 +309,7 @@ TheInputRange.propTypes = {
   /** Hides min/max value text */
   barOnly: PropTypes.bool,
   /** Input error */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Max value */
   max: PropTypes.number,
   /** Min value */

@@ -2,16 +2,16 @@
 
 import { asStyleData, colorAlpha } from 'the-component-util'
 
-function TextStyleData ({
-                                  backgroundColor,
-                                  contentPadding,
-                                  contentWidth,
-                                  dominantColor,
-                                  inputBorderColor,
-                                  inputShadowColor,
-                                  lightBorderColor,
-                                  tappableHeight,
-                                }) {
+function TextStyleData({
+  backgroundColor,
+  contentPadding,
+  contentWidth,
+  dominantColor,
+  inputBorderColor,
+  inputShadowColor,
+  lightBorderColor,
+  tappableHeight,
+}) {
   return asStyleData({
     '.the-input-text': {
       boxSizing: 'border-box',

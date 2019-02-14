@@ -6,12 +6,12 @@
 import { asStyleData } from 'the-component-util'
 
 /** @lends DateStyleData */
-function DateStyleData ({
-                                  contentWidth,
-                                  dominantColor,
-                                  inputBorderColor,
-                                  inputShadowColor,
-                                }) {
+function DateStyleData({
+  contentWidth,
+  dominantColor,
+  inputBorderColor,
+  inputShadowColor,
+}) {
   return asStyleData({
     '.the-input-date': {
       boxSizing: 'border-box',

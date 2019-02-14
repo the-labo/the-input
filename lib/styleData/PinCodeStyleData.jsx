@@ -2,10 +2,7 @@
 
 import { asStyleData } from 'the-component-util'
 
-function PinCodeStyleData ({
-                             contentWidth,
-                             dominantColor,
-                           }) {
+function PinCodeStyleData({ contentWidth, dominantColor }) {
   return asStyleData({
     '.the-input-pin-code': {
       position: 'relative',

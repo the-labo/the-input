@@ -7,7 +7,7 @@ import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
 class TheInputSearch extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     let { open = false } = props
     this.state = {
@@ -16,43 +16,47 @@ class TheInputSearch extends React.PureComponent {
     this._focusTimer = -1
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearTimeout(this._focusTimer)
   }
 
-  handleFocus (e) {
+  handleFocus(e) {
     const { props } = this
     let { onFocus } = props
     onFocus && onFocus(e)
     this.toggleOpen(true)
   }
 
-  render () {
+  render() {
     const { props, state } = this
     let { value } = props
     let { open } = state
     return (
-      <TheInputText {...props}
-                    className={c('the-input-search', {
-                      'the-input-search-open': open || !!value,
-                    })}
-                    inputRef={(input) => { this.input = input }}
-                    onFocus={(e) => this.handleFocus()}
-                    type='search'
+      <TheInputText
+        {...props}
+        className={c('the-input-search', {
+          'the-input-search-open': open || !!value,
+        })}
+        inputRef={(input) => {
+          this.input = input
+        }}
+        onFocus={(e) => this.handleFocus()}
+        type='search'
       >
         {!value && (
-          <a className={c('the-input-search-toggle')}
-             onClick={() => this.toggleOpen()}
-             tabIndex={-1}
+          <a
+            className={c('the-input-search-toggle')}
+            onClick={() => this.toggleOpen()}
+            tabIndex={-1}
           >
-            <TheIcon className={TheInputSearch.SEARCH_ICON}/>
+            <TheIcon className={TheInputSearch.SEARCH_ICON} />
           </a>
         )}
       </TheInputText>
     )
   }
 
-  toggleOpen (open) {
+  toggleOpen(open) {
     if (typeof open === 'undefined') {
       open = !this.state.open
     }
@@ -71,7 +75,9 @@ class TheInputSearch extends React.PureComponent {
 
 TheInputSearch.SEARCH_ICON = 'fa fa-search'
 TheInputSearch.propTypes = clone(TheInputText.propTypes, { without: ['type'] })
-TheInputSearch.defaultProps = clone(TheInputText.defaultProps, { without: ['type'] })
+TheInputSearch.defaultProps = clone(TheInputText.defaultProps, {
+  without: ['type'],
+})
 TheInputSearch.displayName = 'TheInputSearch'
 
 export default TheInputSearch

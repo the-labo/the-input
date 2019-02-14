@@ -5,41 +5,43 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { get } from 'the-window'
-import { normalizeOptions, onOffBoolean, renderErrorMessage, renderWarningMessage } from './helpers'
+import {
+  normalizeOptions,
+  onOffBoolean,
+  renderErrorMessage,
+  renderWarningMessage,
+} from './helpers'
 import * as patterns from './patterns'
 
 /**
  * Text Input
  */
 class TheInputText extends React.PureComponent {
-  static Options ({ candidates, onSelect, parser, selectedCandidate }) {
+  static Options({ candidates, onSelect, parser, selectedCandidate }) {
     if (candidates.length === 0) {
       return null
     }
     return (
-      <ul className='the-input-text-options'
-          role='listbox'
-      >
-        {
-          candidates.map((candidate) => (
-            <li aria-label={candidate}
-                className={c('the-input-text-option', {
-                  'the-input-text-option-selected': selectedCandidate === candidate,
-                })}
-                data-value={parser(candidate)}
-                key={candidate}
-                onClick={() => onSelect({ value: candidate })}
-                role='option'
-            >
-              {candidate}
-            </li>
-          ))
-        }
+      <ul className='the-input-text-options' role='listbox'>
+        {candidates.map((candidate) => (
+          <li
+            aria-label={candidate}
+            className={c('the-input-text-option', {
+              'the-input-text-option-selected': selectedCandidate === candidate,
+            })}
+            data-value={parser(candidate)}
+            key={candidate}
+            onClick={() => onSelect({ value: candidate })}
+            role='option'
+          >
+            {candidate}
+          </li>
+        ))}
       </ul>
     )
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.elm = null
     this.state = {
@@ -59,7 +61,7 @@ class TheInputText extends React.PureComponent {
     this._offSuggestionOffTimer = -1
   }
 
-  commitValue () {
+  commitValue() {
     const { name, onUpdate, parser, value } = this.props
     const committedValue = parser(value)
     onUpdate && onUpdate({ [name]: committedValue || '' })
@@ -70,18 +72,18 @@ class TheInputText extends React.PureComponent {
     this.setState({ committedValue })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const window = get('window')
     window.addEventListener('click', this.handleDocumentClick)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const window = get('window')
     window.removeEventListener('click', this.handleDocumentClick)
     clearTimeout(this._offSuggestionOffTimer)
   }
 
-  enterCandidate (value) {
+  enterCandidate(value) {
     const { name } = this.props
     this.handleChange({
       target: {
@@ -92,7 +94,7 @@ class TheInputText extends React.PureComponent {
     this.offSuggestion()
   }
 
-  getPatternWarning () {
+  getPatternWarning() {
     const { props, state } = this
     const { pattern, patternWarning, value } = props
     const { committedValue } = state
@@ -113,20 +115,20 @@ class TheInputText extends React.PureComponent {
     return patternWarning
   }
 
-  handleBlur (e) {
+  handleBlur(e) {
     const { onBlur } = this.props
     onBlur && onBlur(e)
     this.commitValue()
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const { onChange, onUpdate } = this.props
     const { name, value } = e.target
     onChange && onChange(e)
     onUpdate && onUpdate({ [name]: value || '' })
   }
 
-  handleDocumentClick (e) {
+  handleDocumentClick(e) {
     const elm = this.elmRef.current
 
     if (!elm) {
@@ -138,7 +140,7 @@ class TheInputText extends React.PureComponent {
     }
   }
 
-  handleFocus (e) {
+  handleFocus(e) {
     clearTimeout(this._offSuggestionOffTimer)
     this.setState({ suggesting: true })
     this.updateCandidates(-1)
@@ -156,15 +158,8 @@ class TheInputText extends React.PureComponent {
     }
   }
 
-  handleKeyDown (e) {
-    const {
-      onDown,
-      onEnter,
-      onKeyDown,
-      onLeft,
-      onRight,
-      onUp,
-    } = this.props
+  handleKeyDown(e) {
+    const { onDown, onEnter, onKeyDown, onLeft, onRight, onUp } = this.props
     switch (e.keyCode) {
       case 37: // LEFT
         onLeft && onLeft()
@@ -180,7 +175,8 @@ class TheInputText extends React.PureComponent {
         onDown && onDown()
         this.moveCandidateIndex(+1)
         break
-      case 13: { // Enter
+      case 13: {
+        // Enter
         const { selectedCandidate } = this.state
         if (selectedCandidate) {
           this.enterCandidate(selectedCandidate)
@@ -198,38 +194,38 @@ class TheInputText extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  handleKeyPress (e) {
+  handleKeyPress(e) {
     const { onKeyPress } = this.props
     onKeyPress && onKeyPress(e)
   }
 
-  handleKeyUp (e) {
+  handleKeyUp(e) {
     this.updateCandidates()
     const { onKeyUp } = this.props
     onKeyUp && onKeyUp(e)
   }
 
-  moveCandidateIndex (amount) {
+  moveCandidateIndex(amount) {
     const { candidates, selectedCandidate } = this.state
     if (!candidates) {
       return
     }
     const index = candidates.indexOf(selectedCandidate) + amount
-    const over = (index <= -1) || (index >= candidates.length)
+    const over = index <= -1 || index >= candidates.length
     if (over) {
       return
     }
     this.updateCandidates(index)
   }
 
-  offSuggestion (delay = 10) {
+  offSuggestion(delay = 10) {
     clearTimeout(this._offSuggestionOffTimer)
     this._offSuggestionOffTimer = setTimeout(() => {
       this.setState({ suggesting: false })
     }, delay)
   }
 
-  render () {
+  render() {
     const { props, state } = this
     const {
       autoFocus,
@@ -251,11 +247,7 @@ class TheInputText extends React.PureComponent {
       type,
       value,
     } = props
-    let {
-      autoCapitalize,
-      autoComplete,
-      autoCorrect,
-    } = props
+    let { autoCapitalize, autoComplete, autoCorrect } = props
     const { candidates, committedValue, selectedCandidate, suggesting } = state
     if (!autoComplete && candidates.length >= 0) {
       autoComplete = 'off'
@@ -266,88 +258,92 @@ class TheInputText extends React.PureComponent {
 
     const warning = this.getPatternWarning()
     return (
-      <div {...htmlAttributesFor(props, {
-        except: [
-          'id',
-          'className',
-          'type',
-          'maxLength',
-          'value',
-          'name',
-          'tabIndex',
-          'required',
-          'placeholder',
-          'readOnly',
-          'autoFocus',
-          'autoComplete',
-          'autoCapitalize',
-          'autoCorrect',
-          'spellCheck'
-        ],
-      })}
-           {...eventHandlersFor(props, {
-             except: [
-               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
-             ],
-           })}
-           className={c('the-input-text', className, {
-             'the-input-error': !!error,
-             'the-input-warn': !!warning,
-           })}
-           data-value={value}
-           ref={this.elmRef}
+      <div
+        {...htmlAttributesFor(props, {
+          except: [
+            'id',
+            'className',
+            'type',
+            'maxLength',
+            'value',
+            'name',
+            'tabIndex',
+            'required',
+            'placeholder',
+            'readOnly',
+            'autoFocus',
+            'autoComplete',
+            'autoCapitalize',
+            'autoCorrect',
+            'spellCheck',
+          ],
+        })}
+        {...eventHandlersFor(props, {
+          except: [
+            'onChange',
+            'onFocus',
+            'onBlur',
+            'onKeyUp',
+            'onKeyDown',
+            'onKeyPress',
+          ],
+        })}
+        className={c('the-input-text', className, {
+          'the-input-error': !!error,
+          'the-input-warn': !!warning,
+        })}
+        data-value={value}
+        ref={this.elmRef}
       >
         {renderWarningMessage(warning)}
         {renderErrorMessage(error)}
         {children}
-        {
-          readOnly ? (
-            <span className='the-input-text-readonly'>{value || ''}</span>
-          ) : (
-            <span className='the-input-text-input-wrap'>
-              {prefix}
-              <input className='the-input-text-input'
-                     {...{
-                       autoCapitalize,
-                       autoComplete,
-                       autoCorrect,
-                       autoFocus,
-                       id,
-                       maxLength,
-                       name,
-                       placeholder,
-                       readOnly,
-                       required,
-                       spellCheck,
-                       tabIndex,
-                       type,
-                     }}
-                     onBlur={this.handleBlur}
-                     onChange={this.handleChange}
-                     onFocus={this.handleFocus}
-                     onKeyDown={this.handleKeyDown}
-                     onKeyPress={this.handleKeyPress}
-                     onKeyUp={this.handleKeyUp}
-                     ref={inputRef}
-                     value={value || ''}
-              />
-              {suffix}
-            </span>
-          )
-        }
-
-        {
-          !readOnly && suggesting && (
-            <TheInputText.Options {...{ candidates, parser, selectedCandidate }}
-                                  onSelect={({ value }) => this.enterCandidate(value)}
+        {readOnly ? (
+          <span className='the-input-text-readonly'>{value || ''}</span>
+        ) : (
+          <span className='the-input-text-input-wrap'>
+            {prefix}
+            <input
+              className='the-input-text-input'
+              {...{
+                autoCapitalize,
+                autoComplete,
+                autoCorrect,
+                autoFocus,
+                id,
+                maxLength,
+                name,
+                placeholder,
+                readOnly,
+                required,
+                spellCheck,
+                tabIndex,
+                type,
+              }}
+              onBlur={this.handleBlur}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onKeyDown={this.handleKeyDown}
+              onKeyPress={this.handleKeyPress}
+              onKeyUp={this.handleKeyUp}
+              ref={inputRef}
+              value={value || ''}
             />
-          )
-        }
+            {suffix}
+          </span>
+        )}
+
+        {!readOnly && suggesting && (
+          <TheInputText.Options
+            {...{ candidates, parser, selectedCandidate }}
+            onSelect={({ value }) => this.enterCandidate(value)}
+          />
+        )}
       </div>
     )
   }
 
-  updateCandidates (index) {
+  updateCandidates(index) {
     let { matcher, options, value } = this.props
     options = normalizeOptions(options)
     value = value && String(value || '').trim()
@@ -357,7 +353,10 @@ class TheInputText extends React.PureComponent {
       .map((candidate) => String(candidate).trim())
       .filter((candidate) => !!candidate)
       .filter((candidate) => candidate !== value)
-      .filter((candidate) => !value || matcher(String(candidate), String(value || '')))
+      .filter(
+        (candidate) =>
+          !value || matcher(String(candidate), String(value || '')),
+      )
     if (typeof index === 'undefined') {
       index = candidates.indexOf(selectedCandidate)
     }
@@ -370,10 +369,7 @@ class TheInputText extends React.PureComponent {
 
 TheInputText.propTypes = {
   /** Input error */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Options parser */
   matcher: PropTypes.func,
   /** Name of input */
@@ -393,7 +389,7 @@ TheInputText.propTypes = {
   /** Options */
   options: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   /** Value parser */
   parser: PropTypes.func,
@@ -410,16 +406,16 @@ TheInputText.propTypes = {
   /** Text type */
   type: PropTypes.string,
   /** Value of input */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 TheInputText.defaultProps = {
   error: null,
   matcher: (candidate, value) => {
-    return candidate.indexOf(value) !== -1 || candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    return (
+      candidate.indexOf(value) !== -1 ||
+      candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    )
   },
   onEnter: null,
   options: {},

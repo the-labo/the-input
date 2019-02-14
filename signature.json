@@ -102,7 +102,7 @@
         ],
         "params": [
           {
-            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 tabIndex,\n                 value,\n               }",
+            "name": "{\n  checked,\n  disabled,\n  id,\n  label,\n  name,\n  onChange,\n  tabIndex,\n  value,\n}",
             "type": null
           }
         ],
@@ -521,7 +521,7 @@
         ],
         "params": [
           {
-            "name": "{\n                 checked,\n                 disabled,\n                 id,\n                 label,\n                 name,\n                 onChange,\n                 tabIndex,\n                 value,\n               }",
+            "name": "{\n  checked,\n  disabled,\n  id,\n  label,\n  name,\n  onChange,\n  tabIndex,\n  value,\n}",
             "type": null
           }
         ],
@@ -1122,7 +1122,7 @@
         ],
         "params": [
           {
-            "name": "{ optionsArray, ...props }",
+            "name": "{\n  optionsArray,\n  ...props\n}",
             "type": null
           }
         ],
@@ -1791,7 +1791,7 @@
         "required": false,
         "description": "Options parser",
         "defaultValue": {
-          "value": "(candidate, value) => {\n  return candidate.indexOf(value) !== -1 || candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1\n}",
+          "value": "(candidate, value) => {\n  return (\n    candidate.indexOf(value) !== -1 ||\n    candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1\n  )\n}",
           "computed": false
         }
       },

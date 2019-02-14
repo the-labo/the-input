@@ -16,10 +16,11 @@ import {
   renderErrorMessage,
 } from './helpers'
 
-const previewUrlFilter = (url) => isImageUrl(url) || isVideoUrl(url) || isUnknownTypeUrl(url)
+const previewUrlFilter = (url) =>
+  isImageUrl(url) || isVideoUrl(url) || isUnknownTypeUrl(url)
 
 class TheInputUpload extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.id = newId()
     this.handleChange = this.handleChange.bind(this)
@@ -31,23 +32,22 @@ class TheInputUpload extends React.PureComponent {
     }
   }
 
-  componentDidMount () {
-  }
+  componentDidMount() {}
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { props } = this
     const { value } = props
     const hasValue = value && value.length > 0
-    if (hasValue && (prevProps.value !== value)) {
+    if (hasValue && prevProps.value !== value) {
       this.setState({ urls: [].concat(value) })
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.gone = true
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const { props } = this
     const { target } = e
     const {
@@ -67,9 +67,7 @@ class TheInputUpload extends React.PureComponent {
     ;(async () => {
       try {
         const urls = await Promise.all(
-          [...target.files].map(async (file) =>
-            await convertFile(file, props)
-          )
+          [...target.files].map(async (file) => await convertFile(file, props)),
         )
         if (this.gone) {
           return
@@ -90,7 +88,7 @@ class TheInputUpload extends React.PureComponent {
     })()
   }
 
-  handleRemove () {
+  handleRemove() {
     const { props } = this
     const { name, onLoad, onUpdate } = props
     const urls = []
@@ -102,7 +100,7 @@ class TheInputUpload extends React.PureComponent {
     onUpdate && onUpdate({ [name]: null })
   }
 
-  render () {
+  render() {
     const { props, state } = this
     const {
       accept,
@@ -120,97 +118,95 @@ class TheInputUpload extends React.PureComponent {
       value,
       width,
     } = props
-    const {
-      spinning,
-      urls,
-    } = state
+    const { spinning, urls } = state
 
     const hasImage = !!urls && urls.length > 0
     return (
-      <div {...htmlAttributesFor(props, { except: ['id', 'className'] })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={c('the-input-upload', className, {
-             'the-input-error': !!error,
-             'the-input-upload-read-only': !!readOnly,
-           })}
-           data-value={value}
-           id={id}
+      <div
+        {...htmlAttributesFor(props, { except: ['id', 'className'] })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-input-upload', className, {
+          'the-input-error': !!error,
+          'the-input-upload-read-only': !!readOnly,
+        })}
+        data-value={value}
+        id={id}
       >
         {renderErrorMessage(error)}
-        <input accept={accept}
-               className={c('the-input-upload-input')}
-               id={`${id}-file`}
-               multiple={multiple}
-               name={name}
-               onChange={this.handleChange}
-               readOnly={readOnly}
-               style={(readOnly && !hasImage) ? {} : { height, width }}
-               tabIndex={-1}
-               type='file'
+        <input
+          accept={accept}
+          className={c('the-input-upload-input')}
+          id={`${id}-file`}
+          multiple={multiple}
+          name={name}
+          onChange={this.handleChange}
+          readOnly={readOnly}
+          style={readOnly && !hasImage ? {} : { height, width }}
+          tabIndex={-1}
+          type='file'
         />
         <TheCondition unless={readOnly}>
           <label className='the-input-upload-label' htmlFor={`${id}-file`}>
-          <span className='the-input-upload-aligner'>
-          </span>
+            <span className='the-input-upload-aligner' />
             <span className='the-input-upload-label-inner'>
-            <i className={c('the-input-upload-icon', guideIcon || TheInputUpload.GUIDE_ICON)}/>
-            <span className='the-input-upload-text'>{text}</span>
+              <i
+                className={c(
+                  'the-input-upload-icon',
+                  guideIcon || TheInputUpload.GUIDE_ICON,
+                )}
+              />
+              <span className='the-input-upload-text'>{text}</span>
               {children}
-          </span>
+            </span>
           </label>
         </TheCondition>
         <TheCondition if={spinning}>
-          <TheSpin className='the-input-upload-spin'
-                   cover
-                   enabled
-          />
+          <TheSpin className='the-input-upload-spin' cover enabled />
         </TheCondition>
         <TheCondition if={hasImage}>
           <div>
             <TheCondition unless={readOnly}>
-              <a className='the-input-upload-close'
-                 onClick={this.handleRemove}
-              >
-                <TheIcon className={c('the-input-upload-close-icon', closeIcon || TheInputUpload.CLOSE_ICON)}
-
+              <a className='the-input-upload-close' onClick={this.handleRemove}>
+                <TheIcon
+                  className={c(
+                    'the-input-upload-close-icon',
+                    closeIcon || TheInputUpload.CLOSE_ICON,
+                  )}
                 />
               </a>
             </TheCondition>
-            {
-              (urls || [])
-                .filter(Boolean)
-                .filter(previewUrlFilter)
-                .map((url, i) => (
-                  <div className={c('the-input-upload-preview')}
-                       key={url}
-                       style={{
-                         height,
-                         left: `${i * 10}%`,
-                         top: `${i * 10}%`,
-                         width,
-                       }}>
-                    {
-                      isVideoUrl(url) ? (
-                        <video src={url}
-                               {...{ height, width }}
-                               className={c('the-input-upload-preview-video')}
-                               preload='metadata'
-                        />
-                      ) : (
-                        <img src={url}
-                             {...{ height, width }}
-                             className={c('the-input-upload-preview-img')}
-                        />
-                      )
-                    }
-
-                  </div>
-                ))
-            }
+            {(urls || [])
+              .filter(Boolean)
+              .filter(previewUrlFilter)
+              .map((url, i) => (
+                <div
+                  className={c('the-input-upload-preview')}
+                  key={url}
+                  style={{
+                    height,
+                    left: `${i * 10}%`,
+                    top: `${i * 10}%`,
+                    width,
+                  }}
+                >
+                  {isVideoUrl(url) ? (
+                    <video
+                      src={url}
+                      {...{ height, width }}
+                      className={c('the-input-upload-preview-video')}
+                      preload='metadata'
+                    />
+                  ) : (
+                    <img
+                      src={url}
+                      {...{ height, width }}
+                      className={c('the-input-upload-preview-img')}
+                    />
+                  )}
+                </div>
+              ))}
           </div>
         </TheCondition>
-
-
       </div>
     )
   }
@@ -226,10 +222,7 @@ TheInputUpload.propTypes = {
   /** Convert input file */
   convertFile: PropTypes.func,
   /** Error message */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Image height */
   height: PropTypes.number,
   /** Allow multiple upload */
@@ -246,10 +239,7 @@ TheInputUpload.propTypes = {
   /** Guide text */
   text: PropTypes.string,
   /** Value of input */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /** Image width */
   width: PropTypes.number,
 }

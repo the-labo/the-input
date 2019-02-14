@@ -2,12 +2,12 @@
 
 import { asStyleData } from 'the-component-util'
 
-function SearchStyleData ({
-                            ToggleIconStyle,
-                            animationDuration,
-                            contentWidth,
-                            dominantColor,
-                          }) {
+function SearchStyleData({
+  ToggleIconStyle,
+  animationDuration,
+  contentWidth,
+  dominantColor,
+}) {
   return asStyleData({
     '.the-input-search': {
       maxWidth: '2em',

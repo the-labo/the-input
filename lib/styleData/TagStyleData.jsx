@@ -2,12 +2,12 @@
 
 import { asStyleData, colorAlpha } from 'the-component-util'
 
-function TagStyleData ({
-                         backgroundColor,
-                         dominantColor,
-                         inputBorderColor,
-                         inputShadowColor,
-                       }) {
+function TagStyleData({
+  backgroundColor,
+  dominantColor,
+  inputBorderColor,
+  inputShadowColor,
+}) {
   return asStyleData({
     '.the-input-tag': {
       alignItems: 'center',

@@ -2,9 +2,7 @@
 
 import { asStyleData } from 'the-component-util'
 
-function NumberStyleData ({
-                            dominantColor,
-                          }) {
+function NumberStyleData({ dominantColor }) {
   return asStyleData({
     '.the-input-number': {
       textAlign: 'right',

@@ -2,13 +2,13 @@
 
 import { asStyleData } from 'the-component-util'
 
-function SliderStyleData ({
-                            dominantColor,
-                            handlePaddingRate,
-                            sliderBarHeight,
-                            sliderHandleSize,
-                            sliderPadding,
-                          }) {
+function SliderStyleData({
+  dominantColor,
+  handlePaddingRate,
+  sliderBarHeight,
+  sliderHandleSize,
+  sliderPadding,
+}) {
   return asStyleData({
     '.the-input-slider': {
       height: `${sliderHandleSize + 2}px`,

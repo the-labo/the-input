@@ -15,49 +15,40 @@ import { normalizeOptions, renderErrorMessage } from './helpers'
  * Slider Input
  */
 class TheInputSlider extends React.PureComponent {
-  static Handle (props) {
-    const {
-      elmRef,
-      maxX,
-      minX,
-      onMove,
-      shouldMove = true,
-      step,
-      x,
-    } = props
+  static Handle(props) {
+    const { elmRef, maxX, minX, onMove, shouldMove = true, step, x } = props
     return (
-      <Draggable axis='x'
-                 bounds={{ left: minX, right: maxX }}
-                 grid={step && [step, step]}
-                 onDrag={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 onStart={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 onStop={(e, { x, y }) => shouldMove && onMove({ x, y })}
-                 position={{ x, y: 0 }}
+      <Draggable
+        axis='x'
+        bounds={{ left: minX, right: maxX }}
+        grid={step && [step, step]}
+        onDrag={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        onStart={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        onStop={(e, { x, y }) => shouldMove && onMove({ x, y })}
+        position={{ x, y: 0 }}
       >
-        <div className='the-input-slider-handle'
-             data-max-x={maxX}
-             data-min-x={minX}
-             ref={elmRef}
+        <div
+          className='the-input-slider-handle'
+          data-max-x={maxX}
+          data-min-x={minX}
+          ref={elmRef}
         >
-          <div className='the-input-slider-handle-area'>
-          </div>
-          <div className='the-input-slider-handle-icon'>
-          </div>
+          <div className='the-input-slider-handle-area' />
+          <div className='the-input-slider-handle-icon' />
         </div>
       </Draggable>
     )
   }
 
-  static Label ({ children, className, ref }) {
+  static Label({ children, className, ref }) {
     return (
-      <label className={c('the-input-slider-label', className)}
-             ref={ref}>
+      <label className={c('the-input-slider-label', className)} ref={ref}>
         <span>{children}</span>
       </label>
     )
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       maxX: 0,
@@ -74,18 +65,18 @@ class TheInputSlider extends React.PureComponent {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { window } = get('window')
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const { window } = get('window')
     window.removeEventListener('resize', this.handleResize)
   }
 
-  getHandleRadius () {
+  getHandleRadius() {
     const { handleElm } = this
     if (!handleElm) {
       return 0
@@ -93,7 +84,7 @@ class TheInputSlider extends React.PureComponent {
     return handleElm.offsetWidth / 2
   }
 
-  handleBarClick (e) {
+  handleBarClick(e) {
     const { barElm } = this
     if (!barElm) {
       return
@@ -107,13 +98,13 @@ class TheInputSlider extends React.PureComponent {
     this.setSliderValue(value)
   }
 
-  handleHandleMove ({ x }) {
+  handleHandleMove({ x }) {
     const rate = this._rateWithX(x)
     const value = this._valueWithRate(rate)
     this.setSliderValue(value)
   }
 
-  handleResize () {
+  handleResize() {
     const { barElm, props } = this
     if (!barElm) {
       return
@@ -130,61 +121,54 @@ class TheInputSlider extends React.PureComponent {
     })
   }
 
-  render () {
+  render() {
     const { props, state } = this
-    const {
-      barOnly,
-      className,
-      error,
-      max,
-      min,
-      name,
-      value,
-    } = props
-    const {
-      maxX,
-      minX,
-      x,
-    } = state
+    const { barOnly, className, error, max, min, name, value } = props
+    const { maxX, minX, x } = state
     return (
-      <div {...htmlAttributesFor(props, { except: ['id', 'className', 'type', 'value', 'name', 'placeholder'] })}
-           {...eventHandlersFor(props, { except: [] })}
-           className={c('the-input-slider', className, {
-             'the-input-error': !!error,
-           })}
-           data-value={value}
-           ref={(elm) => {
-             this.elm = elm
-             this.handleResize()
-           }}
+      <div
+        {...htmlAttributesFor(props, {
+          except: ['id', 'className', 'type', 'value', 'name', 'placeholder'],
+        })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-input-slider', className, {
+          'the-input-error': !!error,
+        })}
+        data-value={value}
+        ref={(elm) => {
+          this.elm = elm
+          this.handleResize()
+        }}
       >
         {renderErrorMessage(error)}
-        <input name={name} onChange={(v) => {}} type='hidden' value={value}/>
+        <input name={name} onChange={(v) => {}} type='hidden' value={value} />
         <div className='the-input-slider-inner'>
           <TheCondition unless={barOnly}>
             <TheInputSlider.Label>{min}</TheInputSlider.Label>
           </TheCondition>
           <div className='the-input-slider-bar-wrap'>
-            <div className='the-input-slider-bar'
-                 onClick={(e) => this.handleBarClick(e)}
-                 ref={(barElm) => {
-                   this.barElm = barElm
-                   this.handleResize()
-                 }}
+            <div
+              className='the-input-slider-bar'
+              onClick={(e) => this.handleBarClick(e)}
+              ref={(barElm) => {
+                this.barElm = barElm
+                this.handleResize()
+              }}
             >
-              <div className='the-input-slider-bar-tap'>
-              </div>
-              <div className='the-input-slider-bar-bg'>
-              </div>
-              <div className='the-input-slider-bar-highlight' style={{ left: 0, width: x }}>
-              </div>
+              <div className='the-input-slider-bar-tap' />
+              <div className='the-input-slider-bar-bg' />
+              <div
+                className='the-input-slider-bar-highlight'
+                style={{ left: 0, width: x }}
+              />
             </div>
-            <TheInputSlider.Handle {...{ maxX, minX, x }}
-                                   elmRef={(handleElm) => {
-                                     this.handleElm = handleElm
-                                     this.handleResize()
-                                   }}
-                                   onMove={(e) => this.handleHandleMove(e)}
+            <TheInputSlider.Handle
+              {...{ maxX, minX, x }}
+              elmRef={(handleElm) => {
+                this.handleElm = handleElm
+                this.handleResize()
+              }}
+              onMove={(e) => this.handleHandleMove(e)}
             />
           </div>
           <TheCondition unless={barOnly}>
@@ -195,7 +179,7 @@ class TheInputSlider extends React.PureComponent {
     )
   }
 
-  setSliderValue (value) {
+  setSliderValue(value) {
     const { props, state } = this
     const { name, onUpdate, step } = props
     const duplicate = props.value === value
@@ -221,7 +205,7 @@ class TheInputSlider extends React.PureComponent {
     }
   }
 
-  _rateWithValue (value) {
+  _rateWithValue(value) {
     const { props } = this
     const { max, min } = props
 
@@ -229,7 +213,7 @@ class TheInputSlider extends React.PureComponent {
     return chopcal.round(rangecal.rate(min, max, value), 0.01)
   }
 
-  _rateWithX (x) {
+  _rateWithX(x) {
     const { state } = this
     const { maxX, minX } = state
     if (minX === maxX) {
@@ -238,7 +222,7 @@ class TheInputSlider extends React.PureComponent {
     return rangecal.rate(minX, maxX, x + 2)
   }
 
-  _valueWithRate (rate) {
+  _valueWithRate(rate) {
     const { props } = this
     const { max, min } = props
 
@@ -252,10 +236,7 @@ TheInputSlider.propTypes = {
   /** Hides min/max value text */
   barOnly: PropTypes.bool,
   /** Input error */
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Max value */
   max: PropTypes.number,
   /** Min value */

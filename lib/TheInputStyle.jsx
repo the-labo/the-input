@@ -22,23 +22,22 @@ import ToggleStyleData from './styleData/ToggleStyleData'
 import UploadStyleData from './styleData/UploadStyleData'
 
 /** Style for TheInput */
-const TheInputStyle = ({ className, id, options }) => (
-  [
-    <TheStyle {...{ id }}
-              className={c('the-input-style', className)}
-              key='base'
-              styles={TheInputStyle.data(options)}
-    />,
-    ...TheInputStyle.externals.map((src) => (
-      <link className={c('the-input-style-external')}
-            href={src}
-            key={src}
-            rel='stylesheet'
-      />
-    ))
-  ]
-
-)
+const TheInputStyle = ({ className, id, options }) => [
+  <TheStyle
+    {...{ id }}
+    className={c('the-input-style', className)}
+    key='base'
+    styles={TheInputStyle.data(options)}
+  />,
+  ...TheInputStyle.externals.map((src) => (
+    <link
+      className={c('the-input-style-external')}
+      href={src}
+      key={src}
+      rel='stylesheet'
+    />
+  )),
+]
 
 TheInputStyle.displayName = 'TheInputStyle'
 TheInputStyle.propTypes = {
@@ -51,7 +50,7 @@ TheInputStyle.defaultProps = {
 }
 
 TheInputStyle.externals = [
-  'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'
+  'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css',
 ]
 TheInputStyle.data = (options) => {
   const { ThemeValues } = TheStyle
@@ -78,25 +77,30 @@ TheInputStyle.data = (options) => {
     warnColor = ThemeValues.warnColor,
   } = options
 
-  const ToggleIconStyle = (values) => Object.assign({
-    '&:active': { opacity: activeOpacity },
-    '&:hover': { opacity: hoverOpacity },
-    alignItems: 'center',
-    bottom: 0,
-    cursor: 'pointer',
-    display: 'inline-flex',
-    height: '30px',
-    justifyContent: 'center',
-    minWidth: '1em',
-    outlineColor: colorAlpha(dominantColor, 0.2),
-    padding: '0 4px',
-    position: 'absolute',
-    right: 0,
-    zIndex: 4,
-  }, values)
+  const ToggleIconStyle = (values) =>
+    Object.assign(
+      {
+        '&:active': { opacity: activeOpacity },
+        '&:hover': { opacity: hoverOpacity },
+        alignItems: 'center',
+        bottom: 0,
+        cursor: 'pointer',
+        display: 'inline-flex',
+        height: '30px',
+        justifyContent: 'center',
+        minWidth: '1em',
+        outlineColor: colorAlpha(dominantColor, 0.2),
+        padding: '0 4px',
+        position: 'absolute',
+        right: 0,
+        zIndex: 4,
+      },
+      values,
+    )
 
   // TODO ./styleData下にファイルを分割する
-  return Object.assign({},
+  return Object.assign(
+    {},
     asStyleData({
       '.the-input': {},
     }),

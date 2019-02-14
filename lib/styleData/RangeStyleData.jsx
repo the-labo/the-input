@@ -2,13 +2,13 @@
 
 import { asStyleData } from 'the-component-util'
 
-function RangeStyleData ({
-                           dominantColor,
-                           handlePaddingRate,
-                           sliderBarHeight,
-                           sliderHandleSize,
-                           sliderPadding,
-                         }) {
+function RangeStyleData({
+  dominantColor,
+  handlePaddingRate,
+  sliderBarHeight,
+  sliderHandleSize,
+  sliderPadding,
+}) {
   return asStyleData({
     '.the-input-range': {
       height: `${sliderHandleSize + 2}px`,

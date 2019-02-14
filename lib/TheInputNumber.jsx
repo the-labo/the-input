@@ -6,17 +6,17 @@ import React from 'react'
 import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
-const zeroIfNaN = (v) => isNaN(Number(v)) ? 0 : v
+const zeroIfNaN = (v) => (isNaN(Number(v)) ? 0 : v)
 const sureNumber = (v) => zeroIfNaN(Number(v))
 
 class TheInputNumber extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.incrementValue = this.incrementValue.bind(this)
     this.decrementValue = this.decrementValue.bind(this)
   }
 
-  get value () {
+  get value() {
     let value = Number(this.props.value)
     if (isNaN(value)) {
       return this.props.value
@@ -32,47 +32,53 @@ class TheInputNumber extends React.PureComponent {
     return zeroIfNaN(value)
   }
 
-  changeValue (amount) {
+  changeValue(amount) {
     const { name, onUpdate, step, value } = this.props
-    onUpdate && onUpdate({
-      [name]: sureNumber(value) + (sureNumber(amount) * sureNumber(step)),
-    })
+    onUpdate &&
+      onUpdate({
+        [name]: sureNumber(value) + sureNumber(amount) * sureNumber(step),
+      })
   }
 
-  decrementValue () {
+  decrementValue() {
     this.changeValue(-1)
   }
 
-  incrementValue () {
+  incrementValue() {
     this.changeValue(1)
   }
 
-  render () {
+  render() {
     const { props, value } = this
     const hasValue = Boolean(props.value) || props.value === 0
     return (
-      <TheInputText {...props}
-                    className={c('the-input-number', props.className)}
-                    options={[]}
-                    prefix={
-                      <a className={c('the-input-number-changer', {
-                        'the-input-number-changer-disabled': value <= props.min,
-                      })}
-                         href='javascript:void(0)'
-                         onClick={this.decrementValue}>
-                        <TheIcon className={TheInputNumber.DECREMENT_ICON}/>
-                      </a>
-                    }
-                    suffix={
-                      <a className={c('the-input-number-changer', {
-                        'the-input-number-changer-disabled': value >= props.max,
-                      })}
-                         href='javascript:void(0)'
-                         onClick={this.incrementValue}>
-                        <TheIcon className={TheInputNumber.INCREMENT_ICON}/>
-                      </a>
-                    }
-                    value={hasValue ? String(value) : null}
+      <TheInputText
+        {...props}
+        className={c('the-input-number', props.className)}
+        options={[]}
+        prefix={
+          <a
+            className={c('the-input-number-changer', {
+              'the-input-number-changer-disabled': value <= props.min,
+            })}
+            href='javascript:void(0)'
+            onClick={this.decrementValue}
+          >
+            <TheIcon className={TheInputNumber.DECREMENT_ICON} />
+          </a>
+        }
+        suffix={
+          <a
+            className={c('the-input-number-changer', {
+              'the-input-number-changer-disabled': value >= props.max,
+            })}
+            href='javascript:void(0)'
+            onClick={this.incrementValue}
+          >
+            <TheIcon className={TheInputNumber.INCREMENT_ICON} />
+          </a>
+        }
+        value={hasValue ? String(value) : null}
       />
     )
   }
@@ -81,8 +87,11 @@ class TheInputNumber extends React.PureComponent {
 TheInputNumber.INCREMENT_ICON = 'fas fa-caret-right'
 TheInputNumber.DECREMENT_ICON = 'fas fa-caret-left'
 
-TheInputNumber.propTypes = clone(TheInputText.propTypes, { without: ['type', 'options'] })
-TheInputNumber.defaultProps = Object.assign({},
+TheInputNumber.propTypes = clone(TheInputText.propTypes, {
+  without: ['type', 'options'],
+})
+TheInputNumber.defaultProps = Object.assign(
+  {},
   clone(TheInputText.defaultProps, { without: ['type', 'options'] }),
   {
     autoCapitalize: false,
@@ -95,7 +104,7 @@ TheInputNumber.defaultProps = Object.assign({},
     step: 1,
     type: 'text',
     value: 0,
-  }
+  },
 )
 TheInputNumber.displayName = 'TheInputNumber'
 

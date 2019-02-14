@@ -6,50 +6,60 @@ import flatpickr from 'flatpickr'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { uniqueFilter } from 'the-array'
-import { changedProps, eventHandlersFor, htmlAttributesFor } from 'the-component-util'
+import {
+  changedProps,
+  eventHandlersFor,
+  htmlAttributesFor,
+} from 'the-component-util'
 import { TheIcon } from 'the-icon'
 import { onOffBoolean, renderErrorMessage } from './helpers'
 
 class TheInputDate extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.elmRef = React.createRef()
     this.handleBlur = this.handleBlur.bind(this)
     this.picker = null
   }
 
-  componentDidMount () {
-    this.picker = flatpickr(this.elmRef.current, cleanup({
-      dateFormat: this.props.dateFormat,
-      defaultDate: this.props.value,
-      enableTime: this.props.timeEnabled,
-      maxDate: this.props.maxDate,
-      minDate: this.props.minDate,
-      noCalendar: this.props.noCalendar,
-      onChange: (selectedDates, dateStr) => {
-        const { name, onUpdate } = this.props
-        onUpdate && onUpdate({ [name]: dateStr })
-      },
-    }, { delNull: true }))
+  componentDidMount() {
+    this.picker = flatpickr(
+      this.elmRef.current,
+      cleanup(
+        {
+          dateFormat: this.props.dateFormat,
+          defaultDate: this.props.value,
+          enableTime: this.props.timeEnabled,
+          maxDate: this.props.maxDate,
+          minDate: this.props.minDate,
+          noCalendar: this.props.noCalendar,
+          onChange: (selectedDates, dateStr) => {
+            const { name, onUpdate } = this.props
+            onUpdate && onUpdate({ [name]: dateStr })
+          },
+        },
+        { delNull: true },
+      ),
+    )
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const changed = changedProps(prevProps, this.props)
     this.updatePicker(changed)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.picker.destroy()
     this.picker = null
   }
 
-  handleBlur (e) {
+  handleBlur(e) {
     const { name, onBlur, onUpdate, value } = this.props
     onBlur && onBlur(e)
     onUpdate && onUpdate({ [name]: e.target.value })
   }
 
-  render () {
+  render() {
     const { props } = this
     const {
       autoComplete,
@@ -70,60 +80,67 @@ class TheInputDate extends React.PureComponent {
     const autoCapitalize = onOffBoolean(props.autoCapitalize)
     const autoCorrect = onOffBoolean(props.autoCorrect)
     return (
-      <div {...htmlAttributesFor(props, {
-        except: [
-          'id',
-          'className',
-          'type',
-          'value',
-          'tabIndex',
-          'name',
-          'required',
-          'placeholder',
-          'autoFocus',
-          'autoComplete',
-          'autoCapitalize',
-          'autoCorrect',
-          'spellCheck',
-          'name',
-        ],
-      })}
-           {...eventHandlersFor(props, {
-             except: [
-               'onChange', 'onFocus', 'onBlur', 'onKeyUp', 'onKeyDown', 'onKeyPress'
-             ],
-           })}
-           className={c('the-input-date', className, {
-             'the-input-error': !!error,
-           })}
-           data-value={value}
+      <div
+        {...htmlAttributesFor(props, {
+          except: [
+            'id',
+            'className',
+            'type',
+            'value',
+            'tabIndex',
+            'name',
+            'required',
+            'placeholder',
+            'autoFocus',
+            'autoComplete',
+            'autoCapitalize',
+            'autoCorrect',
+            'spellCheck',
+            'name',
+          ],
+        })}
+        {...eventHandlersFor(props, {
+          except: [
+            'onChange',
+            'onFocus',
+            'onBlur',
+            'onKeyUp',
+            'onKeyDown',
+            'onKeyPress',
+          ],
+        })}
+        className={c('the-input-date', className, {
+          'the-input-error': !!error,
+        })}
+        data-value={value}
       >
         {renderErrorMessage(error)}
-        <input className='the-input-date-input'
-               name={name}
-               onBlur={this.handleBlur}
-               ref={this.elmRef}
-               {...{
-                 autoCapitalize,
-                 autoComplete,
-                 autoCorrect,
-                 autoFocus,
-                 id,
-                 name,
-                 placeholder,
-                 readOnly,
-                 required,
-                 spellCheck,
-                 tabIndex,
-                 type,
-               }}
+        <input
+          className='the-input-date-input'
+          name={name}
+          onBlur={this.handleBlur}
+          ref={this.elmRef}
+          {...{
+            autoCapitalize,
+            autoComplete,
+            autoCorrect,
+            autoFocus,
+            id,
+            name,
+            placeholder,
+            readOnly,
+            required,
+            spellCheck,
+            tabIndex,
+            type,
+          }}
         />
         {children}
       </div>
     )
   }
 
-  updatePicker (config) {
+  updatePicker(config) {
     const skip = Object.keys(config).length === 0
     if (skip) {
       return

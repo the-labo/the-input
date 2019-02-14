@@ -2,12 +2,12 @@
 
 import { asStyleData } from 'the-component-util'
 
-function CheckBoxStyleData ({
-                                      activeOpacity,
-                                      contentWidth,
-                                      dominantColor,
-                                      hoverOpacity,
-                                    }) {
+function CheckBoxStyleData({
+  activeOpacity,
+  contentWidth,
+  dominantColor,
+  hoverOpacity,
+}) {
   return asStyleData({
     '.the-input-checkbox': {
       borderRadius: '2px',
@@ -31,7 +31,6 @@ function CheckBoxStyleData ({
       visibility: 'hidden',
       width: 1,
       zIndex: -1,
-
     },
     '.the-input-checkbox-icon': {
       color: dominantColor,
@@ -46,32 +45,23 @@ function CheckBoxStyleData ({
         pointerEvents: 'none',
       },
       alignItems: 'center',
-      boxSizing:
-        'border-box',
-      display:
-        'inline-flex',
-      justifyContent:
-        'flex-center',
-      margin:
-        '0 2px',
-      overflow:
-        'hidden',
-      textOverflow:
-        'ellipsis',
+      boxSizing: 'border-box',
+      display: 'inline-flex',
+      justifyContent: 'flex-center',
+      margin: '0 2px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     '.the-input-checkbox-label': {
-      '&:active': { opacity: activeOpacity }
-      ,
-      '&:hover': { opacity: hoverOpacity }
-      ,
-      '> *': { // https://github.com/ftlabs/fastclick/issues/60
+      '&:active': { opacity: activeOpacity },
+      '&:hover': { opacity: hoverOpacity },
+      '> *': {
+        // https://github.com/ftlabs/fastclick/issues/60
         pointerEvents: 'none',
       },
       cursor: 'pointer',
-      display:
-        'inline-block',
-      padding:
-        '2px 4px',
+      display: 'inline-block',
+      padding: '2px 4px',
     },
   })
 }

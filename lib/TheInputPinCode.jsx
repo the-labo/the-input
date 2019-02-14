@@ -10,7 +10,7 @@ import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
 class TheInputPinCode extends React.PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       focused: false,
@@ -24,16 +24,13 @@ class TheInputPinCode extends React.PureComponent {
     this.handleItemClick = this.handleItemClick.bind(this)
   }
 
-  componentDidMount () {
-  }
+  componentDidMount() {}
 
-  componentWillUnmount () {
-  }
+  componentWillUnmount() {}
 
-  handleBack () {
-  }
+  handleBack() {}
 
-  handleBlur (e) {
+  handleBlur(e) {
     const { onBlur } = this.props
 
     onBlur && onBlur(e)
@@ -42,12 +39,12 @@ class TheInputPinCode extends React.PureComponent {
     })
   }
 
-  handleEnter (e) {
+  handleEnter(e) {
     const { onEnter } = this.props
     onEnter && onEnter(e)
   }
 
-  handleFocus (e) {
+  handleFocus(e) {
     const { onFocus, value } = this.props
     onFocus && onFocus(e)
     this.setState({
@@ -56,7 +53,7 @@ class TheInputPinCode extends React.PureComponent {
     })
   }
 
-  handleItemClick (index) {
+  handleItemClick(index) {
     this.setState({
       index,
     })
@@ -66,7 +63,7 @@ class TheInputPinCode extends React.PureComponent {
     }
   }
 
-  handleKeyDown (e) {
+  handleKeyDown(e) {
     const { onKeyDown } = this.props
     switch (e.keyCode) {
       case 8:
@@ -81,55 +78,56 @@ class TheInputPinCode extends React.PureComponent {
     onKeyDown && onKeyDown(e)
   }
 
-  handleUpdate (values) {
+  handleUpdate(values) {
     const { digit, name, only, onUpdate, value } = this.props
-    const newValue =
-      String(values[name])
-        .split('')
-        .filter((v) => only ? only.test(v) : !!v)
-        .join('')
-        .trim().slice(0, digit)
+    const newValue = String(values[name])
+      .split('')
+      .filter((v) => (only ? only.test(v) : !!v))
+      .join('')
+      .trim()
+      .slice(0, digit)
     if (value === newValue) {
       return
     }
-    onUpdate && onUpdate({
-      [name]: newValue,
-    })
+    onUpdate &&
+      onUpdate({
+        [name]: newValue,
+      })
     this.setState({
       index: newValue.length,
     })
   }
 
-  render () {
+  render() {
     const { props } = this
     const inputProps = clone(props, { without: ['digit'] })
     const { focused, index } = this.state
     const { digit, id = this.id, name, value } = props
     return (
-      <TheInputText {...inputProps}
-                    className={c('the-input-pin-code', {
-                      'the-input-pin-code-focused': focused,
-                    })}
-                    id={`${id}-text`}
-                    inputRef={this.handleInputRef}
-                    onBlur={this.handleBlur}
-                    onFocus={this.handleFocus}
-                    onKeyDown={this.handleKeyDown}
-                    onUpdate={this.handleUpdate}
-                    value={props.value}
+      <TheInputText
+        {...inputProps}
+        className={c('the-input-pin-code', {
+          'the-input-pin-code-focused': focused,
+        })}
+        id={`${id}-text`}
+        inputRef={this.handleInputRef}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+        onKeyDown={this.handleKeyDown}
+        onUpdate={this.handleUpdate}
+        value={props.value}
       >
         <div className='the-input-pin-code-display'>
-          {
-            new Array(digit).fill(null).map((_, i) => (
-              <TheInputPinCodeItem htmlFor={`${id}-text`}
-                                   index={i}
-                                   key={i}
-                                   onClick={this.handleItemClick}
-                                   selected={focused && index === i}
-                                   value={(props.value || '')[i]}
-              />
-            ))
-          }
+          {new Array(digit).fill(null).map((_, i) => (
+            <TheInputPinCodeItem
+              htmlFor={`${id}-text`}
+              index={i}
+              key={i}
+              onClick={this.handleItemClick}
+              selected={focused && index === i}
+              value={(props.value || '')[i]}
+            />
+          ))}
         </div>
       </TheInputText>
     )
@@ -137,24 +135,25 @@ class TheInputPinCode extends React.PureComponent {
 }
 
 class TheInputPinCodeItem extends React.PureComponent {
-  constructor () {
+  constructor() {
     super(...arguments)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick () {
+  handleClick() {
     const { index, onClick } = this.props
     onClick && onClick(index)
   }
 
-  render () {
+  render() {
     const { htmlFor, selected, value } = this.props
     return (
-      <label className={c('the-input-pin-code-item', {
-        'the-input-pin-code-item-selected': selected,
-      })}
-             htmlFor={htmlFor}
-             onClick={this.handleClick}
+      <label
+        className={c('the-input-pin-code-item', {
+          'the-input-pin-code-item-selected': selected,
+        })}
+        htmlFor={htmlFor}
+        onClick={this.handleClick}
       >
         {value || ''}
       </label>
@@ -167,7 +166,7 @@ TheInputPinCode.propTypes = Object.assign(
   {
     digit: PropTypes.number.isRequired,
     only: PropTypes.any,
-  }
+  },
 )
 TheInputPinCode.defaultProps = Object.assign(
   clone(TheInputText.defaultProps, { without: [] }),

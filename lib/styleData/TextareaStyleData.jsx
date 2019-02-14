@@ -2,12 +2,12 @@
 
 import { asStyleData } from 'the-component-util'
 
-function TextareaStyleData ({
-                              contentWidth,
-                              dominantColor,
-                              inputBorderColor,
-                              inputShadowColor,
-                            }) {
+function TextareaStyleData({
+  contentWidth,
+  dominantColor,
+  inputBorderColor,
+  inputShadowColor,
+}) {
   return asStyleData({
     '.the-input-textarea': {
       alignItems: 'stretch',

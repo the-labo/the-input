@@ -2,14 +2,14 @@
 
 import { asStyleData } from 'the-component-util'
 
-function ToggleStyleData ({
-                            animationDuration,
-                            backgroundColor,
-                            dominantColor,
-                            inputBorderColor,
-                            offLabelBackgroundColor,
-                            toggleHandleSize,
-                          }) {
+function ToggleStyleData({
+  animationDuration,
+  backgroundColor,
+  dominantColor,
+  inputBorderColor,
+  offLabelBackgroundColor,
+  toggleHandleSize,
+}) {
   return asStyleData({
     '.the-input-toggle': {
       alignItems: 'center',
@@ -33,7 +33,7 @@ function ToggleStyleData ({
       alignItems: 'center',
       backgroundColor: backgroundColor,
       border: `1px solid ${inputBorderColor}`,
-      borderRadius: (toggleHandleSize / 2 + 1),
+      borderRadius: toggleHandleSize / 2 + 1,
       display: 'inline-flex',
       height: toggleHandleSize,
       justifyContent: 'flex-start',
@@ -70,7 +70,8 @@ function ToggleStyleData ({
     '.the-input-toggle-off-label': {
       background: offLabelBackgroundColor,
       borderRadius: `0 ${toggleHandleSize / 2}px ${toggleHandleSize / 2}px 0`,
-      boxShadow: `-2px 0 0 ${toggleHandleSize / 4}px ${offLabelBackgroundColor}`,
+      boxShadow: `-2px 0 0 ${toggleHandleSize /
+        4}px ${offLabelBackgroundColor}`,
       color: '#AAA',
     },
     '.the-input-toggle-on-label': {
@@ -88,7 +89,6 @@ function ToggleStyleData ({
     '.the-input-toggle.the-input-toggle-on .the-input-toggle-off-label': {
       width: `0 !important`,
     },
-
   })
 }
 
