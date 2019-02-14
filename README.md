@@ -708,7 +708,10 @@ Text Input
 | --- | --- | ---- | ---- |
 | `error` | union  | Input error | `null` |
 | `matcher` | func  | Options parser | `(candidate, value) => {
-  return candidate.indexOf(value) !== -1 || candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+  return (
+    candidate.indexOf(value) !== -1 ||
+    candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+  )
 }` |
 | `name` | string  | Name of input | `` |
 | `onDown` | func  | Handle for down | `` |
