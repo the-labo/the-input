@@ -1791,7 +1791,7 @@
         "required": false,
         "description": "Options parser",
         "defaultValue": {
-          "value": "(candidate, value) => {\n  return candidate.match(value) || candidate.toLowerCase().match(value.toLowerCase())\n}",
+          "value": "(candidate, value) => {\n  return candidate.indexOf(value) !== -1 || candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1\n}",
           "computed": false
         }
       },
