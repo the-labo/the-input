@@ -189,6 +189,15 @@ class ExampleComponent extends React.PureComponent {
           />
         </div>
 
+        <div>
+          <Checkbox name='value03'
+                    asButton
+                    value={values['value03']}
+                    onUpdate={onUpdate}
+                    options={['Green', 'Pink', 'Brown']}
+          />
+        </div>
+
         <hr/>
         <h3>Select</h3>
 

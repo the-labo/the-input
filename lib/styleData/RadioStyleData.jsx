@@ -23,6 +23,7 @@ function RadioStyleData({
     '.the-input-radio-icon': {
       color: dominantColor,
     },
+    '.the-input-radio-inner': {},
     '.the-input-radio-item': {
       '&.the-input-radio-item-disabled': {
         '.the-input-radio-icon': {
@@ -63,7 +64,7 @@ function RadioStyleData({
       width: 1,
       zIndex: -1,
     },
-    '.the-input-radio.the-input-as-button': {
+    '.the-input-radio.the-input-radio-as-button': {
       '.the-input-radio-icon': {
         display: 'none',
       },
@@ -77,10 +78,12 @@ function RadioStyleData({
         textAlign: 'center',
       },
       '.the-input-radio-item-checked': {
-        border: `2px solid ${dominantColor}`,
+        backgroundColor: dominantColor,
+        borderColor: `${dominantColor}`,
+        color: backgroundColor,
       },
     },
-    '.the-input-radio.the-input-as-toggle': {
+    '.the-input-radio.the-input-radio-as-toggle': {
       '.the-input-radio-icon': {
         display: 'none',
       },

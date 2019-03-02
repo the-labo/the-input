@@ -87,6 +87,7 @@ class TheInputCheckbox extends React.PureComponent {
   render() {
     const { props } = this
     let {
+      asButton,
       className,
       disabledValues,
       error,
@@ -111,34 +112,38 @@ class TheInputCheckbox extends React.PureComponent {
         })}
         {...eventHandlersFor(props, { except: [] })}
         className={c('the-input-checkbox', className, {
+          'the-input-checkbox-as-button': asButton,
           'the-input-error': !!error,
         })}
         data-value={value}
         id={id}
       >
         {renderErrorMessage(error)}
-
-        {readOnly ? (
-          <span className='the-input-checkbox-readonly'>{options[value]}</span>
-        ) : (
-          Object.keys(options).map((optionValue) => (
-            <TheInputCheckbox.Option
-              checked={optionValue
-                .split(splitter)
-                .some((optionValue) =>
-                  value.includes(String(optionValue).trim()),
-                )}
-              disabled={disabledValues.includes(optionValue)}
-              id={this.idFor(optionValue)}
-              key={optionValue}
-              label={options[optionValue]}
-              name={name}
-              onChange={(e) => this.handleChange(e)}
-              tabIndex={tabIndex}
-              value={optionValue}
-            />
-          ))
-        )}
+        <div className={c('the-input-checkbox-inner')}>
+          {readOnly ? (
+            <span className='the-input-checkbox-readonly'>
+              {options[value]}
+            </span>
+          ) : (
+            Object.keys(options).map((optionValue) => (
+              <TheInputCheckbox.Option
+                checked={optionValue
+                  .split(splitter)
+                  .some((optionValue) =>
+                    value.includes(String(optionValue).trim()),
+                  )}
+                disabled={disabledValues.includes(optionValue)}
+                id={this.idFor(optionValue)}
+                key={optionValue}
+                label={options[optionValue]}
+                name={name}
+                onChange={(e) => this.handleChange(e)}
+                tabIndex={tabIndex}
+                value={optionValue}
+              />
+            ))
+          )}
+        </div>
       </div>
     )
   }

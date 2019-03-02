@@ -155,6 +155,7 @@ TheInputStyle.data = (options) => {
     }),
     CheckBoxStyleData({
       activeOpacity,
+      backgroundColor,
       contentWidth,
       dominantColor,
       hoverOpacity,

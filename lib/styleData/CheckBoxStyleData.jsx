@@ -4,6 +4,7 @@ import { asStyleData } from 'the-component-util'
 
 function CheckBoxStyleData({
   activeOpacity,
+  backgroundColor,
   contentWidth,
   dominantColor,
   hoverOpacity,
@@ -36,6 +37,7 @@ function CheckBoxStyleData({
       color: dominantColor,
       minWidth: '1em',
     },
+    '.the-input-checkbox-inner': {},
     '.the-input-checkbox-item': {
       '&.the-input-checkbox-item-disabled': {
         '.the-input-checkbox-icon': {
@@ -62,6 +64,25 @@ function CheckBoxStyleData({
       cursor: 'pointer',
       display: 'inline-block',
       padding: '2px 4px',
+    },
+    '.the-input-checkbox.the-input-checkbox-as-button': {
+      '.the-input-checkbox-icon': {
+        display: 'none',
+      },
+      '.the-input-checkbox-item': {
+        background: backgroundColor,
+        border: `1px solid #CCC`,
+        borderRadius: '4px',
+        fontSize: 'smaller',
+        margin: '4px',
+        padding: '4px 8px',
+        textAlign: 'center',
+      },
+      '.the-input-checkbox-item-checked': {
+        backgroundColor: dominantColor,
+        borderColor: `${dominantColor}`,
+        color: backgroundColor,
+      },
     },
   })
 }

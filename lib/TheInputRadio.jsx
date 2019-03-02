@@ -101,9 +101,9 @@ class TheInputRadio extends React.PureComponent {
         })}
         {...eventHandlersFor(props, { except: [] })}
         className={c('the-input-radio', className, {
-          'the-input-as-button': asButton,
-          'the-input-as-toggle': asToggle,
           'the-input-error': !!error,
+          'the-input-radio-as-button': asButton,
+          'the-input-radio-as-toggle': asToggle,
         })}
         data-value={value}
         id={id}
