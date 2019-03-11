@@ -48,7 +48,7 @@ function TextStyleData({
         backgroundColor: colorAlpha(dominantColor, 0.2),
       },
       alignItems: 'center',
-      backgroundColor: backgroundColor,
+      backgroundColor,
       borderBottom: `1px solid ${lightBorderColor}`,
       boxSizing: 'border-box',
       cursor: 'pointer',

@@ -5,10 +5,8 @@
 
 import path from 'path'
 import React from 'react'
-import { get } from 'the-window'
 import url from 'url'
-
-const videoExtensions = require('video-extensions')
+import videoExtensions from 'video-extensions'
 
 const { parse: parseUrl } = url
 

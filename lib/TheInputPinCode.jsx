@@ -4,9 +4,7 @@ import { clone } from 'asobj'
 import c from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { uniqueFilter } from 'the-array'
 import { newId } from 'the-component-util'
-import { TheIcon } from 'the-icon'
 import TheInputText from './TheInputText'
 
 class TheInputPinCode extends React.PureComponent {
@@ -66,11 +64,11 @@ class TheInputPinCode extends React.PureComponent {
   handleKeyDown(e) {
     const { onKeyDown } = this.props
     switch (e.keyCode) {
-      case 8:
-        this.handleBack()
-        break
       case 13:
         this.handleEnter()
+        break
+      case 8:
+        this.handleBack()
         break
       default:
         break

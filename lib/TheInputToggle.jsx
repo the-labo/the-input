@@ -4,7 +4,6 @@ import c from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { eventHandlersFor, htmlAttributesFor, newId } from 'the-component-util'
-import TheInputRadio from './TheInputRadio'
 
 /**
  * Toggle input of the-components

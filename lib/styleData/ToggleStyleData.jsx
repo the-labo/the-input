@@ -31,7 +31,7 @@ function ToggleStyleData({
     },
     '.the-input-toggle-inner': {
       alignItems: 'center',
-      backgroundColor: backgroundColor,
+      backgroundColor,
       border: `1px solid ${inputBorderColor}`,
       borderRadius: toggleHandleSize / 2 + 1,
       display: 'inline-flex',

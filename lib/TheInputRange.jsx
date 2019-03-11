@@ -5,12 +5,11 @@ import c from 'classnames'
 import PropTypes from 'prop-types'
 import rangecal from 'rangecal'
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Draggable from 'react-draggable'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { get } from 'the-window'
-import { normalizeOptions, renderErrorMessage } from './helpers'
+import { renderErrorMessage } from './helpers'
 
 /**
  * Range Input
@@ -139,8 +138,8 @@ class TheInputRange extends React.PureComponent {
     const toRate = this._rateWithValue(to)
     this.setState({
       fromX: rangecal.value(minX, maxX, fromRate),
-      maxX: maxX,
-      minX: minX,
+      maxX,
+      minX,
       toX: rangecal.value(minX, maxX, toRate),
     })
   }
@@ -176,13 +175,13 @@ class TheInputRange extends React.PureComponent {
         {renderErrorMessage(error)}
         <input
           name={`${name}[from]`}
-          onChange={(v) => {}}
+          onChange={() => {}}
           type='hidden'
           value={from}
         />
         <input
           name={`${name}[to]`}
-          onChange={(v) => {}}
+          onChange={() => {}}
           type='hidden'
           value={to}
         />

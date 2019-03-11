@@ -11,7 +11,7 @@ function TagStyleData({
   return asStyleData({
     '.the-input-tag': {
       alignItems: 'center',
-      backgroundColor: backgroundColor,
+      backgroundColor,
       border: `1px solid ${inputBorderColor}`,
       boxShadow: `1px 1px 1px ${inputShadowColor} inset`,
       boxSizing: 'border-box',

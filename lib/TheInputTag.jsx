@@ -63,11 +63,11 @@ class TheInputTag extends React.PureComponent {
   handleKeyDown(e) {
     const { onKeyDown } = this.props
     switch (e.keyCode) {
-      case 8:
-        this.handleBack()
-        break
       case 13:
         this.handleEnter()
+        break
+      case 8:
+        this.handleBack()
         break
       default:
         break

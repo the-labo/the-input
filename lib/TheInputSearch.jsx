@@ -40,7 +40,7 @@ class TheInputSearch extends React.PureComponent {
         inputRef={(input) => {
           this.input = input
         }}
-        onFocus={(e) => this.handleFocus()}
+        onFocus={() => this.handleFocus()}
         type='search'
       >
         {!value && (

@@ -5,13 +5,11 @@ import c from 'classnames'
 import flatpickr from 'flatpickr'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { uniqueFilter } from 'the-array'
 import {
   changedProps,
   eventHandlersFor,
   htmlAttributesFor,
 } from 'the-component-util'
-import { TheIcon } from 'the-icon'
 import { onOffBoolean, renderErrorMessage } from './helpers'
 
 class TheInputDate extends React.PureComponent {

@@ -9,7 +9,7 @@ import Draggable from 'react-draggable'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheCondition } from 'the-condition'
 import { get } from 'the-window'
-import { normalizeOptions, renderErrorMessage } from './helpers'
+import { renderErrorMessage } from './helpers'
 
 /**
  * Slider Input
@@ -115,8 +115,8 @@ class TheInputSlider extends React.PureComponent {
     const maxX = w - handleRadius
     const rate = this._rateWithValue(props.value)
     this.setState({
-      maxX: maxX,
-      minX: minX,
+      maxX,
+      minX,
       x: rangecal.value(minX, maxX, rate),
     })
   }
@@ -141,7 +141,7 @@ class TheInputSlider extends React.PureComponent {
         }}
       >
         {renderErrorMessage(error)}
-        <input name={name} onChange={(v) => {}} type='hidden' value={value} />
+        <input name={name} onChange={() => {}} type='hidden' value={value} />
         <div className='the-input-slider-inner'>
           <TheCondition unless={barOnly}>
             <TheInputSlider.Label>{min}</TheInputSlider.Label>

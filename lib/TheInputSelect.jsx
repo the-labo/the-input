@@ -141,6 +141,16 @@ class TheInputSelect extends React.PureComponent {
   handleKeyDown(e) {
     const { onEnter, onKeyDown } = this.props
     switch (e.keyCode) {
+      // Enter
+      case 13: {
+        const values = this.getOptionValues()
+        const { suggestingIndex } = this.state
+        this.enterSuggested(values[suggestingIndex])
+        if (onEnter) {
+          onEnter()
+        }
+        break
+      }
       // UP
       case 38: {
         const moved = this.moveCandidateIndex(-1)
@@ -156,16 +166,6 @@ class TheInputSelect extends React.PureComponent {
         if (moved) {
           e.preventDefault()
           e.stopPropagation()
-        }
-        break
-      }
-      // Enter
-      case 13: {
-        const values = this.getOptionValues()
-        const { suggestingIndex } = this.state
-        this.enterSuggested(values[suggestingIndex])
-        if (onEnter) {
-          onEnter()
         }
         break
       }
@@ -388,7 +388,7 @@ TheInputSelect.WithOptionsArray = function WithOptionsArray({
   optionsArray,
   ...props
 }) {
-  const valueArray = optionsArray.map(([v, node]) => v)
+  const valueArray = optionsArray.map(([v]) => v)
   const sorter = (a, b) => valueArray.indexOf(a) - valueArray.indexOf(b)
   return (
     <TheInputSelect

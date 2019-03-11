@@ -12,7 +12,6 @@ import {
   isImageUrl,
   isUnknownTypeUrl,
   isVideoUrl,
-  normalizeArrayValue,
   renderErrorMessage,
 } from './helpers'
 

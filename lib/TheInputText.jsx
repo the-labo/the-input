@@ -161,6 +161,15 @@ class TheInputText extends React.PureComponent {
   handleKeyDown(e) {
     const { onDown, onEnter, onKeyDown, onLeft, onRight, onUp } = this.props
     switch (e.keyCode) {
+      case 13: {
+        // Enter
+        const { selectedCandidate } = this.state
+        if (selectedCandidate) {
+          this.enterCandidate(selectedCandidate)
+        }
+        onEnter && onEnter()
+        break
+      }
       case 37: // LEFT
         onLeft && onLeft()
         break
@@ -175,15 +184,6 @@ class TheInputText extends React.PureComponent {
         onDown && onDown()
         this.moveCandidateIndex(+1)
         break
-      case 13: {
-        // Enter
-        const { selectedCandidate } = this.state
-        if (selectedCandidate) {
-          this.enterCandidate(selectedCandidate)
-        }
-        onEnter && onEnter()
-        break
-      }
       case 9: // Tab
         this.offSuggestion()
         break
