@@ -824,8 +824,8 @@ This software is released under the [MIT License](https://github.com/the-labo/th
 Links
 ------
 
-+ [THE Labo][t_h_e_labo_url]
++ [THE Labo][the_labo_url]
 
-[t_h_e_labo_url]: https://github.com/the-labo
+[the_labo_url]: https://github.com/the-labo
 
 <!-- Links End -->

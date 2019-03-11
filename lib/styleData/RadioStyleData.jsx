@@ -8,6 +8,7 @@ function RadioStyleData({
   contentWidth,
   dominantColor,
   hoverOpacity,
+  tappableHeight,
 }) {
   return asStyleData({
     '.the-input-radio': {
@@ -47,8 +48,11 @@ function RadioStyleData({
         // https://github.com/ftlabs/fastclick/issues/60
         pointerEvents: 'none',
       },
+      alignItems: 'center',
+      boxSizing: 'border-box',
       cursor: 'pointer',
-      display: 'inline-block',
+      display: 'inline-flex',
+      justifyContent: 'center',
       padding: '2px 4px',
     },
     '.the-input-radio-radio': {
@@ -74,13 +78,16 @@ function RadioStyleData({
         borderRadius: '4px',
         fontSize: 'smaller',
         margin: '4px',
-        padding: '4px 8px',
         textAlign: 'center',
       },
       '.the-input-radio-item-checked': {
         backgroundColor: dominantColor,
         borderColor: `${dominantColor}`,
         color: backgroundColor,
+      },
+      '.the-input-radio-label': {
+        minHeight: tappableHeight,
+        padding: '4px 16px',
       },
     },
     '.the-input-radio.the-input-radio-as-toggle': {

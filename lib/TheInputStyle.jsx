@@ -152,6 +152,7 @@ TheInputStyle.data = (options) => {
       contentWidth,
       dominantColor,
       hoverOpacity,
+      tappableHeight,
     }),
     CheckBoxStyleData({
       activeOpacity,
@@ -159,6 +160,7 @@ TheInputStyle.data = (options) => {
       contentWidth,
       dominantColor,
       hoverOpacity,
+      tappableHeight,
     }),
     ToggleStyleData({
       animationDuration,

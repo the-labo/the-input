@@ -8,6 +8,7 @@ function CheckBoxStyleData({
   contentWidth,
   dominantColor,
   hoverOpacity,
+  tappableHeight,
 }) {
   return asStyleData({
     '.the-input-checkbox': {
@@ -61,8 +62,11 @@ function CheckBoxStyleData({
         // https://github.com/ftlabs/fastclick/issues/60
         pointerEvents: 'none',
       },
+      alignItems: 'center',
+      boxSizing: 'border-box',
       cursor: 'pointer',
-      display: 'inline-block',
+      display: 'inline-flex',
+      justifyContent: 'center',
       padding: '2px 4px',
     },
     '.the-input-checkbox.the-input-checkbox-as-button': {
@@ -73,15 +77,19 @@ function CheckBoxStyleData({
         background: backgroundColor,
         border: `1px solid #CCC`,
         borderRadius: '4px',
+        flexGow: '1',
         fontSize: 'smaller',
         margin: '4px',
-        padding: '4px 8px',
         textAlign: 'center',
       },
       '.the-input-checkbox-item-checked': {
         backgroundColor: dominantColor,
         borderColor: `${dominantColor}`,
         color: backgroundColor,
+      },
+      '.the-input-checkbox-label': {
+        minHeight: tappableHeight,
+        padding: '4px 16px',
       },
     },
   })

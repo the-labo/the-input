@@ -80,13 +80,15 @@
         "defaultValue": {
           "value": "{}",
           "computed": false
-        }
+        },
+        "required": false
       },
       "parser": {
         "defaultValue": {
           "value": "String",
           "computed": true
-        }
+        },
+        "required": false
       }
     }
   },
@@ -373,7 +375,9 @@
       {
         "name": "value",
         "docblock": null,
-        "modifiers": [],
+        "modifiers": [
+          "get"
+        ],
         "params": [],
         "returns": null
       },
@@ -686,7 +690,8 @@
         "defaultValue": {
           "value": "'radiogroup'",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   },
@@ -1967,19 +1972,22 @@
         "defaultValue": {
           "value": "false",
           "computed": false
-        }
+        },
+        "required": false
       },
       "role": {
         "defaultValue": {
           "value": "'textbox'",
           "computed": false
-        }
+        },
+        "required": false
       },
       "selectOnFocus": {
         "defaultValue": {
           "value": "false",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   },
@@ -2104,25 +2112,29 @@
         "defaultValue": {
           "value": "null",
           "computed": false
-        }
+        },
+        "required": false
       },
       "readOnly": {
         "defaultValue": {
           "value": "false",
           "computed": false
-        }
+        },
+        "required": false
       },
       "role": {
         "defaultValue": {
           "value": "'textbox'",
           "computed": false
-        }
+        },
+        "required": false
       },
       "spellCheck": {
         "defaultValue": {
           "value": "false",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   },
@@ -2199,7 +2211,7 @@
         "type": {
           "name": "bool"
         },
-        "required": true,
+        "required": false,
         "description": "Switch on or not",
         "defaultValue": {
           "value": "false",
@@ -2232,7 +2244,8 @@
         "defaultValue": {
           "value": "null",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   },
@@ -2400,7 +2413,8 @@
         "defaultValue": {
           "value": "false",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   }
