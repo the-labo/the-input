@@ -3,13 +3,13 @@
 import { asStyleData } from 'the-component-util'
 
 function CheckBoxStyleData({
-  activeOpacity,
-  backgroundColor,
-  contentWidth,
-  dominantColor,
-  hoverOpacity,
-  tappableHeight,
-}) {
+                             activeOpacity,
+                             backgroundColor,
+                             contentWidth,
+                             dominantColor,
+                             hoverOpacity,
+                             tappableHeight,
+                           }) {
   return asStyleData({
     '.the-input-checkbox': {
       borderRadius: '2px',
@@ -70,6 +70,10 @@ function CheckBoxStyleData({
       padding: '2px 4px',
     },
     '.the-input-checkbox.the-input-checkbox-as-button': {
+      '.the-input-checkbox-inner': {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
       '.the-input-checkbox-icon': {
         display: 'none',
       },
@@ -90,6 +94,8 @@ function CheckBoxStyleData({
       '.the-input-checkbox-label': {
         minHeight: tappableHeight,
         padding: '4px 16px',
+
+        textAlign: 'center',
       },
     },
   })

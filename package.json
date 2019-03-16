@@ -35,7 +35,7 @@
     "@babel/runtime": "^7.3.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^4.4.0",
     "the-component-demo": "^4.0.18",
     "the-script-build": "^5.0.10",
     "the-script-doc": "^2.0.0",
